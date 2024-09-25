@@ -1,0 +1,16 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FeliyaAttendance" parent="Theme.Material3.DayNight.NoActionBar">
+        <!--    Primary Color    -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/dark_primary_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!--    Secondary Color    -->
+        <item name="colorSecondary">@color/accent_color</item>
+        <item name="colorSecondaryVariant">@color/dark_accent_color</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
+    <style name="Theme.FeliyaAttendance" parent="Base.Theme.FeliyaAttendance" />
+</resources>

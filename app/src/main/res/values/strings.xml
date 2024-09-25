@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Feliya Attendance</string>
+
+    <!--  Bottom navigation menu  -->
+    <string name="home">Home</string>
+    <string name="reports">Reports</string>
+    <string name="settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  Auth  -->
+    <string name="auth_text_login_title">Hey,\nLogin Now!</string>
+    <string name="auth_text_login_description">Make sure Worker Id is only</string>
+    <string name="auth_text_login_description_number">Number</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="logout">Logout</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="worker_id">Worker Id</string>
+
+</resources>
