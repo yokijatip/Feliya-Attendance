@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -47,7 +50,21 @@ dependencies {
     implementation(libs.chip.navigation.bar)
 
 //    Lottie
-    implementation (libs.lottie)
+    implementation(libs.lottie)
+
+//    Firebase Bom
+    implementation(platform(libs.firebase.bom))
+
+//    When using the BoM, don't specify versions in Firebase dependencies
+    implementation(libs.firebase.analytics)
+
+//    Firebase Firestore
+    implementation(libs.firebase.firestore)
+
+//    Firebase Auth
+    implementation(libs.firebase.auth)
+
+
 
 
 

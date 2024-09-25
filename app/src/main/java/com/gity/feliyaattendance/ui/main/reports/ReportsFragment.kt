@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.databinding.FragmentRegisterBinding
 
 class ReportsFragment : Fragment() {
-
     companion object {
         fun newInstance() = ReportsFragment()
     }
@@ -28,4 +28,6 @@ class ReportsFragment : Fragment() {
     ): View {
         return inflater.inflate(R.layout.fragment_reports, container, false)
     }
+
+
 }

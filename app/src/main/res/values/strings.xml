@@ -10,8 +10,10 @@
 
     <!--  Auth  -->
     <string name="auth_text_login_title">Hey,\nLogin Now!</string>
-    <string name="auth_text_login_description">Make sure Worker Id is only</string>
-    <string name="auth_text_login_description_number">Number</string>
+    <string name="auth_text_login_description">Not have account?</string>
+    <string name="auth_text_login_to_register">Create new Account</string>
+    <string name="auth_text_register_title">Hello,\nRegister Now!</string>
+    <string name="auth_text_register_description">Already have account?</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="logout">Logout</string>

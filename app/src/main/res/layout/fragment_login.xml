@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_top" />
 
     <LinearLayout
+        android:id="@+id/linear_layout_to_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -57,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_medium"
                 android:maxLines="1"
-                android:text="@string/auth_text_login_description_number"
+                android:text="@string/auth_text_login_to_register"
                 android:textColor="@color/accent_color"
                 android:textSize="16sp" />
 
@@ -65,24 +66,24 @@
 
         <!--    Worker Id    -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_worker_id_layout"
+            android:id="@+id/edt_email_layout"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/worker_id"
+            android:hint="@string/email"
             app:boxCornerRadiusBottomEnd="8dp"
             app:boxCornerRadiusBottomStart="8dp"
             app:boxCornerRadiusTopEnd="8dp"
             app:boxCornerRadiusTopStart="8dp"
-            app:startIconDrawable="@drawable/ic_credit_card">
+            app:startIconDrawable="@drawable/ic_at_sign">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_worker_id"
+                android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ellipsize="end"
                 android:fontFamily="@font/inter_regular"
-                android:inputType="number"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -92,7 +93,7 @@
         <!--    Password    -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edt_password_layout"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,13 +112,15 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
+                android:paddingEnd="42dp"
                 android:layout_height="match_parent"
                 android:ellipsize="end"
                 android:fontFamily="@font/inter_regular"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="RtlSymmetry" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
