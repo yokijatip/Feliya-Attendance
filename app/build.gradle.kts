@@ -64,6 +64,9 @@ dependencies {
 //    Firebase Auth
     implementation(libs.firebase.auth)
 
+//    Coroutine Handling for Firebase
+    implementation (libs.kotlinx.coroutines.play.services)
+
 
 
 

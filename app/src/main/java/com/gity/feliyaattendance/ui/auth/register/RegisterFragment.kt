@@ -78,7 +78,7 @@ class RegisterFragment : Fragment() {
                 (activity as? AuthActivity)?.replaceFragment(LoginFragment())
             }, onFailure = { exception ->
                 Toast.makeText(requireContext(), "${getString(R.string.register_failed)}: ${exception.message}", Toast.LENGTH_SHORT).show()
-                Log.e("AUTH_REGISTER", "${getString(R.string.register_failed)}: ${exception.message}")
+                Log.e("AUTH", "${getString(R.string.register_failed)}: ${exception.message}")
             })
         }
 

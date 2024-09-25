@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.ActivityMainBinding
 import com.gity.feliyaattendance.ui.main.home.HomeFragment
+import com.gity.feliyaattendance.ui.main.reports.ReportsFragment
+import com.gity.feliyaattendance.ui.main.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,8 +36,8 @@ class MainActivity : AppCompatActivity() {
             chipNavigationBar.setOnItemSelectedListener {
                 when (it) {
                     R.id.home -> replaceFragment(HomeFragment())
-                    R.id.reports -> replaceFragment(HomeFragment())
-                    R.id.settings -> replaceFragment(HomeFragment())
+                    R.id.reports -> replaceFragment(ReportsFragment())
+                    R.id.settings -> replaceFragment(SettingsFragment())
 
                     else -> {
                         Toast.makeText(this@MainActivity, "Error Navigation Button", Toast.LENGTH_SHORT).show()

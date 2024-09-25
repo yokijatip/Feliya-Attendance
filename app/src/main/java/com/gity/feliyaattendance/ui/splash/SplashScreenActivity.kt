@@ -3,7 +3,7 @@ package com.gity.feliyaattendance.ui.splash
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Telephony.Mms.Intents
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,16 +12,19 @@ import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.ActivitySplashScreenBinding
 import com.gity.feliyaattendance.ui.auth.AuthActivity
 import com.gity.feliyaattendance.ui.main.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding
-    private val splashScreenDuration = 2000L // Delay Waktu untuk Splash Screen
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseFirestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
@@ -34,14 +37,42 @@ class SplashScreenActivity : AppCompatActivity() {
             insets
         }
 
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseFirestore = FirebaseFirestore.getInstance()
+
         CoroutineScope(Dispatchers.Main).launch {
-            delay(splashScreenDuration)
-            navigateToAuth()
+            checkUserLogin()
         }
 
     }
 
-    private fun navigateToMain(){
+    private suspend fun checkUserLogin() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            try {
+//                Ambil data user dari firestore
+                val snapshot =
+                    firebaseFirestore.collection("users").document(currentUser.uid).get().await()
+                val role = snapshot.getString("role")
+
+//                Arahkan user ke halaman sesuai role
+                if (role == "worker") {
+                    navigateToMain()
+                } else if (role == "admin") {
+                    navigateToMain()
+                } else {
+                    navigateToAuth() // Jika role tidak ditemukan
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                navigateToAuth()
+            }
+        } else {
+            navigateToAuth()
+        }
+    }
+
+    private fun navigateToMain() {
         val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
         startActivity(intent)
         finish()

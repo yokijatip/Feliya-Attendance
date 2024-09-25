@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
                 if (inputChecker(email, password)) {
-                    viewModel.register(email, password)
+                    viewModel.login(email, password)
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -92,7 +92,7 @@ class LoginFragment : Fragment() {
             }, onFailure = { e ->
                 Toast.makeText(requireContext(), "Login Failed: ${e.message}", Toast.LENGTH_SHORT)
                     .show()
-                Log.e("AUTH_LOGIN", "Login Failed: ${e.message}")
+                Log.e("AUTH", "Login Failed: ${e.message}")
             })
         }
 
