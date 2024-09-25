@@ -46,6 +46,9 @@ dependencies {
 //    Chip Navigation
     implementation(libs.chip.navigation.bar)
 
+//    Lottie
+    implementation (libs.lottie)
+
 
 
     implementation(libs.androidx.core.ktx)

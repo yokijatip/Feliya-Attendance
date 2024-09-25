@@ -102,13 +102,14 @@
             app:boxCornerRadiusTopEnd="8dp"
             app:helperTextEnabled="true"
             app:counterEnabled="true"
+            android:minEms="8"
             app:endIconMode="password_toggle"
             app:helperText="@string/password_helper"
             app:boxCornerRadiusTopStart="8dp"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_password_id"
+                android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ellipsize="end"
