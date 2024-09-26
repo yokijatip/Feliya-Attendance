@@ -1,1 +1,26 @@
+# Ignore the .env file
+.env
+
+# Android specific
+*.iml
+.gradle/
+local.properties
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
 /build
+/captures
+
+# Firebase config
+/google-services.json
+
+# Keystore files
+*.jks
+
+# Proguard
+proguard/
+proguard-rules.pro
