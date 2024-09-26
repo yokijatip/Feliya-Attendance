@@ -16,6 +16,9 @@ class AuthViewModel(private val repository: Repository) : ViewModel() {
     private val _registrationResult = MutableLiveData<Result<Unit>>()
     val registrationResult: LiveData<Result<Unit>> = _registrationResult
 
+    private val _roles = MutableLiveData<Result<List<String>>>()
+    val roles: LiveData<Result<List<String>>> = _roles
+
     //    Login Function
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -25,10 +28,17 @@ class AuthViewModel(private val repository: Repository) : ViewModel() {
     }
 
     // Register function
-    fun register(email: String, password: String) {
+    fun register(email: String, password: String, name: String, role: String) {
         viewModelScope.launch {
-            val result = repository.registerUser(email, password)
+            val result = repository.registerUser(email, password, name, role)
             _registrationResult.postValue(result)
+        }
+    }
+
+    //  Get Roles
+    fun getRoles() {
+        viewModelScope.launch {
+            _roles.value = repository.fetchRoles()
         }
     }
 }

@@ -17,9 +17,9 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="logout">Logout</string>
-
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="name">Name</string>
     <string name="password_helper">Password must be at least 8 characters</string>
     <string name="worker_id">Worker Id</string>
 
@@ -27,7 +27,7 @@
     <string name="name_is_empty">Name is empty, please fill it</string>
     <string name="phone_is_empty">Phone is empty, please fill it</string>
     <string name="phone_is_not_valid">Phone is not valid, please check it</string>
-    <string name="worker_id_is_empty">Worker Id is empty, please fill it</string>
+    <string name="role_is_empty">Please select your role, fill it</string>
     <string name="email_is_empty">Email is empty, please fill it</string>
     <string name="password_is_empty">Password is empty, please fill it</string>
     <string name="email_is_not_valid">Email is not valid, please check it</string>
@@ -45,5 +45,6 @@
     <string name="delete_account_confirmation">Are you sure want to delete your account?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="select_role">Select Role</string>
 
 </resources>
