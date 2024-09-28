@@ -117,6 +117,7 @@
 
     <!--  Dashboard  -->
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -443,16 +444,68 @@
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/inter_regular"
                         android:maxLines="1"
-                        android:text="16:00"
+                        android:text="28"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/background_icon_total_days"
                         app:layout_constraintTop_toBottomOf="@+id/background_icon_total_days" />
 
+                    <!-- Content -->
+                    <TextView
+                        android:id="@+id/tv_days"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:maxLines="1"
+                        android:text="@string/days"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_total_days"
+                        app:layout_constraintStart_toEndOf="@+id/tv_total_days"
+                        app:layout_constraintTop_toTopOf="@+id/tv_total_days" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!--    Button Clock in & out    -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_clock_in"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/clock_in"
+                android:textSize="14sp"
+                app:cornerRadius="8dp" />
+
+            <!--    Button Clock in & out    -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_clock_out"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/clock_out"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:cornerRadius="8dp"
+                app:rippleColor="@color/color_stroke_primary"
+                app:strokeColor="@color/dark_primary_color"
+                app:strokeWidth="1dp" />
         </LinearLayout>
 
     </LinearLayout>

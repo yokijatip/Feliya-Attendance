@@ -12,7 +12,7 @@
 
     <!--  Color Resource  -->
     <color name="color_stroke_primary">#A8BAC9</color>
-    <color name="color_background_icon_primary">#A8BAC9</color>
+    <color name="color_background_icon_primary">#cfddea</color>
     <color name="grey">#808080</color>
 
 </resources>
