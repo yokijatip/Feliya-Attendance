@@ -46,5 +46,18 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="select_role">Select Role</string>
+    <string name="hours_default">--:--</string>
+
+    <!--  Home Fragment  -->
+    <string name="greetings_good_morning">Good Morning</string>
+    <string name="greetings_good_afternoon">Good Afternoon</string>
+    <string name="greetings_good_evening">Good Evening</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="clock_in">Clock In</string>
+    <string name="clock_out">Clock Out</string>
+    <string name="hours">Hours</string>
+    <string name="days">Days</string>
+    <string name="dashboard_total_hours_title">Total Hours</string>
+    <string name="dashboard_total_days_title">Total Days</string>
 
 </resources>

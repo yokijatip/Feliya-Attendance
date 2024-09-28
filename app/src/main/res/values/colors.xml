@@ -9,4 +9,10 @@
     <!--  Secondary  -->
     <color name="accent_color">#FD6C23</color>
     <color name="dark_accent_color">#D8510D</color>
+
+    <!--  Color Resource  -->
+    <color name="color_stroke_primary">#A8BAC9</color>
+    <color name="color_background_icon_primary">#A8BAC9</color>
+    <color name="grey">#808080</color>
+
 </resources>
