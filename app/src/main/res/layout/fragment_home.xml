@@ -56,21 +56,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:layout_marginEnd="24dp"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_greetings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:maxLines="1"
-                android:text="@string/greetings_good_morning"
+                tools:text="@string/greetings_good_morning"
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_medium"
-                android:text="Yoki Jati Perkasa"
+                tools:text="Yoki Jati Perkasa"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/dark_primary_color"
                 android:textSize="18sp" />
 
@@ -94,20 +99,22 @@
                 android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/tv_top_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_medium"
-                    android:text="20"
+                    tools:text="20"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_top_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_medium"
-                    android:text="Monday"
+                    tools:text="Monday"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -117,7 +124,7 @@
 
     <!--  Dashboard  -->
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/container_dashboard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -507,6 +514,58 @@
                 app:strokeColor="@color/dark_primary_color"
                 app:strokeWidth="1dp" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <!--  Dashboard  -->
+    <LinearLayout
+        android:id="@+id/container_attendance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/container_dashboard">
+
+        <!--    Title    -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <!--    Title    -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semi_bold"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:text="@string/your_activity"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <!--    Title    -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semi_bold"
+                android:maxLines="1"
+                android:text="@string/view_all"
+                android:textColor="@color/dark_primary_color"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!--    Recycler View   -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_your_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            tools:itemCount="5"
+            tools:listitem="@layout/list_item_attendance"
+            />
 
     </LinearLayout>
 

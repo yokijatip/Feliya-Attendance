@@ -30,7 +30,12 @@ class Repository(
     }
 
     //    Register
-    suspend fun registerUser(email: String, password: String, name: String, role: String): Result<Unit> {
+    suspend fun registerUser(
+        email: String,
+        password: String,
+        name: String,
+        role: String
+    ): Result<Unit> {
         return try {
             val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             val userId = result.user?.uid ?: return Result.failure(Exception("User ID not found"))
@@ -54,12 +59,31 @@ class Repository(
         }
     }
 
+    //    Fetch Roles
     suspend fun fetchRoles(): Result<List<String>> {
         return try {
             val snapshot = firebaseFirestore.collection("roles").document("role").get().await()
             val roles = snapshot.get("name") as? List<String>
                 ?: return Result.failure(Exception("Roles not found"))
             Result.success(roles)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    //    Fetch Name
+    suspend fun fetchName(): Result<String> {
+        return try {
+            val userId = firebaseAuth.currentUser?.uid
+                ?: return Result.failure(Exception("User ID not found"))
+            val snapshot = firebaseFirestore.collection("users").document(userId).get().await()
+
+            if (snapshot.exists() && snapshot.contains("name")) {
+                val name = snapshot.getString("name")
+                Result.success(name ?: "Unknown Name")
+            } else {
+                Result.failure(Exception("Name field not found in document"))
+            }
         } catch (e: Exception) {
             Result.failure(e)
         }

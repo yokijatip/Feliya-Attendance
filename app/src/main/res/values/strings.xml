@@ -55,9 +55,20 @@
     <string name="dashboard">Dashboard</string>
     <string name="clock_in">Clock In</string>
     <string name="clock_out">Clock Out</string>
+    <string name="in_and_out">In &amp; Out</string>
     <string name="hours">Hours</string>
     <string name="days">Days</string>
     <string name="dashboard_total_hours_title">Total Hours</string>
     <string name="dashboard_total_days_title">Total Days</string>
+    <string name="your_activity">Your Activity</string>
+    <string name="view_all">View all</string>
+
+
+    <!--  List Item Attendance  -->
+    <string name="date">Date</string>
+    <string name="status_approved">Approved</string>
+    <string name="status_rejected">Rejected</string>
+    <string name="status_pending">Pending</string>
+    <string name="dash">-</string>
 
 </resources>

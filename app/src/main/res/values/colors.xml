@@ -15,4 +15,12 @@
     <color name="color_background_icon_primary">#cfddea</color>
     <color name="grey">#808080</color>
 
+    <!--  Color Status  -->
+    <color name="status_approved">#1BA424</color>
+    <color name="status_approved_background">#E2FFE4</color>
+    <color name="status_rejected">#F85445</color>
+    <color name="status_rejected_background">#FFEBE1</color>
+    <color name="status_pending">#808080</color>
+    <color name="status_pending_background">#E7E7E7</color>
+
 </resources>
