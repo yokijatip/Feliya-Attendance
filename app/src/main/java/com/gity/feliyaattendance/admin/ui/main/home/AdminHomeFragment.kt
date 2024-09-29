@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.admin.ui.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.FeatureAdminAdapter
+import com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
-import com.gity.feliyaattendance.ui.main.home.HomeViewModel
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -62,12 +63,12 @@ class AdminHomeFragment : Fragment() {
         val featureIcons = arrayOf(
             R.drawable.ic_user_plus,
             R.drawable.ic_folder_plus,
-            R.drawable.ic_check_square,
+            R.drawable.ic_check_square_custom_admin,
             R.drawable.ic_printer,
         )
 
 //        Setup Recycler View and Feature Adapter
-        val featureAdapter = FeatureAdminAdapter(featureNames,featureIcons) {position ->
+        val featureAdapter = FeatureAdminAdapter(featureNames, featureIcons) { position ->
             handleFeatureClick(position)
         }
 
@@ -98,16 +99,22 @@ class AdminHomeFragment : Fragment() {
         // Handle clicks for each feature based on position
         when (position) {
             0 -> Toast.makeText(requireContext(), "Add Worker clicked", Toast.LENGTH_SHORT).show()
-            1 -> Toast.makeText(requireContext(), "Add Project clicked", Toast.LENGTH_SHORT).show()
-            2 -> Toast.makeText(requireContext(), "Attendance Approval clicked", Toast.LENGTH_SHORT).show()
-            3 -> Toast.makeText(requireContext(), "Generate Report clicked", Toast.LENGTH_SHORT).show()
+            1 -> navigateToAddProject()
+            2 -> Toast.makeText(requireContext(), "Attendance Approval clicked", Toast.LENGTH_SHORT)
+                .show()
+
+            3 -> Toast.makeText(requireContext(), "Generate Report clicked", Toast.LENGTH_SHORT)
+                .show()
         }
+    }
+
+    private fun navigateToAddProject() {
+        val intent = Intent(requireActivity(), AdminAddProjectActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

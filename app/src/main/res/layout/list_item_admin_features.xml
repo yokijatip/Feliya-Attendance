@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/iv_icon"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             tools:src="@drawable/ic_printer"
             />
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             tools:text="Add Workers"
             android:layout_marginStart="12dp"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/black"
             android:fontFamily="@font/inter_medium"
             />
