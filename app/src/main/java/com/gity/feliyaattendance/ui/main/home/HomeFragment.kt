@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
                 getString(R.string.greetings_good_evening)
             )
         }
-
+        viewModel.fetchName()
         viewModel.nameResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { name ->
                 binding.tvName.text = name
@@ -68,8 +68,26 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModel.fetchName()
-
+//        // Real-time snapshot listener from Firestore
+//        val userId = firebaseAuth.currentUser?.uid
+//        if (userId != null) {
+//            firebaseFirestore.collection("users").document(userId)
+//                .addSnapshotListener { documentSnapshot, error ->
+//                    if (error != null) {
+//                        Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT)
+//                            .show()
+//                        return@addSnapshotListener
+//                    }
+//
+//                    if (documentSnapshot != null && documentSnapshot.exists()) {
+//                        val name = documentSnapshot.getString("name")
+//                        // Update the UI in real-time if the name changes in Firestore
+//                        binding.tvName.text = name
+//                    }
+//                }
+//        } else {
+//            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+//        }
 //        End of Your Code
         return binding.root
     }

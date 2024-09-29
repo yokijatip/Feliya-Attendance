@@ -23,7 +23,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
             android:orientation="horizontal">
 
             <!-- Name -->
@@ -38,17 +40,17 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
-                    android:text="@string/date"
+                    android:text="@string/name"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_date"
+                    android:id="@+id/tv_worker_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
-                    android:text="30 Maret 2024"
+                    android:text="Fakhrusyi Abdillah Fajar"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -77,6 +79,37 @@
                     android:textColor="@color/status_pending" />
 
             </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+        <!-- Date -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_margin="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:maxLines="1"
+                android:text="@string/date"
+                android:textColor="@color/grey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_regular"
+                android:maxLines="1"
+                android:text="20 September 2024"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
