@@ -12,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.admin.ui.main.MainAdminActivity
 import com.gity.feliyaattendance.databinding.FragmentLoginBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
@@ -87,7 +88,7 @@ class LoginFragment : Fragment() {
             result.fold(onSuccess = { role ->
                 when (role) {
                     "worker" -> navigateToMain()
-                    "admin" -> navigateToMain()
+                    "admin" -> navigateToAdmin()
                 }
             }, onFailure = { e ->
                 Toast.makeText(requireContext(), "Login Failed: ${e.message}", Toast.LENGTH_SHORT)
@@ -142,6 +143,12 @@ class LoginFragment : Fragment() {
 
     private fun navigateToMain() {
         val intent = Intent(requireActivity(), MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
+    private fun navigateToAdmin() {
+        val intent = Intent(requireActivity(), MainAdminActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
     }

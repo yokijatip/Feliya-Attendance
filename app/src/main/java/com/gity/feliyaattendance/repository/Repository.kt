@@ -1,9 +1,11 @@
 package com.gity.feliyaattendance.repository
 
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
+import java.util.Date
 import java.util.UUID
 
 class Repository(
@@ -84,6 +86,38 @@ class Repository(
             } else {
                 Result.failure(Exception("Name field not found in document"))
             }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Fungsi untuk menambahkan project baru
+    suspend fun addProject(
+        projectName: String,
+        location: String,
+        startDate: Date,
+        endDate: Date,
+        status: String,
+        description: String
+    ): Result<Unit> {
+        return try {
+            val projectId = UUID.randomUUID().toString()  // Generate projectId secara otomatis
+            val userId = firebaseAuth.currentUser?.uid ?: return Result.failure(Exception("User ID not found"))
+
+            val project = hashMapOf(
+                "projectId" to projectId,
+                "userId" to userId,  // ID admin yang menambahkan project
+                "projectName" to projectName,
+                "location" to location,
+                "startDate" to Timestamp(startDate),
+                "endDate" to Timestamp(endDate),
+                "status" to status,
+                "description" to description,
+                "createdAt" to FieldValue.serverTimestamp()  // Menyimpan waktu pembuatan
+            )
+
+            firebaseFirestore.collection("projects").document(projectId).set(project).await()
+            Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }

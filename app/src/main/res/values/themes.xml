@@ -12,7 +12,6 @@
         <item name="colorSecondary">@color/accent_color</item>
         <item name="colorSecondaryVariant">@color/dark_accent_color</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="android:datePickerDialogTheme">@style/CustomDatePickerStyle</item>
     </style>
 
     <style name="Theme.FeliyaAttendance" parent="Base.Theme.FeliyaAttendance" />
