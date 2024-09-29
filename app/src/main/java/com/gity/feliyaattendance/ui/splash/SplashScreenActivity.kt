@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.admin.ui.main.MainAdminActivity
 import com.gity.feliyaattendance.databinding.ActivitySplashScreenBinding
 import com.gity.feliyaattendance.ui.auth.AuthActivity
 import com.gity.feliyaattendance.ui.main.MainActivity
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -41,6 +43,7 @@ class SplashScreenActivity : AppCompatActivity() {
         firebaseFirestore = FirebaseFirestore.getInstance()
 
         CoroutineScope(Dispatchers.Main).launch {
+            delay(2000)
             checkUserLogin()
         }
 
@@ -56,12 +59,16 @@ class SplashScreenActivity : AppCompatActivity() {
                 val role = snapshot.getString("role")
 
 //                Arahkan user ke halaman sesuai role
-                if (role == "worker") {
-                    navigateToMain()
-                } else if (role == "admin") {
-                    navigateToMain()
-                } else {
-                    navigateToAuth() // Jika role tidak ditemukan
+                when (role) {
+                    "worker" -> {
+                        navigateToMain()
+                    }
+                    "admin" -> {
+                        navigateToAdmin()
+                    }
+                    else -> {
+                        navigateToAuth() // Jika role tidak ditemukan
+                    }
                 }
             } catch (e: Exception) {
                 Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -70,6 +77,12 @@ class SplashScreenActivity : AppCompatActivity() {
         } else {
             navigateToAuth()
         }
+    }
+
+    private fun navigateToAdmin() {
+        val intent = Intent(this@SplashScreenActivity, MainAdminActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun navigateToMain() {

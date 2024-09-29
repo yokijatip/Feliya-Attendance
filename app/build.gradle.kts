@@ -65,7 +65,10 @@ dependencies {
     implementation(libs.firebase.auth)
 
 //    Coroutine Handling for Firebase
-    implementation (libs.kotlinx.coroutines.play.services)
+    implementation(libs.kotlinx.coroutines.play.services)
+
+//    Glide
+    implementation(libs.glide)
 
 
 

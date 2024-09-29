@@ -31,16 +31,6 @@
             android:layout_height="28dp"
             android:layout_weight="1" />
 
-        <!-- Add Project -->
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_add_project"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="8dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:padding="0dp"
-            android:src="@drawable/ic_user_plus"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <!-- Menu Project -->
         <androidx.appcompat.widget.AppCompatImageButton
@@ -59,9 +49,10 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification"
         app:tabGravity="fill"
         app:tabMode="fixed" />
@@ -72,8 +63,8 @@
         android:layout_height="0dp"
         android:labelFor="@id/tabLayout"
         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
     <!--  Guideline  -->

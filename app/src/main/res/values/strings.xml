@@ -70,6 +70,17 @@
     <string name="status_pending">Pending</string>
     <string name="dash">-</string>
 
+    <!--    Admin Home  -->
+    <string name="worker">Workers</string>
+    <string name="feature">Feature</string>
+    <string-array name="features">
+        <item>Add Worker</item>
+        <item>Add Project</item>
+        <item>Attendance Approval</item>
+        <item>Generate Report</item>
+    </string-array>
+
+
     <!--  Admin Projects  -->
     <string name="projects">Projects</string>
     <string name="project_name">Project Name</string>

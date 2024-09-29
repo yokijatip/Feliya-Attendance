@@ -16,6 +16,9 @@
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
         <activity
+            android:name=".admin.ui.main.projects.AdminAddProjectActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.ui.main.MainAdminActivity"
             android:exported="false" />
         <activity
