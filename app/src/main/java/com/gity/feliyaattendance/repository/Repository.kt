@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.repository
 
+import com.gity.feliyaattendance.data.model.Project
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
@@ -102,7 +103,8 @@ class Repository(
     ): Result<Unit> {
         return try {
             val projectId = UUID.randomUUID().toString()  // Generate projectId secara otomatis
-            val userId = firebaseAuth.currentUser?.uid ?: return Result.failure(Exception("User ID not found"))
+            val userId = firebaseAuth.currentUser?.uid
+                ?: return Result.failure(Exception("User ID not found"))
 
             val project = hashMapOf(
                 "projectId" to projectId,
@@ -123,5 +125,24 @@ class Repository(
         }
     }
 
+    suspend fun getActiveProjects(): Result<List<Project>> {
+        return try {
+            val snapshot = firebaseFirestore.collection("projects")
+                .whereEqualTo("status", "Active") // Mengambil project yang statusnya "Active"
+                .get()
+                .await()
+
+            val activeProjects = snapshot.documents.mapNotNull { document ->
+                // Mendapatkan data dari setiap document
+                document.toObject(Project::class.java)?.apply {
+                    projectId = document.id // Menyimpan ID document ke dalam model
+                }
+            }
+
+            Result.success(activeProjects)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
 }

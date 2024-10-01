@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
 
         binding.apply {
 //            Navigate to Register
-            linearLayoutToRegister.setOnClickListener {
+            createNewAccount.setOnClickListener {
                 (activity as? AuthActivity)?.replaceFragment(RegisterFragment())
             }
 

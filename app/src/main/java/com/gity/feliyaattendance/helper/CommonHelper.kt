@@ -1,6 +1,7 @@
 package com.gity.feliyaattendance.helper
 
 import android.icu.util.Calendar
+import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.random.Random
@@ -49,5 +50,13 @@ object CommonHelper {
         }
         return greeting
     }
+
+    fun formatTimestamp(timestamp: Timestamp?): String {
+        return timestamp?.toDate()?.let {
+            val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            dateFormat.format(it)
+        } ?: "Tanggal tidak tersedia"
+    }
+
 
 }

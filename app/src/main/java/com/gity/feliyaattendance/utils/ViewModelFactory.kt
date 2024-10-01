@@ -6,6 +6,7 @@ import com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminProjectViewModel
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.auth.AuthViewModel
+import com.gity.feliyaattendance.ui.main.attendance.AttendanceViewModel
 import com.gity.feliyaattendance.ui.main.home.HomeViewModel
 
 @Suppress("UNCHECKED_CAST")
@@ -20,6 +21,8 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
             return AdminHomeViewModel(repository) as T
         } else if(modelClass.isAssignableFrom(AdminProjectViewModel::class.java)){
             return AdminProjectViewModel(repository) as T
+        } else if(modelClass.isAssignableFrom(AttendanceViewModel::class.java)){
+            return AttendanceViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }

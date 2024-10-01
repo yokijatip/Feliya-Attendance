@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.ui.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,9 @@ import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.FragmentHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
+import com.gity.feliyaattendance.ui.main.attendance.ClockInActivity
+import com.gity.feliyaattendance.ui.main.attendance.ClockOutActivity
+import com.gity.feliyaattendance.ui.main.attendance.ShowProjectActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,8 +32,7 @@ class HomeFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 //        Start Of Your Code
@@ -53,6 +56,14 @@ class HomeFragment : Fragment() {
                 getString(R.string.greetings_good_afternoon),
                 getString(R.string.greetings_good_evening)
             )
+
+            btnClockIn.setOnClickListener {
+                navigateToShowProject()
+            }
+
+            btnClockOut.setOnClickListener {
+                navigateToClockOut()
+            }
         }
         viewModel.fetchName()
         viewModel.nameResult.observe(viewLifecycleOwner) { result ->
@@ -90,5 +101,20 @@ class HomeFragment : Fragment() {
 //        }
 //        End of Your Code
         return binding.root
+    }
+
+    private fun navigateToCLockIn() {
+        val intent = Intent(requireActivity(), ClockInActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToClockOut() {
+        val intent = Intent(requireActivity(), ClockOutActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToShowProject() {
+        val intent = Intent(requireActivity(), ShowProjectActivity::class.java)
+        startActivity(intent)
     }
 }
