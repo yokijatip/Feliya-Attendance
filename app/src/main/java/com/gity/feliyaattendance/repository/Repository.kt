@@ -145,4 +145,42 @@ class Repository(
         }
     }
 
+    suspend fun attendance(
+        userId: String,
+        projectId: String,
+        date: Date,
+        clockInTime: Date,
+        clockOutTime: Date?,
+        imageUrlIn: String,
+        imageUrlOut: String?,
+        description: String,
+        status: String = "Pending",
+        workHours: Int = 0,
+        workHoursOvertime: Int = 0
+    ): Result<Unit> {
+        return try {
+
+            // Siapkan data attendance
+            val attendanceData = hashMapOf(
+                "user_id" to userId,
+                "project_id" to projectId,
+                "date" to date,
+                "clock_in_time" to clockInTime,
+                "clock_out_time" to clockOutTime, // Nullable
+                "work_proof_in" to imageUrlIn,
+                "work_proof_out" to imageUrlOut, // Nullable
+                "work_description" to description,
+                "status" to status,
+                "work_hours" to workHours,
+                "overtime_hours" to workHoursOvertime
+            )
+
+            firebaseFirestore.collection("attendance")
+                .add(attendanceData).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
 }
