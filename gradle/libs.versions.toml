@@ -2,6 +2,7 @@
 agp = "8.5.2"
 chipNavigationBar = "1.4.0"
 circleimageview = "3.1.0"
+datastorePreferences = "1.1.1"
 firebaseBom = "33.3.0"
 glide = "4.16.0"
 kotlin = "1.9.0"
@@ -22,6 +23,7 @@ fragmentKtx = "1.8.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 chip-navigation-bar = { module = "com.github.ismaeldivita:chip-navigation-bar", version.ref = "chipNavigationBar" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }

@@ -3,6 +3,7 @@ package com.gity.feliyaattendance.ui.main.attendance
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -48,6 +49,9 @@ class ShowProjectActivity : AppCompatActivity() {
         val adapter = ProjectAdapter { selectedProject ->
             val intent = Intent(this, ClockInActivity::class.java).apply {
                 putExtra("SELECTED_PROJECT", selectedProject)
+                putExtra("PROJECT_ID", selectedProject.projectId)
+                putExtra("PROJECT_NAME", selectedProject.projectName)
+                putExtra("PROJECT_LOCATION", selectedProject.location)
             }
             startActivity(intent)
         }

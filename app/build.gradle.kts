@@ -71,6 +71,9 @@ dependencies {
 //    Glide
     implementation(libs.glide)
 
+//    Data Store
+    implementation (libs.androidx.datastore.preferences)
+
 
 
 

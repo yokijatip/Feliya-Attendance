@@ -65,6 +65,7 @@
 
     <!--  Worker Attendance  -->
     <string name="clock_in_title">Confirm Clock In</string>
+    <string name="clock_out_title">Confirm Clock Out</string>
     <string name="image_proof">Image Proof</string>
     <string name="upload_image_from_camera_or_gallery">Upload from camera or gallery</string>
     <string name="select_project">Select Project</string>

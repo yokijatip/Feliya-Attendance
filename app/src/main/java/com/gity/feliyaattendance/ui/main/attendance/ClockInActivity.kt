@@ -2,6 +2,7 @@ package com.gity.feliyaattendance.ui.main.attendance
 
 import android.Manifest
 import android.app.Dialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -19,15 +20,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.ActivityClockInBinding
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
+import com.gity.feliyaattendance.ui.main.MainActivity
+import com.gity.feliyaattendance.utils.ProjectDataStoreManager
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -46,8 +53,9 @@ class ClockInActivity : AppCompatActivity() {
     private var photoUri: Uri? = null
     private val calendar = Calendar.getInstance()
 
-    private lateinit var clockInTime: Date
+    private lateinit var clockInTime: Timestamp
     private lateinit var clockInDate: Date
+
 
     companion object {
         const val REQUEST_PERMISSIONS = 102
@@ -58,6 +66,9 @@ class ClockInActivity : AppCompatActivity() {
         binding = ActivityClockInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
+
+        //    Ambil Project ID dari ShowProjectActivity
+
 
         initFirebase()
         setupViewModel()
@@ -87,15 +98,17 @@ class ClockInActivity : AppCompatActivity() {
             showTimePicker { time ->
                 val formattedTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(time)
                 binding.tvStartClockIn.text = formattedTime
-                clockInTime = time
+                clockInTime = Timestamp(time)
             }
         }
+
+
     }
 
     private fun attendance() {
         binding.btnSave.setOnClickListener {
             val dataUserId = firebaseAuth.currentUser?.uid
-            val dataProjectId = "project_id"
+            val dataProjectId = intent.getStringExtra("PROJECT_ID")
             val dataDate = clockInDate
             val dataClockInTime = clockInTime
             val dataClockOutTime = null
@@ -106,17 +119,28 @@ class ClockInActivity : AppCompatActivity() {
             val dataWorkHours = 0
             val dataWorkHoursOvertime = 0
 
-            viewModel.attendanceResult.observe(this@ClockInActivity) {
-                if (it.isSuccess) {
+            CommonHelper.showLoading(this@ClockInActivity, binding.loadingBar, binding.loadingOverlay)
+            viewModel.attendanceResult.observe(this@ClockInActivity) { result ->
+                if (result.isSuccess) {
+                    CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
                     Toast.makeText(this@ClockInActivity, "Success", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@ClockInActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
+                    lifecycleScope.launch {
+                        val dataStoreManager = ProjectDataStoreManager(this@ClockInActivity)
+                        dataStoreManager.saveProjectData(intent.getStringExtra("PROJECT_ID")!!, intent.getStringExtra("PROJECT_NAME")!!, intent.getStringExtra("PROJECT_LOCATION")!!)
+                    }
+                    finish() // Menutup aktivitas saat sukses
                 } else {
+                    CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
                     Toast.makeText(this@ClockInActivity, "Failed", Toast.LENGTH_SHORT).show()
                 }
             }
 
             viewModel.clockIn(
                 dataUserId!!,
-                dataProjectId,
+                dataProjectId!!,
                 dataDate,
                 dataClockInTime,
                 dataClockOutTime,

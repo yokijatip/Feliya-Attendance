@@ -103,11 +103,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun navigateToCLockIn() {
-        val intent = Intent(requireActivity(), ClockInActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun navigateToClockOut() {
         val intent = Intent(requireActivity(), ClockOutActivity::class.java)
         startActivity(intent)

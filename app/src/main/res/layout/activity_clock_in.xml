@@ -13,6 +13,30 @@
         android:layout_height="match_parent"
         tools:context=".ui.auth.login.LoginFragment">
 
+        <ProgressBar
+            android:id="@+id/loading_bar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:translationZ="100dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- View Gelap -->
+        <View
+            android:id="@+id/loading_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000"
+            android:visibility="gone"
+            android:translationZ="99dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!--  Back Button  -->
         <ImageView
             android:id="@+id/btn_back"
@@ -111,15 +135,15 @@
                         android:id="@+id/tv_image_url"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:ellipsize="end"
                         android:fontFamily="@font/inter_regular"
                         android:maxLines="2"
-                        android:ellipsize="end"
                         android:text="@string/image_not_found"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +196,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-
                     android:orientation="horizontal"
                     android:paddingStart="12dp"
                     tools:ignore="RtlSymmetry">
@@ -204,13 +227,13 @@
                         android:backgroundTint="@color/white"
                         android:fontFamily="@font/inter_semi_bold"
                         android:text="@string/start_date"
-                        app:rippleColor="@color/color_stroke_primary"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         app:cornerRadius="8dp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
                         app:layout_constraintEnd_toStartOf="@+id/guideline_end"
                         app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                        app:rippleColor="@color/color_stroke_primary"
                         app:strokeColor="@color/dark_primary_color"
                         app:strokeWidth="1dp" />
                 </LinearLayout>
@@ -262,11 +285,11 @@
                         android:text="@string/set_time"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        app:rippleColor="@color/color_stroke_primary"
                         app:cornerRadius="8dp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
                         app:layout_constraintEnd_toStartOf="@+id/guideline_end"
                         app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                        app:rippleColor="@color/color_stroke_primary"
                         app:strokeColor="@color/dark_primary_color"
                         app:strokeWidth="1dp" />
                 </LinearLayout>
@@ -278,10 +301,10 @@
                 style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:hint="@string/description"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
-                android:layout_marginTop="16dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
                 app:startIconDrawable="@drawable/ic_type">

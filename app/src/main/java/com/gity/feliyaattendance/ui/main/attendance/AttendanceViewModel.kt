@@ -29,8 +29,8 @@ class AttendanceViewModel(private val repository: Repository) : ViewModel() {
         userId: String,
         projectId: String,
         date: Date,
-        clockInTime: Date,
-        clockOutTime: Date?,
+        clockInTime: Timestamp,
+        clockOutTime: Timestamp?,
         imageUrlIn: String,
         imageUrlOut: String?,
         description: String,
@@ -53,6 +53,7 @@ class AttendanceViewModel(private val repository: Repository) : ViewModel() {
                     workHours,
                     workHoursOvertime
                 )
+                _attendanceResult.postValue(result)
             } catch (e: Exception) {
                 _attendanceResult.postValue(Result.failure(e))
             }

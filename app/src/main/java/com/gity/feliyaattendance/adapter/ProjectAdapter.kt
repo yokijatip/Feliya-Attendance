@@ -27,7 +27,10 @@ class ProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
             binding.tvStartDate.text = CommonHelper.formatTimestamp(project.startDate)
             binding.tvEndDate.text = CommonHelper.formatTimestamp(project.endDate)
             binding.tvProjectStatus.text = project.status
-            itemView.setOnClickListener { onProjectSelected(project) }
+            itemView.setOnClickListener {
+                project.projectId
+                onProjectSelected(project)
+            }
             setProjectStatus(project.status, binding.cardProjectStatus, binding.tvProjectStatus)
         }
     }

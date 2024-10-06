@@ -1,6 +1,9 @@
 package com.gity.feliyaattendance.helper
 
+import android.content.Context
 import android.icu.util.Calendar
+import android.view.View
+import android.widget.ProgressBar
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -56,6 +59,18 @@ object CommonHelper {
             val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
             dateFormat.format(it)
         } ?: "Tanggal tidak tersedia"
+    }
+
+    fun showLoading(context: Context, loadingBar: ProgressBar, loadingOverlay: View) {
+        loadingBar.visibility = View.VISIBLE
+        loadingOverlay.visibility = View.VISIBLE
+        // Jika Anda ingin gelap, Anda bisa mengatur warna di View
+        loadingOverlay.alpha = 0.5f // Sesuaikan transparansi sesuai kebutuhan
+    }
+
+    fun hideLoading(loadingBar: ProgressBar, loadingOverlay: View) {
+        loadingBar.visibility = View.GONE
+        loadingOverlay.visibility = View.GONE
     }
 
 
