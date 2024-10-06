@@ -5,8 +5,9 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
 import java.util.Date
+import kotlinx.coroutines.tasks.await
+
 import java.util.UUID
 
 class Repository(
@@ -111,8 +112,8 @@ class Repository(
                 "userId" to userId,  // ID admin yang menambahkan project
                 "projectName" to projectName,
                 "location" to location,
-                "startDate" to Timestamp(startDate),
-                "endDate" to Timestamp(endDate),
+                "startDate" to startDate,
+                "endDate" to endDate,
                 "status" to status,
                 "description" to description,
                 "createdAt" to FieldValue.serverTimestamp()  // Menyimpan waktu pembuatan
@@ -154,7 +155,7 @@ class Repository(
         imageUrlIn: String,
         imageUrlOut: String?,
         description: String,
-        status: String = "Pending",
+        status: String?,
         workHours: Int = 0,
         workHoursOvertime: Int = 0
     ): Result<Unit> {
@@ -174,7 +175,6 @@ class Repository(
                 "work_hours" to workHours,
                 "overtime_hours" to workHoursOvertime
             )
-
             firebaseFirestore.collection("attendance")
                 .add(attendanceData).await()
             Result.success(Unit)

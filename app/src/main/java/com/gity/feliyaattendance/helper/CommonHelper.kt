@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ProgressBar
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 import kotlin.random.Random
 
@@ -71,6 +72,28 @@ object CommonHelper {
     fun hideLoading(loadingBar: ProgressBar, loadingOverlay: View) {
         loadingBar.visibility = View.GONE
         loadingOverlay.visibility = View.GONE
+    }
+
+    // Fungsi untuk mengubah string ke Timestamp Firestore
+    fun stringToTimestamp(dateString: String): Timestamp? {
+        return try {
+            val format = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            val date: Date? = format.parse(dateString) // Konversi String ke Date
+            Timestamp(date!!) // Konversi Date ke Timestamp Firestore
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    fun stringToDate(dateString: String): Date? {
+        return try {
+            val format = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            format.parse(dateString)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
 

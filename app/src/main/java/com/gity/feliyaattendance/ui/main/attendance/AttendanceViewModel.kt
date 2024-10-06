@@ -34,7 +34,7 @@ class AttendanceViewModel(private val repository: Repository) : ViewModel() {
         imageUrlIn: String,
         imageUrlOut: String?,
         description: String,
-        status: String = "pending",
+        status: String?,
         workHours: Int = 0,
         workHoursOvertime: Int = 0
     ) {

@@ -294,34 +294,6 @@
                         app:strokeWidth="1dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <!-- Description -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edt_description_project_layout"
-                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/description"
-                app:boxCornerRadiusBottomEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:startIconDrawable="@drawable/ic_type">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_description_project"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/inter_regular"
-                    android:gravity="top"
-                    android:inputType="textMultiLine"
-                    android:maxLines="6"
-                    android:scrollHorizontally="false"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <!--    Button Login    -->

@@ -1,4 +1,4 @@
-package com.gity.feliyaattendance.utils
+package com.gity.feliyaattendance.data.local
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

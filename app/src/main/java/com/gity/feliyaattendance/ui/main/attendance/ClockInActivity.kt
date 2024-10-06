@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -22,11 +23,12 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
+import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
 import com.gity.feliyaattendance.databinding.ActivityClockInBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.main.MainActivity
-import com.gity.feliyaattendance.utils.ProjectDataStoreManager
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -91,6 +93,7 @@ class ClockInActivity : AppCompatActivity() {
                     SimpleDateFormat("dd - MMMM - yyyy", Locale.getDefault()).format(date)
                 binding.tvStartDate.text = formattedDate
                 clockInDate = date
+
             }
         }
 
@@ -98,7 +101,7 @@ class ClockInActivity : AppCompatActivity() {
             showTimePicker { time ->
                 val formattedTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(time)
                 binding.tvStartClockIn.text = formattedTime
-                clockInTime = Timestamp(time)
+                clockInTime = Timestamp.now()
             }
         }
 
@@ -111,46 +114,45 @@ class ClockInActivity : AppCompatActivity() {
             val dataProjectId = intent.getStringExtra("PROJECT_ID")
             val dataDate = clockInDate
             val dataClockInTime = clockInTime
-            val dataClockOutTime = null
             val dataImageUrlIn = binding.tvImageUrl.text.toString()
-            val dataImageUrlOut = null
-            val dataDescription = binding.edtDescriptionProject.text.toString()
-            val dataStatus = "pending"
-            val dataWorkHours = 0
-            val dataWorkHoursOvertime = 0
 
-            CommonHelper.showLoading(this@ClockInActivity, binding.loadingBar, binding.loadingOverlay)
-            viewModel.attendanceResult.observe(this@ClockInActivity) { result ->
-                if (result.isSuccess) {
+            CommonHelper.showLoading(
+                this@ClockInActivity,
+                binding.loadingBar,
+                binding.loadingOverlay
+            )
+
+            lifecycleScope.launch {
+                val attendanceDataStoreManager = AttendanceDataStoreManager(this@ClockInActivity)
+                val dataStoreManager = ProjectDataStoreManager(this@ClockInActivity)
+                try {
+                    dataStoreManager.saveProjectData(
+                        intent.getStringExtra("PROJECT_ID")!!,
+                        intent.getStringExtra("PROJECT_NAME")!!,
+                        intent.getStringExtra("PROJECT_LOCATION")!!
+                    )
+                    attendanceDataStoreManager.saveClockInData(
+                        dataUserId!!,
+                        dataProjectId!!,
+                        dataDate,
+                        dataClockInTime,
+                        dataImageUrlIn,
+                    )
                     CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
-                    Toast.makeText(this@ClockInActivity, "Success", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@ClockInActivity,
+                        "Success Save di Local",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     startActivity(Intent(this@ClockInActivity, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     })
-                    lifecycleScope.launch {
-                        val dataStoreManager = ProjectDataStoreManager(this@ClockInActivity)
-                        dataStoreManager.saveProjectData(intent.getStringExtra("PROJECT_ID")!!, intent.getStringExtra("PROJECT_NAME")!!, intent.getStringExtra("PROJECT_LOCATION")!!)
-                    }
-                    finish() // Menutup aktivitas saat sukses
-                } else {
+                    finish()
+                } catch (e: Exception) {
+                    Log.e("CLOCK_IN", "Error : ${e.message}")
                     CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
-                    Toast.makeText(this@ClockInActivity, "Failed", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            viewModel.clockIn(
-                dataUserId!!,
-                dataProjectId!!,
-                dataDate,
-                dataClockInTime,
-                dataClockOutTime,
-                dataImageUrlIn,
-                dataImageUrlOut,
-                dataDescription,
-                dataStatus,
-                dataWorkHours,
-                dataWorkHoursOvertime
-            )
         }
     }
 
@@ -166,9 +168,6 @@ class ClockInActivity : AppCompatActivity() {
             tvStartClockIn.addTextChangedListener {
                 checkFieldsForEmptyValues()
             }
-            edtDescriptionProject.addTextChangedListener {
-                checkFieldsForEmptyValues()
-            }
 
             checkFieldsForEmptyValues()
         }
@@ -179,10 +178,9 @@ class ClockInActivity : AppCompatActivity() {
         val isImageSelected = !binding.tvImageUrl.text.isNullOrEmpty()
         val isStartDateSelected = !binding.tvStartDate.text.isNullOrEmpty()
         val isStartTimeSelected = !binding.tvStartClockIn.text.isNullOrEmpty()
-        val isDescriptionFilled = !binding.edtDescriptionProject.text.isNullOrEmpty()
 
         binding.btnSave.isEnabled =
-            isImageSelected && isStartDateSelected && isStartTimeSelected && isDescriptionFilled
+            isImageSelected && isStartDateSelected && isStartTimeSelected
     }
 
     //    Init Firebase
@@ -330,9 +328,12 @@ class ClockInActivity : AppCompatActivity() {
 
     //    Time Picker
     private fun showTimePicker(onTimeSelected: (Date) -> Unit) {
-        val timePicker = MaterialTimePicker.Builder().setTitleText("Pilih Waktu")
-            .setTimeFormat(TimeFormat.CLOCK_24H).setHour(calendar.get(Calendar.HOUR_OF_DAY))
-            .setMinute(calendar.get(Calendar.MINUTE)).build()
+        val timePicker = MaterialTimePicker.Builder()
+            .setTitleText(getString(R.string.set_time))
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(calendar.get(Calendar.HOUR_OF_DAY))
+            .setMinute(calendar.get(Calendar.MINUTE))
+            .build()
 
         timePicker.addOnPositiveButtonClickListener {
             calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
