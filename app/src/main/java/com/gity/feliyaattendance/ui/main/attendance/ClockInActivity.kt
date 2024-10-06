@@ -104,9 +104,9 @@ class ClockInActivity : AppCompatActivity() {
                 clockInTime = Timestamp.now()
             }
         }
-
-
     }
+
+
 
     private fun attendance() {
         binding.btnSave.setOnClickListener {
@@ -141,7 +141,7 @@ class ClockInActivity : AppCompatActivity() {
                     CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
                     Toast.makeText(
                         this@ClockInActivity,
-                        "Success Save di Local",
+                        "Success Save di Local | Date : $dataDate",
                         Toast.LENGTH_SHORT
                     ).show()
                     startActivity(Intent(this@ClockInActivity, MainActivity::class.java).apply {

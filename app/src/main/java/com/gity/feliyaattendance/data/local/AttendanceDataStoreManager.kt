@@ -87,10 +87,8 @@ class AttendanceDataStoreManager(private val context: Context) {
     val imageUrlOut: Flow<String?> = context.dataStore.data
         .map { pref -> pref[IMAGE_URL_OUT] }
 
-
     val description: Flow<String?> = context.dataStore.data
         .map { pref -> pref[DESCRIPTION] }
-
 
     val status: Flow<String?> = context.dataStore.data
         .map { pref -> pref[STATUS] }
