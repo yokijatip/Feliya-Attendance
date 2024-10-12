@@ -21,8 +21,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
 import com.gity.feliyaattendance.databinding.ActivityClockOutBinding
+import com.gity.feliyaattendance.helper.AttendanceManager
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.Timestamp
@@ -32,17 +34,17 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.io.File
 
-@Suppress("DEPRECATION")
 class ClockOutActivity : AppCompatActivity() {
+    private lateinit var attendanceManager: AttendanceManager
     private lateinit var binding: ActivityClockOutBinding
     private var photoUri: Uri? = null
-    private var clockOutTime: Timestamp? = null
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseFirestore: FirebaseFirestore
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
     private lateinit var pickImageLauncher: ActivityResultLauncher<String>
     private lateinit var repository: Repository
     private lateinit var viewModel: AttendanceViewModel
+
 
     companion object {
         const val REQUEST_PERMISSIONS = 102
@@ -59,62 +61,58 @@ class ClockOutActivity : AppCompatActivity() {
         setupUI()
         setupCameraAndGalleryLaunchers()
         setupValidationListener()
-        getClockInData()
         displayProjectData()
+
+        val attendanceDataStore = AttendanceDataStoreManager(this)
+        val projectDataStore = ProjectDataStoreManager(this)
+        attendanceManager =
+            AttendanceManager(this, attendanceDataStore, projectDataStore, firebaseFirestore)
 
         binding.apply {
             btnBack.setOnClickListener { onBackPressed() }
             btnClockOut.setOnClickListener { clockOut() }
             openGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
-
-            tvTitle.setOnClickListener {
-                val value = hashMapOf(
-                    "user_id" to "123userid",
-                    "project_id" to "123projectid",
-                    "date" to Timestamp.now(),
-                    "clock_in_time" to Timestamp.now(),
-                    "clock_out_time" to Timestamp.now(), // Nullable
-                    "work_proof_in" to "imagein",
-                    "work_proof_out" to "imageout", // Nullable
-                    "work_description" to "123desc",
-                    "status" to "pending",
-                    "work_hours" to 8,
-                    "overtime_hours" to 2
-                )
-
-                firebaseFirestore.collection("attendance")
-                    .add(value)
-            }
-        }
-
-    }
-
-    private fun getClockInData() {
-        lifecycleScope.launch {
-
         }
     }
-
 
     private fun clockOut() {
         lifecycleScope.launch {
+            val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
+            val clockOutTime = Timestamp.now()
+            val imageUrlOut = photoUri.toString()
+            val description = binding.edtDescriptionProject.text.toString()
+            val status = "pending"
 
+//            Fetch Clock in Time
+            val clockInTime = attendanceDataStore.clockIn.firstOrNull()
 
-//            Log.v(
-//                "ATTENDANCE_DATA",
-//                "User Id: $userId | Project Id: $projectId | Date: $date | Clock In Time: $clockInTime | Clock Out Time: $clockOutTime | Image URL In: $imageUrlIn | Image URL Out: $imageUrlOut | Description: $description"
-//            )
+            if (clockInTime != null) {
+                val workHours = calculateWorkHours(clockInTime, clockOutTime)
+                val workHoursOvertime = calculateOvertime(workHours)
+
+                attendanceManager.clockOut(
+                    clockOut = clockOutTime,
+                    imageUrlOut = imageUrlOut,
+                    status = status,
+                    workHours = workHours,
+                    workHoursOvertime = workHoursOvertime,
+                    description = description
+                )
+                finish()
+            } else {
+                Toast.makeText(
+                    this@ClockOutActivity, "Clock in time not found", Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
     private fun calculateWorkHours(clockIn: Timestamp, clockOut: Timestamp): Int {
-        val duration =
-            clockOut.toDate().time - clockIn.toDate().time // Menghitung selisih waktu dalam milidetik
-        return (duration / (1000 * 60 * 60)).toInt() // Mengonversi milidetik menjadi jam
+        val duration = clockOut.toDate().time - clockIn.toDate().time
+        return (duration / (1000 * 60 * 60)).toInt()
     }
 
     private fun calculateOvertime(workHours: Int): Int {
-        // Contoh perhitungan overtime, anggap 8 jam kerja reguler
         return if (workHours > 8) workHours - 8 else 0
     }
 

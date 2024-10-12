@@ -31,15 +31,12 @@ import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.main.MainActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -53,9 +50,6 @@ class ClockInActivity : AppCompatActivity() {
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
     private lateinit var pickImageLauncher: ActivityResultLauncher<String>
     private var photoUri: Uri? = null
-    private val calendar = Calendar.getInstance()
-
-    private lateinit var clockInTime: Timestamp
     private lateinit var clockInDate: Date
 
 
@@ -96,16 +90,7 @@ class ClockInActivity : AppCompatActivity() {
 
             }
         }
-
-        binding.btnOpenHour.setOnClickListener {
-            showTimePicker { time ->
-                val formattedTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(time)
-                binding.tvStartClockIn.text = formattedTime
-                clockInTime = Timestamp.now()
-            }
-        }
     }
-
 
 
     private fun attendance() {
@@ -113,7 +98,7 @@ class ClockInActivity : AppCompatActivity() {
             val dataUserId = firebaseAuth.currentUser?.uid
             val dataProjectId = intent.getStringExtra("PROJECT_ID")
             val dataDate = clockInDate
-            val dataClockInTime = clockInTime
+            val dataClockInTime = Timestamp.now()
             val dataImageUrlIn = binding.tvImageUrl.text.toString()
 
             CommonHelper.showLoading(
@@ -139,11 +124,14 @@ class ClockInActivity : AppCompatActivity() {
                         dataImageUrlIn,
                     )
                     CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
+                    val showData =
+                        "Date = $dataDate, userId: $dataUserId, projectId: $dataProjectId, clockIn: $dataClockInTime"
                     Toast.makeText(
                         this@ClockInActivity,
-                        "Success Save di Local | Date : $dataDate",
+                        "Success Save di Local | Data : $showData",
                         Toast.LENGTH_SHORT
                     ).show()
+                    Log.i("ATTENDANCE_DATA", "Data: $showData")
                     startActivity(Intent(this@ClockInActivity, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     })
@@ -165,9 +153,6 @@ class ClockInActivity : AppCompatActivity() {
             tvStartDate.addTextChangedListener {
                 checkFieldsForEmptyValues()
             }
-            tvStartClockIn.addTextChangedListener {
-                checkFieldsForEmptyValues()
-            }
 
             checkFieldsForEmptyValues()
         }
@@ -177,10 +162,9 @@ class ClockInActivity : AppCompatActivity() {
     private fun checkFieldsForEmptyValues() {
         val isImageSelected = !binding.tvImageUrl.text.isNullOrEmpty()
         val isStartDateSelected = !binding.tvStartDate.text.isNullOrEmpty()
-        val isStartTimeSelected = !binding.tvStartClockIn.text.isNullOrEmpty()
 
         binding.btnSave.isEnabled =
-            isImageSelected && isStartDateSelected && isStartTimeSelected
+            isImageSelected && isStartDateSelected
     }
 
     //    Init Firebase
@@ -324,23 +308,6 @@ class ClockInActivity : AppCompatActivity() {
             onDateSelected(Date(selection))
         }
         datePicker.show(supportFragmentManager, "DATE_PICKER")
-    }
-
-    //    Time Picker
-    private fun showTimePicker(onTimeSelected: (Date) -> Unit) {
-        val timePicker = MaterialTimePicker.Builder()
-            .setTitleText(getString(R.string.set_time))
-            .setTimeFormat(TimeFormat.CLOCK_24H)
-            .setHour(calendar.get(Calendar.HOUR_OF_DAY))
-            .setMinute(calendar.get(Calendar.MINUTE))
-            .build()
-
-        timePicker.addOnPositiveButtonClickListener {
-            calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
-            calendar.set(Calendar.MINUTE, timePicker.minute)
-            onTimeSelected(calendar.time)
-        }
-        timePicker.show(supportFragmentManager, "TIME_PICKER")
     }
 }
 

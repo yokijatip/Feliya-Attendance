@@ -188,7 +188,6 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/white"
                 app:strokeWidth="0dp">
 
@@ -239,61 +238,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Start Clock In -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/white"
-                app:strokeWidth="0dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-
-                    android:orientation="horizontal"
-                    android:paddingStart="12dp"
-                    tools:ignore="RtlSymmetry">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_clock" />
-
-                    <!--  Title  -->
-                    <TextView
-                        android:id="@+id/tv_start_clock_in"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/inter_semi_bold"
-                        android:maxLines="1"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        tools:text="08:00" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_open_hour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="42dp"
-                        android:backgroundTint="@color/white"
-                        android:fontFamily="@font/inter_semi_bold"
-                        android:text="@string/set_time"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                        app:rippleColor="@color/color_stroke_primary"
-                        app:strokeColor="@color/dark_primary_color"
-                        app:strokeWidth="1dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
         <!--    Button Login    -->

@@ -43,7 +43,6 @@ class SplashScreenActivity : AppCompatActivity() {
         firebaseFirestore = FirebaseFirestore.getInstance()
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(2000)
             checkUserLogin()
         }
 

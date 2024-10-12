@@ -2,6 +2,8 @@ package com.gity.feliyaattendance.data.local
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.google.firebase.Timestamp
@@ -14,15 +16,17 @@ class AttendanceDataStoreManager(private val context: Context) {
         private val Context.dataStore by preferencesDataStore("attendance_data")
         private val USER_ID = stringPreferencesKey("user_id")
         private val PROJECT_ID = stringPreferencesKey("project_id")
-        private val DATE = stringPreferencesKey("date")
-        private val CLOCK_IN = stringPreferencesKey("clock_in")
-        private val CLOCK_OUT = stringPreferencesKey("clock_out")
+        private val DATE = longPreferencesKey("date")
+        private val CLOCK_IN = longPreferencesKey("clock_in")
+        private val CLOCK_OUT = longPreferencesKey("clock_out")
         private val IMAGE_URL_IN = stringPreferencesKey("image_url_in")
         private val IMAGE_URL_OUT = stringPreferencesKey("image_url_out")
         private val DESCRIPTION = stringPreferencesKey("description")
         private val STATUS = stringPreferencesKey("status")
-        private val WORK_HOURS = stringPreferencesKey("work_hours")
-        private val WORK_HOURS_OVERTIME = stringPreferencesKey("work_hours_overtime")
+        private val WORK_HOURS = intPreferencesKey("work_hours")
+        private val WORK_HOURS_OVERTIME = intPreferencesKey(
+            "work_hours_overtime"
+        )
     }
 
     suspend fun saveClockInData(
@@ -31,12 +35,12 @@ class AttendanceDataStoreManager(private val context: Context) {
         date: Date,
         clockIn: Timestamp,
         imageUrlIn: String,
-        ) {
+    ) {
         context.dataStore.edit { pref ->
             pref[USER_ID] = userId
             pref[PROJECT_ID] = projectId
-            pref[DATE] = date.toString()
-            pref[CLOCK_IN] = clockIn.seconds.toString()
+            pref[DATE] = date.time
+            pref[CLOCK_IN] = clockIn.seconds * 1000 + clockIn.nanoseconds / 1000000
             pref[IMAGE_URL_IN] = imageUrlIn
 
         }
@@ -51,11 +55,11 @@ class AttendanceDataStoreManager(private val context: Context) {
         description: String
     ) {
         context.dataStore.edit { pref ->
-            pref[CLOCK_OUT] = clockOut.toString()
+            pref[CLOCK_OUT] = clockOut.seconds * 1000 + clockOut.nanoseconds / 1000000
             pref[IMAGE_URL_OUT] = imageUrlOut
             pref[STATUS] = status
-            pref[WORK_HOURS] = workHours.toString()
-            pref[WORK_HOURS_OVERTIME] = workHoursOvertime.toString()
+            pref[WORK_HOURS] = workHours
+            pref[WORK_HOURS_OVERTIME] = workHoursOvertime
             pref[DESCRIPTION] = description
         }
     }
@@ -66,20 +70,32 @@ class AttendanceDataStoreManager(private val context: Context) {
         }
     }
 
+
     val userId: Flow<String?> = context.dataStore.data
         .map { pref -> pref[USER_ID] }
 
     val projectId: Flow<String?> = context.dataStore.data
         .map { pref -> pref[PROJECT_ID] }
 
-    val date: Flow<String?> = context.dataStore.data
-        .map { pref -> pref[DATE] }
+    val date: Flow<Date?> = context.dataStore.data
+        .map { pref -> pref[DATE]?.let { Date(it) } }
 
-    val clockIn: Flow<String?> = context.dataStore.data
-        .map { pref -> pref[CLOCK_IN] }
 
-    val clockOut: Flow<String?> = context.dataStore.data
-        .map { pref -> pref[CLOCK_OUT] }
+    // Fungsi untuk mengambil clock in sebagai Timestamp
+    val clockIn: Flow<Timestamp?> = context.dataStore.data
+        .map { pref ->
+            pref[CLOCK_IN]?.let { millis ->
+                Timestamp(Date(millis))
+            }
+        }
+
+    // Fungsi untuk mengambil clock out sebagai Timestamp
+    val clockOut: Flow<Timestamp?> = context.dataStore.data
+        .map { pref ->
+            pref[CLOCK_OUT]?.let { millis ->
+                Timestamp(Date(millis))
+            }
+        }
 
     val imageUrlIn: Flow<String?> = context.dataStore.data
         .map { pref -> pref[IMAGE_URL_IN] }
@@ -93,9 +109,9 @@ class AttendanceDataStoreManager(private val context: Context) {
     val status: Flow<String?> = context.dataStore.data
         .map { pref -> pref[STATUS] }
 
-    val workHours: Flow<String?> = context.dataStore.data
+    val workHours: Flow<Int?> = context.dataStore.data
         .map { pref -> pref[WORK_HOURS] }
 
-    val workHoursOvertime: Flow<String?> = context.dataStore.data
+    val workHoursOvertime: Flow<Int?> = context.dataStore.data
         .map { pref -> pref[WORK_HOURS_OVERTIME] }
 }

@@ -62,6 +62,7 @@
     <string name="dashboard_total_days_title">Total Days</string>
     <string name="your_activity">Your Activity</string>
     <string name="view_all">View all</string>
+    <string name="placeholder_hour">--:--</string>
 
     <!--  Worker Attendance  -->
     <string name="clock_in_title">Confirm Clock In</string>
