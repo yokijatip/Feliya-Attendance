@@ -13,7 +13,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     val nameResult: LiveData<Result<String>> = _nameResult
 
     private val _attendanceList = MutableLiveData<Result<List<Attendance>>>()
-    val attendanceList: LiveData<Result<List<Attendance>>> = _attendanceList
+    val attendanceList: LiveData<Result<List<Attendance>>> get() = _attendanceList
 
     private var nameCache: String? = null
 

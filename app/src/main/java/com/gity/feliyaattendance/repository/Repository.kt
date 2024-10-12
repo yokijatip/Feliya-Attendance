@@ -189,13 +189,13 @@ class Repository(
     suspend fun getAttendanceByUserId(userId: String): Result<List<Attendance>> {
         return try {
             val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("user_id", userId)
+                .whereEqualTo("userId", userId)
                 .get()
                 .await()
 
-            val attendanceList = snapshot.documents.mapNotNull { documentSnapshot ->
-                documentSnapshot.toObject(Attendance::class.java)?.apply {
-                    attendanceId = documentSnapshot.id
+            val attendanceList = snapshot.documents.mapNotNull { document ->
+                document.toObject(Attendance::class.java)?.apply {
+                    attendanceId = document.id
                 }
             }
 

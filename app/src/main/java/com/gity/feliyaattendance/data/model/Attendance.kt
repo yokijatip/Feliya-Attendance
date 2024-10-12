@@ -9,13 +9,13 @@ data class Attendance(
     var attendanceId: String = "",
     var userId: String = "",
     var projectId: String = "",
-    var date: Timestamp,
+    var date: Timestamp? = null,
     var clockInTime: Timestamp? = null,
     var clockOutTime: Timestamp? = null,
     var workProofIn: String = "",
     var workProofOut: String = "",
     var workDescription: String = "",
     var status: String = "",
-    var workHours: Int = 0,
-    var overtimeHours: Int = 0
+    var workHours: Int? = null,
+    var overtimeHours: Int? = null
 ) : Parcelable

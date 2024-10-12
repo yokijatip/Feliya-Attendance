@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        Start Of Your Code
+        //        Start Of Your Code
 
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
@@ -53,16 +53,13 @@ class HomeFragment : Fragment() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
         viewModel.fetchAttendanceList(userId)
 
-
-
         binding.rvYourActivity.layoutManager = LinearLayoutManager(requireContext())
         binding.rvYourActivity.adapter = adapter
-
-
 
         viewModel.attendanceList.observe(viewLifecycleOwner) { result ->
             result.onSuccess { attendance ->
                 adapter.submitList(attendance)
+                Log.i("ATTENDANCE_DATA", "Data : ${attendance.size}")
             }.onFailure { exception ->
                 Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
                 // Tampilkan pesan kesalahan ke pengguna jika diperlukan
@@ -91,6 +88,7 @@ class HomeFragment : Fragment() {
                 navigateToClockOut()
             }
         }
+
         viewModel.fetchName()
         viewModel.nameResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { name ->
@@ -104,29 +102,30 @@ class HomeFragment : Fragment() {
                 ).show()
             }
         }
+        swipeRefreshLayout(adapter)
 
 
-//        // Real-time snapshot listener from Firestore
-//        val userId = firebaseAuth.currentUser?.uid
-//        if (userId != null) {
-//            firebaseFirestore.collection("users").document(userId)
-//                .addSnapshotListener { documentSnapshot, error ->
-//                    if (error != null) {
-//                        Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT)
-//                            .show()
-//                        return@addSnapshotListener
-//                    }
-//
-//                    if (documentSnapshot != null && documentSnapshot.exists()) {
-//                        val name = documentSnapshot.getString("name")
-//                        // Update the UI in real-time if the name changes in Firestore
-//                        binding.tvName.text = name
-//                    }
-//                }
-//        } else {
-//            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
-//        }
-//        End of Your Code
+        //        // Real-time snapshot listener from Firestore
+        //        val userId = firebaseAuth.currentUser?.uid
+        //        if (userId != null) {
+        //            firebaseFirestore.collection("users").document(userId)
+        //                .addSnapshotListener { documentSnapshot, error ->
+        //                    if (error != null) {
+        //                        Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT)
+        //                            .show()
+        //                        return@addSnapshotListener
+        //                    }
+        //
+        //                    if (documentSnapshot != null && documentSnapshot.exists()) {
+        //                        val name = documentSnapshot.getString("name")
+        //                        // Update the UI in real-time if the name changes in Firestore
+        //                        binding.tvName.text = name
+        //                    }
+        //                }
+        //        } else {
+        //            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+        //        }
+        //        End of Your Code
         return binding.root
     }
 
@@ -138,5 +137,24 @@ class HomeFragment : Fragment() {
     private fun navigateToShowProject() {
         val intent = Intent(requireActivity(), ShowProjectActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun swipeRefreshLayout(adapter: AttendanceAdapter) {
+        binding.apply {
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.fetchAttendanceList(firebaseAuth.currentUser?.uid ?: "")
+                viewModel.attendanceList.observe(viewLifecycleOwner) { result ->
+                    result.onSuccess { attendance ->
+                        adapter.submitList(attendance)
+                        Log.i("ATTENDANCE_DATA", "Data : ${attendance.size}")
+                    }.onFailure { exception ->
+                        Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
+                        // Tampilkan pesan kesalahan ke pengguna jika diperlukan
+                    }
+                    swipeRefreshLayout.isRefreshing = false
+                }
+                Toast.makeText(requireContext(), "Refreshed", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

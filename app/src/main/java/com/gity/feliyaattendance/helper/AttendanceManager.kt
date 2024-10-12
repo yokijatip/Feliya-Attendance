@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.tasks.await
 import java.util.Date
+import java.util.UUID
 
 class AttendanceManager(
     private val context: Context,
@@ -62,8 +63,10 @@ class AttendanceManager(
         val status = dataStore.status.first() ?: throw IllegalStateException("Status not found")
         val workHours = dataStore.workHours.first() ?: 0
         val workHoursOvertime = dataStore.workHoursOvertime.first() ?: 0
+        val attendanceId = UUID.randomUUID().toString()
 
         val attendanceData = hashMapOf(
+            "attendanceId" to attendanceId,
             "userId" to userId,
             "projectId" to projectId,
             "date" to date,

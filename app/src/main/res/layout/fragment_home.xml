@@ -1,601 +1,615 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.home.HomeFragment">
 
-    <!--  Logo & Notification  -->
-    <LinearLayout
-        android:id="@+id/container_logo_and_notification"
-        android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toTopOf="@+id/guideline_top">
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_height="match_parent">
 
-        <!-- Logo -->
-        <ImageView
-            android:layout_width="92dp"
-            android:layout_height="28dp"
-            android:src="@drawable/logo_no_background" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1" />
-
-        <!-- Logo -->
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_notification"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:padding="0dp"
-            android:src="@drawable/ic_bell"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    </LinearLayout>
-
-    <!--  Greetings & Day  -->
-    <LinearLayout
-        android:id="@+id/container_greeting_and_day"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification">
-
-        <!--    Greetings    -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:layout_marginEnd="24dp"
-            android:orientation="vertical">
+            tools:context=".ui.main.home.HomeFragment">
 
-            <TextView
-                android:id="@+id/tv_greetings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_regular"
-                android:maxLines="1"
-                tools:text="@string/greetings_good_morning"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium"
-                tools:text="Yoki Jati Perkasa"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/dark_primary_color"
-                android:textSize="18sp" />
-
-
-        </LinearLayout>
-
-        <!--    Day    -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/dark_primary_color"
-            app:cardCornerRadius="8dp"
-            app:strokeWidth="0dp">
-
+            <!--  Logo & Notification  -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:id="@+id/container_logo_and_notification"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toTopOf="@+id/guideline_top">
 
-                <TextView
-                    android:id="@+id/tv_top_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    tools:text="20"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                <!-- Logo -->
+                <ImageView
+                    android:layout_width="92dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/logo_no_background" />
 
-                <TextView
-                    android:id="@+id/tv_top_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    tools:text="Monday"
-                    android:textColor="@color/white"
-                    android:textSize="11sp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="28dp"
+                    android:layout_weight="1" />
+
+                <!-- Logo -->
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_notification"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:padding="0dp"
+                    android:src="@drawable/ic_bell"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-    <!--  Dashboard  -->
-    <LinearLayout
-        android:id="@+id/container_dashboard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/container_greeting_and_day">
-
-        <!--    Title    -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12sp"
-            android:fontFamily="@font/inter_semi_bold"
-            android:maxLines="1"
-            android:text="@string/dashboard"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <!--    Content Horizontal 1    -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <!--      Item 1      -->
-            <com.google.android.material.card.MaterialCardView
+            <!--  Greetings & Day  -->
+            <LinearLayout
+                android:id="@+id/container_greeting_and_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="8dp"
-                app:strokeColor="@color/color_stroke_primary"
-                app:strokeWidth="1dp">
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <!--    Greetings    -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <!-- Icon -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/background_icon_clock_in"
+                    <TextView
+                        android:id="@+id/tv_greetings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:backgroundTint="@color/color_background_icon_primary"
-                        app:cardCornerRadius="4dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp">
+                        android:fontFamily="@font/inter_regular"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        tools:text="@string/greetings_good_morning" />
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_arrow_in_out" />
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/inter_medium"
+                        android:maxLines="1"
+                        android:textColor="@color/dark_primary_color"
+                        android:textSize="18sp"
+                        tools:text="Yoki Jati Perkasa" />
+
+
+                </LinearLayout>
+
+                <!--    Day    -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/dark_primary_color"
+                    app:cardCornerRadius="8dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_top_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:text="20" />
+
+                        <TextView
+                            android:id="@+id/tv_top_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            tools:text="Monday" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!--  Dashboard  -->
+            <LinearLayout
+                android:id="@+id/container_dashboard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/container_greeting_and_day">
+
+                <!--    Title    -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12sp"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:maxLines="1"
+                    android:text="@string/dashboard"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!--    Content Horizontal 1    -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!--      Item 1      -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="8dp"
+                        app:strokeColor="@color/color_stroke_primary"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!-- Icon -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/background_icon_clock_in"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="12dp"
+                                android:backgroundTint="@color/color_background_icon_primary"
+                                app:cardCornerRadius="4dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeWidth="0dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:rotation="-90"
+                                    android:src="@drawable/ic_arrow_in_out" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Title -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="@string/clock_in"
+                                android:textColor="@color/grey"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/background_icon_clock_in"
+                                app:layout_constraintStart_toEndOf="@+id/background_icon_clock_in"
+                                app:layout_constraintTop_toTopOf="@+id/background_icon_clock_in" />
+
+                            <!-- Content -->
+                            <TextView
+                                android:id="@+id/tv_clock_in"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/background_icon_clock_in"
+                                app:layout_constraintTop_toBottomOf="@+id/background_icon_clock_in"
+                                tools:text="@string/placeholder_hour" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Title -->
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!--      Item 2      -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="8dp"
+                        app:strokeColor="@color/color_stroke_primary"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!-- Icon -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/background_icon_clock_out"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="12dp"
+                                android:backgroundTint="@color/color_background_icon_primary"
+                                app:cardCornerRadius="4dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeWidth="0dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:rotation="90"
+                                    android:src="@drawable/ic_arrow_in_out" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Title -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="@string/clock_out"
+                                android:textColor="@color/grey"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/background_icon_clock_out"
+                                app:layout_constraintStart_toEndOf="@+id/background_icon_clock_out"
+                                app:layout_constraintTop_toTopOf="@+id/background_icon_clock_out" />
+
+                            <!-- Content -->
+                            <TextView
+                                android:id="@+id/tv_clock_out"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/background_icon_clock_out"
+                                app:layout_constraintTop_toBottomOf="@+id/background_icon_clock_out"
+                                tools:text="@string/placeholder_hour" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <!--    Content Horizontal 2    -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!--      Item 1      -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="8dp"
+                        app:strokeColor="@color/color_stroke_primary"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!-- Icon -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/background_icon_total_hours"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="12dp"
+                                android:backgroundTint="@color/color_background_icon_primary"
+                                app:cardCornerRadius="4dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeWidth="0dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:rotation="-90"
+                                    android:src="@drawable/ic_clock_total_hours" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Title -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="@string/dashboard_total_hours_title"
+                                android:textColor="@color/grey"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/background_icon_total_hours"
+                                app:layout_constraintStart_toEndOf="@+id/background_icon_total_hours"
+                                app:layout_constraintTop_toTopOf="@+id/background_icon_total_hours" />
+
+                            <!-- Content -->
+                            <TextView
+                                android:id="@+id/tv_total_hours"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/background_icon_total_hours"
+                                app:layout_constraintTop_toBottomOf="@+id/background_icon_total_hours"
+                                tools:text="0" />
+
+                            <TextView
+                                android:id="@+id/tv_hours"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="@string/hours"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/tv_total_hours"
+                                app:layout_constraintStart_toEndOf="@+id/tv_total_hours"
+                                app:layout_constraintTop_toTopOf="@+id/tv_total_hours" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!--      Item 2      -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="8dp"
+                        app:strokeColor="@color/color_stroke_primary"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!-- Icon -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/background_icon_total_days"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="12dp"
+                                android:backgroundTint="@color/color_background_icon_primary"
+                                app:cardCornerRadius="4dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeWidth="0dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:src="@drawable/ic_calendar_total_days" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Title -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="@string/dashboard_total_days_title"
+                                android:textColor="@color/grey"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/background_icon_total_days"
+                                app:layout_constraintStart_toEndOf="@+id/background_icon_total_days"
+                                app:layout_constraintTop_toTopOf="@+id/background_icon_total_days" />
+
+                            <!-- Content -->
+                            <TextView
+                                android:id="@+id/tv_total_days"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/background_icon_total_days"
+                                app:layout_constraintTop_toBottomOf="@+id/background_icon_total_days"
+                                tools:text="0" />
+
+                            <!-- Content -->
+                            <TextView
+                                android:id="@+id/tv_days"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="@string/days"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/tv_total_days"
+                                app:layout_constraintStart_toEndOf="@+id/tv_total_days"
+                                app:layout_constraintTop_toTopOf="@+id/tv_total_days" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!--    Button Clock in & out    -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_clock_in"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_semi_bold"
                         android:text="@string/clock_in"
-                        android:textColor="@color/grey"
                         android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/background_icon_clock_in"
-                        app:layout_constraintStart_toEndOf="@+id/background_icon_clock_in"
-                        app:layout_constraintTop_toTopOf="@+id/background_icon_clock_in" />
+                        app:cornerRadius="8dp" />
 
-                    <!-- Content -->
-                    <TextView
-                        android:id="@+id/tv_clock_in"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        tools:text="@string/placeholder_hour"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/background_icon_clock_in"
-                        app:layout_constraintTop_toBottomOf="@+id/background_icon_clock_in" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!--      Item 2      -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="8dp"
-                app:strokeColor="@color/color_stroke_primary"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <!-- Icon -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/background_icon_clock_out"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:backgroundTint="@color/color_background_icon_primary"
-                        app:cardCornerRadius="4dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:rotation="90"
-                            android:src="@drawable/ic_arrow_in_out" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Title -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <!--    Button Clock in & out    -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_clock_out"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
                         android:layout_marginStart="8dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/inter_semi_bold"
                         android:text="@string/clock_out"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/background_icon_clock_out"
-                        app:layout_constraintStart_toEndOf="@+id/background_icon_clock_out"
-                        app:layout_constraintTop_toTopOf="@+id/background_icon_clock_out" />
-
-                    <!-- Content -->
-                    <TextView
-                        android:id="@+id/tv_clock_out"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        tools:text="@string/placeholder_hour"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/background_icon_clock_out"
-                        app:layout_constraintTop_toBottomOf="@+id/background_icon_clock_out" />
+                        android:textSize="14sp"
+                        app:cornerRadius="8dp"
+                        app:rippleColor="@color/color_stroke_primary"
+                        app:strokeColor="@color/dark_primary_color"
+                        app:strokeWidth="1dp" />
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-        </LinearLayout>
-
-        <!--    Content Horizontal 2    -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <!--      Item 1      -->
-            <com.google.android.material.card.MaterialCardView
+            <!--  Dashboard  -->
+            <LinearLayout
+                android:id="@+id/container_attendance"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="8dp"
-                app:strokeColor="@color/color_stroke_primary"
-                app:strokeWidth="1dp">
+                android:layout_marginTop="24dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/container_dashboard">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <!--    Title    -->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <!-- Icon -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/background_icon_total_hours"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:backgroundTint="@color/color_background_icon_primary"
-                        app:cardCornerRadius="4dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_clock_total_hours" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Title -->
+                    <!--    Title    -->
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/inter_regular"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_semi_bold"
                         android:maxLines="1"
-                        android:text="@string/dashboard_total_hours_title"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/background_icon_total_hours"
-                        app:layout_constraintStart_toEndOf="@+id/background_icon_total_hours"
-                        app:layout_constraintTop_toTopOf="@+id/background_icon_total_hours" />
-
-                    <!-- Content -->
-                    <TextView
-                        android:id="@+id/tv_total_hours"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        tools:text="0"
+                        android:text="@string/your_activity"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/background_icon_total_hours"
-                        app:layout_constraintTop_toBottomOf="@+id/background_icon_total_hours" />
+                        android:textSize="14sp" />
 
+                    <!--    Title    -->
                     <TextView
-                        android:id="@+id/tv_hours"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/inter_semi_bold"
                         android:maxLines="1"
-                        android:text="@string/hours"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_total_hours"
-                        app:layout_constraintStart_toEndOf="@+id/tv_total_hours"
-                        app:layout_constraintTop_toTopOf="@+id/tv_total_hours" />
+                        android:text="@string/view_all"
+                        android:textColor="@color/dark_primary_color"
+                        android:textSize="12sp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <!--      Item 2      -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="8dp"
-                app:strokeColor="@color/color_stroke_primary"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <!--    Recycler View   -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_your_activity"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/list_item_attendance" />
 
-                    <!-- Icon -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/background_icon_total_days"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:backgroundTint="@color/color_background_icon_primary"
-                        app:cardCornerRadius="4dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp">
+            </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:src="@drawable/ic_calendar_total_days" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Title -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        android:text="@string/dashboard_total_days_title"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/background_icon_total_days"
-                        app:layout_constraintStart_toEndOf="@+id/background_icon_total_days"
-                        app:layout_constraintTop_toTopOf="@+id/background_icon_total_days" />
-
-                    <!-- Content -->
-                    <TextView
-                        android:id="@+id/tv_total_days"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        tools:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/background_icon_total_days"
-                        app:layout_constraintTop_toBottomOf="@+id/background_icon_total_days" />
-
-                    <!-- Content -->
-                    <TextView
-                        android:id="@+id/tv_days"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        android:text="@string/days"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_total_days"
-                        app:layout_constraintStart_toEndOf="@+id/tv_total_days"
-                        app:layout_constraintTop_toTopOf="@+id/tv_total_days" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <!--    Button Clock in & out    -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_clock_in"
-                android:layout_width="0dp"
-                android:layout_height="64dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="@string/clock_in"
-                android:textSize="14sp"
-                app:cornerRadius="8dp" />
-
-            <!--    Button Clock in & out    -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_clock_out"
-                android:layout_width="0dp"
-                android:layout_height="64dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="@string/clock_out"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:cornerRadius="8dp"
-                app:rippleColor="@color/color_stroke_primary"
-                app:strokeColor="@color/dark_primary_color"
-                app:strokeWidth="1dp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <!--  Dashboard  -->
-    <LinearLayout
-        android:id="@+id/container_attendance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/container_dashboard">
-
-        <!--    Title    -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-
-            <!--    Title    -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_semi_bold"
-                android:maxLines="1"
-                android:layout_weight="1"
-                android:text="@string/your_activity"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <!--    Title    -->
-            <TextView
+            <!--  Guideline  -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_semi_bold"
-                android:maxLines="1"
-                android:text="@string/view_all"
-                android:textColor="@color/dark_primary_color"
-                android:textSize="12sp" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
 
-        </LinearLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
 
-        <!--    Recycler View   -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_your_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            tools:itemCount="5"
-            tools:listitem="@layout/list_item_attendance"
-            />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="24dp" />
 
-    </LinearLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="24dp" />
 
-    <!--  Guideline  -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="24dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="24dp" />
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="24dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="24dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
