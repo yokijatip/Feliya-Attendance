@@ -1,6 +1,5 @@
 package com.gity.feliyaattendance.adapter
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -58,8 +57,20 @@ class ProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
     private fun setProjectStatus(status: String, cardView: MaterialCardView, textView: TextView) {
         when (status) {
             "Active" -> {
-                cardView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(cardView.context, R.color.status_approved_background)))
-                textView.setTextColor(ContextCompat.getColor(cardView.context, R.color.status_approved))
+                cardView.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            cardView.context,
+                            R.color.status_approved_background
+                        )
+                    )
+                )
+                textView.setTextColor(
+                    ContextCompat.getColor(
+                        cardView.context,
+                        R.color.status_approved
+                    )
+                )
             }
         }
     }

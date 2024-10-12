@@ -34,35 +34,47 @@ class AttendanceManager(
         workHoursOvertime: Int,
         description: String
     ) {
-        dataStore.saveClockOutData(clockOut, imageUrlOut, status, workHours, workHoursOvertime, description)
+        dataStore.saveClockOutData(
+            clockOut,
+            imageUrlOut,
+            status,
+            workHours,
+            workHoursOvertime,
+            description
+        )
         uploadAttendanceData()
     }
 
     private suspend fun uploadAttendanceData() {
         val userId = dataStore.userId.first() ?: throw IllegalStateException("User ID not found")
-        val projectId = dataStore.projectId.first() ?: throw IllegalStateException("Project ID not found")
+        val projectId =
+            dataStore.projectId.first() ?: throw IllegalStateException("Project ID not found")
         val date = dataStore.date.first() ?: throw IllegalStateException("Date not found")
-        val clockIn = dataStore.clockIn.first() ?: throw IllegalStateException("Clock in time not found")
-        val clockOut = dataStore.clockOut.first() ?: throw IllegalStateException("Clock out time not found")
-        val imageUrlIn = dataStore.imageUrlIn.first() ?: throw IllegalStateException("Clock in image URL not found")
-        val imageUrlOut = dataStore.imageUrlOut.first() ?: throw IllegalStateException("Clock out image URL not found")
+        val clockIn =
+            dataStore.clockIn.first() ?: throw IllegalStateException("Clock in time not found")
+        val clockOut =
+            dataStore.clockOut.first() ?: throw IllegalStateException("Clock out time not found")
+        val imageUrlIn = dataStore.imageUrlIn.first()
+            ?: throw IllegalStateException("Clock in image URL not found")
+        val imageUrlOut = dataStore.imageUrlOut.first()
+            ?: throw IllegalStateException("Clock out image URL not found")
         val description = dataStore.description.first() ?: ""
         val status = dataStore.status.first() ?: throw IllegalStateException("Status not found")
         val workHours = dataStore.workHours.first() ?: 0
         val workHoursOvertime = dataStore.workHoursOvertime.first() ?: 0
 
         val attendanceData = hashMapOf(
-            "user_id" to userId,
-            "project_id" to projectId,
+            "userId" to userId,
+            "projectId" to projectId,
             "date" to date,
-            "clock_in_time" to clockIn,
-            "clock_out_time" to clockOut,
-            "work_proof_in" to imageUrlIn,
-            "work_proof_out" to imageUrlOut,
-            "work_description" to description,
+            "clockInTime" to clockIn,
+            "clockOutTime" to clockOut,
+            "workProofIn" to imageUrlIn,
+            "workProofOut" to imageUrlOut,
+            "workDescription" to description,
             "status" to status,
-            "work_hours" to workHours,
-            "overtime_hours" to workHoursOvertime
+            "workHours" to workHours,
+            "overtimeHours" to workHoursOvertime
         )
 
         try {
@@ -101,7 +113,8 @@ class AttendanceManager(
         val imageUrlIn: String
     )
 
-    class AttendanceUploadException(message: String, cause: Throwable? = null) : Exception(message, cause)
+    class AttendanceUploadException(message: String, cause: Throwable? = null) :
+        Exception(message, cause)
 }
 
 

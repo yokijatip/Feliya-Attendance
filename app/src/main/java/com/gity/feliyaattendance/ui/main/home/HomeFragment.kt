@@ -2,17 +2,19 @@ package com.gity.feliyaattendance.ui.main.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.adapter.AttendanceAdapter
 import com.gity.feliyaattendance.databinding.FragmentHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
-import com.gity.feliyaattendance.ui.main.attendance.ClockInActivity
 import com.gity.feliyaattendance.ui.main.attendance.ClockOutActivity
 import com.gity.feliyaattendance.ui.main.attendance.ShowProjectActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
@@ -40,9 +42,33 @@ class HomeFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
 
+        val adapter = AttendanceAdapter { attendance ->
+            Toast.makeText(requireContext(), attendance.attendanceId, Toast.LENGTH_SHORT).show()
+        }
+
         repository = Repository(firebaseAuth, firebaseFirestore)
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
+
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        viewModel.fetchAttendanceList(userId)
+
+
+
+        binding.rvYourActivity.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvYourActivity.adapter = adapter
+
+
+
+        viewModel.attendanceList.observe(viewLifecycleOwner) { result ->
+            result.onSuccess { attendance ->
+                adapter.submitList(attendance)
+            }.onFailure { exception ->
+                Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
+                // Tampilkan pesan kesalahan ke pengguna jika diperlukan
+            }
+        }
+        viewModel.fetchAttendanceList(userId)
 
         binding.apply {
             btnNotification.setOnClickListener {
@@ -78,6 +104,7 @@ class HomeFragment : Fragment() {
                 ).show()
             }
         }
+
 
 //        // Real-time snapshot listener from Firestore
 //        val userId = firebaseAuth.currentUser?.uid
