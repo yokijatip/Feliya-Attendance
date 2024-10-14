@@ -71,10 +71,17 @@ class ClockInActivity : AppCompatActivity() {
         setupCameraAndGalleryLaunchers()
         setupUI()
         setupValidationListener()
-        attendance()
 
         binding.apply {
             tvImageUrl.text = photoUri.toString()
+
+            btnSave.setOnClickListener {
+                confirmationAttendance()
+            }
+
+            btnBack.setOnClickListener {
+                finish()
+            }
         }
 
         binding.openGalleryOrCamera.setOnClickListener {
@@ -92,54 +99,64 @@ class ClockInActivity : AppCompatActivity() {
         }
     }
 
+    private fun confirmationAttendance() {
+        CommonHelper.showConfirmationDialog(
+            context = this@ClockInActivity,
+            title = getString(R.string.title_dialog_confirmation),
+            description = getString(R.string.description_dialog_confirmation_default),
+            positiveButtonText = getString(R.string.sure),
+            negativeButtonText = getString(R.string.cancel),
+            onPositiveClick = {
+                attendance()
+            }
+        )
+    }
 
     private fun attendance() {
-        binding.btnSave.setOnClickListener {
-            val dataUserId = firebaseAuth.currentUser?.uid
-            val dataProjectId = intent.getStringExtra("PROJECT_ID")
-            val dataDate = clockInDate
-            val dataClockInTime = Timestamp.now()
-            val dataImageUrlIn = binding.tvImageUrl.text.toString()
+        val dataUserId = firebaseAuth.currentUser?.uid
+        val dataProjectId = intent.getStringExtra("PROJECT_ID")
+        val dataDate = clockInDate
+        val dataClockInTime = Timestamp.now()
+        val dataImageUrlIn = binding.tvImageUrl.text.toString()
 
-            CommonHelper.showLoading(
-                this@ClockInActivity,
-                binding.loadingBar,
-                binding.loadingOverlay
-            )
+        CommonHelper.showLoading(
+            this@ClockInActivity,
+            binding.loadingBar,
+            binding.loadingOverlay
+        )
 
-            lifecycleScope.launch {
-                val attendanceDataStoreManager = AttendanceDataStoreManager(this@ClockInActivity)
-                val dataStoreManager = ProjectDataStoreManager(this@ClockInActivity)
-                try {
-                    dataStoreManager.saveProjectData(
-                        intent.getStringExtra("PROJECT_ID")!!,
-                        intent.getStringExtra("PROJECT_NAME")!!,
-                        intent.getStringExtra("PROJECT_LOCATION")!!
-                    )
-                    attendanceDataStoreManager.saveClockInData(
-                        dataUserId!!,
-                        dataProjectId!!,
-                        dataDate,
-                        dataClockInTime,
-                        dataImageUrlIn,
-                    )
-                    CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
-                    val showData =
-                        "Date = $dataDate, userId: $dataUserId, projectId: $dataProjectId, clockIn: $dataClockInTime"
-                    Toast.makeText(
-                        this@ClockInActivity,
-                        "Success Save di Local | Data : $showData",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.i("ATTENDANCE_DATA", "Data: $showData")
-                    startActivity(Intent(this@ClockInActivity, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
-                    finish()
-                } catch (e: Exception) {
-                    Log.e("CLOCK_IN", "Error : ${e.message}")
-                    CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
-                }
+        lifecycleScope.launch {
+            val attendanceDataStoreManager = AttendanceDataStoreManager(this@ClockInActivity)
+            val dataStoreManager = ProjectDataStoreManager(this@ClockInActivity)
+            try {
+                dataStoreManager.saveProjectData(
+                    intent.getStringExtra("PROJECT_ID")!!,
+                    intent.getStringExtra("PROJECT_NAME")!!,
+                    intent.getStringExtra("PROJECT_LOCATION")!!
+                )
+                attendanceDataStoreManager.saveClockInData(
+                    dataUserId!!,
+                    dataProjectId!!,
+                    dataDate,
+                    dataClockInTime,
+                    dataImageUrlIn,
+                )
+                CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
+                val showData =
+                    "Date = $dataDate, userId: $dataUserId, projectId: $dataProjectId, clockIn: $dataClockInTime"
+                Toast.makeText(
+                    this@ClockInActivity,
+                    "Success Save di Local | Data : $showData",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.i("ATTENDANCE_DATA", "Data: $showData")
+                startActivity(Intent(this@ClockInActivity, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                })
+                finish()
+            } catch (e: Exception) {
+                Log.e("CLOCK_IN", "Error : ${e.message}")
+                CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
             }
         }
     }

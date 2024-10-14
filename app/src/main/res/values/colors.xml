@@ -14,6 +14,7 @@
     <color name="color_stroke_primary">#A8BAC9</color>
     <color name="color_background_icon_primary">#cfddea</color>
     <color name="grey">#808080</color>
+    <color name="gray_light">#EEEEEE</color>"
 
     <!--  Color Status  -->
     <color name="status_approved">#1BA424</color>

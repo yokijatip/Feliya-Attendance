@@ -1,9 +1,16 @@
 package com.gity.feliyaattendance.helper
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.icu.util.Calendar
+import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.widget.ProgressBar
+import androidx.annotation.StyleRes
+import com.gity.feliyaattendance.databinding.CustomDialogConfimationBinding
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -62,6 +69,11 @@ object CommonHelper {
         } ?: "Tanggal tidak tersedia"
     }
 
+    fun formatTimeOnly(timestamp: Timestamp?): String {
+        val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return sdf.format(timestamp?.toDate() ?: "00:00")
+    }
+
     fun showLoading(context: Context, loadingBar: ProgressBar, loadingOverlay: View) {
         loadingBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
@@ -94,6 +106,41 @@ object CommonHelper {
             e.printStackTrace()
             null
         }
+    }
+
+    fun showConfirmationDialog(
+        context: Context,
+        title: String,
+        description: String,
+        positiveButtonText: String = "Ya",
+        negativeButtonText: String = "Tidak",
+        onPositiveClick: () -> Unit = {},
+        onNegativeClick: () -> Unit = {},
+        cancelable: Boolean = true,
+        @StyleRes themeResId: Int = 0
+    ) {
+        val dialog = if (themeResId != 0) Dialog(context, themeResId) else Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val binding = CustomDialogConfimationBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(binding.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        with(binding) {
+            tvTitle.text = title
+            tvDescription.text = description
+            tvYes.text = positiveButtonText
+            tvNo.text = negativeButtonText
+
+            btnYes.setOnClickListener {
+                onPositiveClick()
+                dialog.dismiss()
+            }
+            btnNo.setOnClickListener {
+                onNegativeClick()
+                dialog.dismiss()
+            }
+        }
+        dialog.setCancelable(cancelable)
+        dialog.show()
     }
 
 

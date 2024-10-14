@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="20dp"
     android:layout_gravity="center"
-    app:cardElevation="4dp"
-    android:elevation="4dp"
-    app:strokeWidth="0dp"
-    android:translationZ="2dp"
+    android:layout_marginHorizontal="20dp"
+
     android:backgroundTint="@color/white"
-    app:cardCornerRadius="8dp">
+
+    app:cardCornerRadius="8dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,18 +29,17 @@
         <View
             android:layout_width="260dp"
             android:layout_height="1dp"
-            android:background="#F5F5F5"
-            />
+            android:background="#F5F5F5" />
 
 
         <LinearLayout
             android:id="@+id/linear_layout_camera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="12dp"
             android:padding="12dp">
 
             <ImageView
@@ -64,10 +62,10 @@
             android:id="@+id/linear_layout_gallery"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_marginTop="4dp"
-            android:orientation="horizontal"
             android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="12dp">
 
             <ImageView

@@ -25,6 +25,7 @@ import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
 import com.gity.feliyaattendance.databinding.ActivityClockOutBinding
 import com.gity.feliyaattendance.helper.AttendanceManager
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.Timestamp
@@ -69,10 +70,23 @@ class ClockOutActivity : AppCompatActivity() {
             AttendanceManager(this, attendanceDataStore, projectDataStore, firebaseFirestore)
 
         binding.apply {
-            btnBack.setOnClickListener { onBackPressed() }
-            btnClockOut.setOnClickListener { clockOut() }
+            btnBack.setOnClickListener { finish() }
+            btnClockOut.setOnClickListener { showConfirmationClockOut() }
             openGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
         }
+    }
+
+    private fun showConfirmationClockOut() {
+        CommonHelper.showConfirmationDialog(
+            context = this@ClockOutActivity,
+            title = getString(R.string.title_dialog_confirmation),
+            description = getString(R.string.description_dialog_confirmation_default),
+            positiveButtonText = getString(R.string.sure),
+            negativeButtonText = getString(R.string.cancel),
+            onPositiveClick = {
+                clockOut()
+            }
+        )
     }
 
     private fun clockOut() {

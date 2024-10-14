@@ -115,6 +115,17 @@
     <string name="error_empty_location">Location cannot be empty</string>
     <string name="error_empty_status">Please select a status</string>
 
+    <!--  Dialog Text  -->
+    <string name="title_dialog_confirmation">Are you sure?</string>
+    <string name="sure">Sure</string>
+    <string name="description_dialog_confirmation_default">This cannot be changed, or updated.</string>
+    <string name="successfully">Successfully</string>
+    <string name="failed">Failed</string>
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
+    <string name="process_success">The process you have done has been successful</string>
+    <string name="process_failed">The process you are performing has failed.</string>
+
 
     <!--  Admin Workers  -->
     <string name="workers">Workers</string>

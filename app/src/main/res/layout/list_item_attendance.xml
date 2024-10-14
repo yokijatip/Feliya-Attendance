@@ -2,6 +2,7 @@
 
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/materialCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
                     android:maxLines="1"
                     android:text="@string/date"
                     android:textColor="@color/grey"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_date"
@@ -50,7 +51,7 @@
                     android:maxLines="1"
                     android:text="30 Maret 2024"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -116,7 +117,7 @@
                         android:maxLines="1"
                         android:text="@string/in_and_out"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -129,9 +130,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_regular"
                             android:maxLines="1"
-                            android:text="08:00"
+                            tools:text="@string/placeholder_hour"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -142,7 +143,7 @@
                             android:maxLines="1"
                             android:text="@string/dash"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_clock_out"
@@ -150,9 +151,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_regular"
                             android:maxLines="1"
-                            android:text="16:30"
+                            tools:text="@string/placeholder_hour"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -188,7 +189,7 @@
                         android:maxLines="1"
                         android:text="@string/dashboard_total_hours_title"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -205,7 +206,7 @@
                             android:maxLines="1"
                             android:text="8"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -215,7 +216,7 @@
                             android:maxLines="1"
                             android:text="@string/hours"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
