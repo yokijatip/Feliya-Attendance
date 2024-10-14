@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.FragmentSettingsBinding
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.ui.auth.AuthActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -30,11 +32,23 @@ class SettingsFragment : Fragment() {
 
         binding.apply {
             btnLogout.setOnClickListener {
-                logoutUser()
+                showConfirmationDialog()
             }
         }
 
         return binding.root
+    }
+
+    private fun showConfirmationDialog() {
+        CommonHelper.showConfirmationDialog(
+            context = requireActivity(),
+            title = getString(R.string.title_dialog_confirmation),
+            description = getString(R.string.logout_confirmation),
+            positiveButtonText = getString(R.string.sure),
+            negativeButtonText = getString(R.string.cancel),
+            onPositiveClick = { logoutUser() },
+            onNegativeClick = { }
+        )
     }
 
     private fun logoutUser() {

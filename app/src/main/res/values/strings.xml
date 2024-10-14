@@ -40,6 +40,7 @@
     <string name="register_failed">Register Failed</string>
     <string name="logout_success">Logout Success</string>
     <string name="logout_failed">Logout Failed</string>
+    <string name="logout_confirmation">Are you sure want to logout from Feliya Attendance?</string>
     <string name="delete_account_success">Delete Account Success</string>
     <string name="delete_account_failed">Delete Account Failed</string>
     <string name="delete_account_confirmation">Are you sure want to delete your account?</string>

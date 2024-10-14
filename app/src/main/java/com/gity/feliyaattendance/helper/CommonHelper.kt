@@ -11,6 +11,8 @@ import android.view.Window
 import android.widget.ProgressBar
 import androidx.annotation.StyleRes
 import com.gity.feliyaattendance.databinding.CustomDialogConfimationBinding
+import com.gity.feliyaattendance.databinding.CustomDialogInformationFailedBinding
+import com.gity.feliyaattendance.databinding.CustomDialogInformationSuccessBinding
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -136,6 +138,62 @@ object CommonHelper {
             }
             btnNo.setOnClickListener {
                 onNegativeClick()
+                dialog.dismiss()
+            }
+        }
+        dialog.setCancelable(cancelable)
+        dialog.show()
+    }
+
+    fun showInformationSuccessDialog(
+        context: Context,
+        title: String,
+        description: String,
+        okButtonText: String = "OK",
+        onOkButton: () -> Unit = {},
+        cancelable: Boolean = true,
+        @StyleRes themeResId: Int = 0
+    ) {
+        val dialog = if (themeResId != 0) Dialog(context, themeResId) else Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val binding = CustomDialogInformationSuccessBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(binding.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        with(binding) {
+            tvTitle.text = title
+            tvDescription.text = description
+            tvOk.text = okButtonText
+
+            btnOk.setOnClickListener {
+                onOkButton()
+                dialog.dismiss()
+            }
+        }
+        dialog.setCancelable(cancelable)
+        dialog.show()
+    }
+
+    fun showInformationFailedDialog(
+        context: Context,
+        title: String,
+        description: String,
+        okButtonText: String = "OK",
+        onOkButton: () -> Unit = {},
+        cancelable: Boolean = true,
+        @StyleRes themeResId: Int = 0
+    ) {
+        val dialog = if (themeResId != 0) Dialog(context, themeResId) else Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val binding = CustomDialogInformationFailedBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(binding.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        with(binding) {
+            tvTitle.text = title
+            tvDescription.text = description
+            tvOk.text = okButtonText
+
+            btnOk.setOnClickListener {
+                onOkButton()
                 dialog.dismiss()
             }
         }

@@ -144,11 +144,6 @@ class ClockInActivity : AppCompatActivity() {
                 CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
                 val showData =
                     "Date = $dataDate, userId: $dataUserId, projectId: $dataProjectId, clockIn: $dataClockInTime"
-                Toast.makeText(
-                    this@ClockInActivity,
-                    "Success Save di Local | Data : $showData",
-                    Toast.LENGTH_SHORT
-                ).show()
                 Log.i("ATTENDANCE_DATA", "Data: $showData")
                 startActivity(Intent(this@ClockInActivity, MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
