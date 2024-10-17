@@ -8,16 +8,17 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
-        android:required="true"
-        android:maxSdkVersion="34" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"
-        android:required="true"
-        android:maxSdkVersion="34" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
+        android:maxSdkVersion="34"
+        android:required="true" />
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_VIDEO"
+        android:maxSdkVersion="34"
+        android:required="true" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-
-
 
     <application
         android:name=".utils.OfflinePersistence"
@@ -30,6 +31,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
+        <activity
+            android:name=".admin.ui.main.detail.attendance.AttendanceActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FeliyaAttendance" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -39,6 +45,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
+
         <activity
             android:name=".ui.main.attendance.ShowProjectActivity"
             android:exported="false" />
@@ -69,9 +76,6 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
-
-
-
     </application>
 
 </manifest>

@@ -30,15 +30,11 @@ import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.main.MainActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class ClockInActivity : AppCompatActivity() {
 
@@ -50,8 +46,6 @@ class ClockInActivity : AppCompatActivity() {
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
     private lateinit var pickImageLauncher: ActivityResultLauncher<String>
     private var photoUri: Uri? = null
-    private lateinit var clockInDate: Date
-
 
     companion object {
         const val REQUEST_PERMISSIONS = 102
@@ -64,7 +58,6 @@ class ClockInActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         //    Ambil Project ID dari ShowProjectActivity
-
 
         initFirebase()
         setupViewModel()
@@ -87,16 +80,6 @@ class ClockInActivity : AppCompatActivity() {
         binding.openGalleryOrCamera.setOnClickListener {
             checkAndRequestPermissions()
         }
-
-        binding.btnStartCalendar.setOnClickListener {
-            showDatePicker { date ->
-                val formattedDate =
-                    SimpleDateFormat("dd - MMMM - yyyy", Locale.getDefault()).format(date)
-                binding.tvStartDate.text = formattedDate
-                clockInDate = date
-
-            }
-        }
     }
 
     private fun confirmationAttendance() {
@@ -115,7 +98,7 @@ class ClockInActivity : AppCompatActivity() {
     private fun attendance() {
         val dataUserId = firebaseAuth.currentUser?.uid
         val dataProjectId = intent.getStringExtra("PROJECT_ID")
-        val dataDate = clockInDate
+        val dataDate = Timestamp.now()
         val dataClockInTime = Timestamp.now()
         val dataImageUrlIn = binding.tvImageUrl.text.toString()
 
@@ -162,9 +145,6 @@ class ClockInActivity : AppCompatActivity() {
             tvImageUrl.addTextChangedListener {
                 checkFieldsForEmptyValues()
             }
-            tvStartDate.addTextChangedListener {
-                checkFieldsForEmptyValues()
-            }
 
             checkFieldsForEmptyValues()
         }
@@ -173,10 +153,8 @@ class ClockInActivity : AppCompatActivity() {
     //    Check Field Listener
     private fun checkFieldsForEmptyValues() {
         val isImageSelected = !binding.tvImageUrl.text.isNullOrEmpty()
-        val isStartDateSelected = !binding.tvStartDate.text.isNullOrEmpty()
 
-        binding.btnSave.isEnabled =
-            isImageSelected && isStartDateSelected
+        binding.btnSave.isEnabled = isImageSelected
     }
 
     //    Init Firebase
@@ -311,16 +289,6 @@ class ClockInActivity : AppCompatActivity() {
         pickImageLauncher.launch("image/*")
     }
 
-    //    Date Picker
-    private fun showDatePicker(onDateSelected: (Date) -> Unit) {
-        val datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Pilih Tanggal")
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds()).build()
-
-        datePicker.addOnPositiveButtonClickListener { selection ->
-            onDateSelected(Date(selection))
-        }
-        datePicker.show(supportFragmentManager, "DATE_PICKER")
-    }
 }
 
 

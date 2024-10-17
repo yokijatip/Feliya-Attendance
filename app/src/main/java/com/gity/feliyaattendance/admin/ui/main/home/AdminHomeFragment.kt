@@ -9,11 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gity.feliyaattendance.R
-import com.gity.feliyaattendance.admin.adapter.FeatureAdminAdapter
+import com.gity.feliyaattendance.admin.adapter.MenuAdminAdapter
+import com.gity.feliyaattendance.admin.data.model.AdminMenu
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
+import com.gity.feliyaattendance.helper.HorizontalSpaceItemDecoration
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
@@ -30,6 +33,9 @@ class AdminHomeFragment : Fragment() {
     private lateinit var repository: Repository
     private lateinit var viewModel: AdminHomeViewModel
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adminMenuAdapter: MenuAdminAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +51,64 @@ class AdminHomeFragment : Fragment() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AdminHomeViewModel::class.java]
 
+        recyclerView = binding.rvMenu
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        val adminMenuList = listOf(
+            AdminMenu(name = getString(R.string.admin_menu_see_worker_list), R.drawable.ic_users),
+            AdminMenu(name = getString(R.string.admin_menu_add_worker), R.drawable.ic_user_plus),
+            AdminMenu(name = getString(R.string.admin_menu_add_project), R.drawable.ic_folder_plus),
+            AdminMenu(
+                name = getString(R.string.admin_menu_attendance_approval),
+                R.drawable.ic_check_square_custom_admin
+            ),
+            AdminMenu(
+                name = getString(R.string.admin_menu_generate_reports),
+                R.drawable.ic_printer
+            ),
+            AdminMenu(
+                name = getString(R.string.admin_menu_generate_reports),
+                R.drawable.ic_printer
+            ),
+            AdminMenu(name = getString(R.string.admin_menu_generate_reports), R.drawable.ic_printer)
+
+
+        )
+
+        adminMenuAdapter = MenuAdminAdapter(adminMenuList) { menu ->
+            when (menu.name) {
+                getString(R.string.admin_menu_see_worker_list) -> Toast.makeText(
+                    requireContext(),
+                    "See Worker List",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                getString(R.string.admin_menu_add_worker) -> Toast.makeText(
+                    requireContext(),
+                    "Add Worker",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                getString(R.string.admin_menu_add_project) -> navigateToAddProject()
+
+                getString(R.string.admin_menu_attendance_approval) -> Toast.makeText(
+                    requireContext(),
+                    "Attendance Approval",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                getString(R.string.admin_menu_generate_reports) -> Toast.makeText(
+                    requireContext(),
+                    "Generate Report",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        recyclerView.addItemDecoration(HorizontalSpaceItemDecoration(24))
+        recyclerView.adapter = adminMenuAdapter
+
         binding.apply {
             btnNotification.setOnClickListener {
                 Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
@@ -59,24 +123,6 @@ class AdminHomeFragment : Fragment() {
             )
         }
 
-        val featureNames = resources.getStringArray(R.array.features)
-        val featureIcons = arrayOf(
-            R.drawable.ic_user_plus,
-            R.drawable.ic_folder_plus,
-            R.drawable.ic_check_square_custom_admin,
-            R.drawable.ic_printer,
-        )
-
-//        Setup Recycler View and Feature Adapter
-        val featureAdapter = FeatureAdminAdapter(featureNames, featureIcons) { position ->
-            handleFeatureClick(position)
-        }
-
-        binding.rvFeatures.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = featureAdapter
-        }
-
         viewModel.fetchName()
         viewModel.nameResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { name ->
@@ -89,23 +135,8 @@ class AdminHomeFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
-
         return binding.root
-    }
-
-    private fun handleFeatureClick(position: Int) {
-        // Handle clicks for each feature based on position
-        when (position) {
-            0 -> Toast.makeText(requireContext(), "Add Worker clicked", Toast.LENGTH_SHORT).show()
-            1 -> navigateToAddProject()
-            2 -> Toast.makeText(requireContext(), "Attendance Approval clicked", Toast.LENGTH_SHORT)
-                .show()
-
-            3 -> Toast.makeText(requireContext(), "Generate Report clicked", Toast.LENGTH_SHORT)
-                .show()
-        }
     }
 
     private fun navigateToAddProject() {

@@ -126,6 +126,7 @@ class Repository(
         }
     }
 
+//    Attendance
     suspend fun attendance(
         userId: String,
         projectId: String,
@@ -165,6 +166,7 @@ class Repository(
         }
     }
 
+//    Get Active Projects
     suspend fun getActiveProjects(): Result<List<Project>> {
         return try {
             val snapshot = firebaseFirestore.collection("projects")
@@ -180,6 +182,37 @@ class Repository(
             }
 
             Result.success(activeProjects)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Mengambil jumlah pekerja (worker)
+    suspend fun getWorkersCount(): Result<Int> {
+        return try {
+            val snapshot = firebaseFirestore.collection("users")
+                .whereEqualTo(
+                    "role",
+                    "worker"
+                ) // Asumsi bahwa role pekerja disimpan sebagai "worker"
+                .get()
+                .await()
+
+            // Mengembalikan jumlah pekerja
+            Result.success(snapshot.size())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+//    Get Project Count
+    suspend fun getProjectCount(): Result<Int> {
+        return try {
+            val snapshot = firebaseFirestore.collection("projects")
+                .get()
+                .await()
+
+            Result.success(snapshot.size())
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -204,5 +237,64 @@ class Repository(
             Result.failure(e)
         }
     }
+
+    suspend fun getAllAttendancePending(): Result<List<Attendance>> {
+        return try {
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("status", "pending")
+                .get()
+                .await()
+
+            val attendanceStatus = snapshot.documents.mapNotNull { documentSnapshot ->
+                documentSnapshot.toObject(Attendance::class.java)?.apply {
+                    attendanceId = documentSnapshot.id
+                }
+            }
+
+            Result.success(attendanceStatus)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getAllAttendanceApproved(): Result<List<Attendance>> {
+        return try {
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("status", "approved")
+                .get()
+                .await()
+
+            val attendanceStatus = snapshot.documents.mapNotNull { documentSnapshot ->
+                documentSnapshot.toObject(Attendance::class.java)?.apply {
+                    attendanceId = documentSnapshot.id
+                }
+            }
+
+            Result.success(attendanceStatus)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getAllAttendanceRejected(): Result<List<Attendance>> {
+        return try {
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("status", "rejected")
+                .get()
+                .await()
+
+            val attendanceStatus = snapshot.documents.mapNotNull { documentSnapshot ->
+                documentSnapshot.toObject(Attendance::class.java)?.apply {
+                    attendanceId = documentSnapshot.id
+                }
+            }
+
+            Result.success(attendanceStatus)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+
 
 }

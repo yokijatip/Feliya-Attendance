@@ -32,14 +32,14 @@ class AttendanceDataStoreManager(private val context: Context) {
     suspend fun saveClockInData(
         userId: String,
         projectId: String,
-        date: Date,
+        date: Timestamp,
         clockIn: Timestamp,
         imageUrlIn: String,
     ) {
         context.dataStore.edit { pref ->
             pref[USER_ID] = userId
             pref[PROJECT_ID] = projectId
-            pref[DATE] = date.time
+            pref[DATE] = date.seconds * 1000 + date.nanoseconds / 1000000
             pref[CLOCK_IN] = clockIn.seconds * 1000 + clockIn.nanoseconds / 1000000
             pref[IMAGE_URL_IN] = imageUrlIn
 
@@ -77,8 +77,12 @@ class AttendanceDataStoreManager(private val context: Context) {
     val projectId: Flow<String?> = context.dataStore.data
         .map { pref -> pref[PROJECT_ID] }
 
-    val date: Flow<Date?> = context.dataStore.data
-        .map { pref -> pref[DATE]?.let { Date(it) } }
+    val date: Flow<Timestamp?> = context.dataStore.data
+        .map { pref ->
+            pref[CLOCK_IN]?.let { millis ->
+                Timestamp(Date(millis))
+            }
+        }
 
 
     // Fungsi untuk mengambil clock in sebagai Timestamp

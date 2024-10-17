@@ -1,60 +1,73 @@
 package com.gity.feliyaattendance.admin.ui.main.attendances.pending
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gity.feliyaattendance.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.gity.feliyaattendance.admin.adapter.AdminAttendanceStatusAdapter
+import com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendanceViewModel
+import com.gity.feliyaattendance.databinding.FragmentAdminAttendancePendingBinding
+import com.gity.feliyaattendance.repository.Repository
+import com.gity.feliyaattendance.utils.ViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AdminAttendancePendingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AdminAttendancePendingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentAdminAttendancePendingBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseFirestore: FirebaseFirestore
+
+    private lateinit var repository: Repository
+    private lateinit var viewModel: AdminAttendanceViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_attendance_pending, container, false)
+    ): View {
+        _binding = FragmentAdminAttendancePendingBinding.inflate(inflater, container, false)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseFirestore = FirebaseFirestore.getInstance()
+
+        repository = Repository(firebaseAuth, firebaseFirestore)
+        val factory = ViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[AdminAttendanceViewModel::class.java]
+
+        val adapter = AdminAttendanceStatusAdapter { attendance ->
+            Toast.makeText(requireContext(), attendance.attendanceId, Toast.LENGTH_SHORT).show()
+        }
+
+        binding.apply {
+            rvAttendancePending.adapter = adapter
+            rvAttendancePending.layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        viewModel.attendanceList.observe(viewLifecycleOwner) { result ->
+            result.onSuccess { attendance ->
+                adapter.submitList(attendance)
+                Log.i("ATTENDANCE_DATA", "Data: ${attendance.size}")
+            }.onFailure { exception ->
+                Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
+            }
+        }
+
+        viewModel.fetchAttendancesAdminStatusPendingList()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AdminAttendancePendingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AdminAttendancePendingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 }

@@ -11,6 +11,12 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
     private val _nameResult = MutableLiveData<Result<String>>()
     val nameResult: LiveData<Result<String>> = _nameResult
 
+    private val _workersCount = MutableLiveData<Result<Int>>()
+    val workersCount: LiveData<Result<Int>> = _workersCount
+
+    private val _projectCount = MutableLiveData<Result<Int>>()
+    val projectCount: LiveData<Result<Int>> = _projectCount
+
     private var nameCache: String? = null
 
     //    Menggunakan sistem cache untuk menyimpan data
@@ -28,4 +34,22 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
+
+    // Mengambil jumlah pekerja
+    fun fetchWorkersCount() {
+        viewModelScope.launch {
+            val result = repository.getWorkersCount()
+            _workersCount.value = result
+        }
+    }
+
+    fun fetchProjectCount() {
+        viewModelScope.launch {
+            viewModelScope.launch {
+                val result = repository.getProjectCount()
+                _projectCount.value = result
+            }
+        }
+    }
+
 }

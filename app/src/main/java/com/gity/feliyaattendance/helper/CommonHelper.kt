@@ -10,6 +10,7 @@ import android.view.View
 import android.view.Window
 import android.widget.ProgressBar
 import androidx.annotation.StyleRes
+import androidx.recyclerview.widget.RecyclerView
 import com.gity.feliyaattendance.databinding.CustomDialogConfimationBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationFailedBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationSuccessBinding
@@ -200,6 +201,8 @@ object CommonHelper {
         dialog.setCancelable(cancelable)
         dialog.show()
     }
+
+
 
 
 }

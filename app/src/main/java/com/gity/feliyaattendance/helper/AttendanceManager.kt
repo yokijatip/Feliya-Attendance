@@ -20,7 +20,7 @@ class AttendanceManager(
     suspend fun clockIn(
         userId: String,
         projectId: String,
-        date: Date,
+        date: Timestamp,
         clockIn: Timestamp,
         imageUrlIn: String
     ) {
@@ -94,19 +94,6 @@ class AttendanceManager(
         }
     }
 
-    suspend fun getClockInData(): ClockInData? {
-        return try {
-            ClockInData(
-                userId = dataStore.userId.first() ?: return null,
-                projectId = dataStore.projectId.first() ?: return null,
-                date = dataStore.date.first() ?: return null,
-                clockIn = dataStore.clockIn.first() ?: return null,
-                imageUrlIn = dataStore.imageUrlIn.first() ?: return null
-            )
-        } catch (e: Exception) {
-            null
-        }
-    }
 
     data class ClockInData(
         val userId: String,

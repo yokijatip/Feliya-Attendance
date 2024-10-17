@@ -42,7 +42,7 @@
                     android:maxLines="1"
                     android:text="@string/name"
                     android:textColor="@color/grey"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_worker_name"
@@ -52,7 +52,7 @@
                     android:maxLines="1"
                     android:text="Fakhrusyi Abdillah Fajar"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -97,7 +97,7 @@
                 android:maxLines="1"
                 android:text="@string/date"
                 android:textColor="@color/grey"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_date"
@@ -109,7 +109,7 @@
                 android:maxLines="1"
                 android:text="20 September 2024"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -149,7 +149,7 @@
                         android:maxLines="1"
                         android:text="@string/in_and_out"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -164,7 +164,7 @@
                             android:maxLines="1"
                             android:text="08:00"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -185,7 +185,7 @@
                             android:maxLines="1"
                             android:text="16:30"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -221,7 +221,7 @@
                         android:maxLines="1"
                         android:text="@string/dashboard_total_hours_title"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
                             android:maxLines="1"
                             android:text="8"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                             android:maxLines="1"
                             android:text="@string/hours"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 

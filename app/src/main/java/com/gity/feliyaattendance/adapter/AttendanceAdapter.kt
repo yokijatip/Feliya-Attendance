@@ -16,6 +16,7 @@ import com.google.android.material.card.MaterialCardView
 
 class AttendanceAdapter(private val onAttendanceSelected: (Attendance) -> Unit) :
     ListAdapter<Attendance, AttendanceAdapter.AttendanceViewHolder>(AttendanceDiffCallback()) {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
