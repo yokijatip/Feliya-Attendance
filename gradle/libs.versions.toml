@@ -3,6 +3,7 @@ agp = "8.5.2"
 chipNavigationBar = "1.4.0"
 circleimageview = "3.1.0"
 cloudinaryAndroid = "1.29.0"
+cloudinaryAndroidVersion = "3.0.2"
 datastorePreferences = "1.1.1"
 firebaseBom = "33.3.0"
 glide = "4.16.0"
@@ -31,6 +32,9 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 chip-navigation-bar = { module = "com.github.ismaeldivita:chip-navigation-bar", version.ref = "chipNavigationBar" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 cloudinary-android = { module = "com.cloudinary:cloudinary-android", version.ref = "cloudinaryAndroid" }
+cloudinary-android-preprocess = { module = "com.cloudinary:cloudinary-android-preprocess", version.ref = "cloudinaryAndroidVersion" }
+cloudinary-android-download = { module = "com.cloudinary:cloudinary-android-download", version.ref = "cloudinaryAndroidVersion" }
+cloudinary-android-v302 = { module = "com.cloudinary:cloudinary-android", version.ref = "cloudinaryAndroidVersion" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
