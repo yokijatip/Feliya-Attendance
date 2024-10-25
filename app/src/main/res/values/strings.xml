@@ -136,6 +136,11 @@
     <string name="attendances">Attendances</string>
     <string name="attendance">Attendance</string>
     <string name="select_status_attendance">Select Status Attendance</string>
+    <string-array name="status_attendance">
+        <item>approved</item>
+        <item>pending</item>
+        <item>rejected</item>
+    </string-array>
 
     <!--  Admin Detail Attendance  -->
     <string name="detail_attendance">Detail Attendance</string>
