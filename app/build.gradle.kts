@@ -77,6 +77,9 @@ dependencies {
 //    Image Auto Slider
     implementation(libs.imageslideshow)
 
+//    Cloudinary
+    implementation (libs.cloudinary.android)
+
 
 
 
