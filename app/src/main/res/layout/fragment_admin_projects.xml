@@ -57,13 +57,15 @@
 
     <!-- Recycler View -->
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_projects"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="24dp"
-        tools:listitem="@layout/list_item_attendance"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification" />
+        app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification"
+        tools:listitem="@layout/list_item_attendance" />
 
     <!--  Guideline  -->
     <androidx.constraintlayout.widget.Guideline
@@ -71,27 +73,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="24dp" />
+        app:layout_constraintGuide_begin="12dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="24dp" />
+        app:layout_constraintGuide_end="12dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="24dp" />
+        app:layout_constraintGuide_begin="12dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="24dp" />
+        app:layout_constraintGuide_end="12dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

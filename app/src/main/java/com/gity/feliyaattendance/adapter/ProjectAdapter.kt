@@ -72,6 +72,40 @@ class ProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
                     )
                 )
             }
+
+            "Inactive" -> {
+                cardView.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            cardView.context,
+                            R.color.status_rejected_background
+                        )
+                    )
+                )
+                textView.setTextColor(
+                    ContextCompat.getColor(
+                        cardView.context,
+                        R.color.status_rejected
+                    )
+                )
+            }
+
+            "Completed" -> {
+                cardView.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            cardView.context,
+                            R.color.status_pending_background
+                        )
+                    )
+                )
+                textView.setTextColor(
+                    ContextCompat.getColor(
+                        cardView.context,
+                        R.color.status_pending
+                    )
+                )
+            }
         }
     }
 

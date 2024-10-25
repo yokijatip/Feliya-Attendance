@@ -44,6 +44,9 @@ class AdminAttendanceStatusAdapter(
                 }
                 setAttendanceStatus(attendanceStatus.status, cardStatus, tvStatus)
             }
+            itemView.setOnClickListener {
+                onAttendanceSelected(attendanceStatus)
+            }
         }
     }
 

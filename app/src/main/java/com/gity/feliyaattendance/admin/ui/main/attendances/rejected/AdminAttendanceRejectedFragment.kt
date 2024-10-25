@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.admin.ui.main.attendances.rejected
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,9 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.AdminAttendanceStatusAdapter
 import com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendanceViewModel
+import com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminAttendanceRejectedBinding
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
@@ -45,6 +46,7 @@ class AdminAttendanceRejectedFragment : Fragment() {
 
         val adapter = AdminAttendanceStatusAdapter { attendance ->
             Toast.makeText(requireContext(), attendance.attendanceId, Toast.LENGTH_SHORT).show()
+            navigateToDetail()
         }
 
         binding.apply {
@@ -64,6 +66,11 @@ class AdminAttendanceRejectedFragment : Fragment() {
         viewModel.fetchAttendancesAdminStatusRejectedList()
 
         return binding.root
+    }
+
+    private fun navigateToDetail() {
+        val startActivity = Intent(requireContext(), AdminAttendanceDetailActivity::class.java)
+        startActivity(startActivity)
     }
 
     override fun onDestroyView() {

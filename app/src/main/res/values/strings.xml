@@ -97,6 +97,7 @@
 
 
     <!--  Admin Projects  -->
+    <string name="project">Project</string>
     <string name="projects">Projects</string>
     <string name="project_name">Project Name</string>
     <string name="create_new_project">Create New Project</string>
@@ -133,6 +134,11 @@
 
     <!--  Admin Attendance  -->
     <string name="attendances">Attendances</string>
+    <string name="attendance">Attendance</string>
+    <string name="select_status_attendance">Select Status Attendance</string>
+
+    <!--  Admin Detail Attendance  -->
+    <string name="detail_attendance">Detail Attendance</string>
 
     <!--  Admin Home  -->
     <string name="zero">0</string>
