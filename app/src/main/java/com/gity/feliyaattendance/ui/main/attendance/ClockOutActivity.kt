@@ -71,8 +71,56 @@ class ClockOutActivity : AppCompatActivity() {
 
         binding.apply {
             btnBack.setOnClickListener { finish() }
-            btnClockOut.setOnClickListener { showConfirmationClockOut() }
+            btnClockOut.isEnabled = false
+            tvImageUrl.addTextChangedListener {
+                validateClockOutButton()
+            }
+            edtDescriptionProject.addTextChangedListener {
+                validateClockOutButton()
+            }
             openGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
+        }
+        checkClockInStatus()
+    }
+
+    private fun checkClockInStatus() {
+        lifecycleScope.launch {
+            val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
+            val hasClockIn = attendanceDataStore.clockIn.firstOrNull() != null
+
+            if (!hasClockIn) {
+                binding.apply {
+                    btnClockOut.isEnabled = false
+                    btnClockOut.alpha = 0.5f
+                    // Optional: Show message why button is disabled
+                    Toast.makeText(
+                        this@ClockOutActivity,
+                        "Please clock in first",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                // Even if clocked in, still need to validate other fields
+                validateClockOutButton()
+            }
+        }
+    }
+
+    private fun validateClockOutButton() {
+        binding.apply {
+            // Check all required fields
+            val hasImage = !tvImageUrl.text.isNullOrEmpty()
+            val hasDescription = !edtDescriptionProject.text.isNullOrEmpty()
+
+            // Enable button only if all conditions are met
+            btnClockOut.isEnabled = hasImage && hasDescription
+
+            // Optional: Change button appearance based on state
+            btnClockOut.alpha = if (btnClockOut.isEnabled) 1.0f else 0.5f
+
+            btnClockOut.setOnClickListener {
+                showConfirmationClockOut()
+            }
         }
     }
 
@@ -177,14 +225,40 @@ class ClockOutActivity : AppCompatActivity() {
         }
     }
 
+//    private fun setupCameraAndGalleryLaunchers() {
+//        takePictureLauncher =
+//            registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+//                if (success && photoUri != null) {
+//                    Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
+//                    binding.tvImageUrl.text = photoUri.toString()
+//                } else {
+//                    Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//        pickImageLauncher =
+//            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+//                if (uri != null) {
+//                    photoUri = uri
+//                    Toast.makeText(this, "Image selected: $photoUri", Toast.LENGTH_SHORT).show()
+//                    binding.tvImageUrl.text = uri.toString()
+//                } else {
+//                    Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//    }
+
     private fun setupCameraAndGalleryLaunchers() {
         takePictureLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
                 if (success && photoUri != null) {
                     Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
                     binding.tvImageUrl.text = photoUri.toString()
+                    validateClockOutButton()
                 } else {
                     Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
+                    binding.tvImageUrl.text = ""
+                    validateClockOutButton()
                 }
             }
 
@@ -192,10 +266,13 @@ class ClockOutActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 if (uri != null) {
                     photoUri = uri
-                    Toast.makeText(this, "Image selected: $photoUri", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Image selected: $uri", Toast.LENGTH_SHORT).show()
                     binding.tvImageUrl.text = uri.toString()
+                    validateClockOutButton()
                 } else {
                     Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
+                    binding.tvImageUrl.text = ""
+                    validateClockOutButton()
                 }
             }
     }

@@ -57,8 +57,6 @@ class ClockInActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableEdgeToEdge()
 
-        //    Ambil Project ID dari ShowProjectActivity
-
         initFirebase()
         setupViewModel()
         setupCameraAndGalleryLaunchers()
@@ -66,19 +64,29 @@ class ClockInActivity : AppCompatActivity() {
         setupValidationListener()
 
         binding.apply {
-            tvImageUrl.text = photoUri.toString()
-
-            btnSave.setOnClickListener {
-                confirmationAttendance()
-            }
+            btnSave.isEnabled = false
 
             btnBack.setOnClickListener {
                 finish()
+            }
+
+            tvImageUrl.addTextChangedListener {
+                validateClockInButton()
             }
         }
 
         binding.openGalleryOrCamera.setOnClickListener {
             checkAndRequestPermissions()
+        }
+    }
+
+    private fun validateClockInButton() {
+        binding.apply {
+            btnSave.isEnabled = !tvImageUrl.text.isNullOrEmpty()
+            btnSave.alpha = if (btnSave.isEnabled) 1.0f else 0.5f
+            btnSave.setOnClickListener {
+                confirmationAttendance()
+            }
         }
     }
 
@@ -179,26 +187,55 @@ class ClockInActivity : AppCompatActivity() {
     }
 
     //    Setup Camera and Gallery Launcher
+//    private fun setupCameraAndGalleryLaunchers() {
+//        // Inisialisasi launcher kamera
+//        takePictureLauncher =
+//            registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+//                if (success && photoUri != null) {
+//                    Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
+//                    binding.tvImageUrl.text = photoUri.toString()
+//                } else {
+//                    Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//        // Inisialisasi launcher galeri
+//        pickImageLauncher =
+//            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+//                if (uri != null) {
+//                    Toast.makeText(this, "Image selected: $uri", Toast.LENGTH_SHORT).show()
+//                    binding.tvImageUrl.text = uri.toString()
+//                } else {
+//                    Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//    }
+
     private fun setupCameraAndGalleryLaunchers() {
-        // Inisialisasi launcher kamera
         takePictureLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
                 if (success && photoUri != null) {
                     Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
                     binding.tvImageUrl.text = photoUri.toString()
+                    validateClockInButton()
                 } else {
                     Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
+                    binding.tvImageUrl.text = ""
+                    validateClockInButton()
                 }
             }
 
-        // Inisialisasi launcher galeri
         pickImageLauncher =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 if (uri != null) {
-                    Toast.makeText(this, "Image selected: $uri", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = uri.toString()
+                    photoUri = uri
+                    Toast.makeText(this, "Image selected: $photoUri", Toast.LENGTH_SHORT).show()
+                    binding.tvImageUrl.text = photoUri.toString()
+                    validateClockInButton()
                 } else {
                     Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
+                    binding.tvImageUrl.text = ""
+                    validateClockInButton()
                 }
             }
     }
