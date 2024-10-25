@@ -100,7 +100,7 @@ class ClockInActivity : AppCompatActivity() {
         val dataProjectId = intent.getStringExtra("PROJECT_ID")
         val dataDate = Timestamp.now()
         val dataClockInTime = Timestamp.now()
-        val dataImageUrlIn = binding.tvImageUrl.text.toString()
+        val dataImageUrlIn = photoUri.toString()
 
         CommonHelper.showLoading(
             this@ClockInActivity,
@@ -145,7 +145,6 @@ class ClockInActivity : AppCompatActivity() {
             tvImageUrl.addTextChangedListener {
                 checkFieldsForEmptyValues()
             }
-
             checkFieldsForEmptyValues()
         }
     }
