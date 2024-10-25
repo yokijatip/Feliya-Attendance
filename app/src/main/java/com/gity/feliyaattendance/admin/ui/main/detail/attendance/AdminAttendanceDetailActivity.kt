@@ -45,7 +45,7 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
             viewModel.fetchAttendanceDetail(id)
             observerAttendanceDetail()
             setupSaveButton()
-        }
+        }t
 
     }
 
