@@ -46,8 +46,7 @@ class AdminAttendanceApprovedFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory)[AdminAttendanceViewModel::class.java]
 
         val adapter = AdminAttendanceStatusAdapter { attendance ->
-            Toast.makeText(requireContext(), attendance.attendanceId, Toast.LENGTH_SHORT).show()
-            navigateToDetail()
+            navigateToDetail(attendance.attendanceId)
         }
 
         binding.apply {
@@ -69,8 +68,9 @@ class AdminAttendanceApprovedFragment : Fragment() {
         return binding.root
     }
 
-    private fun navigateToDetail(){
+    private fun navigateToDetail(attendanceId: String){
         val startActivity = Intent(requireContext(), AdminAttendanceDetailActivity::class.java)
+        startActivity.putExtra("ATTENDANCE_ID", attendanceId)
         startActivity(startActivity)
     }
 

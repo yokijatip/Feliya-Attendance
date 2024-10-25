@@ -51,12 +51,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:strokeWidth="0dp">
 
-                <ImageView
+                <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/iv_detail_attendance"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img_fakhrusyi" />
+                    android:scaleType="centerCrop" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -74,7 +73,7 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_worker_name">
+                app:layout_constraintTop_toBottomOf="@+id/tv_worker_description">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/edt_status"
@@ -122,6 +121,19 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_status" />
+
+            <TextView
+                android:id="@+id/tv_worker_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_regular"
+                android:maxLines="10"
+                android:text="@string/lorem_ipsum"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_worker_name" />
 
             <LinearLayout
                 android:id="@+id/linearLayout3"
@@ -453,7 +465,7 @@
 
 
                                 <TextView
-                                    android:id="@+id/tv_start_date"
+                                    android:id="@+id/tv_project_start_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:ellipsize="end"
@@ -482,7 +494,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
-                                    android:id="@+id/tv_end_date"
+                                    android:id="@+id/tv_project_end_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:ellipsize="end"
@@ -537,7 +549,7 @@
                                         android:orientation="horizontal">
 
                                         <TextView
-                                            android:id="@+id/tv_location"
+                                            android:id="@+id/tv_project_location"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:ellipsize="end"

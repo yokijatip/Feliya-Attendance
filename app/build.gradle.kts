@@ -72,7 +72,10 @@ dependencies {
     implementation(libs.glide)
 
 //    Data Store
-    implementation (libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences)
+
+//    Image Auto Slider
+    implementation(libs.imageslideshow)
 
 
 

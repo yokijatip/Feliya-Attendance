@@ -1,6 +1,7 @@
 package com.gity.feliyaattendance.repository
 
 import com.gity.feliyaattendance.data.model.Attendance
+import com.gity.feliyaattendance.data.model.AttendanceDetail
 import com.gity.feliyaattendance.data.model.Project
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -262,7 +263,7 @@ class Repository(
         }
     }
 
-    //    Get attendancec pending
+    //    Get attendance pending
     suspend fun getAllAttendancePending(): Result<List<Attendance>> {
         return try {
             val snapshot = firebaseFirestore.collection("attendance")
@@ -317,6 +318,60 @@ class Repository(
             }
 
             Result.success(attendanceStatus)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    //    Change attendance status berdasarkan attendanceId
+    suspend fun updateAttendanceStatus(attendanceId: String, newStatus: String): Result<Unit> {
+        return try {
+            firebaseFirestore.collection("attendance")
+                .document(attendanceId)
+                .update("status", newStatus)
+                .await()
+
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    //    Get Detail Attendance
+    suspend fun getAttendanceDetail(attendanceId: String): Result<AttendanceDetail> {
+        return try {
+            val attendanceSnapshot = firebaseFirestore.collection("attendance")
+                .document(attendanceId)
+                .get()
+                .await()
+            val attendance =
+                attendanceSnapshot.toObject(Attendance::class.java) ?: return Result.failure(
+                    Exception("Attendance not found")
+                )
+
+//            Mengambil data worker berdasarkan userId dari attendance
+            val userSnapshot = firebaseFirestore.collection("users")
+                .document(attendance.userId)
+                .get()
+                .await()
+            val workerName = userSnapshot.getString("name") ?: "Unkown User"
+
+            val projectSnapshot = firebaseFirestore.collection("projects")
+                .document(attendance.projectId)
+                .get()
+                .await()
+
+            val project = projectSnapshot.toObject(Project::class.java) ?: return Result.failure(
+                Exception("Project not found")
+            )
+
+            val attendanceDetail = AttendanceDetail(
+                attendance = attendance,
+                workerName = workerName,
+                projectName = project
+            )
+
+            Result.success(attendanceDetail)
         } catch (e: Exception) {
             Result.failure(e)
         }
