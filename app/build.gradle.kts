@@ -76,10 +76,12 @@ dependencies {
 
 //    Image Auto Slider
     implementation(libs.imageslideshow)
+    // All:
+    implementation ("com.cloudinary:cloudinary-android:3.0.2")
 
-//    Cloudinary
-    implementation (libs.cloudinary.android)
-
+// Download + Preprocess:
+    implementation ("com.cloudinary:cloudinary-android-download:3.0.2")
+    implementation ("com.cloudinary:cloudinary-android-preprocess:3.0.2")
 
 
 

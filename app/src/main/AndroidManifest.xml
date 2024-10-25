@@ -31,6 +31,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
+        <meta-data
+            android:name="CLOUDINARY_URL"
+            android:value="cloudinary://959928627833379:JIj6eDiJEugY9cDVZzbt1Om7QcY@dhmxpasaz"/>
         <activity
             android:name=".admin.ui.main.detail.attendance.AdminAttendanceDetailActivity"
             android:exported="false" />

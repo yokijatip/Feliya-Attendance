@@ -191,7 +191,8 @@ class ClockOutActivity : AppCompatActivity() {
         pickImageLauncher =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 if (uri != null) {
-                    Toast.makeText(this, "Image selected: $uri", Toast.LENGTH_SHORT).show()
+                    photoUri = uri
+                    Toast.makeText(this, "Image selected: $photoUri", Toast.LENGTH_SHORT).show()
                     binding.tvImageUrl.text = uri.toString()
                 } else {
                     Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
