@@ -7,6 +7,7 @@ import android.net.Uri
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -14,15 +15,7 @@ import java.io.FileOutputStream
 import kotlin.coroutines.resumeWithException
 
 class CloudinaryHelper(private val context: Context) {
-    init {
-        val config = mapOf(
-            "cloud_name" to "dhmxpasaz",
-            "api_key" to "959928627833379",
-            "api_secret" to "JIj6eDiJEugY9cDVZzbt1Om7QcY"
-        )
-        MediaManager.init(context, config)
-    }
-
+    @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun uploadImage(imageUri: Uri, userId: String): String =
         suspendCancellableCoroutine { continuation ->
             try {
@@ -71,7 +64,7 @@ class CloudinaryHelper(private val context: Context) {
 
         // Kompres bitmap ke JPEG
         val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream)
 
         val tempFile = File.createTempFile("compressed_", ".jpg", context.cacheDir)
         FileOutputStream(tempFile).use {

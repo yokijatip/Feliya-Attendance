@@ -25,6 +25,7 @@ import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
 import com.gity.feliyaattendance.databinding.ActivityClockOutBinding
 import com.gity.feliyaattendance.helper.AttendanceManager
+import com.gity.feliyaattendance.helper.CloudinaryHelper
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
@@ -45,7 +46,7 @@ class ClockOutActivity : AppCompatActivity() {
     private lateinit var pickImageLauncher: ActivityResultLauncher<String>
     private lateinit var repository: Repository
     private lateinit var viewModel: AttendanceViewModel
-
+    private lateinit var cloudinaryHelper: CloudinaryHelper
 
     companion object {
         const val REQUEST_PERMISSIONS = 102
@@ -64,6 +65,7 @@ class ClockOutActivity : AppCompatActivity() {
         setupValidationListener()
         displayProjectData()
 
+        cloudinaryHelper = CloudinaryHelper(this@ClockOutActivity)
         val attendanceDataStore = AttendanceDataStoreManager(this)
         val projectDataStore = ProjectDataStoreManager(this)
         attendanceManager =
@@ -141,9 +143,12 @@ class ClockOutActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
             val clockOutTime = Timestamp.now()
-            val imageUrlOut = photoUri.toString()
             val description = binding.edtDescriptionProject.text.toString()
             val status = "pending"
+
+            val imageUrl = photoUri?.let {
+                cloudinaryHelper.uploadImage(it, firebaseAuth.currentUser?.uid!!)
+            } ?: throw Exception("No Image Selected")
 
 //            Fetch Clock in Time
             val clockInTime = attendanceDataStore.clockIn.firstOrNull()
@@ -154,7 +159,7 @@ class ClockOutActivity : AppCompatActivity() {
 
                 attendanceManager.clockOut(
                     clockOut = clockOutTime,
-                    imageUrlOut = imageUrlOut,
+                    imageUrlOut = imageUrl,
                     status = status,
                     workHours = workHours,
                     workHoursOvertime = workHoursOvertime,

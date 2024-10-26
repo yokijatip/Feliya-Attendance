@@ -26,6 +26,7 @@ import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
 import com.gity.feliyaattendance.databinding.ActivityClockInBinding
+import com.gity.feliyaattendance.helper.CloudinaryHelper
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.main.MainActivity
@@ -45,6 +46,7 @@ class ClockInActivity : AppCompatActivity() {
     private lateinit var viewModel: AttendanceViewModel
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
     private lateinit var pickImageLauncher: ActivityResultLauncher<String>
+    private lateinit var cloudinaryHelper: CloudinaryHelper
     private var photoUri: Uri? = null
 
     companion object {
@@ -62,6 +64,8 @@ class ClockInActivity : AppCompatActivity() {
         setupCameraAndGalleryLaunchers()
         setupUI()
         setupValidationListener()
+
+        cloudinaryHelper = CloudinaryHelper(this)
 
         binding.apply {
             btnSave.isEnabled = false
@@ -108,7 +112,6 @@ class ClockInActivity : AppCompatActivity() {
         val dataProjectId = intent.getStringExtra("PROJECT_ID")
         val dataDate = Timestamp.now()
         val dataClockInTime = Timestamp.now()
-        val dataImageUrlIn = photoUri.toString()
 
         CommonHelper.showLoading(
             this@ClockInActivity,
@@ -125,12 +128,17 @@ class ClockInActivity : AppCompatActivity() {
                     intent.getStringExtra("PROJECT_NAME")!!,
                     intent.getStringExtra("PROJECT_LOCATION")!!
                 )
+
+                val imageUrl = photoUri?.let {
+                    cloudinaryHelper.uploadImage(it, dataUserId!!)
+                } ?: throw Exception("No Image Selected")
+
                 attendanceDataStoreManager.saveClockInData(
                     dataUserId!!,
                     dataProjectId!!,
                     dataDate,
                     dataClockInTime,
-                    dataImageUrlIn,
+                    imageUrl,
                 )
                 CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
                 val showData =

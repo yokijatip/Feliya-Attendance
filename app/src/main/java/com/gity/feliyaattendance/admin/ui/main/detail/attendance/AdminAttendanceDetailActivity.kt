@@ -62,6 +62,7 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
                     tvProjectStartDate.text = CommonHelper.formatTimestamp(detail.projectName.startDate)
                     tvProjectEndDate.text = CommonHelper.formatTimestamp(detail.projectName.endDate)
                     tvProjectLocation.text = detail.projectName.location
+                    tvTotalHours.text = detail.attendance.workHours.toString()
 
                     val imageList = arrayListOf(
                         SlideModel(detail.attendance.workProofIn, "Clock-In Proof"),
@@ -78,6 +79,15 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
 
     private fun setupSaveButton() {
         binding.apply {
+            // Disable button initially
+            btnSave.isEnabled = false
+
+            // Set up dropdown item selection listener
+            edtStatus.setOnItemClickListener { _, _, _, _ ->
+                // Enable button if dropdown has a selected value
+                btnSave.isEnabled = !edtStatus.text.isNullOrEmpty()
+            }
+
             btnSave.setOnClickListener {
                 val newStatus = edtStatus.text.toString()
                 attendanceId?.let {
@@ -87,6 +97,7 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
             }
         }
     }
+
 
     // Observasi hasil update status
     private fun observeUpdateStatus() {
