@@ -243,6 +243,20 @@ class Repository(
         }
     }
 
+//    Get Pending Count Attendance
+    suspend fun getAttendancePending(): Result<Int> {
+        return try {
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("status", "pending")
+                .get()
+                .await()
+
+            Result.success(snapshot.size())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     //    Get list Attendance / Activity
     suspend fun getAttendanceByUserId(userId: String): Result<List<Attendance>> {
         return try {

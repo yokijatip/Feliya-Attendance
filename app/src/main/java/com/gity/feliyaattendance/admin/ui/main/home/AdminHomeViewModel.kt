@@ -17,7 +17,16 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
     private val _projectCount = MutableLiveData<Result<Int>>()
     val projectCount: LiveData<Result<Int>> = _projectCount
 
+    private val _attendancePending = MutableLiveData<Result<Int>>()
+    val attendancePending: LiveData<Result<Int>> = _attendancePending
+
     private var nameCache: String? = null
+
+    init {
+        fetchAttendancePending()
+        fetchWorkersCount()
+        fetchProjectCount()
+    }
 
     //    Menggunakan sistem cache untuk menyimpan data
     fun fetchName() {
@@ -35,19 +44,27 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    // Mengambil jumlah pekerja
-    fun fetchWorkersCount() {
+//    Mengambil jumlah pending attendance
+    private fun fetchAttendancePending() {
         viewModelScope.launch {
-            val result = repository.getWorkersCount()
-            _workersCount.value = result
+            val result = repository.getAttendancePending()
+            _attendancePending.postValue(result)
         }
     }
 
-    fun fetchProjectCount() {
+    // Mengambil jumlah pekerja
+    private fun fetchWorkersCount() {
+        viewModelScope.launch {
+            val result = repository.getWorkersCount()
+            _workersCount.postValue(result)
+        }
+    }
+
+    private fun fetchProjectCount() {
         viewModelScope.launch {
             viewModelScope.launch {
                 val result = repository.getProjectCount()
-                _projectCount.value = result
+                _projectCount.postValue(result)
             }
         }
     }

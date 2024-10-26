@@ -2,6 +2,7 @@ package com.gity.feliyaattendance.admin.ui.main.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,8 @@ class AdminHomeFragment : Fragment() {
         recyclerView = binding.rvMenu
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        dashboard()
 
         val adminMenuList = listOf(
             AdminMenu(name = getString(R.string.admin_menu_see_worker_list), R.drawable.ic_users),
@@ -137,6 +140,34 @@ class AdminHomeFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun dashboard() {
+        binding.apply {
+            viewModel.workersCount.observe(viewLifecycleOwner) { result ->
+                result.onSuccess { count ->
+                    tvWorker.text = count.toString()
+                }.onFailure { exception ->
+                    Log.e("HomeFragment", "Error Message = $exception")
+                }
+            }
+
+            viewModel.projectCount.observe(viewLifecycleOwner) { result ->
+                result.onSuccess { count ->
+                    tvProject.text = count.toString()
+                }.onFailure { exception ->
+                    Log.e("HomeFragment", "Error Message = $exception")
+                }
+            }
+
+            viewModel.attendancePending.observe(viewLifecycleOwner) { result ->
+                result.onSuccess { count ->
+                    tvPending.text = count.toString()
+                }.onFailure { exception ->
+                    Log.e("HomeFragment", "Error Message = $exception")
+                }
+            }
+        }
     }
 
     private fun navigateToAddProject() {

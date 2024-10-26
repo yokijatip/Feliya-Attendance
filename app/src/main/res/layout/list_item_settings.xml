@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
+    android:layout_marginVertical="10dp"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="8dp"
     app:strokeWidth="0dp">
@@ -16,8 +16,8 @@
 
         <!--    Icon    -->
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:backgroundTint="@color/dark_primary_color"
             app:cardCornerRadius="8dp"
             app:strokeWidth="0dp">
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="8dp"
+                android:padding="12dp"
                 tools:src="@drawable/ic_users"
                 app:tint="@color/white" />
 
@@ -41,12 +41,22 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:layout_marginStart="16dp"
-            android:textSize="16sp"
-            android:fontFamily="@font/inter_medium"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter_regular"
             android:textColor="@color/black"
             android:layout_gravity="center"
-            android:text="Users"
+            tools:text="Users"
             />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_nav_arrow_right"
+            android:layout_gravity="center"
+            />
+
+
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

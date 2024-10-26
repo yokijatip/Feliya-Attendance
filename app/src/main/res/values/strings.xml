@@ -78,6 +78,14 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
 
+    <!--  Setting  -->
+    <string name="account">Account</string>
+    <string name="change_password">Change password</string>
+    <string name="notification">Notification</string>
+    <string name="language">Language</string>
+    <string name="about_us">About us</string>
+    <string name="help">Help</string>
+
     <!--  List Item Attendance  -->
     <string name="date">Date</string>
     <string name="status_approved">Approved</string>
@@ -127,7 +135,6 @@
     <string name="ok">OK</string>
     <string name="process_success">The process you have done has been successful</string>
     <string name="process_failed">The process you are performing has failed.</string>
-
 
     <!--  Admin Workers  -->
     <string name="workers">Workers</string>

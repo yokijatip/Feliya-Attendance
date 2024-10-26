@@ -181,7 +181,7 @@
                         android:maxLines="1"
                         android:textColor="@color/gray_light"
                         android:textSize="16sp"
-                        android:text="30" />
+                        android:text="-" />
 
                     <TextView
                         android:id="@+id/tv_pending_title"
@@ -219,7 +219,7 @@
                         android:maxLines="1"
                         android:textColor="@color/gray_light"
                         android:textSize="16sp"
-                        android:text="10" />
+                        android:text="-" />
 
                     <TextView
                         android:id="@+id/tv_project_title"
@@ -257,7 +257,7 @@
                         android:maxLines="1"
                         android:textColor="@color/gray_light"
                         android:textSize="16sp"
-                        android:text="89" />
+                        android:text="-" />
 
                     <TextView
                         android:id="@+id/tv_worker_title"
