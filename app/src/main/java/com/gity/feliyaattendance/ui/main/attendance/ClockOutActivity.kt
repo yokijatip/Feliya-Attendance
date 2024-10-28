@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -176,16 +177,17 @@ class ClockOutActivity : AppCompatActivity() {
 
     private fun calculateTotalWorkHours(clockIn: Timestamp, clockOut: Timestamp): Int {
         val duration = clockOut.toDate().time - clockIn.toDate().time
-//        return (duration / (1000 * 60 * 60)).toInt()
-        return (duration / (1000 * 60)).toInt()
+        return (duration / (1000 * 60 * 60)).toInt() // 8 Jam
+//        return (duration / (1000 * 60)).toInt() // 1 Jam
+//        return (duration / 1000).toInt() // 1 Menit
     }
 
     private fun calculateRegularWorkHours(totalWorkHours: Int): Int {
-        return if (totalWorkHours > 60) 60 else totalWorkHours
+        return if (totalWorkHours > 8) 8 else totalWorkHours
     }
 
     private fun calculateOvertime(totalWorkHours: Int): Int {
-        return if (totalWorkHours > 60) totalWorkHours - 60 else 0
+        return if (totalWorkHours > 8) totalWorkHours - 8 else 0
     }
 
     private fun displayProjectData() {
@@ -341,5 +343,17 @@ class ClockOutActivity : AppCompatActivity() {
 
     private fun openGallery() {
         pickImageLauncher.launch("image/*")
+    }
+
+    private fun handleBackButton(){
+        binding.apply {
+            btnBack.setOnClickListener {
+                finish()
+            }
+        }
+
+        onBackPressedDispatcher.addCallback(this@ClockOutActivity) {
+            finish()
+        }
     }
 }

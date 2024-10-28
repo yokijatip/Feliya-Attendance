@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -64,6 +65,7 @@ class ClockInActivity : AppCompatActivity() {
         setupCameraAndGalleryLaunchers()
         setupUI()
         setupValidationListener()
+        handleBackButton()
 
         cloudinaryHelper = CloudinaryHelper(this)
 
@@ -285,6 +287,17 @@ class ClockInActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
                 REQUEST_PERMISSIONS
             )
+        }
+    }
+
+    private fun handleBackButton() {
+        onBackPressedDispatcher.addCallback(this@ClockInActivity) {
+            finish()
+        }
+        binding.apply {
+            btnBack.setOnClickListener {
+                finish()
+            }
         }
     }
 
