@@ -142,21 +142,19 @@ class ClockOutActivity : AppCompatActivity() {
     private fun clockOut() {
         lifecycleScope.launch {
             val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
-            val clockOutTime = Timestamp.now()
-            val description = binding.edtDescriptionProject.text.toString()
-            val status = "pending"
-
-            val imageUrl = photoUri?.let {
-                cloudinaryHelper.uploadImage(it, firebaseAuth.currentUser?.uid!!)
-            } ?: throw Exception("No Image Selected")
-
-//            Fetch Clock in Time
             val clockInTime = attendanceDataStore.clockIn.firstOrNull()
-
             if (clockInTime != null) {
-                val workHours = calculateWorkHours(clockInTime, clockOutTime)
-                val workHoursOvertime = calculateOvertime(workHours)
-                val totalWorkHours = workHours + workHoursOvertime
+                val clockOutTime = Timestamp.now()
+                val description = binding.edtDescriptionProject.text.toString()
+                val status = "pending"
+
+                val imageUrl = photoUri?.let {
+                    cloudinaryHelper.uploadImage(it, firebaseAuth.currentUser?.uid!!)
+                } ?: throw Exception("No Image Selected")
+                val totalWorkHours = calculateTotalWorkHours(clockInTime, clockOutTime)
+                val workHours = calculateRegularWorkHours(totalWorkHours)
+                val workHoursOvertime = calculateOvertime(totalWorkHours)
+
 
                 attendanceManager.clockOut(
                     clockOut = clockOutTime,
@@ -176,13 +174,18 @@ class ClockOutActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateWorkHours(clockIn: Timestamp, clockOut: Timestamp): Int {
+    private fun calculateTotalWorkHours(clockIn: Timestamp, clockOut: Timestamp): Int {
         val duration = clockOut.toDate().time - clockIn.toDate().time
-        return (duration / (1000 * 60 * 60)).toInt()
+//        return (duration / (1000 * 60 * 60)).toInt()
+        return (duration / (1000 * 60)).toInt()
     }
 
-    private fun calculateOvertime(workHours: Int): Int {
-        return if (workHours > 8) workHours - 8 else 0
+    private fun calculateRegularWorkHours(totalWorkHours: Int): Int {
+        return if (totalWorkHours > 60) 60 else totalWorkHours
+    }
+
+    private fun calculateOvertime(totalWorkHours: Int): Int {
+        return if (totalWorkHours > 60) totalWorkHours - 60 else 0
     }
 
     private fun displayProjectData() {
@@ -231,29 +234,6 @@ class ClockOutActivity : AppCompatActivity() {
             insets
         }
     }
-
-//    private fun setupCameraAndGalleryLaunchers() {
-//        takePictureLauncher =
-//            registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-//                if (success && photoUri != null) {
-//                    Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
-//                    binding.tvImageUrl.text = photoUri.toString()
-//                } else {
-//                    Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//        pickImageLauncher =
-//            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-//                if (uri != null) {
-//                    photoUri = uri
-//                    Toast.makeText(this, "Image selected: $photoUri", Toast.LENGTH_SHORT).show()
-//                    binding.tvImageUrl.text = uri.toString()
-//                } else {
-//                    Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//    }
 
     private fun setupCameraAndGalleryLaunchers() {
         takePictureLauncher =
