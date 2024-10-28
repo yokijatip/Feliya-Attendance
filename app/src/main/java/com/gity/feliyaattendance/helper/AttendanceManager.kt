@@ -7,7 +7,6 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.tasks.await
-import java.util.Date
 import java.util.UUID
 
 class AttendanceManager(
@@ -94,14 +93,6 @@ class AttendanceManager(
         }
     }
 
-
-    data class ClockInData(
-        val userId: String,
-        val projectId: String,
-        val date: Date,
-        val clockIn: Timestamp,
-        val imageUrlIn: String
-    )
 
     class AttendanceUploadException(message: String, cause: Throwable? = null) :
         Exception(message, cause)
