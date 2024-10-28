@@ -156,6 +156,7 @@ class ClockOutActivity : AppCompatActivity() {
             if (clockInTime != null) {
                 val workHours = calculateWorkHours(clockInTime, clockOutTime)
                 val workHoursOvertime = calculateOvertime(workHours)
+                val totalWorkHours = workHours + workHoursOvertime
 
                 attendanceManager.clockOut(
                     clockOut = clockOutTime,
@@ -163,7 +164,8 @@ class ClockOutActivity : AppCompatActivity() {
                     status = status,
                     workHours = workHours,
                     workHoursOvertime = workHoursOvertime,
-                    description = description
+                    description = description,
+                    totalWorkHours = totalWorkHours
                 )
                 finish()
             } else {

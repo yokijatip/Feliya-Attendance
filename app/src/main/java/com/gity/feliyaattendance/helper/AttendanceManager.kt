@@ -32,7 +32,8 @@ class AttendanceManager(
         status: String,
         workHours: Int,
         workHoursOvertime: Int,
-        description: String
+        description: String,
+        totalWorkHours: Int,
     ) {
         dataStore.saveClockOutData(
             clockOut,
@@ -40,7 +41,8 @@ class AttendanceManager(
             status,
             workHours,
             workHoursOvertime,
-            description
+            description,
+            totalWorkHours
         )
         uploadAttendanceData()
     }
@@ -63,6 +65,7 @@ class AttendanceManager(
         val workHours = dataStore.workHours.first() ?: 0
         val workHoursOvertime = dataStore.workHoursOvertime.first() ?: 0
         val attendanceId = UUID.randomUUID().toString()
+        val totalWorkHours = workHours + workHoursOvertime
 
         val attendanceData = hashMapOf(
             "attendanceId" to attendanceId,
@@ -76,7 +79,8 @@ class AttendanceManager(
             "workDescription" to description,
             "status" to status,
             "workHours" to workHours,
-            "overtimeHours" to workHoursOvertime
+            "overtimeHours" to workHoursOvertime,
+            "totalWorkHours" to totalWorkHours
         )
 
         try {

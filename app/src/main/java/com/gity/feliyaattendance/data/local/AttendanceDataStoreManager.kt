@@ -27,6 +27,7 @@ class AttendanceDataStoreManager(private val context: Context) {
         private val WORK_HOURS_OVERTIME = intPreferencesKey(
             "work_hours_overtime"
         )
+        private val TOTAL_WORK_HOURS = intPreferencesKey("total_work_hours")
     }
 
     suspend fun saveClockInData(
@@ -52,7 +53,8 @@ class AttendanceDataStoreManager(private val context: Context) {
         status: String,
         workHours: Int,
         workHoursOvertime: Int,
-        description: String
+        description: String,
+        totalWorkHours: Int
     ) {
         context.dataStore.edit { pref ->
             pref[CLOCK_OUT] = clockOut.seconds * 1000 + clockOut.nanoseconds / 1000000
@@ -61,6 +63,7 @@ class AttendanceDataStoreManager(private val context: Context) {
             pref[WORK_HOURS] = workHours
             pref[WORK_HOURS_OVERTIME] = workHoursOvertime
             pref[DESCRIPTION] = description
+            pref[TOTAL_WORK_HOURS] = totalWorkHours
         }
     }
 
@@ -118,4 +121,7 @@ class AttendanceDataStoreManager(private val context: Context) {
 
     val workHoursOvertime: Flow<Int?> = context.dataStore.data
         .map { pref -> pref[WORK_HOURS_OVERTIME] }
+
+    val totalWorkHours: Flow<Int?> = context.dataStore.data
+        .map { pref -> pref[TOTAL_WORK_HOURS] }
 }
