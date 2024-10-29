@@ -10,7 +10,6 @@ import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendancesFragment
 import com.gity.feliyaattendance.admin.ui.main.home.AdminHomeFragment
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminProjectsFragment
-import com.gity.feliyaattendance.admin.ui.main.workers.AdminWorkersFragment
 import com.gity.feliyaattendance.databinding.ActivityMainAdminBinding
 import com.gity.feliyaattendance.ui.main.settings.SettingsFragment
 

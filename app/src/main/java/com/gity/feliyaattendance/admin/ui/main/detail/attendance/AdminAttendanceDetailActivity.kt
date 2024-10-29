@@ -47,7 +47,6 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
             observerAttendanceDetail()
             setupSaveButton()
         }
-
     }
 
     private fun observerAttendanceDetail() {

@@ -6,7 +6,7 @@ import com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendanceViewMo
 import com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailViewModel
 import com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminProjectViewModel
-import com.gity.feliyaattendance.admin.ui.main.workers.AdminWorkersViewModel
+import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminWorkersViewModel
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.auth.AuthViewModel
 import com.gity.feliyaattendance.ui.main.attendance.AttendanceViewModel

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.adapter.AttendanceAdapter
+import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminWorkersActivity
 import com.gity.feliyaattendance.databinding.FragmentHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
@@ -122,6 +123,7 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
+
     private fun swipeRefreshLayout(adapter: AttendanceAdapter) {
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener {
@@ -135,7 +137,6 @@ class HomeFragment : Fragment() {
                     }
                     swipeRefreshLayout.isRefreshing = false
                 }
-                Toast.makeText(requireContext(), "Refreshed", Toast.LENGTH_SHORT).show()
             }
         }
     }

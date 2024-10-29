@@ -38,7 +38,7 @@ class AttendanceAdapter(private val onAttendanceSelected: (Attendance) -> Unit) 
                 tvDate.text = CommonHelper.formatTimestamp(attendance.date)
                 tvClockIn.text = CommonHelper.formatTimeOnly(attendance.clockInTime)
                 tvClockOut.text = CommonHelper.formatTimeOnly(attendance.clockOutTime)
-                tvTotalHours.text = attendance.workHours.toString()
+                tvTotalHours.text = attendance.totalHours.toString()
                 tvStatus.text = attendance.status
 
                 itemView.setOnClickListener {

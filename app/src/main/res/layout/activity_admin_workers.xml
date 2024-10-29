@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".admin.ui.main.home.workers.AdminWorkersActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".admin.ui.main.projects.AdminProjectsFragment">
+        android:id="@+id/main"
+        tools:context=".admin.ui.main.home.workers.AdminWorkersActivity">
 
         <!--  Logo & Notification  -->
         <LinearLayout
@@ -62,6 +64,7 @@
 
         <!-- Recycler View -->
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_worker_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
