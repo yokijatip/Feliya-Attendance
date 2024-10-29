@@ -16,6 +16,7 @@ import com.gity.feliyaattendance.data.model.Setting
 import com.gity.feliyaattendance.databinding.FragmentSettingsBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.ui.auth.AuthActivity
+import com.gity.feliyaattendance.ui.main.settings.account.AccountActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingsFragment : Fragment() {
@@ -57,7 +58,8 @@ class SettingsFragment : Fragment() {
             when (setting.tvSetting) {
                 getString(R.string.account) -> {
                     // Handle account click
-                    Toast.makeText(requireContext(), "Account clicked", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "Account clicked", Toast.LENGTH_SHORT).show()
+                    navigateToAccount()
                 }
 
                 getString(R.string.change_password) -> {
@@ -116,6 +118,13 @@ class SettingsFragment : Fragment() {
             onPositiveClick = { logoutUser() },
             onNegativeClick = { }
         )
+    }
+
+    private fun navigateToAccount() {
+        binding.apply {
+            val intent = Intent(requireContext(), AccountActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun logoutUser() {

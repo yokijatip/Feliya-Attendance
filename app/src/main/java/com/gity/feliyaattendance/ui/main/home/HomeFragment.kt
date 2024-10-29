@@ -17,6 +17,7 @@ import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.main.attendance.ClockOutActivity
 import com.gity.feliyaattendance.ui.main.attendance.ShowProjectActivity
+import com.gity.feliyaattendance.ui.main.detail.AttendanceDetailActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -43,7 +44,7 @@ class HomeFragment : Fragment() {
         firebaseFirestore = FirebaseFirestore.getInstance()
 
         val adapter = AttendanceAdapter { attendance ->
-            Toast.makeText(requireContext(), attendance.attendanceId, Toast.LENGTH_SHORT).show()
+            navigateToDetailAttendance(attendance.attendanceId)
         }
 
         repository = Repository(firebaseAuth, firebaseFirestore)
@@ -62,7 +63,6 @@ class HomeFragment : Fragment() {
                 Log.i("ATTENDANCE_DATA", "Data : ${attendance.size}")
             }.onFailure { exception ->
                 Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
-                // Tampilkan pesan kesalahan ke pengguna jika diperlukan
             }
         }
         viewModel.fetchAttendanceList(userId)
@@ -103,29 +103,6 @@ class HomeFragment : Fragment() {
             }
         }
         swipeRefreshLayout(adapter)
-
-
-        //        // Real-time snapshot listener from Firestore
-        //        val userId = firebaseAuth.currentUser?.uid
-        //        if (userId != null) {
-        //            firebaseFirestore.collection("users").document(userId)
-        //                .addSnapshotListener { documentSnapshot, error ->
-        //                    if (error != null) {
-        //                        Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT)
-        //                            .show()
-        //                        return@addSnapshotListener
-        //                    }
-        //
-        //                    if (documentSnapshot != null && documentSnapshot.exists()) {
-        //                        val name = documentSnapshot.getString("name")
-        //                        // Update the UI in real-time if the name changes in Firestore
-        //                        binding.tvName.text = name
-        //                    }
-        //                }
-        //        } else {
-        //            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
-        //        }
-        //        End of Your Code
         return binding.root
     }
 
@@ -139,6 +116,12 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
+    private fun navigateToDetailAttendance(attendanceId: String) {
+        val intent = Intent(requireActivity(), AttendanceDetailActivity::class.java)
+        intent.putExtra("ATTENDANCE_ID", attendanceId)
+        startActivity(intent)
+    }
+
     private fun swipeRefreshLayout(adapter: AttendanceAdapter) {
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener {
@@ -149,7 +132,6 @@ class HomeFragment : Fragment() {
                         Log.i("ATTENDANCE_DATA", "Data : ${attendance.size}")
                     }.onFailure { exception ->
                         Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
-                        // Tampilkan pesan kesalahan ke pengguna jika diperlukan
                     }
                     swipeRefreshLayout.isRefreshing = false
                 }

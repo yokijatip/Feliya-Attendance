@@ -17,5 +17,6 @@ data class Attendance(
     var workDescription: String = "",
     var status: String = "",
     var workHours: Int? = null,
-    var overtimeHours: Int? = null
+    var overtimeHours: Int? = null,
+    var totalHours: Int? = null,
 ) : Parcelable

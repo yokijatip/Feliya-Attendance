@@ -115,24 +115,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/tv_user_email"
                         app:layout_constraintVertical_bias="0.0" />
 
-                    <TextView
-                        android:id="@+id/tv_user_worker_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="10dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/inter_bold"
-                        android:maxLines="1"
-                        android:text="90849023457240937249689"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_user_role"
-                        app:layout_constraintStart_toStartOf="@+id/tv_user_role"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_user_role"
-                        app:layout_constraintVertical_bias="0.0" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

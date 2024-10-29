@@ -149,8 +149,13 @@
         <item>rejected</item>
     </string-array>
 
-    <!--  Admin Detail Attendance  -->
+    <!--  Detail Attendance  -->
     <string name="detail_attendance">Detail Attendance</string>
+    <string name="date_attendance">Date</string>
+    <string name="status_attendance">Status</string>
+    <string name="working">Working</string>
+    <string name="overtime">Overtime</string>
+    <string name="total">Total</string>
 
     <!--  Admin Home  -->
     <string name="zero">0</string>
