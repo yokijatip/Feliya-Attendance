@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class AdminAttendanceDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminAttendanceDetailBinding
+
     private val viewModel: AdminAttendanceDetailViewModel by viewModels {
         ViewModelFactory(Repository(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance()))
     }
@@ -40,6 +41,7 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         setupListeners()
         setupStatusAdapter()
 
+
         attendanceId = intent.getStringExtra("ATTENDANCE_ID")
 
         attendanceId?.let { id ->
@@ -47,6 +49,7 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
             observerAttendanceDetail()
             setupSaveButton()
         }
+        attendanceId?.let { swipeRefreshLayout(it) }
     }
 
     private fun observerAttendanceDetail() {
@@ -185,13 +188,30 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupWindowInsets() {
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+    }
+
+    private fun swipeRefreshLayout(attendanceId: String) {
+        binding.apply {
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.fetchAttendanceDetail(attendanceId)
+                viewModel.attendanceDetail.observe(this@AdminAttendanceDetailActivity) { detail ->
+                    if (detail != null) {
+                        updateStatusUI(detail.attendance.status)
+                        swipeRefreshLayout.isRefreshing = false
+                    } else {
+                        showToast("Attendance detail not found")
+                        swipeRefreshLayout.isRefreshing = false
+                    }
+                }
+
+            }
         }
     }
 
