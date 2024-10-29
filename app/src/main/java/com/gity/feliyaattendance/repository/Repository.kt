@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.repository
 
+import com.gity.feliyaattendance.admin.data.model.Worker
 import com.gity.feliyaattendance.data.model.Attendance
 import com.gity.feliyaattendance.data.model.AttendanceDetail
 import com.gity.feliyaattendance.data.model.Project
@@ -243,7 +244,7 @@ class Repository(
         }
     }
 
-//    Get Pending Count Attendance
+    //    Get Pending Count Attendance
     suspend fun getAttendancePending(): Result<Int> {
         return try {
             val snapshot = firebaseFirestore.collection("attendance")
@@ -276,7 +277,6 @@ class Repository(
             Result.failure(e)
         }
     }
-
     //    Get attendance pending
     suspend fun getAllAttendancePending(): Result<List<Attendance>> {
         return try {
@@ -386,6 +386,25 @@ class Repository(
             )
 
             Result.success(attendanceDetail)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getWorkerList(): Result<List<Worker>> {
+        return try {
+            val snapshot = firebaseFirestore.collection("users")
+                .whereEqualTo("role", "worker")
+                .get()
+                .await()
+
+            val workerList = snapshot.documents.mapNotNull { document ->
+                document.toObject(Worker::class.java)?.apply {
+                    id = document.id
+                }
+            }
+
+            Result.success(workerList)
         } catch (e: Exception) {
             Result.failure(e)
         }

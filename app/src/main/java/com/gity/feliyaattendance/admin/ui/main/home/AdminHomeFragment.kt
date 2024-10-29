@@ -55,7 +55,6 @@ class AdminHomeFragment : Fragment() {
         recyclerView = binding.rvMenu
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
         dashboard()
 
         val adminMenuList = listOf(
@@ -67,14 +66,13 @@ class AdminHomeFragment : Fragment() {
                 R.drawable.ic_check_square_custom_admin
             ),
             AdminMenu(
-                name = getString(R.string.admin_menu_generate_reports),
-                R.drawable.ic_printer
+                name = getString(R.string.admin_menu_generate_excel),
+                R.drawable.ic_table
             ),
             AdminMenu(
-                name = getString(R.string.admin_menu_generate_reports),
-                R.drawable.ic_printer
-            ),
-            AdminMenu(name = getString(R.string.admin_menu_generate_reports), R.drawable.ic_printer)
+                name = getString(R.string.admin_menu_generate_pdf),
+                R.drawable.ic_file_text
+            )
 
 
         )
@@ -101,9 +99,15 @@ class AdminHomeFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                getString(R.string.admin_menu_generate_reports) -> Toast.makeText(
+                getString(R.string.admin_menu_generate_excel) -> Toast.makeText(
                     requireContext(),
-                    "Generate Report",
+                    "Generate Report Excel",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                getString(R.string.admin_menu_generate_pdf) -> Toast.makeText(
+                    requireContext(),
+                    "Generate PDF",
                     Toast.LENGTH_SHORT
                 ).show()
             }

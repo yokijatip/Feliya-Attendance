@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -68,6 +69,7 @@ class AdminAddProjectActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        handleBackButton()
     }
 
     private fun setupStatusProjectDropdown() {
@@ -161,6 +163,15 @@ class AdminAddProjectActivity : AppCompatActivity() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+
+    private fun handleBackButton() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+        onBackPressedDispatcher.addCallback {
+            finish()
+        }
     }
 }
 

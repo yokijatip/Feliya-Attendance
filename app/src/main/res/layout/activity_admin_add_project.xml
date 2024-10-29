@@ -140,55 +140,55 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:strokeWidth="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/white">
+                android:backgroundTint="@color/white"
+                app:strokeWidth="0dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingStart="12dp"
-
                     android:layout_gravity="center"
+
                     android:orientation="horizontal"
+                    android:paddingStart="12dp"
                     tools:ignore="RtlSymmetry">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_calendar"
-                        />
+                        android:src="@drawable/ic_calendar" />
 
                     <!--  Title  -->
                     <TextView
                         android:id="@+id/tv_start_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/inter_semi_bold"
                         android:maxLines="1"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
-                        tools:text="30 Maret 2024"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        tools:text="30 Maret 2024" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_start_calendar"
-                        app:strokeWidth="1dp"
-                        app:strokeColor="@color/dark_primary_color"
-                        android:backgroundTint="@color/white"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/black"
-                        android:layout_height="64dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:fontFamily="@font/inter_semi_bold"
                         android:text="@string/start_date"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         app:cornerRadius="8dp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
                         app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_start" />
+                        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                        app:strokeColor="@color/dark_primary_color"
+                        app:strokeWidth="1dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -197,53 +197,53 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:strokeWidth="0dp"
                 android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/white">
+                android:backgroundTint="@color/white"
+                app:strokeWidth="0dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingStart="12dp"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
+                    android:paddingStart="12dp"
                     tools:ignore="RtlSymmetry">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_calendar"
-                        />
+                        android:src="@drawable/ic_calendar" />
 
                     <!--  Title  -->
                     <TextView
                         android:id="@+id/tv_end_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/inter_semi_bold"
                         android:maxLines="1"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
-                        tools:text="30 Maret 2024"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        tools:text="30 Maret 2024" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_end_calendar"
-                        app:strokeWidth="1dp"
-                        app:strokeColor="@color/dark_primary_color"
-                        android:backgroundTint="@color/white"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/black"
-                        android:layout_height="64dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:fontFamily="@font/inter_semi_bold"
                         android:text="@string/end_date"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         app:cornerRadius="8dp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
                         app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_start" />
+                        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                        app:strokeColor="@color/dark_primary_color"
+                        app:strokeWidth="1dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -252,19 +252,19 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
                 android:hint="@string/select_status_project"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
-                android:backgroundTint="@color/white"
                 app:startIconDrawable="@drawable/ic_check_square">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/edt_status_project"
                     android:layout_width="match_parent"
-                    android:backgroundTint="@color/white"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
