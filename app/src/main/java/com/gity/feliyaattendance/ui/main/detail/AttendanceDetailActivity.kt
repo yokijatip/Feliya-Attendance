@@ -2,7 +2,6 @@ package com.gity.feliyaattendance.ui.main.detail
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
@@ -14,7 +13,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.gity.feliyaattendance.R
-import com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailViewModel
 import com.gity.feliyaattendance.databinding.ActivityAttendanceBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
@@ -45,6 +43,7 @@ class AttendanceDetailActivity : AppCompatActivity() {
 
         setupUI()
     }
+
     private fun observerAttendanceDetail() {
         viewModel.attendanceDetail.observe(this@AttendanceDetailActivity) { detail ->
             if (detail != null) {
@@ -55,12 +54,13 @@ class AttendanceDetailActivity : AppCompatActivity() {
                     tvClockIn.text = CommonHelper.formatTimeOnly(detail.attendance.clockInTime)
                     tvClockOut.text = CommonHelper.formatTimeOnly(detail.attendance.clockOutTime)
                     tvWorkerDescription.text = detail.attendance.workDescription
-                    tvProjectStartDate.text = CommonHelper.formatTimestamp(detail.projectName.startDate)
+                    tvProjectStartDate.text =
+                        CommonHelper.formatTimestamp(detail.projectName.startDate)
                     tvProjectEndDate.text = CommonHelper.formatTimestamp(detail.projectName.endDate)
                     tvProjectLocation.text = detail.projectName.location
                     tvTotalHours.text = detail.attendance.totalHours.toString()
                     tvWorkingHours.text = detail.attendance.workHours.toString()
-                    tvOvertimeHours.text= detail.attendance.overtimeHours.toString()
+                    tvOvertimeHours.text = detail.attendance.overtimeHours.toString()
 
                     val imageList = arrayListOf(
                         SlideModel(detail.attendance.workProofIn, "Clock-In Proof"),
@@ -121,6 +121,8 @@ class AttendanceDetailActivity : AppCompatActivity() {
 
     private fun setupUI() {
         setupWindowInsets()
+        setupListeners()
+        attendanceId?.let { swipeRefreshLayout(it) }
     }
 
     private fun setupWindowInsets() {
@@ -128,6 +130,24 @@ class AttendanceDetailActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+    }
+
+    private fun swipeRefreshLayout(attendanceId: String) {
+        binding.apply {
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.fetchAttendanceDetail(attendanceId)
+                viewModel.attendanceDetail.observe(this@AttendanceDetailActivity) { detail ->
+                    if (detail != null) {
+                        updateStatusUI(detail.attendance.status)
+                        swipeRefreshLayout.isRefreshing = false
+                    } else {
+                        showToast("Attendance detail not found")
+                        swipeRefreshLayout.isRefreshing = false
+                    }
+                }
+
+            }
         }
     }
 
