@@ -24,22 +24,14 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
             app:layout_constraintTop_toTopOf="@+id/guideline_top">
 
-            <LinearLayout
-                android:id="@+id/btn_back"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content">
-
-                <!-- Logo -->
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    android:background="@null"
-                    android:src="@drawable/ic_arrow_left"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
+            <!-- Logo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/workers"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <View
                 android:layout_width="0dp"
