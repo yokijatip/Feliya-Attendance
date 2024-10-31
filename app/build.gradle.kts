@@ -77,15 +77,20 @@ dependencies {
 //    Image Auto Slider
     implementation(libs.imageslideshow)
     // All:
-    implementation (libs.cloudinary.android.v302)
-    implementation ("com.cloudinary:cloudinary-android:3.0.2")
+    implementation(libs.cloudinary.android.v302)
+    //noinspection UseTomlInstead
+    implementation("com.cloudinary:cloudinary-android:3.0.2")
 
 // Download + Preprocess:
-    implementation (libs.cloudinary.android.download)
-    implementation (libs.cloudinary.android.preprocess)
+    implementation(libs.cloudinary.android.download)
+    implementation(libs.cloudinary.android.preprocess)
 
-
-
+//    Export data To Excel
+    implementation(libs.poi)
+    implementation(libs.poi.ooxml)
+    implementation(libs.stax.api)
+    implementation(libs.xmlbeans)
+    implementation(libs.aalto.xml)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
