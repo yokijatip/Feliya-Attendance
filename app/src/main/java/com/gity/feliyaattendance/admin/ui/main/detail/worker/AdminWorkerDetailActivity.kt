@@ -9,11 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.adapter.WorkerDetailAdapter
 import com.gity.feliyaattendance.admin.data.model.MonthlyDashboard
 import com.gity.feliyaattendance.admin.data.model.Worker
+import com.gity.feliyaattendance.data.model.DetailWorkerMenu
 import com.gity.feliyaattendance.databinding.ActivityAdminWorkerDetailBinding
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
@@ -54,6 +57,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
 
 //        Observer ViewModel
         observerDetailViewModel()
+        workerDetailMenuSetup()
 
         if (workerId != null) {
             viewModel.fetchWorkerDetail(workerId)
@@ -62,6 +66,40 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
             Toast.makeText(this@AdminWorkerDetailActivity, "Invalid Worker ID", Toast.LENGTH_SHORT)
                 .show()
             finish()
+        }
+
+
+    }
+
+    private fun workerDetailMenuSetup() {
+        val workerDetailMenuList = listOf(
+            DetailWorkerMenu(getString(R.string.admin_menu_generate_excel), R.drawable.ic_table),
+            DetailWorkerMenu(getString(R.string.admin_menu_generate_pdf), R.drawable.ic_file_text)
+        )
+
+        val detailWorkerMenuAdapter = WorkerDetailAdapter(workerDetailMenuList) { menu ->
+            when (menu.tvDetailWorkerMenu) {
+                getString(R.string.admin_menu_generate_excel) -> {
+                    Toast.makeText(
+                        this@AdminWorkerDetailActivity,
+                        "Generated Excel",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                getString(R.string.admin_menu_generate_pdf) -> {
+                    Toast.makeText(
+                        this@AdminWorkerDetailActivity,
+                        "Generated PDF",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+        binding.rvWorkerDetailMenu.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = detailWorkerMenuAdapter
         }
     }
 

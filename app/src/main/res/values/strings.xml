@@ -5,6 +5,7 @@
     <string name="home">Home</string>
     <string name="reports">Reports</string>
     <string name="settings">Settings</string>
+    <string name="back">Back</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -163,8 +164,8 @@
     <string name="admin_menu_attendance_approval">Attendance\nApproval</string>
     <string name="admin_menu_add_worker">Add\nWorker</string>
     <string name="admin_menu_add_project">Add\nProject</string>
-    <string name="admin_menu_generate_excel">Generate\nExcel</string>
-    <string name="admin_menu_generate_pdf">Generate\nPDF</string>
+    <string name="admin_menu_generate_excel">Generate Excel</string>
+    <string name="admin_menu_generate_pdf">Generate PDF</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
