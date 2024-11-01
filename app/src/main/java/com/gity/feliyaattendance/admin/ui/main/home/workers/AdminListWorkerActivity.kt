@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.admin.ui.main.home.workers
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -11,15 +12,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.AdminWorkerAdapter
-import com.gity.feliyaattendance.databinding.ActivityAdminWorkersBinding
+import com.gity.feliyaattendance.admin.ui.main.detail.worker.AdminWorkerDetailActivity
+import com.gity.feliyaattendance.databinding.ActivityAdminListWorkerBinding
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class AdminWorkersActivity : AppCompatActivity() {
+class AdminListWorkerActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAdminWorkersBinding
+    private lateinit var binding: ActivityAdminListWorkerBinding
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseFirestore: FirebaseFirestore
@@ -28,7 +30,7 @@ class AdminWorkersActivity : AppCompatActivity() {
     private lateinit var repository: Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityAdminWorkersBinding.inflate(layoutInflater)
+        binding = ActivityAdminListWorkerBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -46,8 +48,7 @@ class AdminWorkersActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[AdminWorkersViewModel::class.java]
 
         val adapter = AdminWorkerAdapter { worker ->
-            Toast.makeText(this, "Clicked: Name: ${worker.name}", Toast.LENGTH_SHORT)
-                .show()
+            worker.id?.let { navigateToWorkerDetail(it) }
         }
 
         binding.rvWorkerList.layoutManager = LinearLayoutManager(this)
@@ -64,14 +65,13 @@ class AdminWorkersActivity : AppCompatActivity() {
         viewModel.getWorkerList()
         swipeRefreshLayout(adapter)
 
-
     }
 
     private fun swipeRefreshLayout(adapter: AdminWorkerAdapter) {
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener {
                 viewModel.getWorkerList()
-                viewModel.workerlist.observe(this@AdminWorkersActivity) { result ->
+                viewModel.workerlist.observe(this@AdminListWorkerActivity) { result ->
                     result.onSuccess {
                         adapter.submitList(it)
                     }.onFailure {
@@ -82,4 +82,9 @@ class AdminWorkersActivity : AppCompatActivity() {
         }
     }
 
+    private fun navigateToWorkerDetail(workerId: String) {
+        val intent = Intent(this, AdminWorkerDetailActivity::class.java)
+        intent.putExtra("WORKER_ID", workerId)
+        startActivity(intent)
+    }
 }

@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.adapter.AttendanceAdapter
-import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminWorkersActivity
 import com.gity.feliyaattendance.databinding.FragmentHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository

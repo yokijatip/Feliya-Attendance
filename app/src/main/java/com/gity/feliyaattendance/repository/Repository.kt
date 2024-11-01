@@ -1,5 +1,7 @@
 package com.gity.feliyaattendance.repository
 
+import android.util.Log
+import com.gity.feliyaattendance.admin.data.model.MonthlyDashboard
 import com.gity.feliyaattendance.admin.data.model.Worker
 import com.gity.feliyaattendance.data.model.Attendance
 import com.gity.feliyaattendance.data.model.AttendanceDetail
@@ -10,6 +12,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
+import java.util.Calendar
 import java.util.Date
 import java.util.UUID
 
@@ -277,6 +280,7 @@ class Repository(
             Result.failure(e)
         }
     }
+
     //    Get attendance pending
     suspend fun getAllAttendancePending(): Result<List<Attendance>> {
         return try {
@@ -391,6 +395,7 @@ class Repository(
         }
     }
 
+    //    Get Worker List
     suspend fun getWorkerList(): Result<List<Worker>> {
         return try {
             val snapshot = firebaseFirestore.collection("users")
@@ -410,5 +415,93 @@ class Repository(
         }
     }
 
+    //    Get Worker Detail
+    suspend fun getWorkerDetail(workerId: String): Result<Worker> {
+        return try {
+            val snapshot = firebaseFirestore.collection("users")
+                .document(workerId)
+                .get()
+                .await()
+
+            val workerDetail = snapshot.toObject(Worker::class.java)?.apply {
+                id = snapshot.id
+            }
+
+            if (workerDetail != null) {
+                Result.success(workerDetail)
+            } else {
+                Result.failure(Exception("Worker Detail Not Found!"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getMonthlyDashboard(userId: String): Result<MonthlyDashboard> {
+        return try {
+            // Set start of month
+            val startOfMonth = Calendar.getInstance().apply {
+                set(Calendar.DAY_OF_MONTH, 1)
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.time
+
+            // Set end of month
+            val endOfMonth = Calendar.getInstance().apply {
+                set(Calendar.DAY_OF_MONTH, getActualMaximum(Calendar.DAY_OF_MONTH))
+                set(Calendar.HOUR_OF_DAY, 23)
+                set(Calendar.MINUTE, 59)
+                set(Calendar.SECOND, 59)
+                set(Calendar.MILLISECOND, 999)
+            }.time
+
+            // Log untuk debugging
+            Log.d("Repository", "Fetching attendance for userId: $userId")
+            Log.d("Repository", "Start date: $startOfMonth")
+            Log.d("Repository", "End date: $endOfMonth")
+
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("userId", userId)
+                .whereGreaterThanOrEqualTo("date", startOfMonth)
+                .whereLessThanOrEqualTo("date", endOfMonth)
+                .get()
+                .await()
+
+            // Log jumlah dokumen yang ditemukan
+            Log.d("Repository", "Found ${snapshot.size()} documents")
+
+            val totalAttendance = snapshot.size()
+            var totalOvertimeHours = 0.0
+
+            snapshot.documents.forEach { document ->
+//                // Log setiap dokumen untuk debugging
+//                Log.d("Repository", "Document ID: ${document.id}")
+//                Log.d("Repository", "Date: ${document.getTimestamp("date")}")
+//                Log.d("Repository", "Overtime hours: ${document.getDouble("overtimeHours")}")
+
+                val overtimeHours = document.getDouble("overtimeHours") ?: 0.0
+                if (overtimeHours > 0) {
+                    totalOvertimeHours += overtimeHours
+                }
+            }
+
+            Log.d(
+                "Repository",
+                "Final counts - Attendance: $totalAttendance, Overtime: $totalOvertimeHours"
+            )
+
+            Result.success(
+                MonthlyDashboard(
+                    totalAttendance = totalAttendance,
+                    totalOvertimeHours = totalOvertimeHours
+                )
+            )
+        } catch (e: Exception) {
+            Log.e("Repository", "Error fetching monthly dashboard", e)
+            Result.failure(e)
+        }
+    }
 
 }

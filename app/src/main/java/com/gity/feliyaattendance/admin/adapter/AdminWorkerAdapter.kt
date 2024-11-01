@@ -29,7 +29,8 @@ class AdminWorkerAdapter(private val onWorkerSelected: (Worker) -> Unit) :
         fun bind(worker: Worker) {
             binding.apply {
                 tvWorkerName.text = worker.name
-                Glide.with(itemView.context).load(worker.profileImageUrl)
+                Glide.with(itemView.context)
+                    .load(worker.profileImageUrl)
                     .placeholder(R.drawable.worker_profile_placeholder).into(ivWorkerImageProfile)
 
                 itemView.setOnClickListener {

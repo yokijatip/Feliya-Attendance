@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.MenuAdminAdapter
 import com.gity.feliyaattendance.admin.data.model.AdminMenu
-import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminWorkersActivity
+import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminListWorkerActivity
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
@@ -172,7 +172,7 @@ class AdminHomeFragment : Fragment() {
     }
 
     private fun navigateToWorkerList() {
-        val intent = Intent(requireActivity(), AdminWorkersActivity::class.java)
+        val intent = Intent(requireActivity(), AdminListWorkerActivity::class.java)
         startActivity(intent)
     }
 
