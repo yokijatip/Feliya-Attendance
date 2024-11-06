@@ -11,6 +11,7 @@ data class AttendanceExcelReport(
     val clockOutTime: Timestamp?,
     val workHours: Double,
     val overtimeHours: Double,
+    val totalHours: Double,
     val workDescription: String,
     val projectId: String
 ) : Parcelable

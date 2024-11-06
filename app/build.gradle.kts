@@ -86,15 +86,12 @@ dependencies {
     implementation(libs.cloudinary.android.preprocess)
 
 //    Export data To Excel
-    implementation(libs.poi)
-    implementation(libs.poi.ooxml)
-    implementation(libs.stax.api)
-    implementation(libs.xmlbeans)
 
-    implementation (libs.poi.v523)
-    implementation (libs.poi.ooxml.v523)
-    implementation ("org.apache.poi:poi:5.2.2")
-    implementation ("org.apache.poi:poi-ooxml:5.2.2")
+    // Use HSSF instead of XSSF for Android compatibility
+    implementation ("org.apache.poi:poi:5.2.3")
+    // Add required dependencies
+    implementation ("org.apache.poi:poi-ooxml:5.2.3")
+    implementation ("org.apache.xmlbeans:xmlbeans:5.1.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

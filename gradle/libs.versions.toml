@@ -26,20 +26,14 @@ lifecycleViewmodelKtx = "2.8.6"
 fragmentKtx = "1.8.3"
 navigationFragmentKtx = "2.8.1"
 navigationUiKtx = "2.8.1"
-poiOoxmlVersion = "5.2.3"
-poiVersion = "5.2.3"
 staxApi = "1.0"
-poi = "3.17"
-poiOoxml = "3.17"
-xmlbeans = "3.1.0"
+
 
 [libraries]
-aalto-xml = { module = "com.fasterxml:aalto-xml", version.ref = "aaltoXml" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 chip-navigation-bar = { module = "com.github.ismaeldivita:chip-navigation-bar", version.ref = "chipNavigationBar" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
-cloudinary-android = { module = "com.cloudinary:cloudinary-android", version.ref = "cloudinaryAndroid" }
 cloudinary-android-preprocess = { module = "com.cloudinary:cloudinary-android-preprocess", version.ref = "cloudinaryAndroidVersion" }
 cloudinary-android-download = { module = "com.cloudinary:cloudinary-android-download", version.ref = "cloudinaryAndroidVersion" }
 cloudinary-android-v302 = { module = "com.cloudinary:cloudinary-android", version.ref = "cloudinaryAndroidVersion" }
@@ -64,12 +58,6 @@ androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifec
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
-poi-ooxml-v523 = { module = "org.apache.poi:poi-ooxml", version.ref = "poiOoxmlVersion" }
-poi-v523 = { module = "org.apache.poi:poi", version.ref = "poiVersion" }
-xmlbeans = { module = "org.apache.xmlbeans:xmlbeans", version.ref = "xmlbeans" }
-poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poiOoxml" }
-poi = { module = "org.apache.poi:poi", version.ref = "poi" }
-stax-api = { module = "javax.xml.stream:stax-api", version.ref = "staxApi" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -202,10 +202,7 @@ object CommonHelper {
         dialog.show()
     }
 
-    // Extension function untuk membuat Timestamp dari Date
-    fun Date.toTimestamp(): Timestamp {
-        return Timestamp(this)
-    }
+
 
 
 }

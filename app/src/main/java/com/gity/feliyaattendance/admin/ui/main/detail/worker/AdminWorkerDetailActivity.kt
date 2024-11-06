@@ -1,11 +1,13 @@
 package com.gity.feliyaattendance.admin.ui.main.detail.worker
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -20,8 +22,12 @@ import com.gity.feliyaattendance.data.model.DetailWorkerMenu
 import com.gity.feliyaattendance.databinding.ActivityAdminWorkerDetailBinding
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.File
+import java.util.Date
 
 class AdminWorkerDetailActivity : AppCompatActivity() {
 
@@ -32,6 +38,9 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: AdminWorkerDetailViewModel
     private lateinit var repository: Repository
+
+    private lateinit var workerName: String
+    private lateinit var workerId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityAdminWorkerDetailBinding.inflate(layoutInflater)
@@ -53,7 +62,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[AdminWorkerDetailViewModel::class.java]
 
 //        Get Worker ID
-        val workerId = intent.getStringExtra("WORKER_ID")
+        workerId = intent.getStringExtra("WORKER_ID")!!
 
 //        Observer ViewModel
         observerDetailViewModel()
@@ -68,6 +77,8 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
             finish()
         }
 
+        observeExcelGeneration()
+
 
     }
 
@@ -80,11 +91,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         val detailWorkerMenuAdapter = WorkerDetailAdapter(workerDetailMenuList) { menu ->
             when (menu.tvDetailWorkerMenu) {
                 getString(R.string.admin_menu_generate_excel) -> {
-                    Toast.makeText(
-                        this@AdminWorkerDetailActivity,
-                        "Generated Excel",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    generateExcel(workerId)
                 }
 
                 getString(R.string.admin_menu_generate_pdf) -> {
@@ -100,6 +107,43 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         binding.rvWorkerDetailMenu.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = detailWorkerMenuAdapter
+        }
+    }
+
+    private fun generateExcel(workerId: String) {
+        val datePicker = MaterialDatePicker.Builder
+            .dateRangePicker()
+            .setTitleText("Pilih Rentang Tanggal")
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            val startTimestamp = Timestamp(Date(selection.first))
+            val endTimestamp = Timestamp(Date(selection.second))
+
+            viewModel.generateAttendanceReport(
+                context = this,
+                userId = workerId,
+                username = workerName,
+                startTimestamp = startTimestamp,
+                endTimestamp = endTimestamp
+            )
+        }
+
+        datePicker.show(supportFragmentManager, "DATE_RANGE_PICKER")
+    }
+
+    private fun observeExcelGeneration() {
+        viewModel.excelGenerationResult.observe(this) { result ->
+            result.onSuccess { file ->
+//                Buka file atau share
+                openExcelFile(file)
+            }.onFailure {
+                Toast.makeText(
+                    this@AdminWorkerDetailActivity,
+                    "Error generating Excel file: $it",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -145,6 +189,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
             tvUserName.text = worker.name
             tvUserEmail.text = worker.email
             tvUserRole.text = worker.role
+            workerName = worker.name!!
 
             Glide.with(this@AdminWorkerDetailActivity)
                 .load(worker.profileImageUrl)
@@ -171,5 +216,25 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+    }
+
+    //    Fungsi untuk membuka file excel
+    private fun openExcelFile(file: File) {
+        val uri = FileProvider.getUriForFile(
+            this,
+            "${packageName}.provider",
+            file
+        )
+
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        startActivity(intent)
+    }
+
+    fun Date.toTimestamp(): Timestamp {
+        return Timestamp(this)
     }
 }

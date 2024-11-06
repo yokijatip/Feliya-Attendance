@@ -27,8 +27,7 @@ import java.util.Locale
 import java.util.UUID
 
 class Repository(
-    private val firebaseAuth: FirebaseAuth,
-    private val firebaseFirestore: FirebaseFirestore
+    private val firebaseAuth: FirebaseAuth, private val firebaseFirestore: FirebaseFirestore
 ) {
     //    Login
     suspend fun loginUser(email: String, password: String): Result<String> {
@@ -51,10 +50,7 @@ class Repository(
 
     //    Register
     suspend fun registerUser(
-        email: String,
-        password: String,
-        name: String,
-        role: String
+        email: String, password: String, name: String, role: String
     ): Result<Unit> {
         return try {
             val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
@@ -174,8 +170,7 @@ class Repository(
                 "workHours" to workHours,
                 "overtimeHours" to workHoursOvertime
             )
-            firebaseFirestore.collection("attendance")
-                .add(attendanceData).await()
+            firebaseFirestore.collection("attendance").add(attendanceData).await()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
@@ -187,8 +182,7 @@ class Repository(
         return try {
             val snapshot = firebaseFirestore.collection("projects")
                 .whereEqualTo("status", "Active") // Mengambil project yang statusnya "Active"
-                .get()
-                .await()
+                .get().await()
 
             val activeProjects = snapshot.documents.mapNotNull { document ->
                 // Mendapatkan data dari setiap document
@@ -206,13 +200,10 @@ class Repository(
     // Mengambil jumlah pekerja (worker)
     suspend fun getWorkersCount(): Result<Int> {
         return try {
-            val snapshot = firebaseFirestore.collection("users")
-                .whereEqualTo(
-                    "role",
-                    "worker"
+            val snapshot = firebaseFirestore.collection("users").whereEqualTo(
+                    "role", "worker"
                 ) // Asumsi bahwa role pekerja disimpan sebagai "worker"
-                .get()
-                .await()
+                .get().await()
 
             // Mengembalikan jumlah pekerja
             Result.success(snapshot.size())
@@ -224,9 +215,7 @@ class Repository(
     //    Get Project Count
     suspend fun getProjectCount(): Result<Int> {
         return try {
-            val snapshot = firebaseFirestore.collection("projects")
-                .get()
-                .await()
+            val snapshot = firebaseFirestore.collection("projects").get().await()
 
             Result.success(snapshot.size())
         } catch (e: Exception) {
@@ -237,13 +226,10 @@ class Repository(
     //    Get All Project
     suspend fun getAllProject(orderBy: String = "desc"): Result<List<Project>> {
         return try {
-            val snapshot = firebaseFirestore.collection("projects")
-                .orderBy(
+            val snapshot = firebaseFirestore.collection("projects").orderBy(
                     "startDate",
                     if (orderBy == "desc") Query.Direction.DESCENDING else Query.Direction.ASCENDING
-                )
-                .get()
-                .await()
+                ).get().await()
 
             val projects = snapshot.documents.mapNotNull { documentSnapshot ->
                 documentSnapshot.toObject(Project::class.java)?.apply {
@@ -260,10 +246,9 @@ class Repository(
     //    Get Pending Count Attendance
     suspend fun getAttendancePending(): Result<Int> {
         return try {
-            val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("status", "pending")
-                .get()
-                .await()
+            val snapshot =
+                firebaseFirestore.collection("attendance").whereEqualTo("status", "pending").get()
+                    .await()
 
             Result.success(snapshot.size())
         } catch (e: Exception) {
@@ -274,10 +259,9 @@ class Repository(
     //    Get list Attendance / Activity
     suspend fun getAttendanceByUserId(userId: String): Result<List<Attendance>> {
         return try {
-            val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("userId", userId)
-                .get()
-                .await()
+            val snapshot =
+                firebaseFirestore.collection("attendance").whereEqualTo("userId", userId).get()
+                    .await()
 
             val attendanceList = snapshot.documents.mapNotNull { document ->
                 document.toObject(Attendance::class.java)?.apply {
@@ -294,10 +278,9 @@ class Repository(
     //    Get attendance pending
     suspend fun getAllAttendancePending(): Result<List<Attendance>> {
         return try {
-            val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("status", "pending")
-                .get()
-                .await()
+            val snapshot =
+                firebaseFirestore.collection("attendance").whereEqualTo("status", "pending").get()
+                    .await()
 
             val attendanceStatus = snapshot.documents.mapNotNull { documentSnapshot ->
                 documentSnapshot.toObject(Attendance::class.java)?.apply {
@@ -314,10 +297,9 @@ class Repository(
     //    Get attendance approved
     suspend fun getAllAttendanceApproved(): Result<List<Attendance>> {
         return try {
-            val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("status", "approved")
-                .get()
-                .await()
+            val snapshot =
+                firebaseFirestore.collection("attendance").whereEqualTo("status", "approved").get()
+                    .await()
 
             val attendanceStatus = snapshot.documents.mapNotNull { documentSnapshot ->
                 documentSnapshot.toObject(Attendance::class.java)?.apply {
@@ -334,10 +316,9 @@ class Repository(
     //    Get attendance rejected
     suspend fun getAllAttendanceRejected(): Result<List<Attendance>> {
         return try {
-            val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("status", "rejected")
-                .get()
-                .await()
+            val snapshot =
+                firebaseFirestore.collection("attendance").whereEqualTo("status", "rejected").get()
+                    .await()
 
             val attendanceStatus = snapshot.documents.mapNotNull { documentSnapshot ->
                 documentSnapshot.toObject(Attendance::class.java)?.apply {
@@ -354,10 +335,8 @@ class Repository(
     //    Change attendance status berdasarkan attendanceId
     suspend fun updateAttendanceStatus(attendanceId: String, newStatus: String): Result<Unit> {
         return try {
-            firebaseFirestore.collection("attendance")
-                .document(attendanceId)
-                .update("status", newStatus)
-                .await()
+            firebaseFirestore.collection("attendance").document(attendanceId)
+                .update("status", newStatus).await()
 
             Result.success(Unit)
         } catch (e: Exception) {
@@ -368,35 +347,28 @@ class Repository(
     //    Get Detail Attendance
     suspend fun getAttendanceDetail(attendanceId: String): Result<AttendanceDetail> {
         return try {
-            val attendanceSnapshot = firebaseFirestore.collection("attendance")
-                .document(attendanceId)
-                .get()
-                .await()
+            val attendanceSnapshot =
+                firebaseFirestore.collection("attendance").document(attendanceId).get().await()
             val attendance =
                 attendanceSnapshot.toObject(Attendance::class.java) ?: return Result.failure(
                     Exception("Attendance not found")
                 )
 
 //            Mengambil data worker berdasarkan userId dari attendance
-            val userSnapshot = firebaseFirestore.collection("users")
-                .document(attendance.userId)
-                .get()
-                .await()
+            val userSnapshot =
+                firebaseFirestore.collection("users").document(attendance.userId).get().await()
             val workerName = userSnapshot.getString("name") ?: "Unkown User"
 
-            val projectSnapshot = firebaseFirestore.collection("projects")
-                .document(attendance.projectId)
-                .get()
-                .await()
+            val projectSnapshot =
+                firebaseFirestore.collection("projects").document(attendance.projectId).get()
+                    .await()
 
             val project = projectSnapshot.toObject(Project::class.java) ?: return Result.failure(
                 Exception("Project not found")
             )
 
             val attendanceDetail = AttendanceDetail(
-                attendance = attendance,
-                workerName = workerName,
-                projectName = project
+                attendance = attendance, workerName = workerName, projectName = project
             )
 
             Result.success(attendanceDetail)
@@ -408,10 +380,8 @@ class Repository(
     //    Get Worker List
     suspend fun getWorkerList(): Result<List<Worker>> {
         return try {
-            val snapshot = firebaseFirestore.collection("users")
-                .whereEqualTo("role", "worker")
-                .get()
-                .await()
+            val snapshot =
+                firebaseFirestore.collection("users").whereEqualTo("role", "worker").get().await()
 
             val workerList = snapshot.documents.mapNotNull { document ->
                 document.toObject(Worker::class.java)?.apply {
@@ -428,10 +398,7 @@ class Repository(
     //    Get Worker Detail
     suspend fun getWorkerDetail(workerId: String): Result<Worker> {
         return try {
-            val snapshot = firebaseFirestore.collection("users")
-                .document(workerId)
-                .get()
-                .await()
+            val snapshot = firebaseFirestore.collection("users").document(workerId).get().await()
 
             val workerDetail = snapshot.toObject(Worker::class.java)?.apply {
                 id = snapshot.id
@@ -472,12 +439,9 @@ class Repository(
             Log.d("Repository", "Start date: $startOfMonth")
             Log.d("Repository", "End date: $endOfMonth")
 
-            val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("userId", userId)
+            val snapshot = firebaseFirestore.collection("attendance").whereEqualTo("userId", userId)
                 .whereGreaterThanOrEqualTo("date", startOfMonth)
-                .whereLessThanOrEqualTo("date", endOfMonth)
-                .get()
-                .await()
+                .whereLessThanOrEqualTo("date", endOfMonth).get().await()
 
             // Log jumlah dokumen yang ditemukan
             Log.d("Repository", "Found ${snapshot.size()} documents")
@@ -504,8 +468,7 @@ class Repository(
 
             Result.success(
                 MonthlyDashboard(
-                    totalAttendance = totalAttendance,
-                    totalOvertimeHours = totalOvertimeHours
+                    totalAttendance = totalAttendance, totalOvertimeHours = totalOvertimeHours
                 )
             )
         } catch (e: Exception) {
@@ -516,18 +479,13 @@ class Repository(
 
     //    Generate Excel Report
     suspend fun generateExcelReport(
-        userId: String,
-        startTimestamp: Timestamp,
-        endTimestamp: Timestamp
+        userId: String, startTimestamp: Timestamp, endTimestamp: Timestamp
     ): Result<List<AttendanceExcelReport>> {
         return try {
-            val snapshot = firebaseFirestore.collection("attendance")
-                .whereEqualTo("userId", userId)
+            val snapshot = firebaseFirestore.collection("attendance").whereEqualTo("userId", userId)
                 .whereGreaterThanOrEqualTo("date", startTimestamp)
                 .whereLessThanOrEqualTo("date", endTimestamp)
-                .orderBy("date", Query.Direction.ASCENDING)
-                .get()
-                .await()
+                .orderBy("date", Query.Direction.ASCENDING).get().await()
 
             val attendanceReports = snapshot.documents.map { document ->
                 AttendanceExcelReport(
@@ -536,6 +494,7 @@ class Repository(
                     clockOutTime = document.getTimestamp("clockOutTime"),
                     workHours = document.getDouble("workHours") ?: 0.0,
                     overtimeHours = document.getDouble("overtimeHours") ?: 0.0,
+                    totalHours = document.getDouble("totalHours") ?: 0.0,
                     workDescription = document.getString("workDescription") ?: "",
                     projectId = document.getString("projectId") ?: ""
                 )
@@ -546,6 +505,7 @@ class Repository(
             Result.failure(e)
         }
     }
+
 
     fun generateExcelFile(
         context: Context,
@@ -602,12 +562,13 @@ class Repository(
                         ?: "")
                 row.createCell(3).setCellValue(report.workHours)
                 row.createCell(4).setCellValue(report.overtimeHours)
-                row.createCell(5).setCellValue(report.workDescription)
-                row.createCell(6).setCellValue(report.projectId)
+                row.createCell(5).setCellValue(report.totalHours)
+                row.createCell(6).setCellValue(report.workDescription)
+                row.createCell(7).setCellValue(report.projectId)
             }
 
             // Auto size kolom
-            (0 until headers.size).forEach { sheet.autoSizeColumn(it) }
+            headers.indices.forEach { sheet.setColumnWidth(2, it) }
 
             // Buat nama file
             val fileName =
@@ -617,8 +578,7 @@ class Repository(
 
             // Simpan file
             val directory = File(
-                context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
-                "LaporanAbsensi"
+                context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi"
             )
 
             if (!directory.exists()) {
@@ -638,6 +598,101 @@ class Repository(
             Result.failure(e)
         }
     }
+
+//    fun generateExcelFile(
+//        context: Context,
+//        userId: String,
+//        userName: String,
+//        startTimestamp: Timestamp,
+//        endTimestamp: Timestamp,
+//        attendanceReports: List<AttendanceExcelReport>
+//    ): Result<File> {
+//        return try {
+//            // Buat workbook baru
+//            val workbook = HSSFWorkbook()
+////            val sheet = workbook.createSheet("Laporan Absensi")
+//            val sheet = workbook.createSheet("MySheet")
+//            sheet.setColumnWidth(0, 15 * 256)
+//
+//
+//            // Format tanggal
+//            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+//            val dateTimeFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+//
+//            // Header
+//            val headerRow = sheet.createRow(0)
+//            val headerStyle = workbook.createCellStyle().apply {
+//                fillForegroundColor = IndexedColors.LIGHT_BLUE.index
+//                fillPattern = FillPatternType.SOLID_FOREGROUND
+//                alignment = HorizontalAlignment.CENTER
+//            }
+//
+//            val headers = listOf(
+//                "Tanggal",
+//                "Jam Masuk",
+//                "Jam Keluar",
+//                "Jam Kerja",
+//                "Overtime",
+//                "Total Jam Kerja",
+//                "Deskripsi Pekerjaan",
+//                "Project ID"
+//            )
+//
+//            headers.forEachIndexed { index, header ->
+//                headerRow.createCell(index).apply {
+//                    setCellValue(header)
+//                    cellStyle.cloneStyleFrom(headerStyle)
+//                }
+//            }
+//
+//            // Isi data
+//            attendanceReports.forEachIndexed { index, report ->
+//                val row = sheet.createRow(index + 1)
+//                row.createCell(0).setCellValue(dateFormat.format(report.date!!.toDate()))
+//                row.createCell(1)
+//                    .setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) }
+//                        ?: "")
+//                row.createCell(2)
+//                    .setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) }
+//                        ?: "")
+//                row.createCell(3).setCellValue(report.workHours)
+//                row.createCell(4).setCellValue(report.overtimeHours)
+//                row.createCell(5).setCellValue(report.workDescription)
+//                row.createCell(6).setCellValue(report.projectId)
+//            }
+//
+//            // Auto size kolom
+//            headers.indices.forEach { sheet.autoSizeColumn(it) }
+//
+//            // Buat nama file
+//            val fileName =
+//                "Laporan_Absensi_${userName}_${dateFormat.format(startTimestamp.toDate())}_to_${
+//                    dateFormat.format(endTimestamp.toDate())
+//                }.xlsx"
+//
+//            // Simpan file
+//            val directory = File(
+//                context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
+//                "LaporanAbsensi"
+//            )
+//
+//            if (!directory.exists()) {
+//                directory.mkdirs()
+//            }
+//
+//            val file = File(directory, fileName)
+//
+//            file.outputStream().use { fileOut ->
+//                workbook.write(fileOut)
+//            }
+//
+//            workbook.close()
+//
+//            Result.success(file)
+//        } catch (e: Exception) {
+//            Result.failure(e)
+//        }
+//    }
 
 
 }
