@@ -15,10 +15,6 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
-import org.apache.poi.ss.usermodel.FillPatternType
-import org.apache.poi.ss.usermodel.HorizontalAlignment
-import org.apache.poi.ss.usermodel.IndexedColors
-import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -578,7 +574,6 @@ class Repository(
                 "Jam Keluar",
                 "Jam Kerja",
                 "Overtime",
-                "Total Jam Kerja",
                 "Deskripsi Pekerjaan",
                 "Project ID"
             )

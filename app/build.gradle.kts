@@ -90,7 +90,11 @@ dependencies {
     implementation(libs.poi.ooxml)
     implementation(libs.stax.api)
     implementation(libs.xmlbeans)
-    implementation(libs.aalto.xml)
+
+    implementation (libs.poi.v523)
+    implementation (libs.poi.ooxml.v523)
+    implementation ("org.apache.poi:poi:5.2.2")
+    implementation ("org.apache.poi:poi-ooxml:5.2.2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
