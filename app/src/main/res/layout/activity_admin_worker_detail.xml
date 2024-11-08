@@ -1,301 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        tools:context=".admin.ui.main.detail.worker.AdminWorkerDetailActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".admin.ui.main.detail.worker.AdminWorkerDetailActivity">
+        <LinearLayout
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toTopOf="@+id/guideline_top">
 
-            <LinearLayout
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:layout_width="40dp"
                 android:layout_height="44dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toTopOf="@+id/guideline_top">
-
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="44dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_arrow_left" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/back"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_left" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:fontFamily="@font/inter_medium"
-                android:text="@string/account"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_back"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                app:layout_constraintTop_toTopOf="@+id/guideline_top" />
+                android:text="@string/back"
+                android:textSize="18sp" />
+        </LinearLayout>
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:fillViewport="true"
-                app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@+id/btn_back">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <!--      User Profile      -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cv_user_profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/dark_primary_color"
-                        app:cardCornerRadius="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp">
+                <!--      User Profile      -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_user_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/dark_primary_color"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeWidth="0dp">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_user_image"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:layout_marginTop="20dp"
-                                android:src="@drawable/img_fakhrusyi"
-                                app:civ_border_color="@color/white"
-                                app:civ_border_width="1dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_user_image"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/img_fakhrusyi"
+                            app:civ_border_color="@color/white"
+                            app:civ_border_width="1dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                            <TextView
-                                android:id="@+id/tv_user_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:ellipsize="end"
-                                android:maxLines="1"
-                                android:text="Yoki Jati Perkasa"
-                                android:textColor="@color/white"
-                                android:textSize="14sp"
-                                app:layout_constraintEnd_toEndOf="@+id/iv_user_image"
-                                app:layout_constraintStart_toStartOf="@+id/iv_user_image"
-                                app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="20dp"
-                                android:orientation="horizontal"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
-                                app:layout_constraintStart_toStartOf="@+id/tv_user_name"
-                                app:layout_constraintTop_toBottomOf="@+id/tv_user_name">
-
-                                <TextView
-                                    android:id="@+id/tv_user_email"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:ellipsize="end"
-                                    android:fontFamily="@font/inter_regular"
-                                    android:maxLines="1"
-                                    android:text="yokijati@gmail.com"
-                                    android:textColor="@color/gray_light"
-                                    android:textSize="14sp" />
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="4dp"
-                                    android:background="@color/grey" />
-
-                                <TextView
-                                    android:id="@+id/tv_user_role"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:ellipsize="end"
-                                    android:fontFamily="@font/inter_medium"
-                                    android:maxLines="1"
-                                    android:text="Worker"
-                                    android:textColor="@color/gray_light"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:id="@+id/tv_monthly_report"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Monthly Report"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cv_user_profile" />
-
-                    <!-- Feature Worker Account -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/materialCardView4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:backgroundTint="@color/gray_light"
-                        app:cardCornerRadius="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_monthly_report"
-                        app:strokeWidth="0dp">
+                        <TextView
+                            android:id="@+id/tv_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Yoki Jati Perkasa"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_user_image"
+                            app:layout_constraintStart_toStartOf="@+id/iv_user_image"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
                             android:orientation="horizontal"
-                            android:padding="10dp">
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
+                            app:layout_constraintStart_toStartOf="@+id/tv_user_name"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_user_name">
 
-                            <!-- Attendance -->
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/tv_user_email"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="yokijati@gmail.com"
+                                android:textColor="@color/gray_light"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="1dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:layout_margin="4dp"
+                                android:background="@color/grey" />
 
-                                <TextView
-                                    android:id="@+id/tv_title_attendance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginBottom="8dp"
-                                    android:ellipsize="end"
-                                    android:fontFamily="@font/inter_regular"
-                                    android:maxLines="1"
-                                    android:text="Attendance"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_attendance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="4dp"
-                                    android:fontFamily="@font/inter_medium"
-                                    android:text="30"
-                                    android:textSize="18sp" />
-
-                            </LinearLayout>
-
-                            <!-- Overtime -->
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/tv_user_role"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_title_overtime"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginBottom="8dp"
-                                    android:ellipsize="end"
-                                    android:fontFamily="@font/inter_regular"
-                                    android:maxLines="1"
-                                    android:text="Overtime"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_overtime"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="4dp"
-                                    android:fontFamily="@font/inter_medium"
-                                    android:text="19"
-                                    android:textSize="18sp" />
-
-                            </LinearLayout>
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/inter_medium"
+                                android:maxLines="1"
+                                android:text="Worker"
+                                android:textColor="@color/gray_light"
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_worker_detail_menu"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
-                        tools:listitem="@layout/list_item_settings" />
+                <TextView
+                    android:id="@+id/tv_monthly_report"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Monthly Report"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cv_user_profile" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Feature Worker Account -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/gray_light"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_monthly_report"
+                    app:strokeWidth="0dp">
 
-            </androidx.core.widget.NestedScrollView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="10dp" />
+                        <!-- Attendance -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="10dp" />
+                            <TextView
+                                android:id="@+id/tv_title_attendance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="8dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="Attendance"
+                                android:textSize="16sp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="10dp" />
+                            <TextView
+                                android:id="@+id/tv_attendance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="30"
+                                android:textSize="18sp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_bottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_end="10dp" />
+                        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                        <!-- Overtime -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                            <TextView
+                                android:id="@+id/tv_title_overtime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="8dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/inter_regular"
+                                android:maxLines="1"
+                                android:text="Overtime"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_overtime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="19"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_worker_detail_menu"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
+                    tools:listitem="@layout/list_item_settings" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="10dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 

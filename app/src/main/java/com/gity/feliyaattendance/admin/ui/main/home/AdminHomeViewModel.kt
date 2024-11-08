@@ -20,51 +20,58 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
     private val _attendancePending = MutableLiveData<Result<Int>>()
     val attendancePending: LiveData<Result<Int>> = _attendancePending
 
-    private var nameCache: String? = null
-
     init {
-        fetchAttendancePending()
-        fetchWorkersCount()
-        fetchProjectCount()
+        refreshAllData()
+    }
+
+    fun refreshAllData() {
+        fetchName()
+        refreshWorkersCount()
+        refreshProjectCount()
+        refreshAttendancePending()
     }
 
     //    Menggunakan sistem cache untuk menyimpan data
     fun fetchName() {
-        if (nameCache != null) {
-            _nameResult.value = Result.success(nameCache!!)
-        } else {
-            viewModelScope.launch {
-                val result = repository.fetchName()
-                if (result.isSuccess) {
-                    nameCache = result.getOrNull()
-                    _nameResult.value = result
-                }
-                _nameResult.value = result
+        viewModelScope.launch {
+            try {
+                val name = repository.fetchName()
+                _nameResult.postValue(name)
+            } catch (e: Exception) {
+                _nameResult.postValue(e.message?.let { Result.failure(Exception(it)) })
             }
         }
     }
 
-//    Mengambil jumlah pending attendance
-    private fun fetchAttendancePending() {
+    fun refreshWorkersCount() {
         viewModelScope.launch {
-            val result = repository.getAttendancePending()
-            _attendancePending.postValue(result)
+            try {
+                val count = repository.getWorkersCount()
+                _workersCount.postValue(count)
+            } catch (e: Exception) {
+                _workersCount.value = Result.failure(e)
+            }
         }
     }
 
-    // Mengambil jumlah pekerja
-    private fun fetchWorkersCount() {
+    fun refreshProjectCount() {
         viewModelScope.launch {
-            val result = repository.getWorkersCount()
-            _workersCount.postValue(result)
+            try {
+                val count = repository.getProjectCount()
+                _projectCount.postValue(count)
+            } catch (e: Exception) {
+                _projectCount.value = Result.failure(e)
+            }
         }
     }
 
-    private fun fetchProjectCount() {
+    fun refreshAttendancePending() {
         viewModelScope.launch {
-            viewModelScope.launch {
-                val result = repository.getProjectCount()
-                _projectCount.postValue(result)
+            try {
+                val count = repository.getAttendancePending()
+                _attendancePending.postValue(count)
+            } catch (e: Exception) {
+                _attendancePending.value = Result.failure(e)
             }
         }
     }

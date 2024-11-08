@@ -23,6 +23,9 @@ class AdminWorkerDetailViewModel(private val repository: Repository) : ViewModel
     private val _excelGenerationResult = MutableLiveData<Result<File>>()
     val excelGenerationResult: LiveData<Result<File>> = _excelGenerationResult
 
+    private val _deleteAccountStatus = MutableLiveData<Result<Unit>>()
+    val deleteAccountStatus: LiveData<Result<Unit>> get() = _deleteAccountStatus
+
     // Fungsi untuk mengambil detail pekerja berdasarkan workerId
     fun fetchWorkerDetail(workerId: String) {
         viewModelScope.launch {
@@ -65,6 +68,13 @@ class AdminWorkerDetailViewModel(private val repository: Repository) : ViewModel
                 _excelGenerationResult.postValue(Result.failure(error))
                 Log.e("AdminWorkerDetailViewModel", "Error generating Excel file: $error")
             }
+        }
+    }
+
+    fun deleteWorkerAccount(workerId: String) {
+        viewModelScope.launch {
+            val result = repository.deleteWorker(workerId)
+            _deleteAccountStatus.postValue(result)
         }
     }
 

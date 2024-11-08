@@ -1,324 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".admin.ui.main.home.AdminHomeFragment">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         tools:context=".admin.ui.main.home.AdminHomeFragment">
 
-        <!--  Logo & Notification  -->
-        <LinearLayout
-            android:id="@+id/container_logo_and_notification"
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toTopOf="@+id/guideline_top">
-
-            <!-- Logo -->
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="28dp"
-                android:src="@drawable/logo_no_background" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="28dp"
-                android:layout_weight="1" />
-
-            <!-- Logo -->
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btn_notification"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:padding="0dp"
-                android:src="@drawable/ic_bell"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-        </LinearLayout>
-
-        <!--  Greetings & Day  -->
-        <LinearLayout
-            android:id="@+id/container_greeting_and_day"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification">
+            tools:context=".admin.ui.main.home.AdminHomeFragment">
 
-            <!--    Greetings    -->
+            <!--  Logo & Notification  -->
             <LinearLayout
+                android:id="@+id/container_logo_and_notification"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="24dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="28dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toTopOf="@+id/guideline_top">
 
-                <TextView
-                    android:id="@+id/tv_greetings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_regular"
-                    android:maxLines="1"
-                    android:textSize="14sp"
-                    tools:text="@string/greetings_good_morning" />
+                <!-- Logo -->
+                <ImageView
+                    android:layout_width="92dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/logo_no_background" />
 
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/inter_medium"
-                    android:maxLines="1"
-                    android:textColor="@color/dark_primary_color"
-                    android:textSize="18sp"
-                    tools:text="Yoki Jati Perkasa" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="28dp"
+                    android:layout_weight="1" />
 
+                <!-- Logo -->
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_notification"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:padding="0dp"
+                    android:src="@drawable/ic_bell"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             </LinearLayout>
 
-            <!--    Day    -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
+            <!--  Greetings & Day  -->
+            <LinearLayout
+                android:id="@+id/container_greeting_and_day"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/dark_primary_color"
-                app:cardCornerRadius="8dp"
-                app:strokeWidth="0dp">
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification">
 
+                <!--    Greetings    -->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:layout_marginEnd="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_top_date"
+                        android:id="@+id/tv_greetings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="20" />
+                        android:fontFamily="@font/inter_regular"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        tools:text="@string/greetings_good_morning" />
 
                     <TextView
-                        android:id="@+id/tv_top_day"
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
                         android:fontFamily="@font/inter_medium"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        tools:text="Monday" />
+                        android:maxLines="1"
+                        android:textColor="@color/dark_primary_color"
+                        android:textSize="18sp"
+                        tools:text="Yoki Jati Perkasa" />
+
 
                 </LinearLayout>
+
+                <!--    Day    -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/dark_primary_color"
+                    app:cardCornerRadius="8dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_top_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:text="20" />
+
+                        <TextView
+                            android:id="@+id/tv_top_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            tools:text="Monday" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/dark_primary_color"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/container_greeting_and_day"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Title Dashboard -->
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_semi_bold"
+                        android:text="@string/dashboard"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Pending -->
+                    <LinearLayout
+                        android:id="@+id/linear_layout_pending"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/linear_layout_project"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+                        <TextView
+                            android:id="@+id/tv_pending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:maxLines="1"
+                            android:text="-"
+                            android:textColor="@color/gray_light"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_pending_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_regular"
+                            android:maxLines="1"
+                            android:text="@string/status_pending"
+                            android:textColor="@color/gray_light"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- Project -->
+                    <LinearLayout
+                        android:id="@+id/linear_layout_project"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/linear_layout_worker"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/linear_layout_pending"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+                        <TextView
+                            android:id="@+id/tv_project"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:maxLines="1"
+                            android:text="-"
+                            android:textColor="@color/gray_light"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_project_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_regular"
+                            android:maxLines="1"
+                            android:text="@string/projects"
+                            android:textColor="@color/gray_light"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- Worker -->
+                    <LinearLayout
+                        android:id="@+id/linear_layout_worker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/linear_layout_project"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+                        <TextView
+                            android:id="@+id/tv_worker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:maxLines="1"
+                            android:text="-"
+                            android:textColor="@color/gray_light"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_worker_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_regular"
+                            android:maxLines="1"
+                            android:text="@string/workers"
+                            android:textColor="@color/gray_light"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_menu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:clipChildren="true"
+                android:clipToPadding="false"
+                android:paddingHorizontal="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
+                tools:itemCount="1"
+                tools:listitem="@layout/list_item_admin_menu" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/dark_primary_color"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/container_greeting_and_day"
-            app:strokeWidth="0dp">
+            <!--  Guideline  -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="12dp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="12dp" />
 
-                <!-- Title Dashboard -->
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/inter_semi_bold"
-                    android:text="@string/dashboard"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="12dp" />
 
-                <!-- Pending -->
-                <LinearLayout
-                    android:id="@+id/linear_layout_pending"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/linear_layout_project"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="12dp" />
 
-                    <TextView
-                        android:id="@+id/tv_pending"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:maxLines="1"
-                        android:textColor="@color/gray_light"
-                        android:textSize="16sp"
-                        android:text="-" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/tv_pending_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        android:textColor="@color/gray_light"
-                        android:textSize="12sp"
-                        android:text="@string/status_pending" />
+    </androidx.core.widget.NestedScrollView>
 
-                </LinearLayout>
-
-                <!-- Project -->
-                <LinearLayout
-                    android:id="@+id/linear_layout_project"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/linear_layout_worker"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/linear_layout_pending"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-                    <TextView
-                        android:id="@+id/tv_project"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:maxLines="1"
-                        android:textColor="@color/gray_light"
-                        android:textSize="16sp"
-                        android:text="-" />
-
-                    <TextView
-                        android:id="@+id/tv_project_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        android:textColor="@color/gray_light"
-                        android:textSize="12sp"
-                        android:text="@string/projects" />
-
-                </LinearLayout>
-
-                <!-- Worker -->
-                <LinearLayout
-                    android:id="@+id/linear_layout_worker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/linear_layout_project"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-                    <TextView
-                        android:id="@+id/tv_worker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:maxLines="1"
-                        android:textColor="@color/gray_light"
-                        android:textSize="16sp"
-                        android:text="-" />
-
-                    <TextView
-                        android:id="@+id/tv_worker_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_regular"
-                        android:maxLines="1"
-                        android:textColor="@color/gray_light"
-                        android:textSize="12sp"
-                        android:text="@string/workers" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_menu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:clipChildren="true"
-            android:clipToPadding="false"
-            android:paddingHorizontal="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
-            tools:itemCount="1"
-            tools:listitem="@layout/list_item_admin_menu" />
-
-        <!--  Guideline  -->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="12dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="12dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="12dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_end="12dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

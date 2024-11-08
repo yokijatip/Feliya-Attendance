@@ -201,8 +201,8 @@ class Repository(
     suspend fun getWorkersCount(): Result<Int> {
         return try {
             val snapshot = firebaseFirestore.collection("users").whereEqualTo(
-                    "role", "worker"
-                ) // Asumsi bahwa role pekerja disimpan sebagai "worker"
+                "role", "worker"
+            ) // Asumsi bahwa role pekerja disimpan sebagai "worker"
                 .get().await()
 
             // Mengembalikan jumlah pekerja
@@ -227,9 +227,9 @@ class Repository(
     suspend fun getAllProject(orderBy: String = "desc"): Result<List<Project>> {
         return try {
             val snapshot = firebaseFirestore.collection("projects").orderBy(
-                    "startDate",
-                    if (orderBy == "desc") Query.Direction.DESCENDING else Query.Direction.ASCENDING
-                ).get().await()
+                "startDate",
+                if (orderBy == "desc") Query.Direction.DESCENDING else Query.Direction.ASCENDING
+            ).get().await()
 
             val projects = snapshot.documents.mapNotNull { documentSnapshot ->
                 documentSnapshot.toObject(Project::class.java)?.apply {
@@ -506,7 +506,7 @@ class Repository(
         }
     }
 
-
+    //    Generate Excel File
     fun generateExcelFile(
         context: Context,
         userId: String,
@@ -599,100 +599,15 @@ class Repository(
         }
     }
 
-//    fun generateExcelFile(
-//        context: Context,
-//        userId: String,
-//        userName: String,
-//        startTimestamp: Timestamp,
-//        endTimestamp: Timestamp,
-//        attendanceReports: List<AttendanceExcelReport>
-//    ): Result<File> {
-//        return try {
-//            // Buat workbook baru
-//            val workbook = HSSFWorkbook()
-////            val sheet = workbook.createSheet("Laporan Absensi")
-//            val sheet = workbook.createSheet("MySheet")
-//            sheet.setColumnWidth(0, 15 * 256)
-//
-//
-//            // Format tanggal
-//            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-//            val dateTimeFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
-//
-//            // Header
-//            val headerRow = sheet.createRow(0)
-//            val headerStyle = workbook.createCellStyle().apply {
-//                fillForegroundColor = IndexedColors.LIGHT_BLUE.index
-//                fillPattern = FillPatternType.SOLID_FOREGROUND
-//                alignment = HorizontalAlignment.CENTER
-//            }
-//
-//            val headers = listOf(
-//                "Tanggal",
-//                "Jam Masuk",
-//                "Jam Keluar",
-//                "Jam Kerja",
-//                "Overtime",
-//                "Total Jam Kerja",
-//                "Deskripsi Pekerjaan",
-//                "Project ID"
-//            )
-//
-//            headers.forEachIndexed { index, header ->
-//                headerRow.createCell(index).apply {
-//                    setCellValue(header)
-//                    cellStyle.cloneStyleFrom(headerStyle)
-//                }
-//            }
-//
-//            // Isi data
-//            attendanceReports.forEachIndexed { index, report ->
-//                val row = sheet.createRow(index + 1)
-//                row.createCell(0).setCellValue(dateFormat.format(report.date!!.toDate()))
-//                row.createCell(1)
-//                    .setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) }
-//                        ?: "")
-//                row.createCell(2)
-//                    .setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) }
-//                        ?: "")
-//                row.createCell(3).setCellValue(report.workHours)
-//                row.createCell(4).setCellValue(report.overtimeHours)
-//                row.createCell(5).setCellValue(report.workDescription)
-//                row.createCell(6).setCellValue(report.projectId)
-//            }
-//
-//            // Auto size kolom
-//            headers.indices.forEach { sheet.autoSizeColumn(it) }
-//
-//            // Buat nama file
-//            val fileName =
-//                "Laporan_Absensi_${userName}_${dateFormat.format(startTimestamp.toDate())}_to_${
-//                    dateFormat.format(endTimestamp.toDate())
-//                }.xlsx"
-//
-//            // Simpan file
-//            val directory = File(
-//                context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
-//                "LaporanAbsensi"
-//            )
-//
-//            if (!directory.exists()) {
-//                directory.mkdirs()
-//            }
-//
-//            val file = File(directory, fileName)
-//
-//            file.outputStream().use { fileOut ->
-//                workbook.write(fileOut)
-//            }
-//
-//            workbook.close()
-//
-//            Result.success(file)
-//        } catch (e: Exception) {
-//            Result.failure(e)
-//        }
-//    }
+//    Delete Worker Account
+    suspend fun deleteWorker(workerId: String): Result<Unit> {
+        return try {
+            firebaseFirestore.collection("users").document(workerId).delete().await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
 
 }

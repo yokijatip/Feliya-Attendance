@@ -20,6 +20,7 @@ import com.gity.feliyaattendance.admin.data.model.MonthlyDashboard
 import com.gity.feliyaattendance.admin.data.model.Worker
 import com.gity.feliyaattendance.data.model.DetailWorkerMenu
 import com.gity.feliyaattendance.databinding.ActivityAdminWorkerDetailBinding
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -68,24 +69,24 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         observerDetailViewModel()
         workerDetailMenuSetup()
 
-        if (workerId != null) {
-            viewModel.fetchWorkerDetail(workerId)
-            viewModel.fetchMonthlyDashboard(workerId)
-        } else {
-            Toast.makeText(this@AdminWorkerDetailActivity, "Invalid Worker ID", Toast.LENGTH_SHORT)
-                .show()
-            finish()
-        }
+        viewModel.fetchWorkerDetail(workerId)
+        viewModel.fetchMonthlyDashboard(workerId)
 
         observeExcelGeneration()
 
+        binding.apply {
+        }
 
     }
 
     private fun workerDetailMenuSetup() {
         val workerDetailMenuList = listOf(
             DetailWorkerMenu(getString(R.string.admin_menu_generate_excel), R.drawable.ic_table),
-            DetailWorkerMenu(getString(R.string.admin_menu_generate_pdf), R.drawable.ic_file_text)
+            DetailWorkerMenu(getString(R.string.admin_menu_generate_pdf), R.drawable.ic_file_text),
+            DetailWorkerMenu(
+                getString(R.string.admin_menu_delete_account),
+                R.drawable.ic_trash_solid
+            )
         )
 
         val detailWorkerMenuAdapter = WorkerDetailAdapter(workerDetailMenuList) { menu ->
@@ -100,6 +101,19 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                         "Generated PDF",
                         Toast.LENGTH_SHORT
                     ).show()
+                }
+
+                getString(R.string.admin_menu_delete_account) -> {
+                    CommonHelper.showConfirmationDialog(
+                        this@AdminWorkerDetailActivity,
+                        title = getString(R.string.admin_menu_delete_account_title_confirmation),
+                        description = getString(R.string.admin_menu_delete_account_description_confirmation),
+                        positiveButtonText = "Yes",
+                        negativeButtonText = "No",
+                        onPositiveClick = {
+                            viewModel.deleteWorkerAccount(workerId)
+                            finish()
+                        })
                 }
             }
         }

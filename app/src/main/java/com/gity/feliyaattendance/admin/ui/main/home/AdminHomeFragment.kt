@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.MenuAdminAdapter
 import com.gity.feliyaattendance.admin.data.model.AdminMenu
@@ -31,11 +30,8 @@ class AdminHomeFragment : Fragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseFirestore: FirebaseFirestore
-
     private lateinit var repository: Repository
     private lateinit var viewModel: AdminHomeViewModel
-
-    private lateinit var recyclerView: RecyclerView
     private lateinit var adminMenuAdapter: MenuAdminAdapter
 
 
@@ -46,18 +42,43 @@ class AdminHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAdminHomeBinding.inflate(inflater, container, false)
 
+        initializeFirebase()
+        setupViewModel()
+        setupUI()
+        setupObservers()
+
+        return binding.root
+    }
+
+    private fun initializeFirebase() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
-
         repository = Repository(firebaseAuth, firebaseFirestore)
+    }
+
+    private fun setupViewModel() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AdminHomeViewModel::class.java]
+    }
 
-        recyclerView = binding.rvMenu
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        dashboard()
+    private fun setupUI() {
+        setupRecyclerView()
+        setupTopBar()
+        setupSwipeRefresh()
+        setupClickListeners()
+    }
 
+    private fun setupRecyclerView() {
+        binding.rvMenu.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            addItemDecoration(HorizontalSpaceItemDecoration(24))
+            adapter = createMenuAdapter()
+        }
+    }
+
+
+    private fun createMenuAdapter(): MenuAdminAdapter {
         val adminMenuList = listOf(
             AdminMenu(name = getString(R.string.admin_menu_see_worker_list), R.drawable.ic_users),
             AdminMenu(name = getString(R.string.admin_menu_add_worker), R.drawable.ic_user_plus),
@@ -66,58 +87,28 @@ class AdminHomeFragment : Fragment() {
                 name = getString(R.string.admin_menu_attendance_approval),
                 R.drawable.ic_check_square_custom_admin
             ),
-            AdminMenu(
-                name = getString(R.string.admin_menu_generate_excel),
-                R.drawable.ic_table
-            ),
-            AdminMenu(
-                name = getString(R.string.admin_menu_generate_pdf),
-                R.drawable.ic_file_text
-            )
-
-
+            AdminMenu(name = getString(R.string.admin_menu_generate_excel), R.drawable.ic_table),
+            AdminMenu(name = getString(R.string.admin_menu_generate_pdf), R.drawable.ic_file_text)
         )
 
-        adminMenuAdapter = MenuAdminAdapter(adminMenuList) { menu ->
-            when (menu.name) {
-                getString(R.string.admin_menu_see_worker_list) -> navigateToWorkerList()
+        return MenuAdminAdapter(adminMenuList) { menu ->
+            handleMenuClick(menu)
+        }.also { adminMenuAdapter = it }
+    }
 
-                getString(R.string.admin_menu_add_worker) -> Toast.makeText(
-                    requireContext(),
-                    "Add Worker",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                getString(R.string.admin_menu_add_project) -> navigateToAddProject()
-
-                getString(R.string.admin_menu_attendance_approval) -> Toast.makeText(
-                    requireContext(),
-                    "Attendance Approval",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                getString(R.string.admin_menu_generate_excel) -> Toast.makeText(
-                    requireContext(),
-                    "Generate Report Excel",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                getString(R.string.admin_menu_generate_pdf) -> Toast.makeText(
-                    requireContext(),
-                    "Generate PDF",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+    private fun handleMenuClick(menu: AdminMenu) {
+        when (menu.name) {
+            getString(R.string.admin_menu_see_worker_list) -> navigateToWorkerList()
+            getString(R.string.admin_menu_add_worker) -> showToast("Add Worker")
+            getString(R.string.admin_menu_add_project) -> navigateToAddProject()
+            getString(R.string.admin_menu_attendance_approval) -> showToast("Attendance Approval")
+            getString(R.string.admin_menu_generate_excel) -> showToast("Generate Report Excel")
+            getString(R.string.admin_menu_generate_pdf) -> showToast("Generate PDF")
         }
+    }
 
-        recyclerView.addItemDecoration(HorizontalSpaceItemDecoration(24))
-        recyclerView.adapter = adminMenuAdapter
-
+    private fun setupTopBar() {
         binding.apply {
-            btnNotification.setOnClickListener {
-                Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            }
-
             tvTopDay.text = CommonHelper.getCurrentDayOnly()
             tvTopDate.text = CommonHelper.getCurrentDateOnly()
             tvGreetings.text = CommonHelper.getGreetingsMessage(
@@ -126,59 +117,93 @@ class AdminHomeFragment : Fragment() {
                 getString(R.string.greetings_good_evening)
             )
         }
+    }
 
-        viewModel.fetchName()
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.apply {
+            setOnRefreshListener {
+                refreshData()
+            }
+        }
+    }
+
+    private fun setupClickListeners() {
+        binding.btnNotification.setOnClickListener {
+            showToast("Notifications Clicked")
+        }
+    }
+
+    private fun setupObservers() {
+        viewLifecycleOwner.apply {
+            observeNameResult()
+            observeDashboardData()
+        }
+    }
+
+    private fun observeNameResult() {
         viewModel.nameResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { name ->
                 binding.tvName.text = name
-            }
-            result.onFailure { exception ->
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to load name: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+            }.onFailure { exception ->
+                showToast("Failed to load name: ${exception.message}")
             }
         }
-        return binding.root
     }
 
-    private fun dashboard() {
+    private fun observeDashboardData() {
         binding.apply {
             viewModel.workersCount.observe(viewLifecycleOwner) { result ->
-                result.onSuccess { count ->
+                handleResult(result) { count ->
                     tvWorker.text = count.toString()
-                }.onFailure { exception ->
-                    Log.e("HomeFragment", "Error Message = $exception")
                 }
             }
 
             viewModel.projectCount.observe(viewLifecycleOwner) { result ->
-                result.onSuccess { count ->
+                handleResult(result) { count ->
                     tvProject.text = count.toString()
-                }.onFailure { exception ->
-                    Log.e("HomeFragment", "Error Message = $exception")
                 }
             }
 
             viewModel.attendancePending.observe(viewLifecycleOwner) { result ->
-                result.onSuccess { count ->
+                handleResult(result) { count ->
                     tvPending.text = count.toString()
-                }.onFailure { exception ->
-                    Log.e("HomeFragment", "Error Message = $exception")
+                    // Hide refresh indicator after all data is loaded
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
             }
         }
     }
 
+    private fun <T> handleResult(result: Result<T>, onSuccess: (T) -> Unit) {
+        result.onSuccess(onSuccess).onFailure { exception ->
+            Log.e("HomeFragment", "Error Message = $exception")
+        }
+    }
+
+
     private fun navigateToWorkerList() {
-        val intent = Intent(requireActivity(), AdminListWorkerActivity::class.java)
-        startActivity(intent)
+        Intent(requireActivity(), AdminListWorkerActivity::class.java).also {
+            startActivity(it)
+        }
     }
 
     private fun navigateToAddProject() {
-        val intent = Intent(requireActivity(), AdminAddProjectActivity::class.java)
-        startActivity(intent)
+        Intent(requireActivity(), AdminAddProjectActivity::class.java).also {
+            startActivity(it)
+        }
+    }
+
+    private fun refreshData() {
+        viewModel.apply {
+            fetchName()
+            refreshWorkersCount()
+            refreshProjectCount()
+            refreshAttendancePending()
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
