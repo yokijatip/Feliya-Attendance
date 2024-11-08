@@ -2,13 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!--  Primary  -->
-    <color name="primary_color">#014C8D</color>
-    <color name="dark_primary_color">#003462</color>
 
-    <!--  Secondary  -->
-    <color name="accent_color">#FD6C23</color>
-    <color name="dark_accent_color">#D8510D</color>
+
 
     <!--  Color Resource  -->
     <color name="color_stroke_primary">#A8BAC9</color>
@@ -23,5 +18,23 @@
     <color name="status_rejected_background">#FFEBE1</color>
     <color name="status_pending">#808080</color>
     <color name="status_pending_background">#E7E7E7</color>
+
+    <color name="dark_primary_color">#312587</color>
+
+    <!--  Claude Color  -->
+    <color name="primary_color">#3e2aa7</color>
+    <color name="secondary_color">#7265E3</color>
+    <color name="accent_color">#4AC29A</color>
+    <color name="background_color">#EBF4F3</color>
+    <color name="surface_color">#F2F3F7</color>
+    <color name="on_primary_color">#FFFFFF</color>
+    <color name="on_secondary_color">#FFFFFF</color>
+    <color name="on_accent_color">#FFFFFF</color>
+    <color name="on_background_color">#18183C</color>
+    <color name="on_surface_color">#18183C</color>
+
+    <!-- Error Colors -->
+    <color name="error_color">#B00020</color>
+    <color name="on_error_color">@color/white</color>
 
 </resources>
