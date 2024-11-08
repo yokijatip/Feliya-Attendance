@@ -3,7 +3,7 @@ package com.gity.feliyaattendance.admin.ui.main.home.workers
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -64,6 +64,7 @@ class AdminListWorkerActivity : AppCompatActivity() {
 
         viewModel.getWorkerList()
         swipeRefreshLayout(adapter)
+        handleBackButton()
 
     }
 
@@ -74,11 +75,23 @@ class AdminListWorkerActivity : AppCompatActivity() {
                 viewModel.workerlist.observe(this@AdminListWorkerActivity) { result ->
                     result.onSuccess {
                         adapter.submitList(it)
+                        swipeRefreshLayout.isRefreshing = false
                     }.onFailure {
                         Log.e("WORKERS_DATA", "Error fetching Worker", it)
+                        swipeRefreshLayout.isRefreshing = false
                     }
                 }
             }
+        }
+    }
+
+    private fun handleBackButton() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        onBackPressedDispatcher.addCallback {
+            finish()
         }
     }
 

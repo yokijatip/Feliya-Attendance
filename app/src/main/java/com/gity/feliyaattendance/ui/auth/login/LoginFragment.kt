@@ -70,16 +70,19 @@ class LoginFragment : Fragment() {
                     }
                 }
 
+                progressBar.visibility = View.VISIBLE
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
                 if (inputChecker(email, password)) {
                     viewModel.login(email, password)
+                    progressBar.visibility = View.GONE
                 } else {
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.login_failed),
                         Toast.LENGTH_SHORT
                     ).show()
+                    progressBar.visibility = View.GONE
                 }
             }
         }
