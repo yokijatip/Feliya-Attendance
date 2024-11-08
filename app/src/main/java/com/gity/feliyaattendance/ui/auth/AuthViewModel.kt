@@ -19,10 +19,16 @@ class AuthViewModel(private val repository: Repository) : ViewModel() {
     private val _roles = MutableLiveData<Result<List<String>>>()
     val roles: LiveData<Result<List<String>>> = _roles
 
+    //    Loading State
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     //    Login Function
     fun login(email: String, password: String) {
         viewModelScope.launch {
+            _isLoading.value = true
             val result = repository.loginUser(email, password)
+            _isLoading.value = false
             _loginResult.postValue(result)
         }
     }
@@ -30,7 +36,9 @@ class AuthViewModel(private val repository: Repository) : ViewModel() {
     // Register function
     fun register(email: String, password: String, name: String, role: String) {
         viewModelScope.launch {
+            _isLoading.value = true
             val result = repository.registerUser(email, password, name, role)
+            _isLoading.value = false
             _registrationResult.postValue(result)
         }
     }
@@ -38,7 +46,9 @@ class AuthViewModel(private val repository: Repository) : ViewModel() {
     //  Get Roles
     fun getRoles() {
         viewModelScope.launch {
+            _isLoading.value = true
             _roles.value = repository.fetchRoles()
+            _isLoading.value = false
         }
     }
 }

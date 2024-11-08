@@ -72,7 +72,10 @@ class RegisterFragment : Fragment() {
                 navigateToLogin()
             }
 
+
+
             btnRegister.setOnClickListener {
+                showLoading(true)
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
                 val name = edtName.text.toString()
@@ -80,11 +83,7 @@ class RegisterFragment : Fragment() {
                 if (inputChecker(email, password, name, role)) {
                     viewModel.register(email, password, name, role)
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.register_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showLoading(false)
                 }
             }
 
@@ -93,6 +92,7 @@ class RegisterFragment : Fragment() {
         // Observe registration result
         viewModel.registrationResult.observe(viewLifecycleOwner) { result ->
             result.fold(onSuccess = {
+                showLoading(false)
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.register_success),
@@ -100,6 +100,7 @@ class RegisterFragment : Fragment() {
                 ).show()
                 (activity as? AuthActivity)?.replaceFragment(LoginFragment())
             }, onFailure = { exception ->
+                showLoading(false)
                 Toast.makeText(
                     requireContext(),
                     "${getString(R.string.register_failed)}: ${exception.message}",
@@ -187,6 +188,11 @@ class RegisterFragment : Fragment() {
 
     private fun navigateToLogin() {
         (activity as? AuthActivity)?.replaceFragment(LoginFragment())
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.btnRegister.isEnabled = !isLoading
     }
 
     override fun onDestroyView() {

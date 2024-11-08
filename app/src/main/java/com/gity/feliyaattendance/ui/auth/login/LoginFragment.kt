@@ -24,10 +24,8 @@ import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class LoginFragment : Fragment() {
 
-    // Gunakan var nullable untuk binding
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -41,7 +39,6 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
@@ -50,9 +47,8 @@ class LoginFragment : Fragment() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
-
         binding.apply {
-//            Navigate to Register
+            // Navigate to Register
             createNewAccount.setOnClickListener {
                 (activity as? AuthActivity)?.replaceFragment(RegisterFragment())
             }
@@ -62,38 +58,40 @@ class LoginFragment : Fragment() {
                 edtPassword.setText(CommonHelper.generateRandomPassword())
             }
 
+
             btnLogin.setOnClickListener {
-                //  Text Watcher untuk menghapus error saat user ngetik
+                // Text Watcher to clear error when user types
                 edtEmail.addTextChangedListener {
                     if (edtEmail.text.toString().isNotEmpty()) {
                         edtEmailLayout.error = null
                     }
                 }
 
-                progressBar.visibility = View.VISIBLE
+                // Show loading spinner and disable login button
+                showLoading(true)
+
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
                 if (inputChecker(email, password)) {
                     viewModel.login(email, password)
-                    progressBar.visibility = View.GONE
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.login_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    progressBar.visibility = View.GONE
+                    // Hide loading spinner and enable login button
+                    showLoading(false)
                 }
             }
         }
 
         viewModel.loginResult.observe(viewLifecycleOwner) { result ->
             result.fold(onSuccess = { role ->
+                // Hide loading spinner and enable login button
+                showLoading(false)
                 when (role) {
                     "worker" -> navigateToMain()
                     "admin" -> navigateToAdmin()
                 }
             }, onFailure = { e ->
+                // Hide loading spinner and enable login button
+                showLoading(false)
                 Toast.makeText(requireContext(), "Login Failed: ${e.message}", Toast.LENGTH_SHORT)
                     .show()
                 Log.e("AUTH", "Login Failed: ${e.message}")
@@ -105,7 +103,6 @@ class LoginFragment : Fragment() {
 
     private fun inputChecker(email: String, password: String): Boolean {
         binding.apply {
-
             if (email.isEmpty()) {
                 edtEmail.error = getString(R.string.email_is_empty)
                 edtEmailLayout.requestFocus()
@@ -139,7 +136,6 @@ class LoginFragment : Fragment() {
                 edtPassword.requestFocus()
                 return false
             }
-
         }
         return true
     }
@@ -156,9 +152,13 @@ class LoginFragment : Fragment() {
         requireActivity().finish()
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.btnLogin.isEnabled = !isLoading
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        // Set binding ke null untuk menghindari memory leak
         _binding = null
     }
 }
