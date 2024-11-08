@@ -143,16 +143,6 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
                 app:layout_constraintTop_toBottomOf="@+id/container_greeting_and_day">
 
-                <!--    Title    -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12sp"
-                    android:fontFamily="@font/inter_semi_bold"
-                    android:maxLines="1"
-                    android:text="@string/dashboard"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
 
                 <!--    Content Horizontal 1    -->
                 <LinearLayout
