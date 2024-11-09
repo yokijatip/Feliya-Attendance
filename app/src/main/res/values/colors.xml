@@ -8,8 +8,8 @@
     <!--  Color Resource  -->
     <color name="color_stroke_primary">#A8BAC9</color>
     <color name="color_background_icon_primary">#cfddea</color>
-    <color name="grey">#808080</color>
-    <color name="gray_light">#EEEEEE</color>"
+    <color name="gray">#808080</color>
+    <color name="gray_light">#B8B8B8</color>"
 
     <!--  Color Status  -->
     <color name="status_approved">#1BA424</color>
@@ -20,10 +20,11 @@
     <color name="status_pending_background">#E7E7E7</color>
 
     <color name="dark_primary_color">#312587</color>
+    <color name="background_icon">#79dcd2</color>
 
     <!--  Claude Color  -->
-    <color name="primary_color">#3e2aa7</color>
-    <color name="secondary_color">#7265E3</color>
+    <color name="primary_color">#362591</color>
+    <color name="secondary_color">#6052A5</color>
     <color name="accent_color">#4AC29A</color>
     <color name="background_color">#EBF4F3</color>
     <color name="surface_color">#F2F3F7</color>

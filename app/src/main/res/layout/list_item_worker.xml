@@ -60,7 +60,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
                     android:text="@string/name"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/gray"
                     android:textSize="12sp" />
 
                 <TextView

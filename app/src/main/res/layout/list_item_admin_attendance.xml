@@ -41,7 +41,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
                     android:text="@string/name"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/gray"
                     android:textSize="12sp" />
 
                 <TextView
@@ -96,7 +96,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:maxLines="1"
                 android:text="@string/date"
-                android:textColor="@color/grey"
+                android:textColor="@color/gray"
                 android:textSize="12sp" />
 
             <TextView
@@ -148,7 +148,7 @@
                         android:fontFamily="@font/inter_regular"
                         android:maxLines="1"
                         android:text="@string/in_and_out"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/gray"
                         android:textSize="12sp" />
 
                     <LinearLayout
@@ -220,7 +220,7 @@
                         android:fontFamily="@font/inter_regular"
                         android:maxLines="1"
                         android:text="@string/dashboard_total_hours_title"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/gray"
                         android:textSize="12sp" />
 
                     <LinearLayout

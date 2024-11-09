@@ -68,13 +68,10 @@ class HomeFragment : Fragment() {
         viewModel.fetchAttendanceList(userId)
 
         binding.apply {
-            btnNotification.setOnClickListener {
-                Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            }
 
             tvTopDay.text = CommonHelper.getCurrentDayOnly()
             tvTopDate.text = CommonHelper.getCurrentDateOnly()
-            tvGreetings.text = CommonHelper.getGreetingsMessage(
+            tvGreeting.text = CommonHelper.getGreetingsMessage(
                 getString(R.string.greetings_good_morning),
                 getString(R.string.greetings_good_afternoon),
                 getString(R.string.greetings_good_evening)
@@ -87,12 +84,20 @@ class HomeFragment : Fragment() {
             btnClockOut.setOnClickListener {
                 navigateToClockOut()
             }
+
+            btnLeaveApplication.setOnClickListener {
+                navigateToLeaveApplication()
+            }
+
+            btnReports.setOnClickListener {
+                navigateToReportActivity()
+            }
         }
 
         viewModel.fetchName()
         viewModel.nameResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { name ->
-                binding.tvName.text = name
+                binding.tvWorkerName.text = name
             }
             result.onFailure { exception ->
                 Toast.makeText(
@@ -114,6 +119,14 @@ class HomeFragment : Fragment() {
     private fun navigateToShowProject() {
         val intent = Intent(requireActivity(), ShowProjectActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun navigateToLeaveApplication() {
+        CommonHelper.showToast(requireContext(), "Under Development")
+    }
+
+    private fun navigateToReportActivity() {
+        CommonHelper.showToast(requireContext(), "Under Development")
     }
 
     private fun navigateToDetailAttendance(attendanceId: String) {

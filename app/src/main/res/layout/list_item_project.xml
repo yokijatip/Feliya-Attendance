@@ -42,7 +42,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
                     android:text="@string/project_name"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/gray"
                     android:textSize="12sp" />
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
                     android:text="@string/start_date"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/gray"
                     android:textSize="12sp" />
 
 
@@ -138,7 +138,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:maxLines="1"
                 android:text="@string/end_date"
-                android:textColor="@color/grey"
+                android:textColor="@color/gray"
                 android:textSize="12sp" />
 
             <TextView
@@ -188,7 +188,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
                     android:text="@string/location"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/gray"
                     android:textSize="12sp" />
 
                 <LinearLayout

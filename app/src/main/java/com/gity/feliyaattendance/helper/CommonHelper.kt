@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.annotation.StyleRes
-import androidx.recyclerview.widget.RecyclerView
 import com.gity.feliyaattendance.databinding.CustomDialogConfimationBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationFailedBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationSuccessBinding
@@ -205,6 +205,10 @@ object CommonHelper {
     // Extension function untuk membuat Timestamp dari Date
     fun Date.toTimestamp(): Timestamp {
         return Timestamp(this)
+    }
+
+    fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 

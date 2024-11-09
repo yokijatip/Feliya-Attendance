@@ -17,6 +17,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
         android:id="@+id/chipNavigationBar"
         android:layout_width="0dp"
         android:layout_height="74dp"
