@@ -6,12 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class AttendanceExcelReport(
-    val date: Timestamp?,
-    val clockInTime: Timestamp?,
-    val clockOutTime: Timestamp?,
-    val workHours: Double,
-    val overtimeHours: Double,
-    val totalHours: Double,
-    val workDescription: String,
-    val projectId: String
+    var date: Timestamp?,
+    var clockInTime: Timestamp?,
+    var clockOutTime: Timestamp?,
+    var workHours: String = "",
+    var overtimeHours: String = "",
+    var totalHours: String = "",
+    var workDescription: String = "",
+    var projectId: String = ""
 ) : Parcelable

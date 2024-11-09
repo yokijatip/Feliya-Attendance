@@ -18,6 +18,7 @@ import kotlinx.coroutines.tasks.await
 import org.apache.poi.ss.usermodel.FillPatternType
 import org.apache.poi.ss.usermodel.HorizontalAlignment
 import org.apache.poi.ss.usermodel.IndexedColors
+import org.apache.poi.ss.usermodel.VerticalAlignment
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
 import java.text.SimpleDateFormat
@@ -492,9 +493,9 @@ class Repository(
                     date = document.getTimestamp("date") ?: Timestamp.now(),
                     clockInTime = document.getTimestamp("clockInTime"),
                     clockOutTime = document.getTimestamp("clockOutTime"),
-                    workHours = document.getDouble("workHours") ?: 0.0,
-                    overtimeHours = document.getDouble("overtimeHours") ?: 0.0,
-                    totalHours = document.getDouble("totalHours") ?: 0.0,
+                    workHours = document.getString("workHoursFormatted") ?: "",
+                    overtimeHours = document.getString("overtimeHoursFormatted") ?: "",
+                    totalHours = document.getString("totalHoursFormatted") ?: "",
                     workDescription = document.getString("workDescription") ?: "",
                     projectId = document.getString("projectId") ?: ""
                 )
@@ -527,9 +528,16 @@ class Repository(
             // Header
             val headerRow = sheet.createRow(0)
             val headerStyle = workbook.createCellStyle().apply {
-                fillForegroundColor = IndexedColors.LIGHT_BLUE.index
+                fillForegroundColor = IndexedColors.LAVENDER.index
                 fillPattern = FillPatternType.SOLID_FOREGROUND
                 alignment = HorizontalAlignment.CENTER
+                verticalAlignment = VerticalAlignment.CENTER
+                wrapText = true
+                setFont(workbook.createFont().apply {
+                    bold = true
+                    color = IndexedColors.WHITE.index
+                })
+
             }
 
             val headers = listOf(
@@ -537,7 +545,7 @@ class Repository(
                 "Jam Masuk",
                 "Jam Keluar",
                 "Jam Kerja",
-                "Overtime",
+                "Jam Lembur",
                 "Total Jam Kerja",
                 "Deskripsi Pekerjaan",
                 "Project ID"
@@ -553,22 +561,31 @@ class Repository(
             // Isi data
             attendanceReports.forEachIndexed { index, report ->
                 val row = sheet.createRow(index + 1)
-                row.createCell(0).setCellValue(dateFormat.format(report.date!!.toDate()))
-                row.createCell(1)
-                    .setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) }
-                        ?: "")
-                row.createCell(2)
-                    .setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) }
-                        ?: "")
-                row.createCell(3).setCellValue(report.workHours)
-                row.createCell(4).setCellValue(report.overtimeHours)
-                row.createCell(5).setCellValue(report.totalHours)
-                row.createCell(6).setCellValue(report.workDescription)
-                row.createCell(7).setCellValue(report.projectId)
+//                row.createCell(0).setCellValue(dateFormat.format(report.date!!.toDate()))
+//                row.createCell(1)
+//                    .setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) }
+//                        ?: "")
+//                row.createCell(2)
+//                    .setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) }
+//                        ?: "")
+//                row.createCell(3).setCellValue(report.workHours)
+//                row.createCell(4).setCellValue(report.overtimeHours)
+//                row.createCell(5).setCellValue(report.totalHours)
+//                row.createCell(6).setCellValue(report.workDescription)
+//                row.createCell(7).setCellValue(report.projectId)
+
+                row.createCell(0).setCellValue(dateFormat.format(report.date?.toDate() ?: Date()))
+                row.createCell(1).setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) } ?: "")
+                row.createCell(2).setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) } ?: "")
+                row.createCell(3).setCellValue(report.workHours ?: "")
+                row.createCell(4).setCellValue(report.overtimeHours ?: "")
+                row.createCell(5).setCellValue(report.totalHours ?: "")
+                row.createCell(6).setCellValue(report.workDescription ?: "")
+                row.createCell(7).setCellValue(report.projectId ?: "")
             }
 
             // Auto size kolom
-            headers.indices.forEach { sheet.setColumnWidth(2, it) }
+            headers.indices.forEach { sheet.setColumnWidth(it, 6000) }
 
             // Buat nama file
             val fileName =

@@ -29,7 +29,7 @@ class AdminAttendanceStatusAdapter(
                 tvDate.text = CommonHelper.formatTimestamp(attendanceStatus.date)
                 tvClockIn.text = CommonHelper.formatTimeOnly(attendanceStatus.clockInTime)
                 tvClockOut.text = CommonHelper.formatTimeOnly(attendanceStatus.clockOutTime)
-                tvTotalHours.text = attendanceStatus.totalHours.toString()
+                tvTotalHours.text = attendanceStatus.totalHoursFormatted
                 tvStatus.text = attendanceStatus.status
                 // Set default name terlebih dahulu
                 tvWorkerName.text = "Loading..."

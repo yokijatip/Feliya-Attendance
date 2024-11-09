@@ -24,6 +24,7 @@ import androidx.lifecycle.lifecycleScope
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
+import com.gity.feliyaattendance.data.model.WorkTimeResult
 import com.gity.feliyaattendance.databinding.ActivityClockOutBinding
 import com.gity.feliyaattendance.helper.AttendanceManager
 import com.gity.feliyaattendance.helper.CloudinaryHelper
@@ -65,6 +66,7 @@ class ClockOutActivity : AppCompatActivity() {
         setupCameraAndGalleryLaunchers()
         setupValidationListener()
         displayProjectData()
+        handleBackButton()
 
         cloudinaryHelper = CloudinaryHelper(this@ClockOutActivity)
         val attendanceDataStore = AttendanceDataStoreManager(this)
@@ -140,11 +142,36 @@ class ClockOutActivity : AppCompatActivity() {
         )
     }
 
+    // Untuk testing dengan 2 menit sebagai batas regular working time
+    private fun calculateRegularAndOvertimeMinutes(totalMinutes: Int): Pair<Int, Int> {
+        //val regularTimeLimit = 2 // 2 menit untuk testing
+        //val regularTimeLimit = 480 // 8 jam
+        val regularTimeLimit = 60 // 1 Jam
+        return if (totalMinutes > regularTimeLimit) {
+            Pair(regularTimeLimit, totalMinutes - regularTimeLimit)
+        } else {
+            Pair(totalMinutes, 0)
+        }
+    }
+
+    private fun calculateWorkTime(clockIn: Timestamp, clockOut: Timestamp): WorkTimeResult {
+        val durationMillis = clockOut.toDate().time - clockIn.toDate().time
+        val totalMinutes = (durationMillis / (1000 * 60)).toInt() // Konversi ke menit
+
+        return WorkTimeResult(
+            hours = totalMinutes / 60,
+            minutes = totalMinutes % 60,
+            totalMinutes = totalMinutes
+        )
+    }
+
     private fun clockOut() {
         lifecycleScope.launch {
-            val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
-            val clockInTime = attendanceDataStore.clockIn.firstOrNull()
-            if (clockInTime != null) {
+            try {
+                val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
+                val clockInTime = attendanceDataStore.clockIn.firstOrNull()
+                    ?: throw Exception("Clock in time not found")
+
                 val clockOutTime = Timestamp.now()
                 val description = binding.edtDescriptionProject.text.toString()
                 val status = "pending"
@@ -152,42 +179,34 @@ class ClockOutActivity : AppCompatActivity() {
                 val imageUrl = photoUri?.let {
                     cloudinaryHelper.uploadImage(it, firebaseAuth.currentUser?.uid!!)
                 } ?: throw Exception("No Image Selected")
-                val totalWorkHours = calculateTotalWorkHours(clockInTime, clockOutTime)
-                val workHours = calculateRegularWorkHours(totalWorkHours)
-                val workHoursOvertime = calculateOvertime(totalWorkHours)
 
+                // Hitung waktu kerja
+                val workTime = calculateWorkTime(clockInTime, clockOutTime)
+                val (regularMinutes, overtimeMinutes) = calculateRegularAndOvertimeMinutes(workTime.totalMinutes)
+
+                // Update tampilan waktu (optional)
+                val workTimeText = "${workTime.hours} jam ${workTime.minutes} menit"
+                // Anda bisa menambahkan TextView untuk menampilkan waktu ini
 
                 attendanceManager.clockOut(
                     clockOut = clockOutTime,
                     imageUrlOut = imageUrl,
                     status = status,
-                    workHours = workHours,
-                    workHoursOvertime = workHoursOvertime,
-                    description = description,
-                    totalWorkHours = totalWorkHours
+                    workMinutes = regularMinutes,
+                    overtimeMinutes = overtimeMinutes,
+                    totalMinutes = workTime.totalMinutes,
+                    description = description
                 )
+
                 finish()
-            } else {
+            } catch (e: Exception) {
                 Toast.makeText(
-                    this@ClockOutActivity, "Clock in time not found", Toast.LENGTH_SHORT
+                    this@ClockOutActivity,
+                    "Error: ${e.message}",
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }
-    }
-
-    private fun calculateTotalWorkHours(clockIn: Timestamp, clockOut: Timestamp): Int {
-        val duration = clockOut.toDate().time - clockIn.toDate().time
-        return (duration / (1000 * 60 * 60)).toInt() // 8 Jam
-//        return (duration / (1000 * 60)).toInt() // 1 Jam
-//        return (duration / 1000).toInt() // 1 Menit
-    }
-
-    private fun calculateRegularWorkHours(totalWorkHours: Int): Int {
-        return if (totalWorkHours > 8) 8 else totalWorkHours
-    }
-
-    private fun calculateOvertime(totalWorkHours: Int): Int {
-        return if (totalWorkHours > 8) totalWorkHours - 8 else 0
     }
 
     private fun displayProjectData() {

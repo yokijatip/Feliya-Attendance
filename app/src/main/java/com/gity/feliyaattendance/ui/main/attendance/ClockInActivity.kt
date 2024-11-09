@@ -196,31 +196,6 @@ class ClockInActivity : AppCompatActivity() {
         }
     }
 
-    //    Setup Camera and Gallery Launcher
-//    private fun setupCameraAndGalleryLaunchers() {
-//        // Inisialisasi launcher kamera
-//        takePictureLauncher =
-//            registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-//                if (success && photoUri != null) {
-//                    Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
-//                    binding.tvImageUrl.text = photoUri.toString()
-//                } else {
-//                    Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//        // Inisialisasi launcher galeri
-//        pickImageLauncher =
-//            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-//                if (uri != null) {
-//                    Toast.makeText(this, "Image selected: $uri", Toast.LENGTH_SHORT).show()
-//                    binding.tvImageUrl.text = uri.toString()
-//                } else {
-//                    Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//    }
-
     private fun setupCameraAndGalleryLaunchers() {
         takePictureLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
@@ -290,17 +265,6 @@ class ClockInActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleBackButton() {
-        onBackPressedDispatcher.addCallback(this@ClockInActivity) {
-            finish()
-        }
-        binding.apply {
-            btnBack.setOnClickListener {
-                finish()
-            }
-        }
-    }
-
     //    Request One Time Permission
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
@@ -339,6 +303,17 @@ class ClockInActivity : AppCompatActivity() {
         val photoFile = File(filesDir, "photo_${System.currentTimeMillis()}.jpg")
         photoUri = FileProvider.getUriForFile(this, "${packageName}.provider", photoFile)
         takePictureLauncher.launch(photoUri!!)
+    }
+
+    private fun handleBackButton() {
+        onBackPressedDispatcher.addCallback(this@ClockInActivity) {
+            finish()
+        }
+        binding.apply {
+            btnBack.setOnClickListener {
+                finish()
+            }
+        }
     }
 
     //    Open Gallery

@@ -58,10 +58,9 @@ class AttendanceDetailActivity : AppCompatActivity() {
                         CommonHelper.formatTimestamp(detail.projectName.startDate)
                     tvProjectEndDate.text = CommonHelper.formatTimestamp(detail.projectName.endDate)
                     tvProjectLocation.text = detail.projectName.location
-                    tvTotalHours.text = detail.attendance.totalHours.toString()
-                    tvWorkingHours.text = detail.attendance.workHours.toString()
-                    tvOvertimeHours.text = detail.attendance.overtimeHours.toString()
-
+                    tvTotalHours.text = detail.attendance.getFormattedTotalHours()
+                    tvWorkingHours.text = detail.attendance.getFormattedWorkHours()
+                    tvOvertimeHours.text = detail.attendance.getFormattedOvertimeHours()
                     val imageList = arrayListOf(
                         SlideModel(detail.attendance.workProofIn, "Clock-In Proof"),
                         SlideModel(detail.attendance.workProofOut, "Clock-Out Proof")

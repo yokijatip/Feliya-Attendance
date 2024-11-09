@@ -89,14 +89,7 @@ class AttendanceManager(
             "status" to status,
             "workHours" to workHours,
             "overtimeHours" to workHoursOvertime,
-            "totalWorkHours" to totalWorkHours,
-
-            "workMinutes" to workMinutes,
-            "overtimeMinutes" to overtimeMinutes,
-            "totalMinutes" to totalMinutes,
-            "workHoursFormatted" to workHoursFormatted,
-            "overtimeHoursFormatted" to overtimeHoursFormatted,
-            "totalHoursFormatted" to totalHoursFormatted
+            "totalWorkHours" to totalWorkHours
         )
 
         try {

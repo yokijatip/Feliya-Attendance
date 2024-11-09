@@ -29,7 +29,7 @@
             <!-- Name -->
             <TextView
                 android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/inter_semi_bold"
@@ -93,8 +93,8 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:layout_margin="7dp"
-                        app:tint="@color/primary_color"
                         android:src="@drawable/ic_briefcase_attendance"
+                        app:tint="@color/primary_color"
                         tools:ignore="ContentDescription" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -163,41 +163,25 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:layout_margin="7dp"
-                        app:tint="@color/primary_color"
                         android:src="@drawable/ic_watch_attendance"
+                        app:tint="@color/primary_color"
                         tools:ignore="ContentDescription" />
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
-                    android:layout_marginStart="10dp"
+
+                <TextView
+                    android:id="@+id/tv_total_hours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:maxLines="1"
                     android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:text="0"
+                    android:textColor="@color/secondary_color"
+                    android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/tv_total_hours"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:maxLines="1"
-                        android:textColor="@color/secondary_color"
-                        android:textSize="16sp"
-                        tools:text="8" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:maxLines="1"
-                        android:text="@string/hours"
-                        android:textColor="@color/secondary_color"
-                        android:textSize="16sp" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

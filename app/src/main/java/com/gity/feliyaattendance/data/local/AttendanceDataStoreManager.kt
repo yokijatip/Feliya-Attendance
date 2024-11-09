@@ -28,6 +28,9 @@ class AttendanceDataStoreManager(private val context: Context) {
             "work_hours_overtime"
         )
         private val TOTAL_WORK_HOURS = intPreferencesKey("total_work_hours")
+        private val WORK_MINUTES = intPreferencesKey("work_minutes")
+        private val OVERTIME_MINUTES = intPreferencesKey("overtime_minutes")
+        private val TOTAL_MINUTES = intPreferencesKey("total_minutes")
     }
 
     suspend fun saveClockInData(
@@ -51,19 +54,19 @@ class AttendanceDataStoreManager(private val context: Context) {
         clockOut: Timestamp,
         imageUrlOut: String,
         status: String,
-        workHours: Int,
-        workHoursOvertime: Int,
-        description: String,
-        totalWorkHours: Int
+        workMinutes: Int,
+        overtimeMinutes: Int,
+        totalMinutes: Int,
+        description: String
     ) {
         context.dataStore.edit { pref ->
             pref[CLOCK_OUT] = clockOut.seconds * 1000 + clockOut.nanoseconds / 1000000
             pref[IMAGE_URL_OUT] = imageUrlOut
             pref[STATUS] = status
-            pref[WORK_HOURS] = workHours
-            pref[WORK_HOURS_OVERTIME] = workHoursOvertime
+            pref[WORK_MINUTES] = workMinutes
+            pref[OVERTIME_MINUTES] = overtimeMinutes
+            pref[TOTAL_MINUTES] = totalMinutes
             pref[DESCRIPTION] = description
-            pref[TOTAL_WORK_HOURS] = totalWorkHours
         }
     }
 
@@ -86,7 +89,6 @@ class AttendanceDataStoreManager(private val context: Context) {
                 Timestamp(Date(millis))
             }
         }
-
 
     // Fungsi untuk mengambil clock in sebagai Timestamp
     val clockIn: Flow<Timestamp?> = context.dataStore.data
@@ -124,4 +126,13 @@ class AttendanceDataStoreManager(private val context: Context) {
 
     val totalWorkHours: Flow<Int?> = context.dataStore.data
         .map { pref -> pref[TOTAL_WORK_HOURS] }
+
+    val workMinutes: Flow<Int?> = context.dataStore.data
+        .map { pref -> pref[WORK_MINUTES] }
+
+    val overtimeMinutes: Flow<Int?> = context.dataStore.data
+        .map { pref -> pref[OVERTIME_MINUTES] }
+
+    val totalMinutes: Flow<Int?> = context.dataStore.data
+        .map { pref -> pref[TOTAL_MINUTES] }
 }
