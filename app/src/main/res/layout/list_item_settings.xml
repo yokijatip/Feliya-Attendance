@@ -18,8 +18,8 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:backgroundTint="@color/dark_primary_color"
-            app:cardCornerRadius="8dp"
+            android:backgroundTint="@color/background_icon"
+            app:cardCornerRadius="14dp"
             app:strokeWidth="0dp">
 
             <ImageView
@@ -27,9 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
                 tools:src="@drawable/ic_users"
-                app:tint="@color/white" />
+                app:tint="@color/primary_color" />
 
 
         </com.google.android.material.card.MaterialCardView>
@@ -37,7 +36,7 @@
         <!--    Text    -->
         <TextView
             android:id="@+id/tv_setting_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:layout_marginStart="16dp"
@@ -55,8 +54,5 @@
             android:src="@drawable/ic_nav_arrow_right"
             android:layout_gravity="center"
             />
-
-
-
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

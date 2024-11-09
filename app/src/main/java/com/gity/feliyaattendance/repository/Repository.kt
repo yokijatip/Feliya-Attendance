@@ -599,11 +599,31 @@ class Repository(
         }
     }
 
-//    Delete Worker Account
+    //    Delete Worker Account
     suspend fun deleteWorker(workerId: String): Result<Unit> {
         return try {
             firebaseFirestore.collection("users").document(workerId).delete().await()
             Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    //    Upload Image Profile
+    suspend fun getDetailAccount(userId: String): Result<Worker> {
+        return try {
+            // Mendapatkan referensi koleksi "workers" di Firestore
+            val documentSnapshot = firebaseFirestore.collection("users")
+                .document(userId)
+                .get()
+                .await()
+
+            if (documentSnapshot.exists()) {
+                val worker = documentSnapshot.toObject(Worker::class.java)
+                Result.success(worker ?: Worker())  // Jika worker null, kembalikan Worker kosong
+            } else {
+                Result.failure(Exception("Worker not found"))
+            }
         } catch (e: Exception) {
             Result.failure(e)
         }

@@ -9,8 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.ActivityMainBinding
+import com.gity.feliyaattendance.ui.main.eplore.ExploreFragment
 import com.gity.feliyaattendance.ui.main.home.HomeFragment
-import com.gity.feliyaattendance.ui.main.reports.ReportsFragment
 import com.gity.feliyaattendance.ui.main.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             chipNavigationBar.setOnItemSelectedListener {
                 when (it) {
                     R.id.home -> replaceFragment(HomeFragment())
-                    R.id.reports -> replaceFragment(ReportsFragment())
+                    R.id.explores -> replaceFragment(ExploreFragment())
                     R.id.settings -> replaceFragment(SettingsFragment())
 
                     else -> {

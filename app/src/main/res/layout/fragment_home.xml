@@ -111,6 +111,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintVertical_bias="1.0"
                 app:shapeAppearanceOverlay="@style/TopRoundCard"
                 app:strokeWidth="0dp">
 
@@ -565,10 +566,10 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_your_activity"
                             android:layout_width="match_parent"
-                            android:nestedScrollingEnabled="true"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            tools:itemCount="5"
+                            android:nestedScrollingEnabled="true"
+                            tools:itemCount="0"
                             tools:listitem="@layout/list_item_attendance" />
 
                     </LinearLayout>

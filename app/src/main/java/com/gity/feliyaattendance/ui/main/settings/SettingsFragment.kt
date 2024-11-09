@@ -46,8 +46,6 @@ class SettingsFragment : Fragment() {
     private fun settingListSetup() {
         val settingList = listOf(
             Setting(getString(R.string.account), R.drawable.ic_people_tag),
-            Setting(getString(R.string.change_password), R.drawable.ic_key),
-            Setting(getString(R.string.notification), R.drawable.ic_bell),
             Setting(getString(R.string.language), R.drawable.ic_globe),
             Setting(getString(R.string.about_us), R.drawable.ic_warning_circle),
             Setting(getString(R.string.help), R.drawable.ic_headset_help),
@@ -60,18 +58,6 @@ class SettingsFragment : Fragment() {
                     // Handle account click
 //                    Toast.makeText(requireContext(), "Account clicked", Toast.LENGTH_SHORT).show()
                     navigateToAccount()
-                }
-
-                getString(R.string.change_password) -> {
-                    // Handle change password click
-                    Toast.makeText(requireContext(), "Change password clicked", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                getString(R.string.notification) -> {
-                    // Handle notification click
-                    Toast.makeText(requireContext(), "Notification clicked", Toast.LENGTH_SHORT)
-                        .show()
                 }
 
                 getString(R.string.language) -> {

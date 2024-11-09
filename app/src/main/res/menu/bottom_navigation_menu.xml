@@ -12,9 +12,9 @@
         app:cnb_textColor="@color/white" />
 
     <item
-        android:id="@+id/reports"
-        android:icon="@drawable/ic_file_text"
-        android:title="@string/reports"
+        android:id="@+id/explores"
+        android:icon="@drawable/ic_menu"
+        android:title="@string/explore"
         app:cnb_backgroundColor="@color/primary_color"
         app:cnb_iconColor="@color/white"
         app:cnb_iconTintMode="src_in"

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/background_icon"
+        android:backgroundTint="@color/color_background_icon_primary"
         app:strokeWidth="0dp">
 
         <ImageView
@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_margin="14dp"
             android:src="@drawable/ic_folder_plus"
-            app:tint="@color/primary_color" />
+            app:tint="@color/dark_primary_color" />
 
     </com.google.android.material.card.MaterialCardView>
 
