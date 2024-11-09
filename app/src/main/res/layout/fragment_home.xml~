@@ -134,7 +134,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal"
-                            android:padding="18dp"
+                            android:padding="20dp"
                             android:weightSum="2">
 
                             <!-- Clock In -->
@@ -235,7 +235,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:orientation="vertical"
-                                    android:padding="16dp">
+                                    android:padding="20dp">
 
                                     <!-- Icons -->
                                     <LinearLayout
@@ -309,7 +309,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:orientation="vertical"
-                                    android:padding="16dp">
+                                    android:padding="20dp">
 
                                     <!-- Icons -->
                                     <LinearLayout
@@ -393,7 +393,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:orientation="vertical"
-                                    android:padding="16dp">
+                                    android:padding="20dp">
 
                                     <!-- Icons -->
                                     <LinearLayout
@@ -466,7 +466,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:orientation="vertical"
-                                    android:padding="16dp">
+                                    android:padding="20dp">
 
                                     <!-- Icons -->
                                     <LinearLayout

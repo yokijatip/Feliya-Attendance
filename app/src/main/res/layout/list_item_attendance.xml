@@ -5,7 +5,7 @@
     android:id="@+id/materialCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="10dp"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="25dp"
     app:layout_constraintEnd_toStartOf="@+id/guideline_end"
