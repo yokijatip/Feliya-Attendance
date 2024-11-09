@@ -29,7 +29,7 @@
 
                 <!--  Name & Greetings  -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -258,8 +258,7 @@
                                                 android:layout_gravity="center"
                                                 android:layout_margin="7dp"
                                                 android:rotation="-90"
-                                                android:src="@drawable/ic_arrow_in_out"
-                                                tools:ignore="ContentDescription" />
+                                                android:src="@drawable/ic_arrow_in_out" />
 
                                         </com.google.android.material.card.MaterialCardView>
 
@@ -272,8 +271,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
-                                            android:src="@drawable/ic_more_horiz"
-                                            tools:ignore="ContentDescription" />
+                                            android:src="@drawable/ic_more_horiz" />
 
 
                                     </LinearLayout>
@@ -321,7 +319,6 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:backgroundTint="@color/background_icon"
-                                            android:importantForAccessibility="no"
                                             app:cardCornerRadius="14dp"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent"
@@ -333,8 +330,7 @@
                                                 android:layout_gravity="center"
                                                 android:layout_margin="7dp"
                                                 android:rotation="90"
-                                                android:src="@drawable/ic_arrow_in_out"
-                                                tools:ignore="ContentDescription" />
+                                                android:src="@drawable/ic_arrow_in_out" />
 
                                         </com.google.android.material.card.MaterialCardView>
 
@@ -347,8 +343,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
-                                            android:src="@drawable/ic_more_horiz"
-                                            tools:ignore="ContentDescription" />
+                                            android:src="@drawable/ic_more_horiz" />
 
 
                                     </LinearLayout>
@@ -415,8 +410,7 @@
                                                 android:layout_height="24dp"
                                                 android:layout_gravity="center"
                                                 android:layout_margin="7dp"
-                                                android:src="@drawable/ic_eye_closed"
-                                                tools:ignore="ContentDescription" />
+                                                android:src="@drawable/ic_eye_closed" />
 
                                         </com.google.android.material.card.MaterialCardView>
 
@@ -429,8 +423,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
-                                            android:src="@drawable/ic_more_horiz"
-                                            tools:ignore="ContentDescription" />
+                                            android:src="@drawable/ic_more_horiz" />
 
 
                                     </LinearLayout>
