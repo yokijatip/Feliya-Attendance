@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
@@ -18,7 +17,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.adapter.WorkerDetailAdapter
-import com.gity.feliyaattendance.admin.data.model.MonthlyDashboard
 import com.gity.feliyaattendance.admin.data.model.Worker
 import com.gity.feliyaattendance.data.model.DetailWorkerMenu
 import com.gity.feliyaattendance.databinding.ActivityAdminWorkerDetailBinding
@@ -82,11 +80,13 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         workerDetailMenuSetup()
 
         viewModel.fetchWorkerDetail(workerId)
-        viewModel.fetchMonthlyDashboard(workerId)
 
         observeExcelGeneration()
 
         binding.apply {
+            moreMenu.setOnClickListener {
+                CommonHelper.showToast(this@AdminWorkerDetailActivity, "Under Development")
+            }
         }
 
     }
@@ -191,36 +191,12 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
-        viewModel.monthlyDashboardResult.observe(this) { result ->
-            result.onSuccess { worker ->
-                displayMonthlyDashboard(worker)
-            }.onFailure { exception ->
-                Log.e("ADMIN_DETAIL_ACTIVITY", "Error fetching Monthly Dashboard : $exception")
-            }
-        }
-
-        viewModel.monthlyDashboardResult.observe(this) { result ->
-            result.onSuccess { dashboard ->
-                Log.d("Activity", "Received dashboard data:")
-                Log.d("Activity", "Total Attendance: ${dashboard.totalAttendance}")
-                Log.d("Activity", "Total Overtime: ${dashboard.totalOvertimeHours}")
-
-                // Update UI
-                binding.tvAttendance.text = dashboard.totalAttendance.toString()
-                binding.tvOvertime.text = dashboard.totalOvertimeHours.toString()
-            }.onFailure { error ->
-                Log.e("Activity", "Error displaying dashboard", error)
-                // Show error message to user
-            }
-        }
     }
 
     private fun displayWorkerDetails(worker: Worker) {
         binding.apply {
             tvUserName.text = worker.name
             tvUserEmail.text = worker.email
-            tvUserRole.text = worker.role
             workerName = worker.name!!
 
             Glide.with(this@AdminWorkerDetailActivity)
@@ -229,14 +205,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                     RequestOptions.placeholderOf(R.drawable.worker_profile_placeholder)
                         .error(R.drawable.worker_profile_placeholder)
                 )
-                .into(ivUserImage)
-        }
-    }
-
-    private fun displayMonthlyDashboard(monthlyDashboard: MonthlyDashboard) {
-        binding.apply {
-            tvAttendance.text = monthlyDashboard.totalAttendance.toString()
-            tvOvertime.text = monthlyDashboard.totalOvertimeHours.toString()
+                .into(ivUserProfile)
         }
     }
 
@@ -262,12 +231,16 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
 
 
             val intent = Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(uri, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                setDataAndType(
+                    uri,
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
 
             // Cek apakah ada aplikasi yang dapat menangani file
-            val activities = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+            val activities =
+                packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
 
             if (activities.isNotEmpty()) {
                 // Gunakan createChooser untuk menampilkan dialog pemilihan aplikasi

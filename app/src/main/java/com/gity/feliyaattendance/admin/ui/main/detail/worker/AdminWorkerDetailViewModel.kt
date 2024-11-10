@@ -17,9 +17,6 @@ class AdminWorkerDetailViewModel(private val repository: Repository) : ViewModel
     private val _workerDetailResult = MutableLiveData<Result<Worker>>()
     val workerDetailResult: LiveData<Result<Worker>> = _workerDetailResult
 
-    private val _monthlyDashboardResult = MutableLiveData<Result<MonthlyDashboard>>()
-    val monthlyDashboardResult: LiveData<Result<MonthlyDashboard>> = _monthlyDashboardResult
-
     private val _excelGenerationResult = MutableLiveData<Result<File>>()
     val excelGenerationResult: LiveData<Result<File>> = _excelGenerationResult
 
@@ -31,14 +28,6 @@ class AdminWorkerDetailViewModel(private val repository: Repository) : ViewModel
         viewModelScope.launch {
             val result = repository.getWorkerDetail(workerId)
             _workerDetailResult.postValue(result)
-        }
-    }
-
-    // Function to fetch monthly dashboard
-    fun fetchMonthlyDashboard(userId: String) {
-        viewModelScope.launch {
-            val result = repository.getMonthlyDashboard(userId)
-            _monthlyDashboardResult.postValue(result)
         }
     }
 
