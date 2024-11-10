@@ -525,6 +525,12 @@ class Repository(
             // Format tanggal
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val dateTimeFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+            val yearFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+            val monthFormat = SimpleDateFormat("MMMM", Locale.getDefault())
+
+            // Mendapatkan tahun dan bulan dari startTimestamp
+            val year = yearFormat.format(startTimestamp.toDate())
+            val month = monthFormat.format(startTimestamp.toDate())
 
             // Header
             val headerRow = sheet.createRow(0)
@@ -586,15 +592,25 @@ class Repository(
             //val directory = File((Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi")
             //val directory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi")
 
-            // Simpan ke Documents folder
+//            // Simpan ke Documents folder
+//            val documentsPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+//            val directory = File(documentsPath, "LaporanAbsensi")
+
+            // Buat struktur folder
             val documentsPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-            val directory = File(documentsPath, "LaporanAbsensi")
+            val baseDirectory = File(documentsPath, "LaporanAbsensi")
+            val yearDirectory = File(baseDirectory, year)
+            val monthDirectory = File(yearDirectory, month)
+            val userDirectory = File(monthDirectory, userName)
 
-            if (!directory.exists()) {
-                directory.mkdirs()
-            }
+            // Buat folder secara berurutan
+            baseDirectory.mkdirs()
+            yearDirectory.mkdirs()
+            monthDirectory.mkdirs()
+            userDirectory.mkdirs()
 
-            val file = File(directory, fileName)
+            // Simpan file di folder user
+            val file = File(userDirectory, fileName)
 
             FileOutputStream(file).use { fileOut ->
                 workbook.write(fileOut)
