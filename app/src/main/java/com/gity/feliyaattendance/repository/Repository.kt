@@ -21,6 +21,7 @@ import org.apache.poi.ss.usermodel.IndexedColors
 import org.apache.poi.ss.usermodel.VerticalAlignment
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -561,27 +562,15 @@ class Repository(
             // Isi data
             attendanceReports.forEachIndexed { index, report ->
                 val row = sheet.createRow(index + 1)
-//                row.createCell(0).setCellValue(dateFormat.format(report.date!!.toDate()))
-//                row.createCell(1)
-//                    .setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) }
-//                        ?: "")
-//                row.createCell(2)
-//                    .setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) }
-//                        ?: "")
-//                row.createCell(3).setCellValue(report.workHours)
-//                row.createCell(4).setCellValue(report.overtimeHours)
-//                row.createCell(5).setCellValue(report.totalHours)
-//                row.createCell(6).setCellValue(report.workDescription)
-//                row.createCell(7).setCellValue(report.projectId)
 
                 row.createCell(0).setCellValue(dateFormat.format(report.date?.toDate() ?: Date()))
                 row.createCell(1).setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) } ?: "")
                 row.createCell(2).setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) } ?: "")
-                row.createCell(3).setCellValue(report.workHours ?: "")
-                row.createCell(4).setCellValue(report.overtimeHours ?: "")
-                row.createCell(5).setCellValue(report.totalHours ?: "")
-                row.createCell(6).setCellValue(report.workDescription ?: "")
-                row.createCell(7).setCellValue(report.projectId ?: "")
+                row.createCell(3).setCellValue(report.workHours)
+                row.createCell(4).setCellValue(report.overtimeHours)
+                row.createCell(5).setCellValue(report.totalHours)
+                row.createCell(6).setCellValue(report.workDescription)
+                row.createCell(7).setCellValue(report.projectId)
             }
 
             // Auto size kolom
@@ -594,9 +583,12 @@ class Repository(
                 }.xlsx"
 
             // Simpan file
-            val directory = File(
-                context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi"
-            )
+            //val directory = File((Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi")
+            //val directory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi")
+
+            // Simpan ke Documents folder
+            val documentsPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            val directory = File(documentsPath, "LaporanAbsensi")
 
             if (!directory.exists()) {
                 directory.mkdirs()
@@ -604,7 +596,7 @@ class Repository(
 
             val file = File(directory, fileName)
 
-            file.outputStream().use { fileOut ->
+            FileOutputStream(file).use { fileOut ->
                 workbook.write(fileOut)
             }
 

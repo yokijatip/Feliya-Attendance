@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <files-path name="images" path="." />
+<paths>
+<!--    <files-path-->
+<!--        name="images"-->
+<!--        path="." />-->
+<!--    <external-path-->
+<!--        name="external_files"-->
+<!--        path="Documents/LaporanAbsensi" />-->
+
+    <!-- Untuk akses ke direktori Documents publik -->
     <external-path
-        name="external_files"
+        name="external_documents"
+        path="Documents" />
+
+    <!-- Backup untuk backward compatibility -->
+    <files-path
+        name="images"
         path="." />
-    <external-files-path
-        name="external_files"
-        path="Documents/LaporanAbsensi" />
 </paths>

@@ -1,6 +1,8 @@
 package com.gity.feliyaattendance.admin.ui.main.detail.worker
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -22,6 +24,7 @@ import com.gity.feliyaattendance.data.model.DetailWorkerMenu
 import com.gity.feliyaattendance.databinding.ActivityAdminWorkerDetailBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
+import com.gity.feliyaattendance.utils.StoragePermissionHandler
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.Timestamp
@@ -43,6 +46,8 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
     private lateinit var workerName: String
     private lateinit var workerId: String
 
+    private lateinit var storagePermissionHandler: StoragePermissionHandler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityAdminWorkerDetailBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -53,7 +58,14 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        storagePermissionHandler = StoragePermissionHandler(this)
         handleBackButton()
+
+        // Pastikan izin sudah di-check di awal
+        if (!storagePermissionHandler.hasStoragePermission()) {
+            storagePermissionHandler.requestStoragePermission(this)
+        }
 
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
@@ -92,7 +104,13 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         val detailWorkerMenuAdapter = WorkerDetailAdapter(workerDetailMenuList) { menu ->
             when (menu.tvDetailWorkerMenu) {
                 getString(R.string.admin_menu_generate_excel) -> {
-                    generateExcel(workerId)
+                    if (storagePermissionHandler.hasStoragePermission()) {
+                        // Generate Excel jika permission sudah diberikan
+                        generateExcel(workerId)
+                    } else {
+                        storagePermissionHandler.requestStoragePermission(this)
+                    }
+
                 }
 
                 getString(R.string.admin_menu_generate_pdf) -> {
@@ -233,22 +251,55 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
     }
 
     //    Fungsi untuk membuka file excel
+    @SuppressLint("QueryPermissionsNeeded")
     private fun openExcelFile(file: File) {
-        val uri = FileProvider.getUriForFile(
-            this,
-            "${packageName}.provider",
-            file
-        )
+        try {
+            val uri = FileProvider.getUriForFile(
+                this,
+                "${packageName}.provider",
+                file
+            )
 
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+
+            // Cek apakah ada aplikasi yang dapat menangani file
+            val activities = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+
+            if (activities.isNotEmpty()) {
+                // Gunakan createChooser untuk menampilkan dialog pemilihan aplikasi
+                val chooserIntent = Intent.createChooser(intent, "Buka dengan aplikasi spreadsheet")
+                startActivity(chooserIntent)
+            } else {
+                Toast.makeText(
+                    this,
+                    "Tidak ada aplikasi spreadsheet yang terinstall. Silakan install Microsoft Excel atau aplikasi spreadsheet lainnya.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error membuka file: ${e.message}", Toast.LENGTH_SHORT).show()
         }
-
-        startActivity(intent)
     }
 
-    fun Date.toTimestamp(): Timestamp {
-        return Timestamp(this)
+
+    // Fungsi ini memeriksa hasil permintaan izin
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == StoragePermissionHandler.STORAGE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                generateExcel(workerId)
+            } else {
+                Toast.makeText(this, "Storage permission required", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
 }

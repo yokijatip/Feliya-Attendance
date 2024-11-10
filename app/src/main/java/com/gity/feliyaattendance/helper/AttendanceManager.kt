@@ -62,11 +62,7 @@ class AttendanceManager(
             ?: throw IllegalStateException("Clock out image URL not found")
         val description = dataStore.description.first() ?: ""
         val status = dataStore.status.first() ?: throw IllegalStateException("Status not found")
-        val workHours = dataStore.workHours.first() ?: 0
-        val workHoursOvertime = dataStore.workHoursOvertime.first() ?: 0
         val attendanceId = UUID.randomUUID().toString()
-        val totalWorkHours = workHours + workHoursOvertime
-
         val workMinutes = dataStore.workMinutes.first() ?: 0
         val overtimeMinutes = dataStore.overtimeMinutes.first() ?: 0
         val totalMinutes = dataStore.totalMinutes.first() ?: (workMinutes + overtimeMinutes)
@@ -87,10 +83,6 @@ class AttendanceManager(
             "workProofOut" to imageUrlOut,
             "workDescription" to description,
             "status" to status,
-            "workHours" to workHours,
-            "overtimeHours" to workHoursOvertime,
-            "totalWorkHours" to totalWorkHours,
-
             "workMinutes" to workMinutes,
             "overtimeMinutes" to overtimeMinutes,
             "totalMinutes" to totalMinutes,
