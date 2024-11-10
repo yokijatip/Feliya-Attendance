@@ -9,15 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
-import com.gity.feliyaattendance.admin.adapter.MenuAdminAdapter
-import com.gity.feliyaattendance.admin.data.model.AdminMenu
 import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminListWorkerActivity
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminHomeBinding
 import com.gity.feliyaattendance.helper.CommonHelper
-import com.gity.feliyaattendance.helper.HorizontalSpaceItemDecoration
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +28,6 @@ class AdminHomeFragment : Fragment() {
     private lateinit var firebaseFirestore: FirebaseFirestore
     private lateinit var repository: Repository
     private lateinit var viewModel: AdminHomeViewModel
-    private lateinit var adminMenuAdapter: MenuAdminAdapter
 
 
     override fun onCreateView(
@@ -62,48 +57,31 @@ class AdminHomeFragment : Fragment() {
     }
 
     private fun setupUI() {
-        setupRecyclerView()
         setupTopBar()
         setupSwipeRefresh()
-        setupClickListeners()
+        handleMenuClick()
     }
 
-    private fun setupRecyclerView() {
-        binding.rvMenu.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            addItemDecoration(HorizontalSpaceItemDecoration(24))
-            adapter = createMenuAdapter()
-        }
-    }
-
-
-    private fun createMenuAdapter(): MenuAdminAdapter {
-        val adminMenuList = listOf(
-            AdminMenu(name = getString(R.string.admin_menu_see_worker_list), R.drawable.ic_users),
-            AdminMenu(name = getString(R.string.admin_menu_add_worker), R.drawable.ic_user_plus),
-            AdminMenu(name = getString(R.string.admin_menu_add_project), R.drawable.ic_folder_plus),
-            AdminMenu(
-                name = getString(R.string.admin_menu_attendance_approval),
-                R.drawable.ic_check_square_custom_admin
-            ),
-            AdminMenu(name = getString(R.string.admin_menu_generate_excel), R.drawable.ic_table),
-            AdminMenu(name = getString(R.string.admin_menu_generate_pdf), R.drawable.ic_file_text)
-        )
-
-        return MenuAdminAdapter(adminMenuList) { menu ->
-            handleMenuClick(menu)
-        }.also { adminMenuAdapter = it }
-    }
-
-    private fun handleMenuClick(menu: AdminMenu) {
-        when (menu.name) {
-            getString(R.string.admin_menu_see_worker_list) -> navigateToWorkerList()
-            getString(R.string.admin_menu_add_worker) -> showToast("Add Worker")
-            getString(R.string.admin_menu_add_project) -> navigateToAddProject()
-            getString(R.string.admin_menu_attendance_approval) -> showToast("Attendance Approval")
-            getString(R.string.admin_menu_generate_excel) -> showToast("Generate Report Excel")
-            getString(R.string.admin_menu_generate_pdf) -> showToast("Generate PDF")
+    private fun handleMenuClick() {
+        binding.apply {
+            btnListWorker.setOnClickListener {
+                navigateToWorkerList()
+            }
+            btnAddWorker.setOnClickListener {
+                navigateToAddWorker()
+            }
+            btnAddProject.setOnClickListener {
+                navigateToAddProject()
+            }
+            btnLeaveApplication.setOnClickListener {
+                navigateToLeaveApplication()
+            }
+            btnAnnouncement.setOnClickListener {
+                navigateToAnnouncement()
+            }
+            btnHistoryAttendance.setOnClickListener {
+                navigateToHistoryAttendance()
+            }
         }
     }
 
@@ -111,7 +89,7 @@ class AdminHomeFragment : Fragment() {
         binding.apply {
             tvTopDay.text = CommonHelper.getCurrentDayOnly()
             tvTopDate.text = CommonHelper.getCurrentDateOnly()
-            tvGreetings.text = CommonHelper.getGreetingsMessage(
+            tvGreeting.text = CommonHelper.getGreetingsMessage(
                 getString(R.string.greetings_good_morning),
                 getString(R.string.greetings_good_afternoon),
                 getString(R.string.greetings_good_evening)
@@ -127,12 +105,6 @@ class AdminHomeFragment : Fragment() {
         }
     }
 
-    private fun setupClickListeners() {
-        binding.btnNotification.setOnClickListener {
-            showToast("Notifications Clicked")
-        }
-    }
-
     private fun setupObservers() {
         viewLifecycleOwner.apply {
             observeNameResult()
@@ -143,7 +115,7 @@ class AdminHomeFragment : Fragment() {
     private fun observeNameResult() {
         viewModel.nameResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { name ->
-                binding.tvName.text = name
+                binding.tvWorkerName.text = name
             }.onFailure { exception ->
                 showToast("Failed to load name: ${exception.message}")
             }
@@ -191,6 +163,22 @@ class AdminHomeFragment : Fragment() {
         Intent(requireActivity(), AdminAddProjectActivity::class.java).also {
             startActivity(it)
         }
+    }
+
+    private fun navigateToLeaveApplication() {
+        CommonHelper.showToast(requireContext(), "Under Maintenance")
+    }
+
+    private fun navigateToAddWorker() {
+        CommonHelper.showToast(requireContext(), "Under Maintenance")
+    }
+
+    private fun navigateToAnnouncement() {
+        CommonHelper.showToast(requireContext(), "Under Maintenance")
+    }
+
+    private fun navigateToHistoryAttendance() {
+        CommonHelper.showToast(requireContext(), "Under Maintenance")
     }
 
     private fun refreshData() {

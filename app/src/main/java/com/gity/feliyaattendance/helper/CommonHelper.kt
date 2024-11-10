@@ -71,7 +71,7 @@ object CommonHelper {
         } ?: "Tanggal tidak tersedia"
     }
 
-    fun formatTimeOnly(timestamp: Timestamp?): String { 
+    fun formatTimeOnly(timestamp: Timestamp?): String {
         val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
         return sdf.format(timestamp?.toDate() ?: "00:00")
     }

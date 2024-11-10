@@ -20,6 +20,8 @@
         android:id="@+id/chipNavigationBar"
         android:layout_width="0dp"
         android:layout_height="74dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:elevation="16dp"
         android:gravity="center"
         android:padding="8dp"

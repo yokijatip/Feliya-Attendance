@@ -9,12 +9,13 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        tools:context=".admin.ui.main.home.AdminHomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.main.home.HomeFragment">
+            tools:context=".admin.ui.main.home.AdminHomeFragment">
 
             <!--  Name, Greeting & Day  -->
             <LinearLayout
@@ -569,9 +570,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:nestedScrollingEnabled="true"
-                            tools:itemCount="0"
+                            tools:itemCount="10"
                             tools:listitem="@layout/list_item_attendance" />
-
                     </LinearLayout>
                 </LinearLayout>
 

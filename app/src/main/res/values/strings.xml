@@ -163,13 +163,15 @@
 
     <!--  Admin Home  -->
     <string name="zero">0</string>
-    <string name="admin_menu_see_worker_list">List\nWorker</string>
+    <string name="admin_menu_see_worker_list">List Worker</string>
     <string name="admin_menu_attendance_approval">Attendance\nApproval</string>
-    <string name="admin_menu_add_worker">Add\nWorker</string>
-    <string name="admin_menu_add_project">Add\nProject</string>
+    <string name="admin_menu_add_worker">Add Worker</string>
+    <string name="admin_menu_add_project">Add Project</string>
     <string name="admin_menu_generate_excel">Generate Excel</string>
     <string name="admin_menu_generate_pdf">Generate PDF</string>
     <string name="admin_menu_delete_account">Delete Account</string>
+    <string name="admin_menu_make_announcement">Announcement</string>
+    <string name="admin_menu_history_attendance">History Attendance</string>
     <string name="admin_menu_delete_account_title_confirmation">Delete Account Confirmation</string>
     <string name="admin_menu_delete_account_description_confirmation">Are you sure want to delete worker account?</string>
 
