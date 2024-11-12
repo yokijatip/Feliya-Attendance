@@ -54,16 +54,13 @@ class AttendanceDetailActivity : AppCompatActivity() {
                     tvClockIn.text = CommonHelper.formatTimeOnly(detail.attendance.clockInTime)
                     tvClockOut.text = CommonHelper.formatTimeOnly(detail.attendance.clockOutTime)
                     tvWorkerDescription.text = detail.attendance.workDescription
-                    tvProjectStartDate.text =
-                        CommonHelper.formatTimestamp(detail.projectName.startDate)
-                    tvProjectEndDate.text = CommonHelper.formatTimestamp(detail.projectName.endDate)
                     tvProjectLocation.text = detail.projectName.location
                     tvTotalHours.text = detail.attendance.getFormattedTotalHours()
                     tvWorkingHours.text = detail.attendance.getFormattedWorkHours()
                     tvOvertimeHours.text = detail.attendance.getFormattedOvertimeHours()
                     val imageList = arrayListOf(
-                        SlideModel(detail.attendance.workProofIn, "Clock-In Proof"),
-                        SlideModel(detail.attendance.workProofOut, "Clock-Out Proof")
+                        SlideModel(detail.attendance.workProofIn, getString(R.string.clock_in_proof)),
+                        SlideModel(detail.attendance.workProofOut, getString(R.string.clock_out_proof))
                     )
                     ivDetailAttendance.setImageList(imageList, ScaleTypes.CENTER_CROP)
                     updateStatusUI(detail.attendance.status)

@@ -68,9 +68,9 @@ class AttendanceManager(
         val totalMinutes = dataStore.totalMinutes.first() ?: (workMinutes + overtimeMinutes)
 
         // Format waktu untuk tampilan yang lebih baik
-        val workHoursFormatted = "${workMinutes / 60}h ${workMinutes % 60}m"
-        val overtimeHoursFormatted = "${overtimeMinutes / 60}h ${overtimeMinutes % 60}m"
-        val totalHoursFormatted = "${totalMinutes / 60}h ${totalMinutes % 60}m"
+        val workHoursFormatted = "${workMinutes / 60}:${workMinutes % 60}"
+        val overtimeHoursFormatted = "${overtimeMinutes / 60}:${overtimeMinutes % 60}"
+        val totalHoursFormatted = "${totalMinutes / 60}:${totalMinutes % 60}"
 
         val attendanceData = hashMapOf(
             "attendanceId" to attendanceId,

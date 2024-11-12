@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/primary_color"
-                        app:cardCornerRadius="30dp"
+                        app:cardCornerRadius="20dp"
                         app:strokeWidth="0dp">
 
                         <LinearLayout
@@ -229,7 +229,7 @@
                                 android:layout_marginEnd="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -303,7 +303,7 @@
                                 android:layout_marginStart="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -387,7 +387,7 @@
                                 android:layout_marginEnd="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -460,7 +460,7 @@
                                 android:layout_marginStart="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout

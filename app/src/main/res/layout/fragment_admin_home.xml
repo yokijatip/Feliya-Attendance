@@ -127,7 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/primary_color"
-                        app:cardCornerRadius="30dp"
+                        app:cardCornerRadius="20dp"
                         app:strokeWidth="0dp">
 
                         <LinearLayout
@@ -263,7 +263,7 @@
                                 android:layout_marginEnd="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -336,7 +336,7 @@
                                 android:layout_marginStart="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -420,7 +420,7 @@
                                 android:layout_marginEnd="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -450,8 +450,8 @@
                                                 android:layout_height="24dp"
                                                 android:layout_gravity="center"
                                                 android:layout_margin="7dp"
-                                                app:tint="@color/primary_color"
                                                 android:src="@drawable/ic_folder_plus"
+                                                app:tint="@color/primary_color"
                                                 tools:ignore="ContentDescription" />
 
                                         </com.google.android.material.card.MaterialCardView>
@@ -494,7 +494,7 @@
                                 android:layout_marginStart="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -525,8 +525,7 @@
                                                 android:layout_gravity="center"
                                                 android:layout_margin="7dp"
                                                 android:src="@drawable/ic_eye_closed"
-                                                app:tint="@color/primary_color"
-                                                />
+                                                app:tint="@color/primary_color" />
 
                                         </com.google.android.material.card.MaterialCardView>
 
@@ -576,7 +575,7 @@
                                 android:layout_marginEnd="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -606,8 +605,8 @@
                                                 android:layout_height="24dp"
                                                 android:layout_gravity="center"
                                                 android:layout_margin="7dp"
-                                                app:tint="@color/primary_color"
                                                 android:src="@drawable/ic_sound_low"
+                                                app:tint="@color/primary_color"
                                                 tools:ignore="ContentDescription" />
 
                                         </com.google.android.material.card.MaterialCardView>
@@ -650,7 +649,7 @@
                                 android:layout_marginStart="7dp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/background_color"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:strokeWidth="0dp">
 
                                 <LinearLayout
@@ -681,8 +680,7 @@
                                                 android:layout_gravity="center"
                                                 android:layout_margin="7dp"
                                                 android:src="@drawable/ic_user_badge_check"
-                                                app:tint="@color/primary_color"
-                                                />
+                                                app:tint="@color/primary_color" />
 
                                         </com.google.android.material.card.MaterialCardView>
 
@@ -718,54 +716,54 @@
 
                     </LinearLayout>
 
-<!--                    &lt;!&ndash; Last Attendance &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="28dp"-->
-<!--                        android:orientation="vertical">-->
+                    <!--                    &lt;!&ndash; Last Attendance &ndash;&gt;-->
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="28dp"-->
+                    <!--                        android:orientation="vertical">-->
 
-<!--                        &lt;!&ndash; Title Last Attendance &ndash;&gt;-->
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            tools:ignore="UselessParent">-->
+                    <!--                        &lt;!&ndash; Title Last Attendance &ndash;&gt;-->
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:orientation="horizontal"-->
+                    <!--                            tools:ignore="UselessParent">-->
 
-<!--                            &lt;!&ndash;    Title    &ndash;&gt;-->
-<!--                            <TextView-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:fontFamily="@font/inter_semi_bold"-->
-<!--                                android:maxLines="1"-->
-<!--                                android:text="@string/your_activity"-->
-<!--                                android:textColor="@color/black"-->
-<!--                                android:textSize="14sp" />-->
+                    <!--                            &lt;!&ndash;    Title    &ndash;&gt;-->
+                    <!--                            <TextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight="1"-->
+                    <!--                                android:fontFamily="@font/inter_semi_bold"-->
+                    <!--                                android:maxLines="1"-->
+                    <!--                                android:text="@string/your_activity"-->
+                    <!--                                android:textColor="@color/black"-->
+                    <!--                                android:textSize="14sp" />-->
 
-<!--                            &lt;!&ndash;    Title    &ndash;&gt;-->
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:fontFamily="@font/inter_semi_bold"-->
-<!--                                android:maxLines="1"-->
-<!--                                android:text="@string/view_all"-->
-<!--                                android:textColor="@color/primary_color"-->
-<!--                                android:textSize="12sp" />-->
+                    <!--                            &lt;!&ndash;    Title    &ndash;&gt;-->
+                    <!--                            <TextView-->
+                    <!--                                android:layout_width="wrap_content"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:fontFamily="@font/inter_semi_bold"-->
+                    <!--                                android:maxLines="1"-->
+                    <!--                                android:text="@string/view_all"-->
+                    <!--                                android:textColor="@color/primary_color"-->
+                    <!--                                android:textSize="12sp" />-->
 
-<!--                        </LinearLayout>-->
+                    <!--                        </LinearLayout>-->
 
-<!--                        &lt;!&ndash;    Recycler View   &ndash;&gt;-->
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/rv_your_activity"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="12dp"-->
-<!--                            android:nestedScrollingEnabled="true"-->
-<!--                            tools:itemCount="0"-->
-<!--                            tools:listitem="@layout/list_item_attendance" />-->
+                    <!--                        &lt;!&ndash;    Recycler View   &ndash;&gt;-->
+                    <!--                        <androidx.recyclerview.widget.RecyclerView-->
+                    <!--                            android:id="@+id/rv_your_activity"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginTop="12dp"-->
+                    <!--                            android:nestedScrollingEnabled="true"-->
+                    <!--                            tools:itemCount="0"-->
+                    <!--                            tools:listitem="@layout/list_item_attendance" />-->
 
-<!--                    </LinearLayout>-->
+                    <!--                    </LinearLayout>-->
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>

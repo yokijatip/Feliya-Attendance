@@ -19,6 +19,7 @@
     <color name="status_pending_background">#E7E7E7</color>
 
     <color name="dark_primary_color">#312587</color>
+    <color name="background_card_secondary_color">#eceaf8</color>
     <color name="background_icon">#79dcd2</color>
 
     <!--  Claude Color  -->

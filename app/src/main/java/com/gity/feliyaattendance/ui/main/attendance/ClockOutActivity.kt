@@ -145,8 +145,8 @@ class ClockOutActivity : AppCompatActivity() {
     // Untuk testing dengan 2 menit sebagai batas regular working time
     private fun calculateRegularAndOvertimeMinutes(totalMinutes: Int): Pair<Int, Int> {
         //val regularTimeLimit = 2 // 2 menit untuk testing
-        //val regularTimeLimit = 480 // 8 jam
-        val regularTimeLimit = 60 // 1 Jam
+        val regularTimeLimit = 480 // 8 jam
+        //val regularTimeLimit = 60 // 1 Jam
         return if (totalMinutes > regularTimeLimit) {
             Pair(regularTimeLimit, totalMinutes - regularTimeLimit)
         } else {
@@ -183,10 +183,6 @@ class ClockOutActivity : AppCompatActivity() {
                 // Hitung waktu kerja
                 val workTime = calculateWorkTime(clockInTime, clockOutTime)
                 val (regularMinutes, overtimeMinutes) = calculateRegularAndOvertimeMinutes(workTime.totalMinutes)
-
-                // Update tampilan waktu (optional)
-                val workTimeText = "${workTime.hours} jam ${workTime.minutes} menit"
-                // Anda bisa menambahkan TextView untuk menampilkan waktu ini
 
                 attendanceManager.clockOut(
                     clockOut = clockOutTime,

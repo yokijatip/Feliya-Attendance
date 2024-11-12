@@ -40,10 +40,10 @@ data class Attendance(
         val hours = minutes / 60
         val remainingMinutes = minutes % 60
         return when {
-            hours > 0 && remainingMinutes > 0 -> "$hours jam $remainingMinutes menit"
-            hours > 0 -> "$hours jam"
-            remainingMinutes > 0 -> "$remainingMinutes menit"
-            else -> "0 menit"
+            hours > 0 && remainingMinutes > 0 -> "$hours:$remainingMinutes"
+            hours > 0 -> "$hours Jam"
+            remainingMinutes > 0 -> "$remainingMinutes Menit"
+            else -> "0 Menit"
         }
     }
 
