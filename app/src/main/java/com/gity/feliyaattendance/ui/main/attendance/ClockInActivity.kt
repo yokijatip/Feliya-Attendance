@@ -20,9 +20,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
@@ -75,20 +75,19 @@ class ClockInActivity : AppCompatActivity() {
             btnBack.setOnClickListener {
                 finish()
             }
-
-            tvImageUrl.addTextChangedListener {
-                validateClockInButton()
-            }
         }
 
         binding.openGalleryOrCamera.setOnClickListener {
+            checkAndRequestPermissions()
+        }
+        binding.linearLayoutOpenGalleryOrCamera.setOnClickListener {
             checkAndRequestPermissions()
         }
     }
 
     private fun validateClockInButton() {
         binding.apply {
-            btnSave.isEnabled = !tvImageUrl.text.isNullOrEmpty()
+            // Mengatur alpha tombol Save berdasarkan status enabled
             btnSave.alpha = if (btnSave.isEnabled) 1.0f else 0.5f
             btnSave.setOnClickListener {
                 confirmationAttendance()
@@ -160,18 +159,18 @@ class ClockInActivity : AppCompatActivity() {
     //    Setup Validation Listener
     private fun setupValidationListener() {
         binding.apply {
-            tvImageUrl.addTextChangedListener {
-                checkFieldsForEmptyValues()
-            }
+//            tvImageUrl.addTextChangedListener {
+//                checkFieldsForEmptyValues()
+//            }
             checkFieldsForEmptyValues()
         }
     }
 
     //    Check Field Listener
     private fun checkFieldsForEmptyValues() {
-        val isImageSelected = !binding.tvImageUrl.text.isNullOrEmpty()
+        //val isImageSelected = !binding.tvImageUrl.text.isNullOrEmpty()
 
-        binding.btnSave.isEnabled = isImageSelected
+        //binding.btnSave.isEnabled = isImageSelected
     }
 
     //    Init Firebase
@@ -200,12 +199,19 @@ class ClockInActivity : AppCompatActivity() {
         takePictureLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
                 if (success && photoUri != null) {
-                    Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = photoUri.toString()
+                    //binding.tvImageUrl.text = photoUri.toString()
+                    if (photoUri != null) {
+                        Glide.with(this)
+                            .load(photoUri)
+                            .into(binding.ivImage)
+                    }
+                    binding.btnSave.isEnabled = true
+                    binding.btnSave.alpha = 1.0f
                     validateClockInButton()
                 } else {
                     Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = ""
+                    binding.btnSave.isEnabled = false
+                    binding.btnSave.alpha = 0.5f
                     validateClockInButton()
                 }
             }
@@ -214,12 +220,17 @@ class ClockInActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 if (uri != null) {
                     photoUri = uri
-                    Toast.makeText(this, "Image selected: $photoUri", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = photoUri.toString()
+                    //binding.tvImageUrl.text = photoUri.toString()
+                    Glide.with(this)
+                        .load(photoUri)
+                        .into(binding.ivImage)
+                    binding.btnSave.isEnabled = true
+                    binding.btnSave.alpha = 1.0f
                     validateClockInButton()
                 } else {
                     Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = ""
+                    binding.btnSave.isEnabled = false
+                    binding.btnSave.alpha = 0.5f
                     validateClockInButton()
                 }
             }

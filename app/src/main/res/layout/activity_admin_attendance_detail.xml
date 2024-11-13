@@ -160,7 +160,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
-                                android:backgroundTint="@color/status_pending_background"
+                                tools:backgroundTint="@color/status_pending_background"
                                 android:translationZ="4dp"
                                 app:cardCornerRadius="14dp"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -176,8 +176,8 @@
                                     android:paddingTop="4dp"
                                     android:paddingEnd="12dp"
                                     android:paddingBottom="4dp"
-                                    android:text="@string/status_pending"
-                                    android:textColor="@color/status_pending" />
+                                    tools:text="@string/status_pending"
+                                    tools:textColor="@color/status_pending" />
 
                             </com.google.android.material.card.MaterialCardView>
 

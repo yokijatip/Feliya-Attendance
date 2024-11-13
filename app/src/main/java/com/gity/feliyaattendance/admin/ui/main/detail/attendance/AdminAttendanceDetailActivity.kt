@@ -225,7 +225,14 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         dialog.findViewById<LinearLayout>(R.id.linear_layout_delete).setOnClickListener {
-            deleteAttendance()
+            //deleteAttendance()
+            CommonHelper.showConfirmationDialog(
+                this@AdminAttendanceDetailActivity,
+                getString(R.string.confirmation_delete_attendance),
+                getString(R.string.confirmation_delete_attendance_description),
+                onPositiveClick = { deleteAttendance() },
+                onNegativeClick = { dialog.dismiss() }
+            )
             dialog.dismiss()
         }
         dialog.show()
