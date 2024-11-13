@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -21,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
@@ -76,12 +78,9 @@ class ClockOutActivity : AppCompatActivity() {
 
         binding.apply {
             btnBack.setOnClickListener { finish() }
-            btnClockOut.isEnabled = false
-            tvImageUrl.addTextChangedListener {
-                validateClockOutButton()
-            }
+
             edtDescriptionProject.addTextChangedListener {
-                validateClockOutButton()
+
             }
             openGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
         }
@@ -95,8 +94,8 @@ class ClockOutActivity : AppCompatActivity() {
 
             if (!hasClockIn) {
                 binding.apply {
-                    btnClockOut.isEnabled = false
-                    btnClockOut.alpha = 0.5f
+                    btnSave.isEnabled = false
+                    btnSave.alpha = 0.5f
                     // Optional: Show message why button is disabled
                     Toast.makeText(
                         this@ClockOutActivity,
@@ -106,25 +105,7 @@ class ClockOutActivity : AppCompatActivity() {
                 }
             } else {
                 // Even if clocked in, still need to validate other fields
-                validateClockOutButton()
-            }
-        }
-    }
 
-    private fun validateClockOutButton() {
-        binding.apply {
-            // Check all required fields
-            val hasImage = !tvImageUrl.text.isNullOrEmpty()
-            val hasDescription = !edtDescriptionProject.text.isNullOrEmpty()
-
-            // Enable button only if all conditions are met
-            btnClockOut.isEnabled = hasImage && hasDescription
-
-            // Optional: Change button appearance based on state
-            btnClockOut.alpha = if (btnClockOut.isEnabled) 1.0f else 0.5f
-
-            btnClockOut.setOnClickListener {
-                showConfirmationClockOut()
             }
         }
     }
@@ -166,6 +147,11 @@ class ClockOutActivity : AppCompatActivity() {
     }
 
     private fun clockOut() {
+        CommonHelper.showLoading(
+            this@ClockOutActivity,
+            binding.loadingBar,
+            binding.loadingOverlay
+        )
         lifecycleScope.launch {
             try {
                 val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
@@ -193,14 +179,12 @@ class ClockOutActivity : AppCompatActivity() {
                     totalMinutes = workTime.totalMinutes,
                     description = description
                 )
+                CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
 
                 finish()
             } catch (e: Exception) {
-                Toast.makeText(
-                    this@ClockOutActivity,
-                    "Error: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
+                Log.e("Clock_out", "Error: ${e.message}")
             }
         }
     }
@@ -221,16 +205,10 @@ class ClockOutActivity : AppCompatActivity() {
 
     private fun setupValidationListener() {
         binding.apply {
-            tvImageUrl.addTextChangedListener { checkFieldsForEmptyValues() }
-            edtDescriptionProject.addTextChangedListener { checkFieldsForEmptyValues() }
-            checkFieldsForEmptyValues()
+            edtDescriptionProject.addTextChangedListener {
+                validateClockOutButton() // Memanggil fungsi untuk memvalidasi tombol
+            }
         }
-    }
-
-    private fun checkFieldsForEmptyValues() {
-        val isImageSelected = !binding.tvImageUrl.text.isNullOrEmpty()
-        val isDescriptionFilled = !binding.edtDescriptionProject.text.isNullOrEmpty()
-        binding.btnClockOut.isEnabled = isImageSelected && isDescriptionFilled
     }
 
     private fun initFirebase() {
@@ -256,12 +234,12 @@ class ClockOutActivity : AppCompatActivity() {
         takePictureLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
                 if (success && photoUri != null) {
-                    Toast.makeText(this, "Picture taken: $photoUri", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = photoUri.toString()
+                    Glide.with(this)
+                        .load(photoUri)
+                        .into(binding.ivImage)
                     validateClockOutButton()
                 } else {
                     Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = ""
                     validateClockOutButton()
                 }
             }
@@ -270,15 +248,26 @@ class ClockOutActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 if (uri != null) {
                     photoUri = uri
-                    Toast.makeText(this, "Image selected: $uri", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = uri.toString()
+                    Glide.with(this)
+                        .load(uri)
+                        .into(binding.ivImage)
                     validateClockOutButton()
                 } else {
                     Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
-                    binding.tvImageUrl.text = ""
                     validateClockOutButton()
                 }
             }
+    }
+
+    private fun validateClockOutButton() {
+        binding.apply {
+            // Mengatur alpha tombol Save berdasarkan status enabled
+            btnSave.isEnabled = !edtDescriptionProject.text.isNullOrEmpty() && photoUri != null
+            btnSave.alpha = if (btnSave.isEnabled) 1.0f else 0.5f
+            btnSave.setOnClickListener {
+                showConfirmationClockOut()
+            }
+        }
     }
 
     private fun checkAndRequestPermissions() {
@@ -288,6 +277,7 @@ class ClockOutActivity : AppCompatActivity() {
             requestPermissionsLegacy()
         }
     }
+
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun requestPermissionsModern() {
@@ -360,13 +350,12 @@ class ClockOutActivity : AppCompatActivity() {
         pickImageLauncher.launch("image/*")
     }
 
-    private fun handleBackButton(){
+    private fun handleBackButton() {
         binding.apply {
             btnBack.setOnClickListener {
                 finish()
             }
         }
-
         onBackPressedDispatcher.addCallback(this@ClockOutActivity) {
             finish()
         }

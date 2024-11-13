@@ -64,14 +64,12 @@ class ClockInActivity : AppCompatActivity() {
         setupViewModel()
         setupCameraAndGalleryLaunchers()
         setupUI()
-        setupValidationListener()
         handleBackButton()
 
         cloudinaryHelper = CloudinaryHelper(this)
 
         binding.apply {
             btnSave.isEnabled = false
-
             btnBack.setOnClickListener {
                 finish()
             }
@@ -154,23 +152,6 @@ class ClockInActivity : AppCompatActivity() {
                 CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
             }
         }
-    }
-
-    //    Setup Validation Listener
-    private fun setupValidationListener() {
-        binding.apply {
-//            tvImageUrl.addTextChangedListener {
-//                checkFieldsForEmptyValues()
-//            }
-            checkFieldsForEmptyValues()
-        }
-    }
-
-    //    Check Field Listener
-    private fun checkFieldsForEmptyValues() {
-        //val isImageSelected = !binding.tvImageUrl.text.isNullOrEmpty()
-
-        //binding.btnSave.isEnabled = isImageSelected
     }
 
     //    Init Firebase
