@@ -83,6 +83,7 @@
     <string name="clock_in_proof">Clock In Proof</string>
     <string name="clock_out_proof">Clock Out Proof</string>
     <string name="work_description">Work Description</string>
+    <string name="menu">Menu</string>
 
     <!--  Setting  -->
     <string name="account">Account</string>

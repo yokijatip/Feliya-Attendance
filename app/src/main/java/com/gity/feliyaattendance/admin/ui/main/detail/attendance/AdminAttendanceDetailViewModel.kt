@@ -15,6 +15,9 @@ class AdminAttendanceDetailViewModel(private val repository: Repository) : ViewM
     private val _updateStatusSuccess = MutableLiveData<Boolean>()
     val updateStatusSuccess: LiveData<Boolean> get() = _updateStatusSuccess
 
+    private val _deleteAttendance = MutableLiveData<Unit>()
+    val deleteAttendance: LiveData<Unit> get() = _deleteAttendance
+
     fun fetchAttendanceDetail(attendanceId: String) {
         viewModelScope.launch {
             try {
@@ -34,6 +37,12 @@ class AdminAttendanceDetailViewModel(private val repository: Repository) : ViewM
             } catch (e: Exception) {
                 _updateStatusSuccess.postValue(false)
             }
+        }
+    }
+
+    fun deleteAttendance(attendanceId: String) {
+        viewModelScope.launch {
+            repository.deleteAttendance(attendanceId)
         }
     }
 }

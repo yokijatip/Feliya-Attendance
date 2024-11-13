@@ -1,8 +1,10 @@
 package com.gity.feliyaattendance.admin.ui.main.detail.attendance
 
+import android.app.Dialog
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.widget.ArrayAdapter
+import android.view.Window
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -28,9 +30,6 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         ViewModelFactory(Repository(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance()))
     }
 
-
-    //    Status Attendance Adapter
-    private lateinit var statusAttendanceAdapter: ArrayAdapter<String>
     private var attendanceId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +38,6 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupWindowInsets()
         setupListeners()
-        setupStatusAdapter()
 
 
         attendanceId = intent.getStringExtra("ATTENDANCE_ID")
@@ -47,7 +45,6 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         attendanceId?.let { id ->
             viewModel.fetchAttendanceDetail(id)
             observerAttendanceDetail()
-            setupSaveButton()
         }
         attendanceId?.let { swipeRefreshLayout(it) }
     }
@@ -62,12 +59,10 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
                     tvClockIn.text = CommonHelper.formatTimeOnly(detail.attendance.clockInTime)
                     tvClockOut.text = CommonHelper.formatTimeOnly(detail.attendance.clockOutTime)
                     tvWorkerDescription.text = detail.attendance.workDescription
-                    tvProjectStartDate.text = CommonHelper.formatTimestamp(detail.projectName.startDate)
-                    tvProjectEndDate.text = CommonHelper.formatTimestamp(detail.projectName.endDate)
                     tvProjectLocation.text = detail.projectName.location
                     tvTotalHours.text = detail.attendance.getFormattedTotalHours()
                     tvWorkingHours.text = detail.attendance.getFormattedWorkHours()
-                    tvOvertimeHours.text= detail.attendance.getFormattedOvertimeHours()
+                    tvOvertimeHours.text = detail.attendance.getFormattedOvertimeHours()
 
                     val imageList = arrayListOf(
                         SlideModel(detail.attendance.workProofIn, "Clock-In Proof"),
@@ -82,38 +77,16 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupSaveButton() {
-        binding.apply {
-            // Disable button initially
-            btnSave.isEnabled = false
-
-            // Set up dropdown item selection listener
-            edtStatus.setOnItemClickListener { _, _, _, _ ->
-                // Enable button if dropdown has a selected value
-                btnSave.isEnabled = !edtStatus.text.isNullOrEmpty()
-            }
-
-            btnSave.setOnClickListener {
-                val newStatus = edtStatus.text.toString()
-                attendanceId?.let {
-                    viewModel.updateAttendanceStatus(it, newStatus)
-                    observeUpdateStatus()
-                }
-            }
-        }
-    }
-
-
-    // Observasi hasil update status
-    private fun observeUpdateStatus() {
-        viewModel.updateStatusSuccess.observe(this) { isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(this, "Attendance status updated", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Error updating attendance status", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+//    // Observasi hasil update status
+//    private fun observeUpdateStatus() {
+//        viewModel.updateStatusSuccess.observe(this) { isSuccess ->
+//            if (isSuccess) {
+//                Toast.makeText(this, "Attendance status updated", Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(this, "Error updating attendance status", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
 
     private fun updateStatusUI(status: String? = null) {
         val (backgroundColor, textColor) = when (status) {
@@ -159,33 +132,17 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupStatusAdapter() {
-        statusAttendanceAdapter = ArrayAdapter(
-            this,
-            R.layout.list_item_roles,
-            resources.getStringArray(R.array.status_attendance).toMutableList()
-        )
-
-        binding.edtStatus.apply {
-            setAdapter(statusAttendanceAdapter)
-            // Menambahkan listener untuk perubahan status
-            setOnItemClickListener { _, _, _, _ ->
-                val selectedStatus = text.toString()
-                updateStatusUI(selectedStatus)
-            }
-        }
-    }
-
     private fun setupListeners() {
         binding.apply {
             btnBack.setOnClickListener { finish() }
-
-            btnSave.setOnClickListener {
-                val statusText = edtStatus.text.toString()
-                updateStatusUI(statusText)
-                showToast("Status updated to: $statusText")
+            fabApproved.setOnClickListener {
+                attendanceId?.let {
+                    viewModel.updateAttendanceStatus(it, approveAttendance())
+                    updateStatusUI(approveAttendance())
+                }
             }
         }
+        moreMenu()
     }
 
     private fun setupWindowInsets() {
@@ -214,6 +171,66 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun approveAttendance(): String {
+        val approve = "approved"
+        return approve
+    }
+
+    private fun rejectAttendance() {
+        val rejectedStatus = "rejected"
+        attendanceId?.let {
+            viewModel.updateAttendanceStatus(it, rejectedStatus)
+            updateStatusUI(rejectedStatus)
+        }
+    }
+
+    private fun pendingAttendance() {
+        val pendingStatus = "pending"
+        attendanceId?.let {
+            viewModel.updateAttendanceStatus(it, pendingStatus)
+            updateStatusUI(pendingStatus)
+        }
+    }
+
+    private fun deleteAttendance() {
+        attendanceId?.let {
+            viewModel.deleteAttendance(it)
+            finish()
+        }
+    }
+
+    private fun moreMenu() {
+        binding.apply {
+            btnMore.setOnClickListener {
+                showDialogImage()
+            }
+        }
+    }
+
+    private fun showDialogImage() {
+        val dialog = Dialog(this).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(true)
+            setContentView(R.layout.custom_dialog_menu_admin_attendance_detail)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_pending).setOnClickListener {
+            pendingAttendance()
+            dialog.dismiss()
+        }
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_rejected).setOnClickListener {
+            rejectAttendance()
+            dialog.dismiss()
+        }
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_delete).setOnClickListener {
+            deleteAttendance()
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

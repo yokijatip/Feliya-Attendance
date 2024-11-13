@@ -654,5 +654,14 @@ class Repository(
         }
     }
 
+    suspend fun deleteAttendance(attendanceId: String): Result<Unit> {
+        return try {
+            firebaseFirestore.collection("attendance").document(attendanceId).delete().await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
 
 }
