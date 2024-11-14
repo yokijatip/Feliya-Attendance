@@ -3,7 +3,7 @@ package com.gity.feliyaattendance.ui.main.attendance
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -46,6 +46,8 @@ class ShowProjectActivity : AppCompatActivity() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AttendanceViewModel::class.java]
 
+        handleBackButton()
+
         val adapter = ProjectAdapter { selectedProject ->
             val intent = Intent(this, ClockInActivity::class.java).apply {
                 putExtra("SELECTED_PROJECT", selectedProject)
@@ -70,7 +72,16 @@ class ShowProjectActivity : AppCompatActivity() {
             }
         }
 
-
         viewModel.fetchActiveProjects()
+    }
+
+    private fun handleBackButton() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        onBackPressedDispatcher.addCallback(this@ShowProjectActivity) {
+            finish()
+        }
     }
 }

@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/container_logo_and_notification"
-        tools:listitem="@layout/list_item_attendance" />
+        tools:listitem="@layout/list_item_project" />
 
     <!--  Guideline  -->
     <androidx.constraintlayout.widget.Guideline

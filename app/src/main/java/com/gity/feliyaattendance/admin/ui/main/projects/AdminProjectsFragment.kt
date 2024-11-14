@@ -57,6 +57,11 @@ class AdminProjectsFragment : Fragment() {
             btnAddProject.setOnClickListener {
                 navigateToAddProject()
             }
+
+            btnFilter.setOnClickListener {
+                // Implement filter functionality here
+                Toast.makeText(requireContext(), "Filter button clicked", Toast.LENGTH_SHORT).show()
+            }
         }
 
         viewModel.projects.observe(viewLifecycleOwner) { result ->
