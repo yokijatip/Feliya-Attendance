@@ -58,6 +58,48 @@ class CloudinaryHelper(private val context: Context) {
             }
         }
 
+    suspend fun uploadProjectImage(imageUri: Uri, locationDefault: String = "Home", locationTypeDefault: String = "projects"): String =
+        suspendCancellableCoroutine { continuation ->
+            try {
+
+//            Kompress gambar
+                val compressedFile = compressImage(imageUri)
+
+//            Struktur Folder: Home/userId/attendance
+                val folder = "$locationDefault/$locationDefault"
+                val fileName = "project_${System.currentTimeMillis()}"
+
+                MediaManager.get().upload(compressedFile.absolutePath)
+                    .option("folder", folder)
+                    .option("public_id", fileName)
+                    .callback(object : UploadCallback {
+                        override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                            val imageUrl = resultData["secure_url"] as String
+                            continuation.resume(imageUrl) {
+                                compressedFile.delete() // Hapus file setelah selesai
+                            }
+                        }
+
+                        override fun onError(requestId: String, error: ErrorInfo) {
+                            continuation.resumeWithException(Exception(error.description))
+                            compressedFile.delete()
+                        }
+
+                        override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
+                            // Tambahkan kode untuk menangani progress jika diperlukan
+                        }
+
+                        override fun onStart(requestId: String) {}
+                        override fun onReschedule(requestId: String, error: ErrorInfo) {}
+
+                    })
+                    .dispatch()
+
+            } catch (e: Exception) {
+                continuation.resumeWithException(e)
+            }
+        }
+
     private fun compressImage(imageUri: Uri): File {
         val inputStream = context.contentResolver.openInputStream(imageUri)
         val bitmap = BitmapFactory.decodeStream(inputStream)

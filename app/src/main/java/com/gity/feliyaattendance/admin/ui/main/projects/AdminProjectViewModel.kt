@@ -23,11 +23,12 @@ class   AdminProjectViewModel(private val repository: Repository) : ViewModel() 
         startDate: Date,
         endDate: Date,
         status: String,
-        description: String
+        description: String,
+        projectImage: String
     ) {
         viewModelScope.launch {
             val result = repository.addProject(
-                projectName, location, startDate, endDate, status, description
+                projectName, location, startDate, endDate, status, description, projectImage
             )
             _saveProjectResult.postValue(result)
         }

@@ -1,17 +1,12 @@
 package com.gity.feliyaattendance.adapter
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.data.model.Project
 import com.gity.feliyaattendance.databinding.ListItemProjectBinding
 import com.gity.feliyaattendance.helper.CommonHelper
-import com.google.android.material.card.MaterialCardView
 
 class ProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
     androidx.recyclerview.widget.ListAdapter<Project, ProjectAdapter.ProjectViewHolder>(
@@ -25,12 +20,12 @@ class ProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
             binding.tvLocation.text = project.location
             binding.tvStartDate.text = CommonHelper.formatTimestamp(project.startDate)
             binding.tvEndDate.text = CommonHelper.formatTimestamp(project.endDate)
-            binding.tvProjectStatus.text = project.status
+            //binding.tvProjectStatus.text = project.status
             itemView.setOnClickListener {
                 project.projectId
                 onProjectSelected(project)
             }
-            setProjectStatus(project.status, binding.cardProjectStatus, binding.tvProjectStatus)
+            //setProjectStatus(project.status, binding.cardProjectStatus, binding.tvProjectStatus)
         }
     }
 
@@ -54,60 +49,60 @@ class ProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
         }
     }
 
-    private fun setProjectStatus(status: String, cardView: MaterialCardView, textView: TextView) {
-        when (status) {
-            "Active" -> {
-                cardView.setBackgroundTintList(
-                    ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            cardView.context,
-                            R.color.status_approved_background
-                        )
-                    )
-                )
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        cardView.context,
-                        R.color.status_approved
-                    )
-                )
-            }
-
-            "Inactive" -> {
-                cardView.setBackgroundTintList(
-                    ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            cardView.context,
-                            R.color.status_rejected_background
-                        )
-                    )
-                )
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        cardView.context,
-                        R.color.status_rejected
-                    )
-                )
-            }
-
-            "Completed" -> {
-                cardView.setBackgroundTintList(
-                    ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            cardView.context,
-                            R.color.status_pending_background
-                        )
-                    )
-                )
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        cardView.context,
-                        R.color.status_pending
-                    )
-                )
-            }
-        }
-    }
+//    private fun setProjectStatus(status: String, cardView: MaterialCardView, textView: TextView) {
+//        when (status) {
+//            "Active" -> {
+//                cardView.setBackgroundTintList(
+//                    ColorStateList.valueOf(
+//                        ContextCompat.getColor(
+//                            cardView.context,
+//                            R.color.status_approved_background
+//                        )
+//                    )
+//                )
+//                textView.setTextColor(
+//                    ContextCompat.getColor(
+//                        cardView.context,
+//                        R.color.status_approved
+//                    )
+//                )
+//            }
+//
+//            "Inactive" -> {
+//                cardView.setBackgroundTintList(
+//                    ColorStateList.valueOf(
+//                        ContextCompat.getColor(
+//                            cardView.context,
+//                            R.color.status_rejected_background
+//                        )
+//                    )
+//                )
+//                textView.setTextColor(
+//                    ContextCompat.getColor(
+//                        cardView.context,
+//                        R.color.status_rejected
+//                    )
+//                )
+//            }
+//
+//            "Completed" -> {
+//                cardView.setBackgroundTintList(
+//                    ColorStateList.valueOf(
+//                        ContextCompat.getColor(
+//                            cardView.context,
+//                            R.color.status_pending_background
+//                        )
+//                    )
+//                )
+//                textView.setTextColor(
+//                    ContextCompat.getColor(
+//                        cardView.context,
+//                        R.color.status_pending
+//                    )
+//                )
+//            }
+//        }
+//    }
 
 
 }

@@ -78,10 +78,6 @@ class ClockOutActivity : AppCompatActivity() {
 
         binding.apply {
             btnBack.setOnClickListener { finish() }
-
-            edtDescriptionProject.addTextChangedListener {
-
-            }
             openGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
         }
         checkClockInStatus()

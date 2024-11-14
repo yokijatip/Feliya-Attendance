@@ -12,6 +12,7 @@ data class Project(
     var startDate: Timestamp? = null, // Menggunakan Timestamp
     var endDate: Timestamp? = null,
     val status: String = "",
-    var description: String = ""
+    var description: String = "",
+    var projectImage: String = ""
 ) : Parcelable
 

@@ -182,7 +182,6 @@
     <string name="admin_menu_delete_account_title_confirmation">Delete Account Confirmation</string>
     <string name="admin_menu_delete_account_description_confirmation">Are you sure want to delete worker account?</string>
 
-
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gity.feliyaattendance.adapter.ProjectAdapter
+import com.gity.feliyaattendance.admin.adapter.AdminProjectAdapter
 import com.gity.feliyaattendance.databinding.FragmentAdminProjectsBinding
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
@@ -42,7 +42,7 @@ class AdminProjectsFragment : Fragment() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AdminProjectViewModel::class.java]
 
-        val adapter = ProjectAdapter { selectedProject ->
+        val adapter = AdminProjectAdapter { selectedProject ->
             Toast.makeText(
                 requireContext(),
                 "Selected Project: ${selectedProject.projectName}",

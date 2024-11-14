@@ -114,7 +114,8 @@ class Repository(
         startDate: Date,
         endDate: Date,
         status: String,
-        description: String
+        description: String,
+        projectImage: String,
     ): Result<Unit> {
         return try {
             val projectId = UUID.randomUUID().toString()  // Generate projectId secara otomatis
@@ -130,7 +131,8 @@ class Repository(
                 "endDate" to endDate,
                 "status" to status,
                 "description" to description,
-                "createdAt" to FieldValue.serverTimestamp()  // Menyimpan waktu pembuatan
+                "createdAt" to FieldValue.serverTimestamp(),  // Menyimpan waktu pembuatan
+                "projectImage" to projectImage,
             )
 
             firebaseFirestore.collection("projects").document(projectId).set(project).await()

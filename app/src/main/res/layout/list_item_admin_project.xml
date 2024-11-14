@@ -23,8 +23,8 @@
 
         <!-- Image Project -->
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             app:cardCornerRadius="20dp"
             app:strokeWidth="0dp">
 
@@ -40,17 +40,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginVertical="4dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginVertical="4dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <!-- Location -->
                 <LinearLayout
@@ -79,6 +79,28 @@
 
                 </LinearLayout>
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_project_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/status_pending_background"
+                    app:cardCornerRadius="14dp"
+                    app:strokeWidth="0dp">
+
+                    <TextView
+                        android:id="@+id/tv_project_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:paddingStart="12dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/status_project_inactive"
+                        android:textColor="@color/status_pending" />
+
+                </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
 
             <!-- Project Name -->
@@ -89,11 +111,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:layout_marginBottom="4dp"
                 android:fontFamily="@font/inter_medium"
                 android:maxLines="2"
                 android:textSize="15sp"
-                tools:text="Project Sency Blok M Bandung Indonesia Cicilalang" />
+                tools:text="Project Sency Blok M Bandung Indonesia Ciicilang" />
 
             <!-- Date -->
             <LinearLayout
