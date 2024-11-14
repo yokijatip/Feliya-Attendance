@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Window
 import android.widget.ArrayAdapter
@@ -67,25 +69,109 @@ class AdminAddProjectActivity : AppCompatActivity() {
         binding = ActivityAdminAddProjectBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        cloudinaryHelper = CloudinaryHelper(this@AdminAddProjectActivity)
+
+        initializeComponents()
+        setupUI()
+        setupValidations()
+        setupObservers()
+    }
+
+    private fun setupValidations() {
+        // Add text change listeners to all edit texts
+        binding.apply {
+            edtNameProject.addTextChangedListener(createTextWatcher())
+            edtLocationProject.addTextChangedListener(createTextWatcher())
+            edtStatusProject.addTextChangedListener(createTextWatcher())
+            edtDescriptionProject.addTextChangedListener(createTextWatcher())
+        }
+    }
+
+    private fun initializeComponents() {
         // Initialize ViewModel
         repository = Repository(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AdminProjectViewModel::class.java]
 
-        setupUI()
+        // Setup other components
         setupStatusProjectDropdown()
         setupListeners()
         setupCameraAndGalleryLaunchers()
-        observeViewModel()
+    }
 
+    private fun createTextWatcher(): TextWatcher {
+        return object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                validateForm()
+            }
+        }
+    }
+
+
+    private fun validateForm() {
+        val isValid = isFormValid()
+        binding.btnSave.isEnabled = isValid
+
+        // Optional: Change button appearance based on validity
+        binding.btnSave.alpha = if (isValid) 1.0f else 0.5f
+    }
+
+    private fun isFormValid(): Boolean {
+        return binding.run {
+            !edtNameProject.text.isNullOrEmpty() &&
+                    !edtLocationProject.text.isNullOrEmpty() &&
+                    !edtStatusProject.text.isNullOrEmpty() &&
+                    !edtDescriptionProject.text.isNullOrEmpty() &&
+                    photoUri != null && // Check if image is selected
+                    startDate != null && // Check if start date is selected
+                    endDate != null && // Check if end date is selected
+                    validateDates() // Check if dates are valid
+        }
+    }
+
+    private fun validateDates(): Boolean {
+        return if (startDate != null && endDate != null) {
+            startDate!!.before(endDate) || startDate!! == endDate
+        } else {
+            false
+        }
+    }
+
+    private fun setupStatusProjectDropdown() {
+        statusProjectAdapter = ArrayAdapter(this, R.layout.list_item_roles, setupStatusProject())
+        binding.edtStatusProject.setAdapter(statusProjectAdapter)
+    }
+
+    private fun setupListeners() {
         binding.apply {
-            openGalleryOrCamera.setOnClickListener {
-                checkAndRequestPermissions()
+            btnStartDate.setOnClickListener {
+                showDatePicker { date ->
+                    startDate = date
+                    tvStartDate.text = date.formatToString()
+                    validateForm()
+                }
             }
 
-            linearLayoutOpenGalleryOrCamera.setOnClickListener {
-                checkAndRequestPermissions()
+            btnEndDate.setOnClickListener {
+                showDatePicker { date ->
+                    endDate = date
+                    tvEndDate.text = date.formatToString()
+                    validateForm()
+                }
             }
+
+            btnSave.apply {
+                isEnabled = false
+                alpha = 0.5f
+                setOnClickListener {
+                    showConfirmationAddProject()
+                }
+            }
+
+            openGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
+            linearLayoutOpenGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
         }
     }
 
@@ -102,7 +188,7 @@ class AdminAddProjectActivity : AppCompatActivity() {
         )
     }
 
-    private fun observeViewModel() {
+    private fun setupObservers() {
         viewModel.saveProjectResult.observe(this) { result ->
             result.onSuccess {
                 Toast.makeText(this, "Project added successfully", Toast.LENGTH_SHORT).show()
@@ -124,12 +210,6 @@ class AdminAddProjectActivity : AppCompatActivity() {
         handleBackButton()
     }
 
-    private fun setupStatusProjectDropdown() {
-        statusProjectAdapter =
-            ArrayAdapter(this, R.layout.list_item_roles, setupStatusProject())
-        binding.edtStatusProject.setAdapter(statusProjectAdapter)
-    }
-
     private fun setupStatusProject(): List<String> {
         return listOf(
             getString(R.string.status_project_active),
@@ -138,90 +218,54 @@ class AdminAddProjectActivity : AppCompatActivity() {
         )
     }
 
-    private fun setupListeners() {
-        binding.apply {
-            btnStartDate.setOnClickListener {
-                showDatePicker { date ->
-                    binding.tvStartDate.text =
-                        SimpleDateFormat("dd - MMMM - yyyy", Locale.getDefault()).format(date)
-                    startDate = date
-                }
-            }
-            btnEndDate.setOnClickListener {
-                showDatePicker { date ->
-                    binding.tvEndDate.text =
-                        SimpleDateFormat("dd - MMMM - yyyy", Locale.getDefault()).format(date)
-                    endDate = date
+    private fun setupCameraAndGalleryLaunchers() {
+        takePictureLauncher =
+            registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+                if (success && photoUri != null) {
+                    updateProjectImage(photoUri!!)
+                } else {
+                    showError(getString(R.string.error_taking_picture))
                 }
             }
 
-            btnSave.setOnClickListener {
-                showConfirmationAddProject()
+        pickImageLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                uri?.let {
+                    photoUri = it
+                    updateProjectImage(it)
+                } ?: showError(getString(R.string.error_picking_image))
             }
-
-        }
     }
 
     private fun addProject() {
-        if (validateInputs()) {
-            lifecycleScope.launch {
-                try {
-                    CommonHelper.showLoading(
-                        this@AdminAddProjectActivity,
-                        binding.loadingBar,
-                        binding.loadingOverlay
-                    )
-                    val imageUrl = photoUri?.let {
-                        cloudinaryHelper.uploadProjectImage(it, "Home", "projects")
-                    } ?: throw Exception("No Image Selected")
+        if (!isFormValid()) return
 
-                    viewModel.addProject(
-                        binding.edtNameProject.text.toString(),
-                        binding.edtLocationProject.text.toString(),
-                        startDate ?: Date(),
-                        endDate ?: Date(),
-                        binding.edtStatusProject.text.toString(),
-                        binding.edtDescriptionProject.text.toString(),
-                        imageUrl
-                    )
-                    CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
-                    finish()
-                } catch (e: Exception) {
-                    CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
-                    Log.e("AdminAddProjectActivity", "Error : ${e.message}")
-                }
+        lifecycleScope.launch {
+            try {
+                showLoading(true)
+
+                val imageUrl = photoUri?.let {
+                    cloudinaryHelper.uploadProjectImage(it, "Home", "projects")
+                } ?: throw Exception("No Image Selected")
+
+                viewModel.addProject(
+                    projectName = binding.edtNameProject.text.toString(),
+                    location = binding.edtLocationProject.text.toString(),
+                    startDate = startDate!!,
+                    endDate = endDate!!,
+                    status = binding.edtStatusProject.text.toString(),
+                    description = binding.edtDescriptionProject.text.toString(),
+                    projectImage = imageUrl
+                )
+
+                showLoading(false)
+                finish()
+            } catch (e: Exception) {
+                showLoading(false)
+                showError(e.message ?: getString(R.string.error_general))
+                Log.e("AdminAddProjectActivity", "Error: ${e.message}")
             }
         }
-    }
-
-    private fun validateInputs(): Boolean {
-        var isValid = true
-
-        // Validasi Project Name
-        if (binding.edtNameProject.text.isNullOrEmpty()) {
-            binding.edtNameProject.error = getString(R.string.error_empty_project_name)
-            isValid = false
-        } else {
-            binding.edtNameProject.error = null
-        }
-
-        // Validasi Location
-        if (binding.edtLocationProject.text.isNullOrEmpty()) {
-            binding.edtLocationProject.error = getString(R.string.error_empty_location)
-            isValid = false
-        } else {
-            binding.edtLocationProject.error = null
-        }
-
-        // Validasi Status Project
-        if (binding.edtStatusProject.text.isNullOrEmpty()) {
-            binding.edtStatusProjectLayout.error = getString(R.string.error_empty_status)
-            isValid = false
-        } else {
-            binding.edtStatusProjectLayout.error = null
-        }
-
-        return isValid
     }
 
     private fun showDatePicker(onDateSelected: (Date) -> Unit) {
@@ -318,33 +362,11 @@ class AdminAddProjectActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupCameraAndGalleryLaunchers() {
-        takePictureLauncher =
-            registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-                if (success && photoUri != null) {
-                    Glide.with(this)
-                        .load(photoUri)
-                        .into(binding.ivImage)
-                    //validateClockOutButton()
-                } else {
-                    Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
-                    //validateClockOutButton()
-                }
-            }
-
-        pickImageLauncher =
-            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-                if (uri != null) {
-                    photoUri = uri
-                    Glide.with(this)
-                        .load(uri)
-                        .into(binding.ivImage)
-                    //validateClockOutButton()
-                } else {
-                    Toast.makeText(this, "Failed to pick image", Toast.LENGTH_SHORT).show()
-                    //validateClockOutButton()
-                }
-            }
+    private fun updateProjectImage(uri: Uri) {
+        Glide.with(this)
+            .load(uri)
+            .into(binding.ivImage)
+        validateForm()
     }
 
     private fun handleBackButton() {
@@ -354,6 +376,26 @@ class AdminAddProjectActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback {
             finish()
         }
+    }
+
+    private fun showLoading(show: Boolean) {
+        if (show) {
+            CommonHelper.showLoading(
+                this@AdminAddProjectActivity,
+                binding.loadingBar,
+                binding.loadingOverlay
+            )
+        } else {
+            CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
+        }
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun Date.formatToString(): String {
+        return SimpleDateFormat("dd - MMMM - yyyy", Locale.getDefault()).format(this)
     }
 }
 

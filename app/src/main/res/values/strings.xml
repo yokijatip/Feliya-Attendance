@@ -133,6 +133,9 @@
     <string name="error_empty_project_name">Project Name cannot be empty</string>
     <string name="error_empty_location">Location cannot be empty</string>
     <string name="error_empty_status">Please select a status</string>
+    <string name="error_taking_picture">Failed to take picture</string>
+    <string name="error_picking_image">Failed to pick image</string>
+    <string name="error_general">An error occurred</string>
 
     <!--  Dialog Text  -->
     <string name="title_dialog_confirmation">Are you sure?</string>

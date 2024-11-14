@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.data.model.Project
 import com.gity.feliyaattendance.databinding.ListItemAdminProjectBinding
@@ -30,6 +31,9 @@ class AdminProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
                 project.projectId
                 onProjectSelected(project)
             }
+            Glide.with(itemView.context)
+                .load(project.projectImage)
+                .placeholder(R.drawable.iv_placeholder).into(binding.ivProjectImage)
             setProjectStatus(project.status, binding.cardProjectStatus, binding.tvProjectStatus)
         }
     }
