@@ -11,7 +11,7 @@
     app:layout_constraintEnd_toStartOf="@+id/guideline_end"
     app:layout_constraintStart_toStartOf="@+id/guideline_start"
     app:layout_constraintTop_toTopOf="@+id/guideline_top"
-    app:strokeColor="@color/primary_color"
+    app:strokeColor="@color/secondary_color"
     app:strokeWidth="1dp">
 
     <LinearLayout

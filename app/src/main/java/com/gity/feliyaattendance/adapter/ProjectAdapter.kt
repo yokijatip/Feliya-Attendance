@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.data.model.Project
 import com.gity.feliyaattendance.databinding.ListItemProjectBinding
 import com.gity.feliyaattendance.helper.CommonHelper
@@ -25,6 +27,9 @@ class ProjectAdapter(private val onProjectSelected: (Project) -> Unit) :
                 project.projectId
                 onProjectSelected(project)
             }
+            Glide.with(itemView.context)
+                .load(project.projectImage)
+                .placeholder(R.drawable.iv_placeholder).into(binding.ivProjectImage)
             //setProjectStatus(project.status, binding.cardProjectStatus, binding.tvProjectStatus)
         }
     }
