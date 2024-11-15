@@ -84,7 +84,6 @@ class AdminListWorkerActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun handleBackButton() {
         binding.btnBack.setOnClickListener {
             finish()

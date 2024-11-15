@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_medium"
             android:padding="12dp"
+            android:background="@color/gray_ultra_light"
             android:text="@string/select_camera_or_gallery"
             android:textColor="@color/black"
             android:textSize="14sp" />
