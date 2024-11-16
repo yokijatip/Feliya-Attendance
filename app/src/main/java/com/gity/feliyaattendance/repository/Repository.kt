@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.repository
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Environment
 import android.util.Log
@@ -19,6 +20,7 @@ import org.apache.poi.ss.usermodel.FillPatternType
 import org.apache.poi.ss.usermodel.HorizontalAlignment
 import org.apache.poi.ss.usermodel.IndexedColors
 import org.apache.poi.ss.usermodel.VerticalAlignment
+import org.apache.poi.ss.util.CellRangeAddress
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
 import java.io.FileOutputStream
@@ -546,7 +548,17 @@ class Repository(
                     bold = true
                     color = IndexedColors.WHITE.index
                 })
+            }
 
+            // Style untuk total
+            val totalStyle = workbook.createCellStyle().apply {
+                fillForegroundColor = IndexedColors.GREY_25_PERCENT.index
+                fillPattern = FillPatternType.SOLID_FOREGROUND
+                alignment = HorizontalAlignment.CENTER
+                verticalAlignment = VerticalAlignment.CENTER
+                setFont(workbook.createFont().apply {
+                    bold = true
+                })
             }
 
             val headers = listOf(
@@ -581,6 +593,73 @@ class Repository(
                 row.createCell(7).setCellValue(report.projectId)
             }
 
+            // Function untuk menghitung total menit dari format "HH:mm"
+            fun calculateTotalMinutes(timeStr: String): Int {
+                return try {
+                    val parts = timeStr.trim().split(":")
+                    if (parts.size == 2) {
+                        val hours = parts[0].trim().toIntOrNull() ?: 0
+                        val minutes = parts[1].trim().toIntOrNull() ?: 0
+                        (hours * 60) + minutes
+                    } else {
+                        0
+                    }
+                } catch (e: Exception) {
+                    0
+                }
+            }
+
+            // Function untuk memformat menit ke format "HH:mm"
+            fun formatMinutesToTime(totalMinutes: Int): String {
+                val hours = totalMinutes / 60
+                val minutes = totalMinutes % 60
+                return String.format("%02d:%02d", hours, minutes)
+            }
+
+            // Hitung total untuk setiap jenis jam
+            var totalWorkMinutes = 0
+            var totalOvertimeMinutes = 0
+            var totalAllMinutes = 0
+
+            attendanceReports.forEach { report ->
+                totalWorkMinutes += calculateTotalMinutes(report.workHours)
+                totalOvertimeMinutes += calculateTotalMinutes(report.overtimeHours)
+                totalAllMinutes += calculateTotalMinutes(report.totalHours)
+            }
+
+            // Tambahkan baris total
+            val totalRow = sheet.createRow(attendanceReports.size + 1)
+
+            // Buat cell "Total" di kolom pertama
+            totalRow.createCell(0).apply {
+                setCellValue("Total")
+                cellStyle = totalStyle
+            }
+
+            // Set nilai total untuk setiap jenis jam
+            totalRow.createCell(3).apply {
+                setCellValue(formatMinutesToTime(totalWorkMinutes))
+                cellStyle = totalStyle
+            }
+
+            totalRow.createCell(4).apply {
+                setCellValue(formatMinutesToTime(totalOvertimeMinutes))
+                cellStyle = totalStyle
+            }
+
+            totalRow.createCell(5).apply {
+                setCellValue(formatMinutesToTime(totalAllMinutes))
+                cellStyle = totalStyle
+            }
+
+            // Merge cells untuk label "Total"
+            sheet.addMergedRegion(CellRangeAddress(
+                attendanceReports.size + 1, // first row (0-based)
+                attendanceReports.size + 1, // last row
+                0, // first column (0-based)
+                2  // last column
+            ))
+
             // Auto size kolom
             headers.indices.forEach { sheet.setColumnWidth(it, 6000) }
 
@@ -589,14 +668,6 @@ class Repository(
                 "Laporan_Absensi_${userName}_${dateFormat.format(startTimestamp.toDate())}_to_${
                     dateFormat.format(endTimestamp.toDate())
                 }.xlsx"
-
-            // Simpan file
-            //val directory = File((Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi")
-            //val directory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "LaporanAbsensi")
-
-//            // Simpan ke Documents folder
-//            val documentsPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-//            val directory = File(documentsPath, "LaporanAbsensi")
 
             // Buat struktur folder
             val documentsPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
