@@ -85,6 +85,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         viewModel.fetchWorkerDetail(workerId)
 
         observeExcelGeneration()
+        observerUpdateStatus()
         handleMoreMenu()
 
     }
@@ -103,7 +104,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
     }
 
     private fun suspendAccount(): String {
-        val suspend = "suspend"
+        val suspend = "suspended"
         return suspend
     }
 
@@ -117,10 +118,12 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
 
         dialog.findViewById<LinearLayout>(R.id.linear_layout_activate_account).setOnClickListener {
             //viewModel.updateWorkerStatus(workerId, activateAccount())
+            viewModel.updateStatusAccount(workerId, activateAccount())
             dialog.dismiss()
         }
 
         dialog.findViewById<LinearLayout>(R.id.linear_layout_suspend_account).setOnClickListener {
+            viewModel.updateStatusAccount(workerId, suspendAccount())
             dialog.dismiss()
         }
 
@@ -138,18 +141,31 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         dialog.show()
+    }
 
+    private fun observerUpdateStatus() {
+        viewModel.updateStatusAccount.observe(this) { result ->
+            result.onSuccess {
+                CommonHelper.showInformationSuccessDialog(
+                    this@AdminWorkerDetailActivity,
+                    getString(R.string.successfully),
+                    getString(R.string.process_success)
+                )
+            }.onFailure {
+                CommonHelper.showInformationFailedDialog(
+                    this@AdminWorkerDetailActivity,
+                    getString(R.string.failed),
+                    getString(R.string.process_failed)
+                )
+            }
 
+        }
     }
 
     private fun workerDetailMenuSetup() {
         val workerDetailMenuList = listOf(
             DetailWorkerMenu(getString(R.string.admin_menu_generate_excel), R.drawable.ic_table),
             DetailWorkerMenu(getString(R.string.admin_menu_generate_pdf), R.drawable.ic_file_text),
-            DetailWorkerMenu(
-                getString(R.string.admin_menu_delete_account),
-                R.drawable.ic_trash_solid
-            )
         )
 
         val detailWorkerMenuAdapter = WorkerDetailAdapter(workerDetailMenuList) { menu ->
@@ -169,19 +185,6 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                         "Generated PDF",
                         Toast.LENGTH_SHORT
                     ).show()
-                }
-
-                getString(R.string.admin_menu_delete_account) -> {
-                    CommonHelper.showConfirmationDialog(
-                        this@AdminWorkerDetailActivity,
-                        title = getString(R.string.admin_menu_delete_account_title_confirmation),
-                        description = getString(R.string.admin_menu_delete_account_description_confirmation),
-                        positiveButtonText = "Yes",
-                        negativeButtonText = "No",
-                        onPositiveClick = {
-                            viewModel.deleteWorkerAccount(workerId)
-                            finish()
-                        })
                 }
             }
         }

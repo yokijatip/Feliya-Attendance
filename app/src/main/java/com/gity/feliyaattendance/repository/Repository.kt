@@ -350,6 +350,18 @@ class Repository(
         }
     }
 
+//    Change status Account
+    suspend fun updateStatusAccount(userId: String, newStatus: String): Result<Unit> {
+        return try {
+            firebaseFirestore.collection("users").document(userId)
+                .update("status", newStatus).await()
+
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     //    Get Detail Attendance
     suspend fun getAttendanceDetail(attendanceId: String): Result<AttendanceDetail> {
         return try {
@@ -584,8 +596,12 @@ class Repository(
                 val row = sheet.createRow(index + 1)
 
                 row.createCell(0).setCellValue(dateFormat.format(report.date?.toDate() ?: Date()))
-                row.createCell(1).setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) } ?: "")
-                row.createCell(2).setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) } ?: "")
+                row.createCell(1)
+                    .setCellValue(report.clockInTime?.let { dateTimeFormat.format(it.toDate()) }
+                        ?: "")
+                row.createCell(2)
+                    .setCellValue(report.clockOutTime?.let { dateTimeFormat.format(it.toDate()) }
+                        ?: "")
                 row.createCell(3).setCellValue(report.workHours)
                 row.createCell(4).setCellValue(report.overtimeHours)
                 row.createCell(5).setCellValue(report.totalHours)
@@ -653,12 +669,14 @@ class Repository(
             }
 
             // Merge cells untuk label "Total"
-            sheet.addMergedRegion(CellRangeAddress(
-                attendanceReports.size + 1, // first row (0-based)
-                attendanceReports.size + 1, // last row
-                0, // first column (0-based)
-                2  // last column
-            ))
+            sheet.addMergedRegion(
+                CellRangeAddress(
+                    attendanceReports.size + 1, // first row (0-based)
+                    attendanceReports.size + 1, // last row
+                    0, // first column (0-based)
+                    2  // last column
+                )
+            )
 
             // Auto size kolom
             headers.indices.forEach { sheet.setColumnWidth(it, 6000) }
@@ -670,7 +688,8 @@ class Repository(
                 }.xlsx"
 
             // Buat struktur folder
-            val documentsPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            val documentsPath =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
             val baseDirectory = File(documentsPath, "LaporanAbsensi")
             val yearDirectory = File(baseDirectory, year)
             val monthDirectory = File(yearDirectory, month)
@@ -710,10 +729,8 @@ class Repository(
     suspend fun getDetailAccount(userId: String): Result<Worker> {
         return try {
             // Mendapatkan referensi koleksi "workers" di Firestore
-            val documentSnapshot = firebaseFirestore.collection("users")
-                .document(userId)
-                .get()
-                .await()
+            val documentSnapshot =
+                firebaseFirestore.collection("users").document(userId).get().await()
 
             if (documentSnapshot.exists()) {
                 val worker = documentSnapshot.toObject(Worker::class.java)

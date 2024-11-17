@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gity.feliyaattendance.admin.data.model.MonthlyDashboard
 import com.gity.feliyaattendance.admin.data.model.Worker
 import com.gity.feliyaattendance.repository.Repository
 import com.google.firebase.Timestamp
@@ -23,6 +22,9 @@ class AdminWorkerDetailViewModel(private val repository: Repository) : ViewModel
     private val _deleteAccountStatus = MutableLiveData<Result<Unit>>()
     val deleteAccountStatus: LiveData<Result<Unit>> get() = _deleteAccountStatus
 
+    private val _updateStatusAccount = MutableLiveData<Result<Unit>>()
+    val updateStatusAccount: LiveData<Result<Unit>> get() = _updateStatusAccount
+
     // Fungsi untuk mengambil detail pekerja berdasarkan workerId
     fun fetchWorkerDetail(workerId: String) {
         viewModelScope.launch {
@@ -31,7 +33,19 @@ class AdminWorkerDetailViewModel(private val repository: Repository) : ViewModel
         }
     }
 
-//    Generate Attendance Monthly Report
+    //    mengubah Status Account
+    fun updateStatusAccount(userId: String, newStatus: String) {
+        viewModelScope.launch {
+            try {
+                val result = repository.updateStatusAccount(userId, newStatus)
+                _updateStatusAccount.postValue(result)
+            } catch (e: Exception) {
+                _updateStatusAccount.postValue(Result.failure(e))
+            }
+        }
+    }
+
+    //    Generate Attendance Monthly Report
     fun generateAttendanceReport(
         context: Context,
         userId: String,
@@ -40,7 +54,8 @@ class AdminWorkerDetailViewModel(private val repository: Repository) : ViewModel
         endTimestamp: Timestamp
     ) {
         viewModelScope.launch {
-            val attendanceResult = repository.generateExcelReport(userId, startTimestamp, endTimestamp)
+            val attendanceResult =
+                repository.generateExcelReport(userId, startTimestamp, endTimestamp)
 
             attendanceResult.onSuccess { attendanceReports ->
                 val excelResult = repository.generateExcelFile(

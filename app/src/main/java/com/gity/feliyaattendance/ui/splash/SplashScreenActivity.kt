@@ -53,8 +53,7 @@ class SplashScreenActivity : AppCompatActivity() {
         if (currentUser != null) {
             try {
 //                Ambil data user dari firestore
-                val snapshot =
-                    firebaseFirestore.collection("users").document(currentUser.uid).get().await()
+                val snapshot = firebaseFirestore.collection("users").document(currentUser.uid).get().await()
                 val role = snapshot.getString("role")
 
 //                Arahkan user ke halaman sesuai role
