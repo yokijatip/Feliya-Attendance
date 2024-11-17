@@ -147,6 +147,13 @@
     <string name="ok">OK</string>
     <string name="process_success">The process you have done has been successful</string>
     <string name="process_failed">The process you are performing has failed.</string>
+    <string name="account_pending_message">Your account is pending approval. Please wait for admin confirmation.</string>
+    <string name="account_suspended_message">Your account has been suspended. Please contact admin for more information.</string>
+    <string name="account_activated_message">Your account has been activated</string>
+    <string name="invalid_role_not_found">Invalid Role Note Found</string>
+    <string name="invalid_account_status">Invalid account status. Please contact admin.</string>
+    <string name="user_not_found">User not found.</string>
+    <string name="error_checking_account_status">Error checking account status:</string>
 
     <!--  Admin Workers  -->
     <string name="workers">Workers</string>

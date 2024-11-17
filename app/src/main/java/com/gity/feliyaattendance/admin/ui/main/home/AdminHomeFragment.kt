@@ -67,9 +67,6 @@ class AdminHomeFragment : Fragment() {
             btnListWorker.setOnClickListener {
                 navigateToWorkerList()
             }
-            btnAddWorker.setOnClickListener {
-                navigateToAddWorker()
-            }
             btnAddProject.setOnClickListener {
                 navigateToAddProject()
             }
@@ -166,10 +163,6 @@ class AdminHomeFragment : Fragment() {
     }
 
     private fun navigateToLeaveApplication() {
-        CommonHelper.showToast(requireContext(), "Under Maintenance")
-    }
-
-    private fun navigateToAddWorker() {
         CommonHelper.showToast(requireContext(), "Under Maintenance")
     }
 

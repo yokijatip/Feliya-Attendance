@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.ui.main.MainAdminActivity
 import com.gity.feliyaattendance.databinding.ActivitySplashScreenBinding
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.ui.auth.AuthActivity
 import com.gity.feliyaattendance.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -61,7 +62,6 @@ class SplashScreenActivity : AppCompatActivity() {
 
                 when (status) {
                     "activated" -> {
-                        // Arahkan user ke halaman sesuai role
                         when (role) {
                             "worker" -> navigateToMain()
                             "admin" -> navigateToAdmin()
@@ -71,20 +71,34 @@ class SplashScreenActivity : AppCompatActivity() {
                             }
                         }
                     }
+
                     "pending" -> {
-                        showToast("Your account is pending approval")
+                        CommonHelper.showInformationFailedDialog(
+                            this@SplashScreenActivity,
+                            getString(R.string.failed),
+                            getString(R.string.account_pending_message)
+                        )
                         // Sign out user karena status pending
                         firebaseAuth.signOut()
                         navigateToAuth()
                     }
+
                     "suspended" -> {
-                        showToast("Your account has been suspended")
-                        // Sign out user karena status suspended
+                        CommonHelper.showInformationFailedDialog(
+                            this@SplashScreenActivity,
+                            getString(R.string.failed),
+                            getString(R.string.account_suspended_message)
+                        )
                         firebaseAuth.signOut()
                         navigateToAuth()
                     }
+
                     else -> {
-                        showToast("Invalid account status")
+                        CommonHelper.showInformationFailedDialog(
+                            this@SplashScreenActivity,
+                            getString(R.string.failed),
+                            getString(R.string.invalid_account_status)
+                        )
                         firebaseAuth.signOut()
                         navigateToAuth()
                     }

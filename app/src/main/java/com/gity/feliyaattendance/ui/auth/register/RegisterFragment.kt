@@ -21,169 +21,188 @@ import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class RegisterFragment : Fragment() {
 
-    // Gunakan var nullable untuk binding
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseFirestore: FirebaseFirestore
-
     private lateinit var repository: Repository
     private lateinit var viewModel: AuthViewModel
-
     private lateinit var rolesAdapter: ArrayAdapter<String>
 
+    companion object {
+        private const val TAG = "RegisterFragment"
+    }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        setupFirebase()
+        setupViewModel()
+        setupViews()
+        setupObservers()
+        return binding.root
+    }
 
+    private fun setupFirebase() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
-
         repository = Repository(firebaseAuth, firebaseFirestore)
+    }
+
+    private fun setupViewModel() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
+    }
 
-//        Setup Dropdown Adapter
+    private fun setupViews() {
+        setupRolesAdapter()
+        setupClickListeners()
+        setupTextWatchers()
+    }
+
+    private fun setupRolesAdapter() {
         rolesAdapter = ArrayAdapter(requireContext(), R.layout.list_item_roles, mutableListOf())
+        binding.edtRole.setAdapter(rolesAdapter)
+    }
 
+    private fun setupClickListeners() {
         binding.apply {
-//            Setup Dropdown Adapter
-            edtRole.setAdapter(rolesAdapter)
+            linearLayoutToLogin.setOnClickListener { navigateToLogin() }
+            btnBack.setOnClickListener { navigateToLogin() }
+            btnRegister.setOnClickListener { handleRegistration() }
+        }
+    }
 
-            //  Text Watcher untuk menghapus error saat user ngetik
+    private fun setupTextWatchers() {
+        binding.apply {
             edtEmail.addTextChangedListener {
                 if (edtEmail.text.toString().isNotEmpty()) {
                     edtEmailLayout.error = null
                 }
             }
-
-            linearLayoutToLogin.setOnClickListener {
-                navigateToLogin()
-            }
-
-            btnBack.setOnClickListener {
-                navigateToLogin()
-            }
-
-
-
-            btnRegister.setOnClickListener {
-                showLoading(true)
-                val email = edtEmail.text.toString()
-                val password = edtPassword.text.toString()
-                val name = edtName.text.toString()
-                val role = edtRole.text.toString()
-                if (inputChecker(email, password, name, role)) {
-                    viewModel.register(email, password, name, role)
-                } else {
-                    showLoading(false)
-                }
-            }
-
         }
-
-        // Observe registration result
-        viewModel.registrationResult.observe(viewLifecycleOwner) { result ->
-            result.fold(onSuccess = {
-                showLoading(false)
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.register_success),
-                    Toast.LENGTH_SHORT
-                ).show()
-                (activity as? AuthActivity)?.replaceFragment(LoginFragment())
-            }, onFailure = { exception ->
-                showLoading(false)
-                Toast.makeText(
-                    requireContext(),
-                    "${getString(R.string.register_failed)}: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.e("AUTH", "${getString(R.string.register_failed)}: ${exception.message}")
-            })
-        }
-
-        //  Observer Roles
-        viewModel.roles.observe(viewLifecycleOwner) { result ->
-            result.onSuccess { roles ->
-                rolesAdapter.clear()
-                rolesAdapter.addAll(roles)
-                rolesAdapter.notifyDataSetChanged()
-            }
-            result.onFailure { exception ->
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to load roles: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-        //  Trigger Fetching Roles
-        viewModel.getRoles()
-
-
-        return binding.root
     }
 
-    private fun inputChecker(email: String, password: String, name: String, role: String): Boolean {
-        binding.apply {
+    private fun setupObservers() {
+        observeRegistrationResult()
+        observeRoles()
+        viewModel.getRoles() // Trigger fetching roles
+    }
 
-            if (email.isEmpty()) {
-                edtEmail.error = getString(R.string.email_is_empty)
-                edtEmailLayout.requestFocus()
-                return false
-            }
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                edtEmail.error = requireContext().getString(R.string.email_is_not_valid)
-                edtEmail.requestFocus()
-                return false
-            }
-
-            if (name.isEmpty()) {
-                edtName.error = getString(R.string.name_is_empty)
-                edtName.requestFocus()
-                return false
-            }
-
-            if (role.isEmpty()) {
-                edtRole.error = getString(R.string.role_is_empty)
-                edtRole.requestFocus()
-                return false
-            }
-
-            if (password.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.password_is_empty),
-                    Toast.LENGTH_SHORT
-                ).show()
-                edtPassword.error = getString(R.string.password_is_empty)
-                edtPassword.requestFocus()
-                return false
-            }
-
-            if (password.length < 8) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.password_helper),
-                    Toast.LENGTH_SHORT
-                ).show()
-                edtPassword.error = getString(R.string.password_helper)
-                edtPassword.requestFocus()
-                return false
-            }
-
+    private fun observeRegistrationResult() {
+        viewModel.registrationResult.observe(viewLifecycleOwner) { result ->
+            result.fold(
+                onSuccess = {
+                    showLoading(false)
+                    showToast(getString(R.string.register_success))
+                    navigateToLogin()
+                },
+                onFailure = { exception ->
+                    showLoading(false)
+                    val errorMessage = "${getString(R.string.register_failed)}: ${exception.message}"
+                    showToast(errorMessage)
+                    Log.e(TAG, errorMessage)
+                }
+            )
         }
-        return true
+    }
+
+    private fun observeRoles() {
+        viewModel.roles.observe(viewLifecycleOwner) { result ->
+            result.fold(
+                onSuccess = { roles ->
+                    updateRolesAdapter(roles)
+                },
+                onFailure = { exception ->
+                    showToast("Failed to load roles: ${exception.message}")
+                }
+            )
+        }
+    }
+
+    private fun updateRolesAdapter(roles: List<String>) {
+        rolesAdapter.apply {
+            clear()
+            addAll(roles)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun handleRegistration() {
+        showLoading(true)
+        binding.apply {
+            val email = edtEmail.text.toString()
+            val password = edtPassword.text.toString()
+            val name = edtName.text.toString()
+            val role = edtRole.text.toString()
+
+            if (validateInputs(email, password, name, role)) {
+                // Register with default status
+                viewModel.register(
+                    email = email,
+                    password = password,
+                    name = name,
+                    role = role
+                )
+            } else {
+                showLoading(false)
+            }
+        }
+    }
+
+    private fun validateInputs(
+        email: String,
+        password: String,
+        name: String,
+        role: String
+    ): Boolean {
+        binding.apply {
+            when {
+                email.isEmpty() -> {
+                    edtEmail.error = getString(R.string.email_is_empty)
+                    edtEmailLayout.requestFocus()
+                    return false
+                }
+                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    edtEmail.error = getString(R.string.email_is_not_valid)
+                    edtEmail.requestFocus()
+                    return false
+                }
+                name.isEmpty() -> {
+                    edtName.error = getString(R.string.name_is_empty)
+                    edtName.requestFocus()
+                    return false
+                }
+                role.isEmpty() -> {
+                    edtRole.error = getString(R.string.role_is_empty)
+                    edtRole.requestFocus()
+                    return false
+                }
+                password.isEmpty() -> {
+                    showToast(getString(R.string.password_is_empty))
+                    edtPassword.error = getString(R.string.password_is_empty)
+                    edtPassword.requestFocus()
+                    return false
+                }
+                password.length < 8 -> {
+                    showToast(getString(R.string.password_helper))
+                    edtPassword.error = getString(R.string.password_helper)
+                    edtPassword.requestFocus()
+                    return false
+                }
+            }
+            return true
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun navigateToLogin() {
@@ -191,13 +210,14 @@ class RegisterFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.btnRegister.isEnabled = !isLoading
+        binding.apply {
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            btnRegister.isEnabled = !isLoading
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Set binding ke null untuk menghindari memory leak
         _binding = null
     }
 }

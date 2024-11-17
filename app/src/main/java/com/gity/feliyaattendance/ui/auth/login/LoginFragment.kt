@@ -96,32 +96,38 @@ class LoginFragment : Fragment() {
             .addOnSuccessListener { documents ->
                 if (documents.isEmpty) {
                     showLoading(false)
-                    Toast.makeText(requireContext(), "User not found", Toast.LENGTH_SHORT).show()
+                    CommonHelper.showInformationFailedDialog(
+                        requireContext(),
+                        getString(R.string.error),
+                        getString(R.string.user_not_found)
+                    )
                     return@addOnSuccessListener
                 }
 
                 val userDoc = documents.documents[0]
                 when (userDoc.getString("status")?.lowercase()) {
                     "activated" -> {
-                        // Proceed with login
                         viewModel.login(email, password)
                     }
+
                     "pending" -> {
                         showLoading(false)
-                        Toast.makeText(
+                        CommonHelper.showInformationFailedDialog(
                             requireContext(),
-                            "Your account is pending approval. Please wait for admin confirmation.",
-                            Toast.LENGTH_LONG
-                        ).show()
+                            getString(R.string.failed),
+                            getString(R.string.account_pending_message)
+                        )
                     }
+
                     "suspended" -> {
                         showLoading(false)
-                        Toast.makeText(
+                        CommonHelper.showInformationFailedDialog(
                             requireContext(),
-                            "Your account has been suspended. Please contact admin for more information.",
-                            Toast.LENGTH_LONG
-                        ).show()
+                            getString(R.string.failed),
+                            getString(R.string.account_suspended_message)
+                        )
                     }
+
                     else -> {
                         showLoading(false)
                         Toast.makeText(
@@ -134,11 +140,11 @@ class LoginFragment : Fragment() {
             }
             .addOnFailureListener { e ->
                 showLoading(false)
-                Toast.makeText(
+                CommonHelper.showInformationFailedDialog(
                     requireContext(),
-                    "Error checking account status: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                    getString(R.string.failed),
+                    "${getString(R.string.error_checking_account_status)} ${e.message}"
+                )
                 Log.e("AUTH", "Error checking account status: ${e.message}")
             }
     }
@@ -155,8 +161,11 @@ class LoginFragment : Fragment() {
                 },
                 onFailure = { e ->
                     showLoading(false)
-                    Toast.makeText(requireContext(), "Login Failed: ${e.message}", Toast.LENGTH_SHORT)
-                        .show()
+                    CommonHelper.showInformationFailedDialog(
+                        requireContext(),
+                        getString(R.string.error),
+                        "${getString(R.string.login_failed)} ${e.message}"
+                    )
                     Log.e("AUTH", "Login Failed: ${e.message}")
                 }
             )
