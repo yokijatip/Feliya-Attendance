@@ -1,9 +1,12 @@
 package com.gity.feliyaattendance.admin.ui.main.detail.worker
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Window
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
@@ -82,12 +85,60 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         viewModel.fetchWorkerDetail(workerId)
 
         observeExcelGeneration()
+        handleMoreMenu()
 
+    }
+
+    private fun handleMoreMenu() {
         binding.apply {
             moreMenu.setOnClickListener {
-                CommonHelper.showToast(this@AdminWorkerDetailActivity, "Under Development")
+                showDialogMoreMenu()
             }
         }
+    }
+
+    private fun activateAccount(): String {
+        val activate = "activate"
+        return activate
+    }
+
+    private fun suspendAccount(): String {
+        val suspend = "suspend"
+        return suspend
+    }
+
+    private fun showDialogMoreMenu() {
+        val dialog = Dialog(this@AdminWorkerDetailActivity).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(true)
+            setContentView(R.layout.custom_dialog_menu_admin_worker_detail)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_activate_account).setOnClickListener {
+            //viewModel.updateWorkerStatus(workerId, activateAccount())
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_suspend_account).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_delete_account).setOnClickListener {
+            CommonHelper.showConfirmationDialog(
+                this@AdminWorkerDetailActivity,
+                title = getString(R.string.admin_menu_delete_account_title_confirmation),
+                description = getString(R.string.admin_menu_delete_account_description_confirmation),
+                positiveButtonText = "Yes",
+                negativeButtonText = "No",
+                onPositiveClick = {
+                    viewModel.deleteWorkerAccount(workerId)
+                    finish()
+                })
+            dialog.dismiss()
+        }
+        dialog.show()
+
 
     }
 
@@ -110,7 +161,6 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                     } else {
                         storagePermissionHandler.requestStoragePermission(this)
                     }
-
                 }
 
                 getString(R.string.admin_menu_generate_pdf) -> {
@@ -229,7 +279,6 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 "${packageName}.provider",
                 file
             )
-
 
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 setDataAndType(

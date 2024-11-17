@@ -41,7 +41,7 @@
             android:fontFamily="@font/inter_regular"
             android:maxLines="1"
             android:paddingEnd="64dp"
-            android:text="@string/process_success"
+            tools:text="@string/process_success"
             android:textColor="@color/black"
             android:textSize="12sp"
             tools:ignore="RtlSymmetry" />

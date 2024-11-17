@@ -193,6 +193,8 @@
 
     <!--  Admin Detail Worker  -->
     <string name="delete_account">Delete Account</string>
+    <string name="suspend_account">Suspend Account</string>
+    <string name="activate_account">Activate Account</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

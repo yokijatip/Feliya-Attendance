@@ -707,7 +707,6 @@ class Repository(
         }
     }
 
-    //    Upload Image Profile
     suspend fun getDetailAccount(userId: String): Result<Worker> {
         return try {
             // Mendapatkan referensi koleksi "workers" di Firestore

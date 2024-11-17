@@ -34,7 +34,7 @@
 
 
         <LinearLayout
-            android:id="@+id/linear_layout_pending"
+            android:id="@+id/linear_layout_activate_account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
@@ -46,21 +46,21 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_clock" />
+                android:src="@drawable/ic_user_badge_check" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/inter_regular"
-                android:text="@string/status_pending"
+                android:text="@string/activate_account"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear_layout_rejected"
+            android:id="@+id/linear_layout_suspend_account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="4dp"
@@ -72,21 +72,21 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_minus_circle" />
+                android:src="@drawable/ic_lock" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/inter_regular"
-                android:text="@string/status_rejected"
+                android:text="@string/suspend_account"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear_layout_delete"
+            android:id="@+id/linear_layout_delete_account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="4dp"
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/inter_regular"
-                android:text="@string/delete"
+                android:text="@string/delete_account"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 

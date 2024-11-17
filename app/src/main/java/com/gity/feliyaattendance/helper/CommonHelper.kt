@@ -11,6 +11,7 @@ import android.view.Window
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StyleRes
+import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.CustomDialogConfimationBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationFailedBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationSuccessBinding
@@ -209,6 +210,5 @@ object CommonHelper {
     fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-
 
 }
