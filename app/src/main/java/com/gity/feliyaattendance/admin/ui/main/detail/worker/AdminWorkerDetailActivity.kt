@@ -99,7 +99,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
     }
 
     private fun activateAccount(): String {
-        val activate = "activate"
+        val activate = "activated"
         return activate
     }
 

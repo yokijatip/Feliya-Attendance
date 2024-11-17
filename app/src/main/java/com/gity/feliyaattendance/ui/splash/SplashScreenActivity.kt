@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -45,31 +44,53 @@ class SplashScreenActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             checkUserLogin()
         }
-
     }
 
     private suspend fun checkUserLogin() {
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             try {
-//                Ambil data user dari firestore
-                val snapshot = firebaseFirestore.collection("users").document(currentUser.uid).get().await()
-                val role = snapshot.getString("role")
+                // Ambil data user dari firestore
+                val snapshot = firebaseFirestore.collection("users")
+                    .document(currentUser.uid)
+                    .get()
+                    .await()
 
-//                Arahkan user ke halaman sesuai role
-                when (role) {
-                    "worker" -> {
-                        navigateToMain()
+                val role = snapshot.getString("role")
+                val status = snapshot.getString("status")?.lowercase()
+
+                when (status) {
+                    "activated" -> {
+                        // Arahkan user ke halaman sesuai role
+                        when (role) {
+                            "worker" -> navigateToMain()
+                            "admin" -> navigateToAdmin()
+                            else -> {
+                                showToast("Invalid role found")
+                                navigateToAuth()
+                            }
+                        }
                     }
-                    "admin" -> {
-                        navigateToAdmin()
+                    "pending" -> {
+                        showToast("Your account is pending approval")
+                        // Sign out user karena status pending
+                        firebaseAuth.signOut()
+                        navigateToAuth()
+                    }
+                    "suspended" -> {
+                        showToast("Your account has been suspended")
+                        // Sign out user karena status suspended
+                        firebaseAuth.signOut()
+                        navigateToAuth()
                     }
                     else -> {
-                        navigateToAuth() // Jika role tidak ditemukan
+                        showToast("Invalid account status")
+                        firebaseAuth.signOut()
+                        navigateToAuth()
                     }
                 }
             } catch (e: Exception) {
-                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                showToast("Error: ${e.message}")
                 navigateToAuth()
             }
         } else {
@@ -77,20 +98,27 @@ class SplashScreenActivity : AppCompatActivity() {
         }
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     private fun navigateToAdmin() {
         val intent = Intent(this@SplashScreenActivity, MainAdminActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }
 
     private fun navigateToMain() {
         val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }
 
     private fun navigateToAuth() {
         val intent = Intent(this@SplashScreenActivity, AuthActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }

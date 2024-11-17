@@ -47,8 +47,14 @@ class LoginFragment : Fragment() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
+        setupClickListeners()
+        observeViewModel()
+
+        return binding.root
+    }
+
+    private fun setupClickListeners() {
         binding.apply {
-            // Navigate to Register
             createNewAccount.setOnClickListener {
                 (activity as? AuthActivity)?.replaceFragment(RegisterFragment())
             }
@@ -58,47 +64,103 @@ class LoginFragment : Fragment() {
                 edtPassword.setText(CommonHelper.generateRandomPassword())
             }
 
-
             btnLogin.setOnClickListener {
-                // Text Watcher to clear error when user types
-                edtEmail.addTextChangedListener {
-                    if (edtEmail.text.toString().isNotEmpty()) {
-                        edtEmailLayout.error = null
-                    }
-                }
+                handleLoginAttempt()
+            }
 
-                // Show loading spinner and disable login button
-                showLoading(true)
-
-                val email = edtEmail.text.toString()
-                val password = edtPassword.text.toString()
-                if (inputChecker(email, password)) {
-                    viewModel.login(email, password)
-                } else {
-                    // Hide loading spinner and enable login button
-                    showLoading(false)
+            // Text Watcher to clear error when user types
+            edtEmail.addTextChangedListener {
+                if (edtEmail.text.toString().isNotEmpty()) {
+                    edtEmailLayout.error = null
                 }
             }
         }
+    }
 
-        viewModel.loginResult.observe(viewLifecycleOwner) { result ->
-            result.fold(onSuccess = { role ->
-                // Hide loading spinner and enable login button
-                showLoading(false)
-                when (role) {
-                    "worker" -> navigateToMain()
-                    "admin" -> navigateToAdmin()
-                }
-            }, onFailure = { e ->
-                // Hide loading spinner and enable login button
-                showLoading(false)
-                Toast.makeText(requireContext(), "Login Failed: ${e.message}", Toast.LENGTH_SHORT)
-                    .show()
-                Log.e("AUTH", "Login Failed: ${e.message}")
-            })
+    private fun handleLoginAttempt() {
+        showLoading(true)
+        val email = binding.edtEmail.text.toString()
+        val password = binding.edtPassword.text.toString()
+
+        if (inputChecker(email, password)) {
+            checkAccountStatusAndLogin(email, password)
+        } else {
+            showLoading(false)
         }
+    }
 
-        return binding.root
+    private fun checkAccountStatusAndLogin(email: String, password: String) {
+        firebaseFirestore.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    showLoading(false)
+                    Toast.makeText(requireContext(), "User not found", Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+
+                val userDoc = documents.documents[0]
+                when (userDoc.getString("status")?.lowercase()) {
+                    "activated" -> {
+                        // Proceed with login
+                        viewModel.login(email, password)
+                    }
+                    "pending" -> {
+                        showLoading(false)
+                        Toast.makeText(
+                            requireContext(),
+                            "Your account is pending approval. Please wait for admin confirmation.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    "suspended" -> {
+                        showLoading(false)
+                        Toast.makeText(
+                            requireContext(),
+                            "Your account has been suspended. Please contact admin for more information.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    else -> {
+                        showLoading(false)
+                        Toast.makeText(
+                            requireContext(),
+                            "Invalid account status. Please contact admin.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                showLoading(false)
+                Toast.makeText(
+                    requireContext(),
+                    "Error checking account status: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.e("AUTH", "Error checking account status: ${e.message}")
+            }
+    }
+
+    private fun observeViewModel() {
+        viewModel.loginResult.observe(viewLifecycleOwner) { result ->
+            result.fold(
+                onSuccess = { role ->
+                    showLoading(false)
+                    when (role) {
+                        "worker" -> navigateToMain()
+                        "admin" -> navigateToAdmin()
+                    }
+                },
+                onFailure = { e ->
+                    showLoading(false)
+                    Toast.makeText(requireContext(), "Login Failed: ${e.message}", Toast.LENGTH_SHORT)
+                        .show()
+                    Log.e("AUTH", "Login Failed: ${e.message}")
+                }
+            )
+        }
     }
 
     private fun inputChecker(email: String, password: String): Boolean {
