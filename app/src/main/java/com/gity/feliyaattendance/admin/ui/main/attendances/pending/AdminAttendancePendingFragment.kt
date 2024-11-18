@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,34 +24,21 @@ class AdminAttendancePendingFragment : Fragment() {
     private var _binding: FragmentAdminAttendancePendingBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firebaseFirestore: FirebaseFirestore
-
-    private lateinit var repository: Repository
     private lateinit var viewModel: AdminAttendanceViewModel
+    private lateinit var adapter: AdminAttendanceStatusAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAdminAttendancePendingBinding.inflate(inflater, container, false)
+        setupViewModel()
+        setupRecyclerView()
+        observeData()
+        return binding.root
+    }
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseFirestore = FirebaseFirestore.getInstance()
-
-        repository = Repository(firebaseAuth, firebaseFirestore)
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[AdminAttendanceViewModel::class.java]
-
-        val adapter = AdminAttendanceStatusAdapter { attendance ->
-            navigateToDetail(attendance.attendanceId)
-        }
-
-        binding.apply {
-            rvAttendancePending.adapter = adapter
-            rvAttendancePending.layoutManager = LinearLayoutManager(requireContext())
-        }
-
+    private fun observeData() {
         viewModel.attendanceList.observe(viewLifecycleOwner) { result ->
             result.onSuccess { attendance ->
                 adapter.submitList(attendance)
@@ -61,16 +47,38 @@ class AdminAttendancePendingFragment : Fragment() {
                 Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
             }
         }
-
-        viewModel.fetchAttendancesAdminStatusPendingList()
-
-        return binding.root
     }
 
-    private fun navigateToDetail(attendanceId: String){
+    private fun setupViewModel() {
+        val repository = Repository(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
+        val factory = ViewModelFactory(repository)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            factory
+        )[AdminAttendanceViewModel::class.java]
+    }
+
+
+    private fun setupRecyclerView() {
+        adapter = AdminAttendanceStatusAdapter { attendance ->
+            navigateToDetail(attendance.attendanceId)
+        }
+
+        binding.rvAttendancePending.apply {
+            adapter = this@AdminAttendancePendingFragment.adapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun navigateToDetail(attendanceId: String) {
         val startActivity = Intent(requireContext(), AdminAttendanceDetailActivity::class.java)
         startActivity.putExtra("ATTENDANCE_ID", attendanceId)
         startActivity(startActivity)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchAttendancesAdminStatusPendingList()
     }
 
     override fun onDestroyView() {
