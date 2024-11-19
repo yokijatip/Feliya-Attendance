@@ -104,15 +104,58 @@ class CloudinaryHelper(private val context: Context) {
         val inputStream = context.contentResolver.openInputStream(imageUri)
         val bitmap = BitmapFactory.decodeStream(inputStream)
 
-        // Kompres bitmap ke JPEG
+        // Dapatkan dimensi asli
+        val originalWidth = bitmap.width
+        val originalHeight = bitmap.height
+
+        // Tentukan ukuran maksimum
+        val maxWidth = 800 // Sesuaikan dengan kebutuhan Anda
+        val maxHeight = 600 // Sesuaikan dengan kebutuhan Anda
+
+        // Hitung ulang dimensi
+        val (newWidth, newHeight) = calculateNewDimensions(originalWidth, originalHeight, maxWidth, maxHeight)
+
+        // Resize bitmap
+        val resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+
+        // Kompres bitmap ke JPEG dengan kualitas lebih rendah
         val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream)
+        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream)
 
         val tempFile = File.createTempFile("compressed_", ".jpg", context.cacheDir)
         FileOutputStream(tempFile).use {
             it.write(outputStream.toByteArray())
         }
 
+        // Bersihkan bitmap
+        bitmap.recycle()
+        resizedBitmap.recycle()
+
         return tempFile
+    }
+
+    private fun calculateNewDimensions(
+        originalWidth: Int,
+        originalHeight: Int,
+        maxWidth: Int,
+        maxHeight: Int
+    ): Pair<Int, Int> {
+        var newWidth = originalWidth
+        var newHeight = originalHeight
+
+        // Jika gambar lebih besar dari ukuran maksimum
+        if (originalWidth > maxWidth || originalHeight > maxHeight) {
+            val aspectRatio = originalWidth.toFloat() / originalHeight.toFloat()
+
+            if (originalWidth > originalHeight) {
+                newWidth = maxWidth
+                newHeight = (maxWidth / aspectRatio).toInt()
+            } else {
+                newHeight = maxHeight
+                newWidth = (maxHeight * aspectRatio).toInt()
+            }
+        }
+
+        return Pair(newWidth, newHeight)
     }
 }
