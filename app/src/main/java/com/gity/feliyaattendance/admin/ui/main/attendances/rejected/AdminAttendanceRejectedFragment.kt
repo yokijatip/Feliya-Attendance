@@ -23,11 +23,8 @@ class AdminAttendanceRejectedFragment : Fragment() {
     private var _binding: FragmentAdminAttendanceRejectedBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firebaseFirestore: FirebaseFirestore
-
-    private lateinit var repository: Repository
     private lateinit var viewModel: AdminAttendanceViewModel
+    private lateinit var adapter: AdminAttendanceStatusAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,23 +32,14 @@ class AdminAttendanceRejectedFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAdminAttendanceRejectedBinding.inflate(inflater, container, false)
+        setupViewModel()
+        observeData()
+        setupRecyclerView()
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseFirestore = FirebaseFirestore.getInstance()
+        return binding.root
+    }
 
-        repository = Repository(firebaseAuth, firebaseFirestore)
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[AdminAttendanceViewModel::class.java]
-
-        val adapter = AdminAttendanceStatusAdapter { attendance ->
-            navigateToDetail(attendance.attendanceId)
-        }
-
-        binding.apply {
-            rvAttendanceRejected.adapter = adapter
-            rvAttendanceRejected.layoutManager = LinearLayoutManager(requireContext())
-        }
-
+    private fun observeData() {
         viewModel.attendanceAdminStatusRejectedList.observe(viewLifecycleOwner) { result ->
             result.onSuccess { attendance ->
                 adapter.submitList(attendance)
@@ -60,16 +48,37 @@ class AdminAttendanceRejectedFragment : Fragment() {
                 Log.e("ATTENDANCE_DATA", "Error fetching active projects", exception)
             }
         }
+    }
 
-        viewModel.fetchAttendancesAdminStatusRejectedList()
+    private fun setupViewModel() {
+        val repository = Repository(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
+        val factory = ViewModelFactory(repository)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            factory
+        )[AdminAttendanceViewModel::class.java]
+    }
 
-        return binding.root
+    private fun setupRecyclerView() {
+        adapter = AdminAttendanceStatusAdapter { attendance ->
+            navigateToDetail(attendance.attendanceId)
+        }
+
+        binding.rvAttendanceRejected.apply {
+            adapter = this@AdminAttendanceRejectedFragment.adapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     private fun navigateToDetail(attendanceId: String) {
         val startActivity = Intent(requireContext(), AdminAttendanceDetailActivity::class.java)
         startActivity.putExtra("ATTENDANCE_ID", attendanceId)
         startActivity(startActivity)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchAttendancesAdminStatusRejectedList()
     }
 
     override fun onDestroyView() {
