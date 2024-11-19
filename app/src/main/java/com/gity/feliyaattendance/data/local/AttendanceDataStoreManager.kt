@@ -76,6 +76,12 @@ class AttendanceDataStoreManager(private val context: Context) {
         }
     }
 
+    suspend fun clearClockOutData() {
+        context.dataStore.edit { pref ->
+            pref.remove(CLOCK_OUT)
+        }
+    }
+
 
     val userId: Flow<String?> = context.dataStore.data
         .map { pref -> pref[USER_ID] }

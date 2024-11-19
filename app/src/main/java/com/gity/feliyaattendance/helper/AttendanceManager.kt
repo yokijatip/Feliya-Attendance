@@ -98,6 +98,7 @@ class AttendanceManager(
 
             // Clear DataStore after successful upload
             dataStore.clearClockInOutData()
+            dataStore.clearClockOutData()
             projectDataStore.clearProjectData()
         } catch (e: Exception) {
             // Handle upload error

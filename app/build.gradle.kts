@@ -4,6 +4,7 @@ plugins {
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
     id("kotlin-parcelize")
+    id("com.google.firebase.firebase-perf")
 
 }
 
@@ -65,6 +66,10 @@ dependencies {
 //    Firebase Auth
     implementation(libs.firebase.auth)
 
+//    Firebase Perfomance Monitoring
+    implementation("com.google.firebase:firebase-perf:21.0.2")
+
+
 //    Coroutine Handling for Firebase
     implementation(libs.kotlinx.coroutines.play.services)
 
@@ -88,10 +93,10 @@ dependencies {
 //    Export data To Excel
 
     // Use HSSF instead of XSSF for Android compatibility
-    implementation ("org.apache.poi:poi:5.2.3")
+    implementation("org.apache.poi:poi:5.2.3")
     // Add required dependencies
-    implementation ("org.apache.poi:poi-ooxml:5.2.3")
-    implementation ("org.apache.xmlbeans:xmlbeans:5.1.1")
+    implementation("org.apache.poi:poi-ooxml:5.2.3")
+    implementation("org.apache.xmlbeans:xmlbeans:5.1.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

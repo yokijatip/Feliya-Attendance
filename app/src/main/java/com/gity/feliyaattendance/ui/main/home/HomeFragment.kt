@@ -24,7 +24,6 @@ import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -54,43 +53,67 @@ class HomeFragment : Fragment() {
 
         setupViewModel()
         setupDataStoreManager()
-        calculateExpectedClockOutTime()
-        displayClockInAndClockOutTimes()
         setupRecyclerView()
         setupUI()
+        observeClockTimes()
         observeData()
         setupSwipeRefresh()
     }
 
-    private fun displayClockInAndClockOutTimes() {
-        lifecycleScope.launch {
-            val clockInTime = attendanceDataStoreManager.clockIn.firstOrNull()
-            if (clockInTime != null) {
-                // Format and display clock-in time
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchClockInAndClockOutTimes(attendanceDataStoreManager)
+    }
+
+//    private fun displayClockInAndClockOutTimes() {
+//        lifecycleScope.launch {
+//            val clockInTime = attendanceDataStoreManager.clockIn.firstOrNull()
+//            val clockOutTime = attendanceDataStoreManager.clockOut.firstOrNull()
+//
+//            if (clockInTime != null && clockOutTime == null) {
+//                // Only show times if clocked in but not yet clocked out
+//                val clockInFormattedTime = SimpleDateFormat("HH:mm", Locale.getDefault())
+//                    .format(clockInTime.toDate())
+//                binding.tvClockIn.text = clockInFormattedTime
+//
+//                val expectedClockOutTime = calculateClockOutTime(clockInTime)
+//                val clockOutFormattedTime = SimpleDateFormat("HH:mm", Locale.getDefault())
+//                    .format(expectedClockOutTime)
+//                binding.tvClockOut.text = clockOutFormattedTime
+//            } else {
+//                // Hide or clear TextViews when clocked out or no clock-in exists
+//                binding.tvClockIn.text = getString(R.string.hours_default)
+//                binding.tvClockOut.text = getString(R.string.hours_default)
+//            }
+//        }
+//    }
+
+
+    private fun observeClockTimes() {
+        viewModel.clockInTime.observe(viewLifecycleOwner) { clockIn ->
+            if (clockIn != null) {
+                // Tampilkan waktu clock in
                 val clockInFormattedTime = SimpleDateFormat("HH:mm", Locale.getDefault())
-                    .format(clockInTime.toDate())
+                    .format(clockIn.toDate())
                 binding.tvClockIn.text = clockInFormattedTime
 
-                // Calculate and display expected clock-out time
-                val expectedClockOutTime = calculateClockOutTime(clockInTime)
+                // Hitung waktu clock out yang diharapkan
+                val expectedClockOutTime = calculateClockOutTime(clockIn)
                 val clockOutFormattedTime = SimpleDateFormat("HH:mm", Locale.getDefault())
                     .format(expectedClockOutTime)
                 binding.tvClockOut.text = clockOutFormattedTime
             } else {
-                binding.tvClockIn.text = "--:--"
-                binding.tvClockOut.text = "--:--"
+                // Reset kedua TextView jika tidak ada clock in
+                binding.tvClockIn.text = getString(R.string.hours_default)
+                binding.tvClockOut.text = getString(R.string.hours_default)
             }
         }
-    }
 
-    private fun calculateExpectedClockOutTime() {
-        lifecycleScope.launch {
-            val clockInTime = attendanceDataStoreManager.clockIn.firstOrNull()
-            if (clockInTime != null) {
-                val expectedClockOutTime = calculateClockOutTime(clockInTime)
-                binding.tvClockOut.text = formatExpectedClockOutTime(expectedClockOutTime)
-            } else {
-                binding.tvClockOut.text = "--:--"
+        viewModel.clockOutTime.observe(viewLifecycleOwner) { clockOut ->
+            if (clockOut != null) {
+                // Jika sudah clock out, reset kedua TextView
+                binding.tvClockIn.text = getString(R.string.hours_default)
+                binding.tvClockOut.text = getString(R.string.hours_default)
             }
         }
     }
@@ -100,11 +123,6 @@ class HomeFragment : Fragment() {
         calendar.time = clockIn.toDate()
         calendar.add(Calendar.HOUR_OF_DAY, 8) // Add 8 hours for standard work day
         return calendar.time
-    }
-
-    private fun formatExpectedClockOutTime(date: Date): String {
-        val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
-        return sdf.format(date)
     }
 
     private fun setupDataStoreManager() {
@@ -147,7 +165,6 @@ class HomeFragment : Fragment() {
 
     private fun observeData() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-
         // Fetch Attendance List
         viewModel.fetchAttendanceList(userId)
         viewModel.attendanceList.observe(viewLifecycleOwner) { result ->
