@@ -39,4 +39,5 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
             _attendanceList.value = result
         }
     }
+
 }

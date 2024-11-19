@@ -187,7 +187,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_medium"
-                                    android:text="@string/clock_in"
+                                    android:text="@string/clock_out"
                                     android:textColor="@color/gray_light"
                                     android:textSize="16sp" />
 
