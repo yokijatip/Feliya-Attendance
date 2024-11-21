@@ -100,6 +100,50 @@ class CloudinaryHelper(private val context: Context) {
             }
         }
 
+    suspend fun uploadAnnouncementImage(imageUri: Uri, locationDefault: String = "Home", locationTypeDefault: String = "announcement"): String =
+        suspendCancellableCoroutine { continuation ->
+            try {
+
+//            Kompress gambar
+                val compressedFile = compressImage(imageUri)
+
+//            Struktur Folder: Home/userId/attendance
+                val folder = "$locationDefault/$locationDefault"
+                val fileName = "announcement_${System.currentTimeMillis()}"
+
+                MediaManager.get().upload(compressedFile.absolutePath)
+                    .option("folder", folder)
+                    .option("public_id", fileName)
+                    .callback(object : UploadCallback {
+                        override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                            val imageUrl = resultData["secure_url"] as String
+                            continuation.resume(imageUrl) {
+                                compressedFile.delete() // Hapus file setelah selesai
+                            }
+                        }
+
+                        override fun onError(requestId: String, error: ErrorInfo) {
+                            continuation.resumeWithException(Exception(error.description))
+                            compressedFile.delete()
+                        }
+
+                        override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
+                            // Tambahkan kode untuk menangani progress jika diperlukan
+                        }
+
+                        override fun onStart(requestId: String) {}
+                        override fun onReschedule(requestId: String, error: ErrorInfo) {}
+
+                    })
+                    .dispatch()
+
+            } catch (e: Exception) {
+                continuation.resumeWithException(e)
+            }
+        }
+
+
+
     private fun compressImage(imageUri: Uri): File {
         val inputStream = context.contentResolver.openInputStream(imageUri)
         val bitmap = BitmapFactory.decodeStream(inputStream)
@@ -120,7 +164,7 @@ class CloudinaryHelper(private val context: Context) {
 
         // Kompres bitmap ke JPEG dengan kualitas lebih rendah
         val outputStream = ByteArrayOutputStream()
-        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream)
+        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
 
         val tempFile = File.createTempFile("compressed_", ".jpg", context.cacheDir)
         FileOutputStream(tempFile).use {

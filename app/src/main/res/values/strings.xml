@@ -210,4 +210,10 @@
 
     <string name="strip">-</string>
 
+    <!-- Announcement -->
+    <string name="announcement">Announcement</string>
+    <string name="add_post">Add Post</string>
+    <string name="success_create_announcement">Announcement added successfully</string>
+    <string name="failed_create_announcement">An error occurred</string>
+
 </resources>

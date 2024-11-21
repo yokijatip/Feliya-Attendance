@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel
 import com.gity.feliyaattendance.databinding.ActivityAdminAddProjectBinding
 import com.gity.feliyaattendance.helper.CloudinaryHelper
 import com.gity.feliyaattendance.helper.CommonHelper
@@ -54,6 +55,7 @@ class AdminAddProjectActivity : AppCompatActivity() {
     private lateinit var pickImageLauncher: ActivityResultLauncher<String>
 
     private lateinit var viewModel: AdminProjectViewModel
+
     private lateinit var repository: Repository
 
     private lateinit var cloudinaryHelper: CloudinaryHelper
@@ -93,6 +95,7 @@ class AdminAddProjectActivity : AppCompatActivity() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AdminProjectViewModel::class.java]
 
+
         // Setup other components
         setupStatusProjectDropdown()
         setupListeners()
@@ -108,7 +111,6 @@ class AdminAddProjectActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun validateForm() {
         val isValid = isFormValid()

@@ -1,6 +1,5 @@
 package com.gity.feliyaattendance.repository
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Environment
 import android.util.Log
@@ -109,6 +108,25 @@ class Repository(
         }
     }
 
+    suspend fun fetchEmail(): Result<String> {
+        return try {
+            val userId = firebaseAuth.currentUser?.uid
+                ?: return Result.failure(Exception("User ID not found"))
+            val snapshot = firebaseFirestore.collection("users").document(userId).get().await()
+
+            if (snapshot.exists() && snapshot.contains("email")) {
+                val email = snapshot.getString("email")
+                Result.success(email ?: "Unknown Email")
+            } else {
+                Result.failure(Exception("Email field not found in document"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+
+
     // Fungsi untuk menambahkan project baru
     suspend fun addProject(
         projectName: String,
@@ -159,7 +177,6 @@ class Repository(
         workHoursOvertime: Int = 0
     ): Result<Unit> {
         return try {
-
             val attendanceId = UUID.randomUUID().toString()
             // Siapkan data attendance
             val attendanceData = hashMapOf(
@@ -350,7 +367,7 @@ class Repository(
         }
     }
 
-//    Change status Account
+    //    Change status Account
     suspend fun updateStatusAccount(userId: String, newStatus: String): Result<Unit> {
         return try {
             firebaseFirestore.collection("users").document(userId)
@@ -746,6 +763,33 @@ class Repository(
     suspend fun deleteAttendance(attendanceId: String): Result<Unit> {
         return try {
             firebaseFirestore.collection("attendance").document(attendanceId).delete().await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun createAnnouncement(
+        announcement: String,
+        createdBy: String,
+        createdByName: String,
+        createdByEmail: String,
+        imageAnnouncement: String
+    ): Result<Unit> {
+        return try {
+            val announcementId = UUID.randomUUID().toString()
+
+            val announcementData = hashMapOf(
+                "announcementId" to announcementId,
+                "announcement" to announcement,
+                "createdAt" to FieldValue.serverTimestamp(),
+                "createdBy" to createdBy,
+                "createdByName" to createdByName,
+                "createdByEmail" to createdByEmail,
+                "imageAnnouncement" to imageAnnouncement,
+            )
+
+            firebaseFirestore.collection("announcement").add(announcementData).await()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementActivity
 import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminListWorkerActivity
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminHomeBinding
@@ -167,7 +168,7 @@ class AdminHomeFragment : Fragment() {
     }
 
     private fun navigateToAnnouncement() {
-        CommonHelper.showToast(requireContext(), "Under Maintenance")
+        startActivity(Intent(requireActivity(), AdminAnnouncementActivity::class.java))
     }
 
     private fun navigateToHistoryAttendance() {

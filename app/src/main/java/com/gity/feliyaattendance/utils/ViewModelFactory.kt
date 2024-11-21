@@ -2,6 +2,7 @@ package com.gity.feliyaattendance.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementViewModel
 import com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendanceViewModel
 import com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailViewModel
 import com.gity.feliyaattendance.admin.ui.main.detail.worker.AdminWorkerDetailViewModel
@@ -41,6 +42,8 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
             return AdminWorkerDetailViewModel(repository) as T
         } else if(modelClass.isAssignableFrom(AccountViewModel::class.java)) {
             return AccountViewModel(repository) as T
+        } else if(modelClass.isAssignableFrom(AdminAnnouncementViewModel::class.java)) {
+            return AdminAnnouncementViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }

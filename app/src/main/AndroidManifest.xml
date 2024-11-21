@@ -23,13 +23,10 @@
         tools:ignore="ScopedStorage" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-
-    <!-- Untuk Android 10 (API level 29) ke atas -->
+        android:maxSdkVersion="32" /> <!-- Untuk Android 10 (API level 29) ke atas -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
 
     <application
         android:name=".utils.FeliyaAttendanceApp"
@@ -43,9 +40,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
+        <activity
+            android:name=".admin.ui.main.announcement.AdminAddPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ui.main.announcement.AdminAnnouncementActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />
+
         <activity
             android:name=".admin.ui.main.home.workers.AdminListWorkerActivity"
             android:exported="false" />
