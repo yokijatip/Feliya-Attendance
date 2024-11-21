@@ -2,7 +2,6 @@ package com.gity.feliyaattendance.admin.ui.main.announcement
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.AdminAnnouncementAdapter
@@ -56,9 +56,14 @@ class AdminAnnouncementActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         adapter = AdminAnnouncementAdapter { announcement ->
             // Handle announcement click if needed
+            CommonHelper.showToast(this@AdminAnnouncementActivity, "Announcement Clicked, ID : ${announcement.id}")
         }
         binding.rvAnnouncement.adapter = adapter
         binding.rvAnnouncement.layoutManager = LinearLayoutManager(this)
+
+        val dividerItemDecoration =
+            DividerItemDecoration(binding.rvAnnouncement.context, LinearLayoutManager.VERTICAL)
+        binding.rvAnnouncement.addItemDecoration(dividerItemDecoration)
     }
 
     //    Setup Observer Announcement

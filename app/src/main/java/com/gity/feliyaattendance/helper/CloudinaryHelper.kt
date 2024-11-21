@@ -58,7 +58,12 @@ class CloudinaryHelper(private val context: Context) {
             }
         }
 
-    suspend fun uploadProjectImage(imageUri: Uri, locationDefault: String = "Home", locationTypeDefault: String = "projects"): String =
+    @OptIn(ExperimentalCoroutinesApi::class)
+    suspend fun uploadProjectImage(
+        imageUri: Uri,
+        locationDefault: String = "Project",
+        locationTypeDefault: String = "projects"
+    ): String =
         suspendCancellableCoroutine { continuation ->
             try {
 
@@ -100,7 +105,59 @@ class CloudinaryHelper(private val context: Context) {
             }
         }
 
-    suspend fun uploadAnnouncementImage(imageUri: Uri, locationDefault: String = "Home", locationTypeDefault: String = "announcement"): String =
+    @OptIn(ExperimentalCoroutinesApi::class)
+    suspend fun uploadUserProfileImage(
+        imageUri: Uri,
+        locationDefault: String = "UserProfile",
+        locationTypeDefault: String = "user_profile"
+    ): String =
+        suspendCancellableCoroutine { continuation ->
+            try {
+
+//            Kompress gambar
+                val compressedFile = compressImage(imageUri)
+
+//            Struktur Folder: Home/userId/attendance
+                val folder = "$locationDefault/$locationDefault"
+                val fileName = "user_profile_${System.currentTimeMillis()}"
+
+                MediaManager.get().upload(compressedFile.absolutePath)
+                    .option("folder", folder)
+                    .option("public_id", fileName)
+                    .callback(object : UploadCallback {
+                        override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                            val imageUrl = resultData["secure_url"] as String
+                            continuation.resume(imageUrl) {
+                                compressedFile.delete() // Hapus file setelah selesai
+                            }
+                        }
+
+                        override fun onError(requestId: String, error: ErrorInfo) {
+                            continuation.resumeWithException(Exception(error.description))
+                            compressedFile.delete()
+                        }
+
+                        override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
+                            // Tambahkan kode untuk menangani progress jika diperlukan
+                        }
+
+                        override fun onStart(requestId: String) {}
+                        override fun onReschedule(requestId: String, error: ErrorInfo) {}
+
+                    })
+                    .dispatch()
+
+            } catch (e: Exception) {
+                continuation.resumeWithException(e)
+            }
+        }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    suspend fun uploadAnnouncementImage(
+        imageUri: Uri,
+        locationDefault: String = "Announcement",
+        locationTypeDefault: String = "announcement"
+    ): String =
         suspendCancellableCoroutine { continuation ->
             try {
 
@@ -143,28 +200,42 @@ class CloudinaryHelper(private val context: Context) {
         }
 
 
-
     private fun compressImage(imageUri: Uri): File {
         val inputStream = context.contentResolver.openInputStream(imageUri)
-        val bitmap = BitmapFactory.decodeStream(inputStream)
 
-        // Dapatkan dimensi asli
-        val originalWidth = bitmap.width
-        val originalHeight = bitmap.height
+        // Gunakan BitmapFactory.Options untuk decoding yang lebih efisien
+        val options = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+        }
+        BitmapFactory.decodeStream(inputStream, null, options)
 
         // Tentukan ukuran maksimum
-        val maxWidth = 800 // Sesuaikan dengan kebutuhan Anda
-        val maxHeight = 600 // Sesuaikan dengan kebutuhan Anda
+        val maxWidth = 800
+        val maxHeight = 600
 
-        // Hitung ulang dimensi
-        val (newWidth, newHeight) = calculateNewDimensions(originalWidth, originalHeight, maxWidth, maxHeight)
+        // Hitung sample size untuk kompresi awal
+        options.inSampleSize =
+            calculateInSampleSize(options.outWidth, options.outHeight, maxWidth, maxHeight)
+        options.inJustDecodeBounds = false
 
-        // Resize bitmap
+        // Reset input stream
+        val inputStreamAgain = context.contentResolver.openInputStream(imageUri)
+        val bitmap = BitmapFactory.decodeStream(inputStreamAgain, null, options)
+
+        // Hitung dimensi baru dengan mempertahankan aspek rasio
+        val (newWidth, newHeight) = calculateNewDimensions(
+            bitmap!!.width,
+            bitmap.height,
+            maxWidth,
+            maxHeight
+        )
+
+        // Resize bitmap dengan kualitas tinggi
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
 
-        // Kompres bitmap ke JPEG dengan kualitas lebih rendah
+        // Kompres bitmap ke JPEG dengan kualitas yang lebih baik
         val outputStream = ByteArrayOutputStream()
-        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream)
 
         val tempFile = File.createTempFile("compressed_", ".jpg", context.cacheDir)
         FileOutputStream(tempFile).use {
@@ -176,6 +247,19 @@ class CloudinaryHelper(private val context: Context) {
         resizedBitmap.recycle()
 
         return tempFile
+    }
+
+    // Fungsi untuk menghitung sample size
+    private fun calculateInSampleSize(width: Int, height: Int, maxWidth: Int, maxHeight: Int): Int {
+        var inSampleSize = 1
+        if (height > maxHeight || width > maxWidth) {
+            val halfHeight = height / 2
+            val halfWidth = width / 2
+            while ((halfHeight / inSampleSize) >= maxHeight && (halfWidth / inSampleSize) >= maxWidth) {
+                inSampleSize *= 2
+            }
+        }
+        return inSampleSize
     }
 
     private fun calculateNewDimensions(

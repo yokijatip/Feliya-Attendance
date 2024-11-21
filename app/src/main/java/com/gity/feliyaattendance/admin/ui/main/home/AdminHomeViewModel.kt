@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.admin.ui.main.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -67,6 +68,7 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
             try {
                 val imageProfileUrl = repository.fetchUserImageProfile()
                 _imageProfileUrl.postValue(imageProfileUrl)
+                Log.d("GetImageUrlProfile", "Result : $imageProfileUrl")
             } catch (e: Exception) {
                 _imageProfileUrl.postValue(e.message?.let { Result.failure(Exception(it)) })
             }

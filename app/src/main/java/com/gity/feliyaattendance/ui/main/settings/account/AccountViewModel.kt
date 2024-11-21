@@ -12,9 +12,18 @@ class AccountViewModel(private val repository: Repository) : ViewModel() {
     private val _userDetails = MutableLiveData<Result<Worker>>()
     val userDetails: LiveData<Result<Worker>> get() = _userDetails
 
+    private val _profileImageUploadResult = MutableLiveData<Result<String>>()
+    val profileImageUploadResult: LiveData<Result<String>> = _profileImageUploadResult
+
     fun loadUserDetails(userId: String) {
         viewModelScope.launch {
             _userDetails.postValue(repository.getDetailAccount(userId))
+        }
+    }
+
+    fun uploadProfileImage(imageUrl: String) {
+        viewModelScope.launch {
+            _profileImageUploadResult.value = repository.uploadUserProfileImage(imageUrl)
         }
     }
 }

@@ -791,7 +791,8 @@ class Repository(
         createdBy: String,
         createdByName: String,
         createdByEmail: String,
-        imageAnnouncement: String
+        imageAnnouncement: String,
+        imageUser: String
     ): Result<Unit> {
         return try {
             val announcementId = UUID.randomUUID().toString()
@@ -804,6 +805,7 @@ class Repository(
                 "createdByName" to createdByName,
                 "createdByEmail" to createdByEmail,
                 "imageAnnouncement" to imageAnnouncement,
+                "imageUser" to imageUser
             )
 
             firebaseFirestore.collection("announcement").add(announcementData).await()
@@ -851,6 +853,22 @@ class Repository(
             }
 
             Result.success(announcements)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun uploadUserProfileImage(imageUrl: String): Result<String> {
+        return try {
+            val userId = firebaseAuth.currentUser?.uid
+                ?: throw IllegalStateException("User not authenticated")
+
+            firebaseFirestore.collection("users")
+                .document(userId)
+                .update("profileImageUrl", imageUrl)
+                .await()
+
+            Result.success(imageUrl)
         } catch (e: Exception) {
             Result.failure(e)
         }

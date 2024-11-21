@@ -132,7 +132,8 @@ class AdminAddPostActivity : AppCompatActivity() {
                     createdBy = userId!!,
                     createdByName = usernamePost,
                     createdByEmail = emailPost,
-                    imageAnnouncement = imageUrl // Bisa kosong
+                    imageAnnouncement = imageUrl,
+                    imageProfile = imageProfileUrl
                 )
 
                 showLoading(false)
@@ -167,12 +168,12 @@ class AdminAddPostActivity : AppCompatActivity() {
         }
 
         viewModelHomeFragment.imageProfileUrl.observe(this@AdminAddPostActivity) { result ->
-            result.onSuccess {
-                imageProfileUrl = it
+            result.onSuccess { imageUrl ->
+                imageProfileUrl = imageUrl
+                Log.d("GetImageUrlProfile", "Result : $imageUrl")
             }.onFailure {
                 Log.e("Announcement", "Error : ${it.message}")
             }
-
         }
     }
 

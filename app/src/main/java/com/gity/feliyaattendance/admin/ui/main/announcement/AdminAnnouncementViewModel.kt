@@ -22,7 +22,8 @@ class AdminAnnouncementViewModel(private val repository: Repository) : ViewModel
         createdBy: String,
         createdByName: String,
         createdByEmail: String,
-        imageAnnouncement: String
+        imageAnnouncement: String,
+        imageProfile: String
     ) {
         viewModelScope.launch {
             val result = repository.createAnnouncement(
@@ -30,7 +31,8 @@ class AdminAnnouncementViewModel(private val repository: Repository) : ViewModel
                 createdBy,
                 createdByName,
                 createdByEmail,
-                imageAnnouncement
+                imageAnnouncement,
+                imageProfile
             )
             _createAnnouncement.postValue(result)
         }

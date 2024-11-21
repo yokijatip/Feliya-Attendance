@@ -54,7 +54,7 @@ class AdminAnnouncementAdapter(private val onAnnouncementSelected: (Announcement
 
                 Glide.with(itemView.context)
                     .load(announcement.imageUser)
-                    .placeholder(R.drawable.worker_profile_placeholder).into(binding.ivUserProfile)
+                    .into(binding.ivUserProfile)
 
                 itemView.setOnClickListener {
                     onAnnouncementSelected(announcement)
