@@ -49,6 +49,7 @@ class AdminAddPostActivity : AppCompatActivity() {
     private lateinit var cloudinaryHelper: CloudinaryHelper
     private lateinit var usernamePost: String
     private lateinit var emailPost: String
+    private lateinit var imageProfileUrl: String
 
     private var photoUri: Uri? = null
 
@@ -163,6 +164,15 @@ class AdminAddPostActivity : AppCompatActivity() {
             }.onFailure { exception ->
                 Log.e("Announcement", "Error: ${exception.message}")
             }
+        }
+
+        viewModelHomeFragment.imageProfileUrl.observe(this@AdminAddPostActivity) { result ->
+            result.onSuccess {
+                imageProfileUrl = it
+            }.onFailure {
+                Log.e("Announcement", "Error : ${it.message}")
+            }
+
         }
     }
 

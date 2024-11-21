@@ -3,6 +3,7 @@ package com.gity.feliyaattendance.repository
 import android.content.Context
 import android.os.Environment
 import android.util.Log
+import com.gity.feliyaattendance.admin.data.model.Announcement
 import com.gity.feliyaattendance.admin.data.model.AttendanceExcelReport
 import com.gity.feliyaattendance.admin.data.model.MonthlyDashboard
 import com.gity.feliyaattendance.admin.data.model.Worker
@@ -125,6 +126,22 @@ class Repository(
         }
     }
 
+    suspend fun fetchUserImageProfile(): Result<String> {
+        return try {
+            val userId = firebaseAuth.currentUser?.uid
+                ?: return Result.failure(Exception("User ID not found"))
+            val snapshot = firebaseFirestore.collection("users").document(userId).get().await()
+
+            if (snapshot.exists() && snapshot.contains("profileImageUrl")) {
+                val email = snapshot.getString("profileImageUrl")
+                Result.success(email ?: "Unknown Profile Image URL")
+            } else {
+                Result.failure(Exception("Image Profile URL field not found in document"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
 
     // Fungsi untuk menambahkan project baru
@@ -791,6 +808,49 @@ class Repository(
 
             firebaseFirestore.collection("announcement").add(announcementData).await()
             Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun fetchAnnouncementList(selectedDate: Date? = null): Result<List<Announcement>> {
+        return try {
+            // Use selected date or current date if not specified
+            val calendar = Calendar.getInstance().apply {
+                time = selectedDate ?: Date()
+            }
+
+            // Set to first day of the month at start of day
+            calendar.set(Calendar.DAY_OF_MONTH, 1)
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+            val startOfMonth = calendar.time
+
+            // Set to last day of the month at end of day
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
+            calendar.set(Calendar.HOUR_OF_DAY, 23)
+            calendar.set(Calendar.MINUTE, 59)
+            calendar.set(Calendar.SECOND, 59)
+            calendar.set(Calendar.MILLISECOND, 999)
+            val endOfMonth = calendar.time
+
+            // Fetch announcements within the specified month
+            val snapshot = firebaseFirestore.collection("announcement")
+                .whereGreaterThanOrEqualTo("createdAt", startOfMonth)
+                .whereLessThanOrEqualTo("createdAt", endOfMonth)
+                .orderBy("createdAt", Query.Direction.DESCENDING)
+                .get().await()
+
+            // Map documents to Announcement objects
+            val announcements = snapshot.documents.mapNotNull { documentSnapshot ->
+                documentSnapshot.toObject(Announcement::class.java)?.apply {
+                    id = documentSnapshot.id
+                }
+            }
+
+            Result.success(announcements)
         } catch (e: Exception) {
             Result.failure(e)
         }

@@ -215,5 +215,7 @@
     <string name="add_post">Add Post</string>
     <string name="success_create_announcement">Announcement added successfully</string>
     <string name="failed_create_announcement">An error occurred</string>
+    <string name="no_announcement">No Announcement</string>
+    <string name="no_announcement_description">Failed to load announcements</string>
 
 </resources>

@@ -7,6 +7,7 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
+        android:id="@+id/swipeRefreshLayout"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,9 +117,22 @@
                         android:padding="10dp">
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_announcement"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             tools:listitem="@layout/list_item_admin_announcement"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_no_announcement"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/no_announcement"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/gray"
                             />
 
                     </LinearLayout>

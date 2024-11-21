@@ -2,23 +2,33 @@ package com.gity.feliyaattendance.admin.ui.main.announcement
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.admin.adapter.AdminAnnouncementAdapter
 import com.gity.feliyaattendance.databinding.ActivityAdminAnnouncementBinding
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date
 
 class AdminAnnouncementActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminAnnouncementBinding
     private lateinit var viewModel: AdminAnnouncementViewModel
+
+    private lateinit var adapter: AdminAnnouncementAdapter
+    private var selectedDate: Date? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityAdminAnnouncementBinding.inflate(layoutInflater)
@@ -27,6 +37,50 @@ class AdminAnnouncementActivity : AppCompatActivity() {
         setupUI()
         setupViewModel()
         navigateToAddPost()
+        setupRecyclerView()
+        observeAnnouncements()
+        setupFilterButton()
+        setupSwipeRefreshLayout()
+        viewModel.fetchAnnouncements()
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        binding.apply {
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.fetchAnnouncements()
+            }
+        }
+    }
+
+    //    Setup RecyclerView
+    private fun setupRecyclerView() {
+        adapter = AdminAnnouncementAdapter { announcement ->
+            // Handle announcement click if needed
+        }
+        binding.rvAnnouncement.adapter = adapter
+        binding.rvAnnouncement.layoutManager = LinearLayoutManager(this)
+    }
+
+    //    Setup Observer Announcement
+    private fun observeAnnouncements() {
+        viewModel.announcementList.observe(this) { result ->
+            result.onSuccess {
+                adapter.submitList(result.getOrNull())
+                binding.tvNoAnnouncement.visibility =
+                    if (result.getOrNull()?.isEmpty() == true) View.VISIBLE
+                    else View.GONE
+                // Stop refreshing animation
+                binding.swipeRefreshLayout.isRefreshing = false
+            }.onFailure {
+                CommonHelper.showInformationFailedDialog(
+                    this@AdminAnnouncementActivity,
+                    getString(R.string.failed),
+                    getString(R.string.no_announcement_description)
+                )
+                // Stop refreshing animation
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+        }
     }
 
     //    Setup ViewModel
@@ -63,6 +117,21 @@ class AdminAnnouncementActivity : AppCompatActivity() {
             Intent(this@AdminAnnouncementActivity, AdminAddPostActivity::class.java).also {
                 startActivity(it)
             }
+        }
+    }
+
+    private fun setupFilterButton() {
+        binding.btnFilter.setOnClickListener {
+            val datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select Month")
+                .build()
+
+            datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+                selectedDate = Date(selectedDateInMillis)
+                viewModel.fetchAnnouncements(selectedDate)
+            }
+
+            datePicker.show(supportFragmentManager, "DATE_PICKER")
         }
     }
 }

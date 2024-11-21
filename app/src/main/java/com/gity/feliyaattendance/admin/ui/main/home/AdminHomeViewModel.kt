@@ -14,6 +14,9 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
     private val _emailResult = MutableLiveData<Result<String>>()
     val emailResult: LiveData<Result<String>> = _emailResult
 
+    private val _imageProfileUrl = MutableLiveData<Result<String>>()
+    val imageProfileUrl: LiveData<Result<String>> = _imageProfileUrl
+
     private val _workersCount = MutableLiveData<Result<Int>>()
     val workersCount: LiveData<Result<Int>> = _workersCount
 
@@ -30,6 +33,7 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
     fun refreshAllData() {
         fetchName()
         fetchEmail()
+        fetchImageProfileUrl()
         refreshWorkersCount()
         refreshProjectCount()
         refreshAttendancePending()
@@ -54,6 +58,17 @@ class AdminHomeViewModel(private val repository: Repository) : ViewModel() {
                 _emailResult.postValue(email)
             } catch (e: Exception) {
                 _emailResult.postValue(e.message?.let { Result.failure(Exception(it)) })
+            }
+        }
+    }
+
+    fun fetchImageProfileUrl() {
+        viewModelScope.launch {
+            try {
+                val imageProfileUrl = repository.fetchUserImageProfile()
+                _imageProfileUrl.postValue(imageProfileUrl)
+            } catch (e: Exception) {
+                _imageProfileUrl.postValue(e.message?.let { Result.failure(Exception(it)) })
             }
         }
     }
