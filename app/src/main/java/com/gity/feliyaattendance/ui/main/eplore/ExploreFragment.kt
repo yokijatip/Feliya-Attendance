@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.ui.main.eplore
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.AdminAnnouncementAdapter
 import com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementViewModel
+import com.gity.feliyaattendance.admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity
 import com.gity.feliyaattendance.databinding.FragmentExploreBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
@@ -58,6 +60,9 @@ class ExploreFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = AdminAnnouncementAdapter { announcement ->
             // Handle announcement click if needed
+            val intent = Intent(requireActivity(), AnnouncementDetailActivity::class.java)
+            intent.putExtra("announcementId", announcement.id)
+            startActivity(intent)
         }
         binding.rvAnnouncement.adapter = adapter
         binding.rvAnnouncement.layoutManager = LinearLayoutManager(requireContext())

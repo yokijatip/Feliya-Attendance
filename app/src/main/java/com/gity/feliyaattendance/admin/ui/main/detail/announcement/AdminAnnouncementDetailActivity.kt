@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.LinearLayout
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -141,13 +142,23 @@ class AdminAnnouncementDetailActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupUI() {
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        handleBackButton()
+    }
+
+    //    Handle Back Button
+    private fun handleBackButton() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+        onBackPressedDispatcher.addCallback {
+            finish()
         }
     }
 

@@ -4,31 +4,23 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
-
-    <!-- Basic Permissions -->
+        android:required="false" /> <!-- Basic Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <!-- Media Permissions for Android 13+ -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Media Permissions for Android 13+ -->
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
         tools:node="replace" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"
-        tools:node="replace" />
-
-    <!-- Selected Photos Access for Android 14+ -->
-    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
-
-    <!-- Backward compatibility for older Android versions -->
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_VIDEO"
+        tools:node="replace" /> <!-- Selected Photos Access for Android 14+ -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" /> <!-- Backward compatibility for older Android versions -->
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
-        tools:ignore="ScopedStorage" />
-
-    <!-- Location Permissions -->
+        tools:ignore="ScopedStorage" /> <!-- Location Permissions -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -44,6 +36,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.main.eplore.AnnouncementDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity"
             android:exported="false" />
