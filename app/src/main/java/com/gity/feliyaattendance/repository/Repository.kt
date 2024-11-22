@@ -307,7 +307,11 @@ class Repository(
     suspend fun getAttendanceByUserId(userId: String): Result<List<Attendance>> {
         return try {
             val snapshot =
-                firebaseFirestore.collection("attendance").whereEqualTo("userId", userId).get()
+                firebaseFirestore.collection("attendance")
+                    .whereEqualTo("userId", userId)
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .limit(10)
+                    .get()
                     .await()
 
             val attendanceList = snapshot.documents.mapNotNull { document ->

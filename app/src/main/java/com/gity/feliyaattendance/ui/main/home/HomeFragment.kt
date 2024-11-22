@@ -65,30 +65,6 @@ class HomeFragment : Fragment() {
         viewModel.fetchClockInAndClockOutTimes(attendanceDataStoreManager)
     }
 
-//    private fun displayClockInAndClockOutTimes() {
-//        lifecycleScope.launch {
-//            val clockInTime = attendanceDataStoreManager.clockIn.firstOrNull()
-//            val clockOutTime = attendanceDataStoreManager.clockOut.firstOrNull()
-//
-//            if (clockInTime != null && clockOutTime == null) {
-//                // Only show times if clocked in but not yet clocked out
-//                val clockInFormattedTime = SimpleDateFormat("HH:mm", Locale.getDefault())
-//                    .format(clockInTime.toDate())
-//                binding.tvClockIn.text = clockInFormattedTime
-//
-//                val expectedClockOutTime = calculateClockOutTime(clockInTime)
-//                val clockOutFormattedTime = SimpleDateFormat("HH:mm", Locale.getDefault())
-//                    .format(expectedClockOutTime)
-//                binding.tvClockOut.text = clockOutFormattedTime
-//            } else {
-//                // Hide or clear TextViews when clocked out or no clock-in exists
-//                binding.tvClockIn.text = getString(R.string.hours_default)
-//                binding.tvClockOut.text = getString(R.string.hours_default)
-//            }
-//        }
-//    }
-
-
     private fun observeClockTimes() {
         viewModel.clockInTime.observe(viewLifecycleOwner) { clockIn ->
             if (clockIn != null) {
