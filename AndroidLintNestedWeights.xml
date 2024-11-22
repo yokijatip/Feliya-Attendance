@@ -1,0 +1,15 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_attendance.xml</file>
+  <line>41</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_attendance.xml" />
+  <problem_class id="AndroidLintNestedWeights" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Nested layout weights</problem_class>
+  <hints />
+  <description>&lt;html&gt;Nested weights are bad for performance&lt;/html&gt;</description>
+  <highlighted_element>android:layout_weight=&quot;1&quot;</highlighted_element>
+  <language>XML</language>
+  <offset>20</offset>
+  <length>25</length>
+</problem>
+</problems>

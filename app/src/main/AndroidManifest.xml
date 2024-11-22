@@ -6,25 +6,29 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <!-- Basic Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Media Permissions for Android 13+ -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+        tools:node="replace" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"
+        tools:node="replace" />
+
+    <!-- Selected Photos Access for Android 14+ -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+
+    <!-- Backward compatibility for older Android versions -->
     <uses-permission
-        android:name="android.permission.READ_MEDIA_IMAGES"
-        android:maxSdkVersion="34"
-        android:required="true"
-        tools:ignore="SelectedPhotoAccess" />
-    <uses-permission
-        android:name="android.permission.READ_MEDIA_VIDEO"
-        android:maxSdkVersion="34"
-        android:required="true" />
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" /> <!-- Untuk Android 10 (API level 29) ke atas -->
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <!-- Location Permissions -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -40,6 +44,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
+        <activity
+            android:name=".admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".admin.ui.main.announcement.AdminAddPostActivity"
             android:exported="false" />

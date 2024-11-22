@@ -1,0 +1,873 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml</file>
+  <line>179</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml</file>
+  <line>205</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_post.xml</file>
+  <line>113</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_post.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_post.xml</file>
+  <line>146</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_post.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>116</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>148</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>173</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>204</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>228</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>259</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>283</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>314</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>363</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>412</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement.xml</file>
+  <line>86</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement_detail.xml</file>
+  <line>154</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageButton</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement_detail.xml</file>
+  <line>195</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml</file>
+  <line>125</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml</file>
+  <line>184</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageButton</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml</file>
+  <line>374</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>45</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml</file>
+  <line>424</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>45</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml</file>
+  <line>501</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>45</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml</file>
+  <line>552</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>45</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_list_worker.xml</file>
+  <line>82</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_list_worker.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_worker_detail.xml</file>
+  <line>157</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_worker_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageButton</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml</file>
+  <line>116</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml</file>
+  <line>357</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml</file>
+  <line>407</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml</file>
+  <line>484</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml</file>
+  <line>535</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_in.xml</file>
+  <line>117</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_in.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_in.xml</file>
+  <line>149</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_in.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_in.xml</file>
+  <line>174</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_in.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml</file>
+  <line>115</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>25</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml</file>
+  <line>176</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>33</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml</file>
+  <line>209</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_image_and_camera.xml</file>
+  <line>46</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_image_and_camera.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_image_and_camera.xml</file>
+  <line>72</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_image_and_camera.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_announcement_detail.xml</file>
+  <line>45</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_announcement_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_attendance_detail.xml</file>
+  <line>46</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_attendance_detail.xml</file>
+  <line>72</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_attendance_detail.xml</file>
+  <line>98</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_worker_detail.xml</file>
+  <line>46</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_worker_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_worker_detail.xml</file>
+  <line>72</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_worker_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_worker_detail.xml</file>
+  <line>98</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_menu_admin_worker_detail.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/dummy.xml</file>
+  <line>73</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/dummy.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/dummy.xml</file>
+  <line>91</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/dummy.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_attendances.xml</file>
+  <line>53</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_attendances.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml</file>
+  <line>364</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>45</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml</file>
+  <line>379</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml</file>
+  <line>519</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>45</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml</file>
+  <line>534</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_home.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_projects.xml</file>
+  <line>48</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_projects.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_projects.xml</file>
+  <line>66</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_admin_projects.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_explore.xml</file>
+  <line>50</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_explore.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml</file>
+  <line>488</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>45</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml</file>
+  <line>502</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml</file>
+  <line>26</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>9</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_announcement.xml</file>
+  <line>81</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_announcement.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_features.xml</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_features.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>9</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_menu.xml</file>
+  <line>18</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_menu.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>9</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml</file>
+  <line>31</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml</file>
+  <line>64</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml</file>
+  <line>31</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml</file>
+  <line>64</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_settings.xml</file>
+  <line>25</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_settings.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_settings.xml</file>
+  <line>51</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_settings.xml" />
+  <problem_class id="AndroidLintContentDescription" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image without contentDescription</problem_class>
+  <hints />
+  <description>&lt;html&gt;Missing &lt;code&gt;contentDescription&lt;/code&gt; attribute on image&lt;/html&gt;</description>
+  <highlighted_element>ImageView</highlighted_element>
+  <language>XML</language>
+  <offset>9</offset>
+  <length>9</length>
+</problem>
+</problems>

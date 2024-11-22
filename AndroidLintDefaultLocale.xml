@@ -1,0 +1,16 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/repository/Repository.kt</file>
+  <line>666</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.repository</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/repository/Repository.kt" />
+  <problem_class id="AndroidLintDefaultLocale" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Implied default locale in case conversion</problem_class>
+  <hints />
+  <description>&lt;html&gt;Implicitly using the default locale is a common source of bugs: Use &lt;code&gt;String.format(Locale, ...)&lt;/code&gt; instead&lt;/html&gt;</description>
+  <highlighted_element>String.format(&quot;%02d:%02d&quot;, hours, minutes)</highlighted_element>
+  <language>kotlin</language>
+  <offset>23</offset>
+  <length>42</length>
+</problem>
+</problems>

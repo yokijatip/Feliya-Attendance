@@ -1,0 +1,15 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt</file>
+  <line>9</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.utils.OfflinePersistence void onCreate()" />
+  <problem_class id="KotlinRedundantOverride" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Redundant overriding method</problem_class>
+  <description>Redundant overriding method</description>
+  <highlighted_element>override fun</highlighted_element>
+  <language>kotlin</language>
+  <offset>4</offset>
+  <length>12</length>
+</problem>
+</problems>

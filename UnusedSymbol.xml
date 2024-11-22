@@ -1,0 +1,288 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/FeatureAdminAdapter.kt</file>
+  <line>8</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.adapter.FeatureAdminAdapter" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Class &quot;FeatureAdminAdapter&quot; is never used</description>
+  <highlighted_element>FeatureAdminAdapter</highlighted_element>
+  <language>kotlin</language>
+  <offset>6</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/MenuAdminAdapter.kt</file>
+  <line>12</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.adapter.MenuAdminAdapter" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Class &quot;MenuAdminAdapter&quot; is never used</description>
+  <highlighted_element>MenuAdminAdapter</highlighted_element>
+  <language>kotlin</language>
+  <offset>6</offset>
+  <length>16</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/attendance/AdminAttendanceDetailViewModel.kt</file>
+  <line>16</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.attendance</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailViewModel androidx.lifecycle.LiveData&lt;java.lang.Boolean&gt; getUpdateStatusSuccess()" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;updateStatusSuccess&quot; is never used</description>
+  <highlighted_element>updateStatusSuccess</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/attendance/AdminAttendanceDetailViewModel.kt</file>
+  <line>19</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.attendance</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailViewModel androidx.lifecycle.LiveData&lt;kotlin.Unit&gt; getDeleteAttendance()" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;deleteAttendance&quot; is never used</description>
+  <highlighted_element>deleteAttendance</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>16</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/worker/AdminWorkerDetailViewModel.kt</file>
+  <line>23</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.worker</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.worker.AdminWorkerDetailViewModel androidx.lifecycle.LiveData&lt;kotlin.Result&lt;kotlin.Unit&gt;&gt; getDeleteAccountStatus()" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;deleteAccountStatus&quot; is never used</description>
+  <highlighted_element>deleteAccountStatus</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/local/AttendanceDataStoreManager.kt</file>
+  <line>127</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.local</package>
+  <entry_point TYPE="field" FQNAME="com.gity.feliyaattendance.data.local.AttendanceDataStoreManager workHours" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;workHours&quot; is never used</description>
+  <highlighted_element>workHours</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/local/AttendanceDataStoreManager.kt</file>
+  <line>130</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.local</package>
+  <entry_point TYPE="field" FQNAME="com.gity.feliyaattendance.data.local.AttendanceDataStoreManager workHoursOvertime" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;workHoursOvertime&quot; is never used</description>
+  <highlighted_element>workHoursOvertime</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/local/AttendanceDataStoreManager.kt</file>
+  <line>133</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.local</package>
+  <entry_point TYPE="field" FQNAME="com.gity.feliyaattendance.data.local.AttendanceDataStoreManager totalWorkHours" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;totalWorkHours&quot; is never used</description>
+  <highlighted_element>totalWorkHours</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/Attendance.kt</file>
+  <line>51</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.data.model.Attendance java.lang.String calculateWorkDuration()" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Function &quot;calculateWorkDuration&quot; is never used</description>
+  <highlighted_element>calculateWorkDuration</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>21</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/User.kt</file>
+  <line>3</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.data.model.User" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Class &quot;User&quot; is never used</description>
+  <highlighted_element>User</highlighted_element>
+  <language>kotlin</language>
+  <offset>11</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/AttendanceManager.kt</file>
+  <line>13</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.AttendanceManager AttendanceManager(android.content.Context context, com.gity.feliyaattendance.data.local.AttendanceDataStoreManager dataStore, com.gity.feliyaattendance.data.local.ProjectDataStoreManager projectDataStore, com.google.firebase.firestore.FirebaseFirestore firestore)" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;context&quot; is never used</description>
+  <highlighted_element>context</highlighted_element>
+  <language>kotlin</language>
+  <offset>16</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/AttendanceManager.kt</file>
+  <line>19</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.AttendanceManager java.lang.Object clockIn(java.lang.String userId, java.lang.String projectId, com.google.firebase.Timestamp date, com.google.firebase.Timestamp clockIn, java.lang.String imageUrlIn, kotlin.coroutines.Continuation&lt;? super kotlin.Unit&gt; $completion)" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Function &quot;clockIn&quot; is never used</description>
+  <highlighted_element>clockIn</highlighted_element>
+  <language>kotlin</language>
+  <offset>16</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CommonHelper.kt</file>
+  <line>93</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.CommonHelper com.google.firebase.Timestamp stringToTimestamp(java.lang.String dateString)" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Function &quot;stringToTimestamp&quot; is never used</description>
+  <highlighted_element>stringToTimestamp</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CommonHelper.kt</file>
+  <line>104</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.CommonHelper java.util.Date stringToDate(java.lang.String dateString)" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Function &quot;stringToDate&quot; is never used</description>
+  <highlighted_element>stringToDate</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CommonHelper.kt</file>
+  <line>206</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.CommonHelper com.google.firebase.Timestamp toTimestamp(java.util.Date $this$toTimestamp)" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Function &quot;toTimestamp&quot; is never used</description>
+  <highlighted_element>toTimestamp</highlighted_element>
+  <language>kotlin</language>
+  <offset>13</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/HorizontalSpaceItemDecoration.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.helper.HorizontalSpaceItemDecoration" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Class &quot;HorizontalSpaceItemDecoration&quot; is never used</description>
+  <highlighted_element>HorizontalSpaceItemDecoration</highlighted_element>
+  <language>kotlin</language>
+  <offset>6</offset>
+  <length>29</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/repository/Repository.kt</file>
+  <line>469</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.repository</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.repository.Repository java.lang.Object getMonthlyDashboard(java.lang.String userId, kotlin.coroutines.Continuation&lt;? super kotlin.Result&lt;? extends com.gity.feliyaattendance.admin.data.model.MonthlyDashboard&gt;&gt; $completion)" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Function &quot;getMonthlyDashboard&quot; is never used</description>
+  <highlighted_element>getMonthlyDashboard</highlighted_element>
+  <language>kotlin</language>
+  <offset>16</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/auth/AuthViewModel.kt</file>
+  <line>24</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.auth</package>
+  <entry_point TYPE="field" FQNAME="com.gity.feliyaattendance.ui.auth.AuthViewModel isLoading" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;isLoading&quot; is never used</description>
+  <highlighted_element>isLoading</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/AttendanceViewModel.kt</file>
+  <line>18</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.ui.main.attendance.AttendanceViewModel androidx.lifecycle.LiveData&lt;kotlin.Result&lt;kotlin.Unit&gt;&gt; getAttendanceResult()" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;attendanceResult&quot; is never used</description>
+  <highlighted_element>attendanceResult</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>16</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/AttendanceViewModel.kt</file>
+  <line>28</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.ui.main.attendance.AttendanceViewModel void clockIn(java.lang.String userId, java.lang.String projectId, java.util.Date date, com.google.firebase.Timestamp clockInTime, com.google.firebase.Timestamp clockOutTime, java.lang.String imageUrlIn, java.lang.String imageUrlOut, java.lang.String description, java.lang.String status, int workHours, int workHoursOvertime)" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Function &quot;clockIn&quot; is never used</description>
+  <highlighted_element>clockIn</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>13</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.home.HomeViewModelDataStore" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Class &quot;HomeViewModelDataStore&quot; is never used</description>
+  <highlighted_element>HomeViewModelDataStore</highlighted_element>
+  <language>kotlin</language>
+  <offset>6</offset>
+  <length>22</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/settings/SettingsFragment.kt</file>
+  <line>28</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.settings</package>
+  <entry_point TYPE="field" FQNAME="com.gity.feliyaattendance.ui.main.settings.SettingsFragment viewModel$delegate" />
+  <problem_class id="UnusedSymbol" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused symbol</problem_class>
+  <description>Property &quot;viewModel&quot; is never used</description>
+  <highlighted_element>viewModel</highlighted_element>
+  <language>kotlin</language>
+  <offset>16</offset>
+  <length>9</length>
+</problem>
+</problems>

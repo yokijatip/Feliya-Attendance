@@ -1,0 +1,57 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/images_placeholder.png</file>
+  <line>1</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/images_placeholder.png" />
+  <problem_class id="AndroidLintIconLocation" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image defined in density-independent drawable folder</problem_class>
+  <hints />
+  <description>&lt;html&gt;Found bitmap drawable &lt;code&gt;res/drawable/images_placeholder.png&lt;/code&gt; in densityless folder&lt;/html&gt;</description>
+  <highlighted_element />
+  <language />
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/img_fakhrusyi.jpg</file>
+  <line>1</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/img_fakhrusyi.jpg" />
+  <problem_class id="AndroidLintIconLocation" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image defined in density-independent drawable folder</problem_class>
+  <hints />
+  <description>&lt;html&gt;Found bitmap drawable &lt;code&gt;res/drawable/img_fakhrusyi.jpg&lt;/code&gt; in densityless folder&lt;/html&gt;</description>
+  <highlighted_element />
+  <language />
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/iv_placeholder.jpg</file>
+  <line>1</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/iv_placeholder.jpg" />
+  <problem_class id="AndroidLintIconLocation" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image defined in density-independent drawable folder</problem_class>
+  <hints />
+  <description>&lt;html&gt;Found bitmap drawable &lt;code&gt;res/drawable/iv_placeholder.jpg&lt;/code&gt; in densityless folder&lt;/html&gt;</description>
+  <highlighted_element />
+  <language />
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/logo_no_background.png</file>
+  <line>1</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/logo_no_background.png" />
+  <problem_class id="AndroidLintIconLocation" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image defined in density-independent drawable folder</problem_class>
+  <hints />
+  <description>&lt;html&gt;Found bitmap drawable &lt;code&gt;res/drawable/logo_no_background.png&lt;/code&gt; in densityless folder&lt;/html&gt;</description>
+  <highlighted_element />
+  <language />
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/worker_profile_placeholder.jpg</file>
+  <line>1</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/worker_profile_placeholder.jpg" />
+  <problem_class id="AndroidLintIconLocation" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Image defined in density-independent drawable folder</problem_class>
+  <hints />
+  <description>&lt;html&gt;Found bitmap drawable &lt;code&gt;res/drawable/worker_profile_placeholder.jpg&lt;/code&gt; in densityless folder&lt;/html&gt;</description>
+  <highlighted_element />
+  <language />
+</problem>
+</problems>

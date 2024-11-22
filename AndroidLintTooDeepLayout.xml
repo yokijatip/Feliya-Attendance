@@ -1,0 +1,41 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml</file>
+  <line>219</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_attendance_detail.xml" />
+  <problem_class id="AndroidLintTooDeepLayout" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Layout hierarchy is too deep</problem_class>
+  <hints />
+  <description>&lt;html&gt;&lt;code&gt;activity_admin_attendance_detail.xml&lt;/code&gt; has more than 10 levels, bad for performance&lt;/html&gt;</description>
+  <highlighted_element>com.denzcoskun.imageslider.ImageSlider</highlighted_element>
+  <language>XML</language>
+  <offset>37</offset>
+  <length>38</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml</file>
+  <line>227</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attendance.xml" />
+  <problem_class id="AndroidLintTooDeepLayout" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Layout hierarchy is too deep</problem_class>
+  <hints />
+  <description>&lt;html&gt;&lt;code&gt;activity_attendance.xml&lt;/code&gt; has more than 10 levels, bad for performance&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>37</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml</file>
+  <line>202</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml" />
+  <problem_class id="AndroidLintTooDeepLayout" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Layout hierarchy is too deep</problem_class>
+  <hints />
+  <description>&lt;html&gt;&lt;code&gt;activity_clock_out.xml&lt;/code&gt; has more than 10 levels, bad for performance&lt;/html&gt;</description>
+  <highlighted_element>com.google.android.material.card.MaterialCardView</highlighted_element>
+  <language>XML</language>
+  <offset>37</offset>
+  <length>49</length>
+</problem>
+</problems>

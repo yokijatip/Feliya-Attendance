@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.AdminAnnouncementAdapter
+import com.gity.feliyaattendance.admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity
 import com.gity.feliyaattendance.databinding.ActivityAdminAnnouncementBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
@@ -56,7 +57,9 @@ class AdminAnnouncementActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         adapter = AdminAnnouncementAdapter { announcement ->
             // Handle announcement click if needed
-            CommonHelper.showToast(this@AdminAnnouncementActivity, "Announcement Clicked, ID : ${announcement.id}")
+            val intent = Intent(this@AdminAnnouncementActivity, AdminAnnouncementDetailActivity::class.java)
+            intent.putExtra("announcementId", announcement.id)
+            startActivity(intent)
         }
         binding.rvAnnouncement.adapter = adapter
         binding.rvAnnouncement.layoutManager = LinearLayoutManager(this)

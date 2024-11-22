@@ -2,10 +2,8 @@ package com.gity.feliyaattendance.repository
 
 import android.content.Context
 import android.os.Environment
-import android.util.Log
 import com.gity.feliyaattendance.admin.data.model.Announcement
 import com.gity.feliyaattendance.admin.data.model.AttendanceExcelReport
-import com.gity.feliyaattendance.admin.data.model.MonthlyDashboard
 import com.gity.feliyaattendance.admin.data.model.Worker
 import com.gity.feliyaattendance.data.model.Attendance
 import com.gity.feliyaattendance.data.model.AttendanceDetail
@@ -83,9 +81,18 @@ class Repository(
     suspend fun fetchRoles(): Result<List<String>> {
         return try {
             val snapshot = firebaseFirestore.collection("roles").document("role").get().await()
-            val roles = snapshot.get("name") as? List<String>
-                ?: return Result.failure(Exception("Roles not found"))
-            Result.success(roles)
+
+            // Pendekatan 1: Menggunakan safe casting dengan konversi eksplisit
+            val roles = when (val rolesData = snapshot.get("name")) {
+                is List<*> -> rolesData.filterIsInstance<String>()
+                else -> return Result.failure(Exception("Roles not found or invalid type"))
+            }
+
+            if (roles.isEmpty()) {
+                Result.failure(Exception("No roles found"))
+            } else {
+                Result.success(roles)
+            }
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -466,68 +473,68 @@ class Repository(
         }
     }
 
-    suspend fun getMonthlyDashboard(userId: String): Result<MonthlyDashboard> {
-        return try {
-            // Set start of month
-            val startOfMonth = Calendar.getInstance().apply {
-                set(Calendar.DAY_OF_MONTH, 1)
-                set(Calendar.HOUR_OF_DAY, 0)
-                set(Calendar.MINUTE, 0)
-                set(Calendar.SECOND, 0)
-                set(Calendar.MILLISECOND, 0)
-            }.time
-
-            // Set end of month
-            val endOfMonth = Calendar.getInstance().apply {
-                set(Calendar.DAY_OF_MONTH, getActualMaximum(Calendar.DAY_OF_MONTH))
-                set(Calendar.HOUR_OF_DAY, 23)
-                set(Calendar.MINUTE, 59)
-                set(Calendar.SECOND, 59)
-                set(Calendar.MILLISECOND, 999)
-            }.time
-
-            // Log untuk debugging
-            Log.d("Repository", "Fetching attendance for userId: $userId")
-            Log.d("Repository", "Start date: $startOfMonth")
-            Log.d("Repository", "End date: $endOfMonth")
-
-            val snapshot = firebaseFirestore.collection("attendance").whereEqualTo("userId", userId)
-                .whereGreaterThanOrEqualTo("date", startOfMonth)
-                .whereLessThanOrEqualTo("date", endOfMonth).get().await()
-
-            // Log jumlah dokumen yang ditemukan
-            Log.d("Repository", "Found ${snapshot.size()} documents")
-
-            val totalAttendance = snapshot.size()
-            var totalOvertimeHours = 0.0
-
-            snapshot.documents.forEach { document ->
-//                // Log setiap dokumen untuk debugging
-//                Log.d("Repository", "Document ID: ${document.id}")
-//                Log.d("Repository", "Date: ${document.getTimestamp("date")}")
-//                Log.d("Repository", "Overtime hours: ${document.getDouble("overtimeHours")}")
-
-                val overtimeHours = document.getDouble("overtimeHours") ?: 0.0
-                if (overtimeHours > 0) {
-                    totalOvertimeHours += overtimeHours
-                }
-            }
-
-            Log.d(
-                "Repository",
-                "Final counts - Attendance: $totalAttendance, Overtime: $totalOvertimeHours"
-            )
-
-            Result.success(
-                MonthlyDashboard(
-                    totalAttendance = totalAttendance, totalOvertimeHours = totalOvertimeHours
-                )
-            )
-        } catch (e: Exception) {
-            Log.e("Repository", "Error fetching monthly dashboard", e)
-            Result.failure(e)
-        }
-    }
+//    suspend fun getMonthlyDashboard(userId: String): Result<MonthlyDashboard> {
+//        return try {
+//            // Set start of month
+//            val startOfMonth = Calendar.getInstance().apply {
+//                set(Calendar.DAY_OF_MONTH, 1)
+//                set(Calendar.HOUR_OF_DAY, 0)
+//                set(Calendar.MINUTE, 0)
+//                set(Calendar.SECOND, 0)
+//                set(Calendar.MILLISECOND, 0)
+//            }.time
+//
+//            // Set end of month
+//            val endOfMonth = Calendar.getInstance().apply {
+//                set(Calendar.DAY_OF_MONTH, getActualMaximum(Calendar.DAY_OF_MONTH))
+//                set(Calendar.HOUR_OF_DAY, 23)
+//                set(Calendar.MINUTE, 59)
+//                set(Calendar.SECOND, 59)
+//                set(Calendar.MILLISECOND, 999)
+//            }.time
+//
+//            // Log untuk debugging
+//            Log.d("Repository", "Fetching attendance for userId: $userId")
+//            Log.d("Repository", "Start date: $startOfMonth")
+//            Log.d("Repository", "End date: $endOfMonth")
+//
+//            val snapshot = firebaseFirestore.collection("attendance").whereEqualTo("userId", userId)
+//                .whereGreaterThanOrEqualTo("date", startOfMonth)
+//                .whereLessThanOrEqualTo("date", endOfMonth).get().await()
+//
+//            // Log jumlah dokumen yang ditemukan
+//            Log.d("Repository", "Found ${snapshot.size()} documents")
+//
+//            val totalAttendance = snapshot.size()
+//            var totalOvertimeHours = 0.0
+//
+//            snapshot.documents.forEach { document ->
+////                // Log setiap dokumen untuk debugging
+////                Log.d("Repository", "Document ID: ${document.id}")
+////                Log.d("Repository", "Date: ${document.getTimestamp("date")}")
+////                Log.d("Repository", "Overtime hours: ${document.getDouble("overtimeHours")}")
+//
+//                val overtimeHours = document.getDouble("overtimeHours") ?: 0.0
+//                if (overtimeHours > 0) {
+//                    totalOvertimeHours += overtimeHours
+//                }
+//            }
+//
+//            Log.d(
+//                "Repository",
+//                "Final counts - Attendance: $totalAttendance, Overtime: $totalOvertimeHours"
+//            )
+//
+//            Result.success(
+//                MonthlyDashboard(
+//                    totalAttendance = totalAttendance, totalOvertimeHours = totalOvertimeHours
+//                )
+//            )
+//        } catch (e: Exception) {
+//            Log.e("Repository", "Error fetching monthly dashboard", e)
+//            Result.failure(e)
+//        }
+//    }
 
     //    Generate Excel Report
     suspend fun generateExcelReport(
@@ -659,11 +666,11 @@ class Repository(
                 }
             }
 
-            // Function untuk memformat menit ke format "HH:mm"
+            // Function untuk memformat menit ke format "HH:mm" dengan Locale yang eksplisit
             fun formatMinutesToTime(totalMinutes: Int): String {
                 val hours = totalMinutes / 60
                 val minutes = totalMinutes % 60
-                return String.format("%02d:%02d", hours, minutes)
+                return String.format(Locale.getDefault(), "%02d:%02d", hours, minutes)
             }
 
             // Hitung total untuk setiap jenis jam
@@ -785,6 +792,31 @@ class Repository(
             Result.failure(e)
         }
     }
+
+    suspend fun getDetailAnnouncement(announcementId: String): Result<Announcement> {
+        return try {
+            val documentSnapshot =
+                firebaseFirestore.collection("announcement").document(announcementId).get().await()
+            if (documentSnapshot.exists()) {
+                val announcement = documentSnapshot.toObject(Announcement::class.java)
+                Result.success(announcement ?: Announcement())
+            } else {
+                Result.failure(Exception("Announcement Not Found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun deleteAnnouncement(announcementId: String): Result<Unit> {
+        return try {
+            firebaseFirestore.collection("announcement").document(announcementId).delete().await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
 
     suspend fun createAnnouncement(
         announcement: String,

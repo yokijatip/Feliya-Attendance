@@ -15,7 +15,6 @@ import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
@@ -219,43 +218,57 @@ class ClockInActivity : AppCompatActivity() {
 
     //    Permission Checker
     private fun checkAndRequestPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissionsModern()
-        } else {
-            requestPermissionsLegacy()
+        val permissionsToRequest = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ->
+                arrayOf(
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.CAMERA
+                )
+            else ->
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
+                )
         }
-    }
 
-    //    Request Permission modern
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun requestPermissionsModern() {
-        if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
+        if (permissionsToRequest.all {
+                checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
+            }) {
             showDialogImage()
         } else {
-            requestPermissions(
-                arrayOf(Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.CAMERA),
-                REQUEST_PERMISSIONS
-            )
+            requestPermissions(permissionsToRequest, REQUEST_PERMISSIONS)
         }
     }
-
-    //    Permission Checker
-    private fun requestPermissionsLegacy() {
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            showDialogImage()
-        } else {
-            requestPermissions(
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
-                REQUEST_PERMISSIONS
-            )
-        }
-    }
+//    //    Request Permission modern
+//    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+//    private fun requestPermissionsModern() {
+//        if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(
+//                Manifest.permission.CAMERA
+//            ) == PackageManager.PERMISSION_GRANTED
+//        ) {
+//            showDialogImage()
+//        } else {
+//            requestPermissions(
+//                arrayOf(Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.CAMERA),
+//                REQUEST_PERMISSIONS
+//            )
+//        }
+//    }
+//
+//    //    Permission Checker
+//    private fun requestPermissionsLegacy() {
+//        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(
+//                Manifest.permission.CAMERA
+//            ) == PackageManager.PERMISSION_GRANTED
+//        ) {
+//            showDialogImage()
+//        } else {
+//            requestPermissions(
+//                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
+//                REQUEST_PERMISSIONS
+//            )
+//        }
+//    }
 
     //    Request One Time Permission
     override fun onRequestPermissionsResult(

@@ -1,0 +1,54 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_attendance.xml</file>
+  <line>89</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_attendance.xml" />
+  <problem_class id="AndroidLintDisableBaselineAlignment" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing baselineAligned attribute</problem_class>
+  <hints />
+  <description>&lt;html&gt;Set &lt;code&gt;android:baselineAligned=&quot;false&quot;&lt;/code&gt; on this element for better performance&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>9</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml</file>
+  <line>49</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml" />
+  <problem_class id="AndroidLintDisableBaselineAlignment" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing baselineAligned attribute</problem_class>
+  <hints />
+  <description>&lt;html&gt;Set &lt;code&gt;android:baselineAligned=&quot;false&quot;&lt;/code&gt; on this element for better performance&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_attendance.xml</file>
+  <line>69</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_attendance.xml" />
+  <problem_class id="AndroidLintDisableBaselineAlignment" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing baselineAligned attribute</problem_class>
+  <hints />
+  <description>&lt;html&gt;Set &lt;code&gt;android:baselineAligned=&quot;false&quot;&lt;/code&gt; on this element for better performance&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>9</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml</file>
+  <line>49</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml" />
+  <problem_class id="AndroidLintDisableBaselineAlignment" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing baselineAligned attribute</problem_class>
+  <hints />
+  <description>&lt;html&gt;Set &lt;code&gt;android:baselineAligned=&quot;false&quot;&lt;/code&gt; on this element for better performance&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>13</offset>
+  <length>12</length>
+</problem>
+</problems>

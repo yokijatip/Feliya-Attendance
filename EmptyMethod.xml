@@ -1,0 +1,18 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt</file>
+  <line>9</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.utils.OfflinePersistence void onCreate()" />
+  <problem_class id="EmptyMethod" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Empty method</problem_class>
+  <hints>
+    <hint value="false" />
+  </hints>
+  <description>Method only calls its super</description>
+  <highlighted_element>onCreate</highlighted_element>
+  <language>kotlin</language>
+  <offset>17</offset>
+  <length>8</length>
+</problem>
+</problems>

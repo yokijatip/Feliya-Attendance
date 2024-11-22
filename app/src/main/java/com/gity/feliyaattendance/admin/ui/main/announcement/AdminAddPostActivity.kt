@@ -16,7 +16,6 @@ import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
@@ -30,7 +29,7 @@ import com.gity.feliyaattendance.databinding.ActivityAdminAddPostBinding
 import com.gity.feliyaattendance.helper.CloudinaryHelper
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
-import com.gity.feliyaattendance.ui.main.attendance.ClockOutActivity
+import com.gity.feliyaattendance.ui.main.attendance.ClockInActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -289,42 +288,27 @@ class AdminAddPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestPermissionsLegacy() {
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            showDialogImage()
-        } else {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA
-                ), ClockOutActivity.REQUEST_PERMISSIONS
-            )
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun requestPermissionsModern() {
-        if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            showDialogImage()
-        } else {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.CAMERA
-                ), ClockOutActivity.REQUEST_PERMISSIONS
-            )
-        }
-    }
-
     private fun checkAndRequestPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissionsModern()
+        val permissionsToRequest = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ->
+                arrayOf(
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.CAMERA
+                )
+
+            else ->
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
+                )
+        }
+
+        if (permissionsToRequest.all {
+                checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
+            }) {
+            showDialogImage()
         } else {
-            requestPermissionsLegacy()
+            requestPermissions(permissionsToRequest, ClockInActivity.REQUEST_PERMISSIONS)
         }
     }
 

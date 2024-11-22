@@ -1,0 +1,28 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement_detail.xml</file>
+  <line>123</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_announcement_detail.xml" />
+  <problem_class id="AndroidLintInefficientWeight" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Inefficient layout weight</problem_class>
+  <hints />
+  <description>&lt;html&gt;Use a &lt;code&gt;layout_width&lt;/code&gt; of &lt;code&gt;0dp&lt;/code&gt; instead of &lt;code&gt;wrap_content&lt;/code&gt; for better performance&lt;/html&gt;</description>
+  <highlighted_element>android:layout_width=&quot;wrap_content&quot;</highlighted_element>
+  <language>XML</language>
+  <offset>28</offset>
+  <length>35</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/fragment_explore.xml</file>
+  <line>31</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_explore.xml" />
+  <problem_class id="AndroidLintInefficientWeight" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Inefficient layout weight</problem_class>
+  <hints />
+  <description>&lt;html&gt;Use a &lt;code&gt;layout_width&lt;/code&gt; of &lt;code&gt;0dp&lt;/code&gt; instead of &lt;code&gt;wrap_content&lt;/code&gt; for better performance&lt;/html&gt;</description>
+  <highlighted_element>android:layout_width=&quot;wrap_content&quot;</highlighted_element>
+  <language>XML</language>
+  <offset>20</offset>
+  <length>35</length>
+</problem>
+</problems>

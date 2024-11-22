@@ -1,0 +1,41 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml</file>
+  <line>57</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_admin_project.xml" />
+  <problem_class id="AndroidLintUselessParent" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unnecessary parent layout</problem_class>
+  <hints />
+  <description>&lt;html&gt;This &lt;code&gt;LinearLayout&lt;/code&gt; layout or its &lt;code&gt;LinearLayout&lt;/code&gt; parent is unnecessary&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml</file>
+  <line>57</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_project.xml" />
+  <problem_class id="AndroidLintUselessParent" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unnecessary parent layout</problem_class>
+  <hints />
+  <description>&lt;html&gt;This &lt;code&gt;LinearLayout&lt;/code&gt; layout or its &lt;code&gt;LinearLayout&lt;/code&gt; parent is unnecessary&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/list_item_worker.xml</file>
+  <line>23</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_worker.xml" />
+  <problem_class id="AndroidLintUselessParent" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unnecessary parent layout</problem_class>
+  <hints />
+  <description>&lt;html&gt;This &lt;code&gt;LinearLayout&lt;/code&gt; layout or its &lt;code&gt;LinearLayout&lt;/code&gt; parent is unnecessary&lt;/html&gt;</description>
+  <highlighted_element>LinearLayout</highlighted_element>
+  <language>XML</language>
+  <offset>9</offset>
+  <length>12</length>
+</problem>
+</problems>

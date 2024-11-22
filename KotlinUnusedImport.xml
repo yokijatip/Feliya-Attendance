@@ -1,0 +1,223 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminAnnouncementAdapter.kt</file>
+  <line>9</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminAnnouncementAdapter.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import androidx.transition.Visibility</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>37</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminAnnouncementAdapter.kt</file>
+  <line>11</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminAnnouncementAdapter.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.gity.feliyaattendance.R</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>34</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt</file>
+  <line>3</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import android.content.res.ColorStateList</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>41</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt</file>
+  <line>6</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import android.widget.TextView</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>30</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import androidx.core.content.ContextCompat</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt</file>
+  <line>15</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.adapter</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/adapter/AdminProjectAdapter.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.google.android.material.card.MaterialCardView</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>56</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/projects/AdminAddProjectActivity.kt</file>
+  <line>30</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.projects</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/projects/AdminAddProjectActivity.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>70</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CommonHelper.kt</file>
+  <line>14</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CommonHelper.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.gity.feliyaattendance.R</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>34</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>4</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import androidx.lifecycle.LiveData</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>34</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>5</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import androidx.lifecycle.MutableLiveData</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>41</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import androidx.lifecycle.viewModelScope</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>40</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>8</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>70</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>9</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.google.firebase.Timestamp</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>36</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>10</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import kotlinx.coroutines.flow.firstOrNull</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt</file>
+  <line>11</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeViewModelDataStore.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import kotlinx.coroutines.launch</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>32</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt</file>
+  <line>4</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.google.firebase.firestore.FirebaseFirestore</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>54</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt</file>
+  <line>5</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt" />
+  <problem_class id="KotlinUnusedImport" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unused import directive</problem_class>
+  <description>Unused import directive</description>
+  <highlighted_element>import com.google.firebase.firestore.FirebaseFirestoreSettings</highlighted_element>
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>62</length>
+</problem>
+</problems>

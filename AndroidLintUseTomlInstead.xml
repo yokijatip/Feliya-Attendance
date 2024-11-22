@@ -1,0 +1,58 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/build.gradle.kts</file>
+  <line>70</line>
+  <module>Feliya_Attendance.app</module>
+  <package>&lt;default&gt;</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/build.gradle.kts" />
+  <problem_class id="AndroidLintUseTomlInstead" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Use TOML Version Catalog Instead</problem_class>
+  <hints />
+  <description>&lt;html&gt;Use version catalog instead&lt;/html&gt;</description>
+  <highlighted_element>&quot;com.google.firebase:firebase-perf:21.0.2&quot;</highlighted_element>
+  <language>kotlin</language>
+  <offset>19</offset>
+  <length>42</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/build.gradle.kts</file>
+  <line>96</line>
+  <module>Feliya_Attendance.app</module>
+  <package>&lt;default&gt;</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/build.gradle.kts" />
+  <problem_class id="AndroidLintUseTomlInstead" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Use TOML Version Catalog Instead</problem_class>
+  <hints />
+  <description>&lt;html&gt;Use version catalog instead&lt;/html&gt;</description>
+  <highlighted_element>&quot;org.apache.poi:poi:5.2.3&quot;</highlighted_element>
+  <language>kotlin</language>
+  <offset>19</offset>
+  <length>26</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/build.gradle.kts</file>
+  <line>98</line>
+  <module>Feliya_Attendance.app</module>
+  <package>&lt;default&gt;</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/build.gradle.kts" />
+  <problem_class id="AndroidLintUseTomlInstead" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Use TOML Version Catalog Instead</problem_class>
+  <hints />
+  <description>&lt;html&gt;Use version catalog instead&lt;/html&gt;</description>
+  <highlighted_element>&quot;org.apache.poi:poi-ooxml:5.2.3&quot;</highlighted_element>
+  <language>kotlin</language>
+  <offset>19</offset>
+  <length>32</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/build.gradle.kts</file>
+  <line>99</line>
+  <module>Feliya_Attendance.app</module>
+  <package>&lt;default&gt;</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/build.gradle.kts" />
+  <problem_class id="AndroidLintUseTomlInstead" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Use TOML Version Catalog Instead</problem_class>
+  <hints />
+  <description>&lt;html&gt;Use version catalog instead&lt;/html&gt;</description>
+  <highlighted_element>&quot;org.apache.xmlbeans:xmlbeans:5.1.1&quot;</highlighted_element>
+  <language>kotlin</language>
+  <offset>19</offset>
+  <length>36</length>
+</problem>
+</problems>

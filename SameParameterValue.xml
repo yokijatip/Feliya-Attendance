@@ -1,0 +1,86 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/attendance/AdminAttendanceDetailActivity.kt</file>
+  <line>242</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.attendance</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailActivity void showToast(java.lang.String message)" />
+  <problem_class id="SameParameterValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method parameter always has the same value</problem_class>
+  <hints />
+  <description>Actual value of parameter &lt;code&gt;message&lt;/code&gt; is always 'Attendance detail not found'</description>
+  <highlighted_element>message</highlighted_element>
+  <language>kotlin</language>
+  <offset>26</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CloudinaryHelper.kt</file>
+  <line>253</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.CloudinaryHelper int calculateInSampleSize(int width, int height, int maxWidth, int maxHeight)" />
+  <problem_class id="SameParameterValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method parameter always has the same value</problem_class>
+  <hints />
+  <description>Actual value of parameter &lt;code&gt;maxWidth&lt;/code&gt; is always '800'</description>
+  <highlighted_element>maxWidth</highlighted_element>
+  <language>kotlin</language>
+  <offset>63</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CloudinaryHelper.kt</file>
+  <line>253</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.CloudinaryHelper int calculateInSampleSize(int width, int height, int maxWidth, int maxHeight)" />
+  <problem_class id="SameParameterValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method parameter always has the same value</problem_class>
+  <hints />
+  <description>Actual value of parameter &lt;code&gt;maxHeight&lt;/code&gt; is always '600'</description>
+  <highlighted_element>maxHeight</highlighted_element>
+  <language>kotlin</language>
+  <offset>78</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CloudinaryHelper.kt</file>
+  <line>268</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.CloudinaryHelper kotlin.Pair&lt;java.lang.Integer,java.lang.Integer&gt; calculateNewDimensions(int originalWidth, int originalHeight, int maxWidth, int maxHeight)" />
+  <problem_class id="SameParameterValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method parameter always has the same value</problem_class>
+  <hints />
+  <description>Actual value of parameter &lt;code&gt;maxWidth&lt;/code&gt; is always '800'</description>
+  <highlighted_element>maxWidth</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/helper/CloudinaryHelper.kt</file>
+  <line>269</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.helper</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.helper.CloudinaryHelper kotlin.Pair&lt;java.lang.Integer,java.lang.Integer&gt; calculateNewDimensions(int originalWidth, int originalHeight, int maxWidth, int maxHeight)" />
+  <problem_class id="SameParameterValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method parameter always has the same value</problem_class>
+  <hints />
+  <description>Actual value of parameter &lt;code&gt;maxHeight&lt;/code&gt; is always '600'</description>
+  <highlighted_element>maxHeight</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/detail/AttendanceDetailActivity.kt</file>
+  <line>159</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.detail</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.ui.main.detail.AttendanceDetailActivity void showToast(java.lang.String message)" />
+  <problem_class id="SameParameterValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method parameter always has the same value</problem_class>
+  <hints />
+  <description>Actual value of parameter &lt;code&gt;message&lt;/code&gt; is always 'Attendance detail not found'</description>
+  <highlighted_element>message</highlighted_element>
+  <language>kotlin</language>
+  <offset>26</offset>
+  <length>7</length>
+</problem>
+</problems>

@@ -1,0 +1,67 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_post.xml</file>
+  <line>157</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_post.xml" />
+  <problem_class id="AndroidLintTextFields" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing inputType</problem_class>
+  <hints />
+  <description>&lt;html&gt;This text field does not specify an &lt;code&gt;inputType&lt;/code&gt;&lt;/html&gt;</description>
+  <highlighted_element>EditText</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>325</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintTextFields" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing inputType</problem_class>
+  <hints />
+  <description>&lt;html&gt;This text field does not specify an &lt;code&gt;inputType&lt;/code&gt;&lt;/html&gt;</description>
+  <highlighted_element>EditText</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>374</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintTextFields" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing inputType</problem_class>
+  <hints />
+  <description>&lt;html&gt;This text field does not specify an &lt;code&gt;inputType&lt;/code&gt;&lt;/html&gt;</description>
+  <highlighted_element>EditText</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml</file>
+  <line>423</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_add_project.xml" />
+  <problem_class id="AndroidLintTextFields" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing inputType</problem_class>
+  <hints />
+  <description>&lt;html&gt;This text field does not specify an &lt;code&gt;inputType&lt;/code&gt;&lt;/html&gt;</description>
+  <highlighted_element>EditText</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml</file>
+  <line>220</line>
+  <module>Feliya_Attendance.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/layout/activity_clock_out.xml" />
+  <problem_class id="AndroidLintTextFields" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Missing inputType</problem_class>
+  <hints />
+  <description>&lt;html&gt;This text field does not specify an &lt;code&gt;inputType&lt;/code&gt;&lt;/html&gt;</description>
+  <highlighted_element>EditText</highlighted_element>
+  <language>XML</language>
+  <offset>37</offset>
+  <length>8</length>
+</problem>
+</problems>

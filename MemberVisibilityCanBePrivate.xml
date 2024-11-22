@@ -1,0 +1,41 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/home/AdminHomeViewModel.kt</file>
+  <line>34</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.home</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel void refreshAllData()" />
+  <problem_class id="MemberVisibilityCanBePrivate" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Class member can have 'private' visibility</problem_class>
+  <description>Function 'refreshAllData' could be private</description>
+  <highlighted_element>refreshAllData</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/home/AdminHomeViewModel.kt</file>
+  <line>55</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.home</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel void fetchEmail()" />
+  <problem_class id="MemberVisibilityCanBePrivate" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Class member can have 'private' visibility</problem_class>
+  <description>Function 'fetchEmail' could be private</description>
+  <highlighted_element>fetchEmail</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>10</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/home/AdminHomeViewModel.kt</file>
+  <line>66</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.home</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel void fetchImageProfileUrl()" />
+  <problem_class id="MemberVisibilityCanBePrivate" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Class member can have 'private' visibility</problem_class>
+  <description>Function 'fetchImageProfileUrl' could be private</description>
+  <highlighted_element>fetchImageProfileUrl</highlighted_element>
+  <language>kotlin</language>
+  <offset>8</offset>
+  <length>20</length>
+</problem>
+</problems>

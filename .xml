@@ -1,0 +1,1294 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/androidTest/java/com/gity/feliyaattendance/ExampleInstrumentedTest.kt</file>
+  <line>11</line>
+  <module>Feliya_Attendance.app.androidTest</module>
+  <package>com.gity.feliyaattendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ExampleInstrumentedTest" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>3</length>
+  <highlighted_element>/**</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/androidTest/java/com/gity/feliyaattendance/ExampleInstrumentedTest.kt</file>
+  <line>18</line>
+  <module>Feliya_Attendance.app.androidTest</module>
+  <package>com.gity.feliyaattendance</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.ExampleInstrumentedTest void useAppContext()" />
+  <language>kotlin</language>
+  <offset>4</offset>
+  <length>5</length>
+  <highlighted_element>@Test</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/data/model/AttendanceExcelReport.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.data.model</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.data.model.AttendanceExcelReport" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>10</length>
+  <highlighted_element>@Parcelize</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/data/model/AttendanceExcelReport.kt</file>
+  <line>8</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.data.model</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.admin.data.model.AttendanceExcelReport AttendanceExcelReport(com.google.firebase.Timestamp date, com.google.firebase.Timestamp clockInTime, com.google.firebase.Timestamp clockOutTime, java.lang.String workHours, java.lang.String overtimeHours, java.lang.String totalHours, java.lang.String workDescription, java.lang.String projectId)" />
+  <language>kotlin</language>
+  <offset>32</offset>
+  <length>1</length>
+  <highlighted_element>(</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor has one usage, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/MainAdminActivity.kt</file>
+  <line>16</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.MainAdminActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>47</length>
+  <highlighted_element>class MainAdminActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/announcement/AdminAddPostActivity.kt</file>
+  <line>40</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.announcement</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.announcement.AdminAddPostActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>50</length>
+  <highlighted_element>class AdminAddPostActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/announcement/AdminAnnouncementActivity.kt</file>
+  <line>26</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.announcement</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>55</length>
+  <highlighted_element>class AdminAnnouncementActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/AdminAttendancesFragment.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendancesFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>45</length>
+  <highlighted_element>class AdminAttendancesFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/approved/AdminAttendanceApprovedFragment.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances.approved</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.approved.AdminAttendanceApprovedFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>52</length>
+  <highlighted_element>class AdminAttendanceApprovedFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/pending/AdminAttendancePendingFragment.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances.pending</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.pending.AdminAttendancePendingFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>51</length>
+  <highlighted_element>class AdminAttendancePendingFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/rejected/AdminAttendanceRejectedFragment.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances.rejected</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.rejected.AdminAttendanceRejectedFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>52</length>
+  <highlighted_element>class AdminAttendanceRejectedFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/announcement/AdminAnnouncementDetailActivity.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.announcement</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>61</length>
+  <highlighted_element>class AdminAnnouncementDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/attendance/AdminAttendanceDetailActivity.kt</file>
+  <line>25</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>59</length>
+  <highlighted_element>class AdminAttendanceDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/worker/AdminWorkerDetailActivity.kt</file>
+  <line>37</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.worker</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.worker.AdminWorkerDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>55</length>
+  <highlighted_element>class AdminWorkerDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/home/AdminHomeFragment.kt</file>
+  <line>23</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.home</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.home.AdminHomeFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>38</length>
+  <highlighted_element>class AdminHomeFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/home/workers/AdminListWorkerActivity.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.home.workers</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.home.workers.AdminListWorkerActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>53</length>
+  <highlighted_element>class AdminListWorkerActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/projects/AdminAddProjectActivity.kt</file>
+  <line>47</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.projects</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>53</length>
+  <highlighted_element>class AdminAddProjectActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/projects/AdminProjectsFragment.kt</file>
+  <line>20</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.projects</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.projects.AdminProjectsFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class AdminProjectsFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/Attendance.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.data.model.Attendance" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>10</length>
+  <highlighted_element>@Parcelize</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 10 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/Attendance.kt</file>
+  <line>8</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.data.model.Attendance Attendance(java.lang.String attendanceId, java.lang.String userId, java.lang.String projectId, com.google.firebase.Timestamp date, com.google.firebase.Timestamp clockInTime, com.google.firebase.Timestamp clockOutTime, java.lang.String workProofIn, java.lang.String workProofOut, java.lang.String workDescription, java.lang.String status, int workMinutes, int overtimeMinutes, int totalMinutes, java.lang.String workHoursFormatted, java.lang.String overtimeHoursFormatted, java.lang.String totalHoursFormatted)" />
+  <language>kotlin</language>
+  <offset>21</offset>
+  <length>1</length>
+  <highlighted_element>(</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor has 5 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/AttendanceDetail.kt</file>
+  <line>6</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.data.model.AttendanceDetail" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>10</length>
+  <highlighted_element>@Parcelize</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/AttendanceDetail.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.data.model.AttendanceDetail AttendanceDetail(com.gity.feliyaattendance.data.model.Attendance attendance, java.lang.String workerName, com.gity.feliyaattendance.data.model.Project projectName)" />
+  <language>kotlin</language>
+  <offset>27</offset>
+  <length>1</length>
+  <highlighted_element>(</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor has one usage, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/DetailWorkerMenu.kt</file>
+  <line>6</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.data.model.DetailWorkerMenu" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>10</length>
+  <highlighted_element>@Parcelize</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/DetailWorkerMenu.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.data.model.DetailWorkerMenu DetailWorkerMenu(java.lang.String tvDetailWorkerMenu, int ivDetailWorkerMenu)" />
+  <language>kotlin</language>
+  <offset>27</offset>
+  <length>1</length>
+  <highlighted_element>(</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor has one usage, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/Project.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.data.model.Project" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>10</length>
+  <highlighted_element>@Parcelize</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 6 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/Project.kt</file>
+  <line>8</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.data.model.Project Project(java.lang.String projectId, java.lang.String projectName, java.lang.String location, com.google.firebase.Timestamp startDate, com.google.firebase.Timestamp endDate, java.lang.String status, java.lang.String description, java.lang.String projectImage)" />
+  <language>kotlin</language>
+  <offset>18</offset>
+  <length>1</length>
+  <highlighted_element>(</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor has 3 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/Setting.kt</file>
+  <line>6</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.data.model.Setting" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>10</length>
+  <highlighted_element>@Parcelize</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/data/model/Setting.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.data.model</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.data.model.Setting Setting(java.lang.String tvSetting, int ivSetting)" />
+  <language>kotlin</language>
+  <offset>19</offset>
+  <length>1</length>
+  <highlighted_element>(</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor has one usage, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/auth/AuthActivity.kt</file>
+  <line>13</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.auth</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.auth.AuthActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class AuthActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/auth/login/LoginFragment.kt</file>
+  <line>27</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.auth.login</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.auth.login.LoginFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>34</length>
+  <highlighted_element>class LoginFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/auth/register/RegisterFragment.kt</file>
+  <line>24</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.auth.register</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.auth.register.RegisterFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>37</length>
+  <highlighted_element>class RegisterFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/MainActivity.kt</file>
+  <line>16</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.MainActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class MainActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/ClockInActivity.kt</file>
+  <line>41</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.attendance.ClockInActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>45</length>
+  <highlighted_element>class ClockInActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/ClockOutActivity.kt</file>
+  <line>43</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.attendance.ClockOutActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>46</length>
+  <highlighted_element>class ClockOutActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/ShowProjectActivity.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.attendance.ShowProjectActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>49</length>
+  <highlighted_element>class ShowProjectActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/detail/AttendanceDetailActivity.kt</file>
+  <line>23</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.detail</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.detail.AttendanceDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>54</length>
+  <highlighted_element>class AttendanceDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/eplore/ExploreFragment.kt</file>
+  <line>24</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.eplore</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.eplore.ExploreFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>36</length>
+  <highlighted_element>class ExploreFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeFragment.kt</file>
+  <line>33</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.home.HomeFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>33</length>
+  <highlighted_element>class HomeFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/settings/SettingsFragment.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.settings</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.settings.SettingsFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>37</length>
+  <highlighted_element>class SettingsFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/settings/account/AccountActivity.kt</file>
+  <line>34</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.settings.account</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.settings.account.AccountActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>45</length>
+  <highlighted_element>class AccountActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/splash/SplashScreenActivity.kt</file>
+  <line>24</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.splash</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.splash.SplashScreenActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>35</length>
+  <highlighted_element>@SuppressLint(&quot;CustomSplashScreen&quot;)</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/FeliyaAttendanceApp.kt</file>
+  <line>8</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.utils.FeliyaAttendanceApp" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>43</length>
+  <highlighted_element>class FeliyaAttendanceApp : Application() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.utils.OfflinePersistence" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class OfflinePersistence: Application () {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/test/java/com/gity/feliyaattendance/ExampleUnitTest.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.unitTest</module>
+  <package>com.gity.feliyaattendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ExampleUnitTest" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>3</length>
+  <highlighted_element>/**</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/test/java/com/gity/feliyaattendance/ExampleUnitTest.kt</file>
+  <line>13</line>
+  <module>Feliya_Attendance.app.unitTest</module>
+  <package>com.gity.feliyaattendance</package>
+  <entry_point TYPE="method" FQNAME="com.gity.feliyaattendance.ExampleUnitTest void addition_isCorrect()" />
+  <language>kotlin</language>
+  <offset>4</offset>
+  <length>5</length>
+  <highlighted_element>@Test</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/androidTest/java/com/gity/feliyaattendance/ExampleInstrumentedTest.kt</file>
+  <line>11</line>
+  <module>Feliya_Attendance.app.androidTest</module>
+  <package>com.gity.feliyaattendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ExampleInstrumentedTest" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>3</length>
+  <highlighted_element>/**</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/MainAdminActivity.kt</file>
+  <line>16</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.MainAdminActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>47</length>
+  <highlighted_element>class MainAdminActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/announcement/AdminAddPostActivity.kt</file>
+  <line>40</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.announcement</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.announcement.AdminAddPostActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>50</length>
+  <highlighted_element>class AdminAddPostActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/announcement/AdminAnnouncementActivity.kt</file>
+  <line>26</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.announcement</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>55</length>
+  <highlighted_element>class AdminAnnouncementActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/AdminAttendancesFragment.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendancesFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>45</length>
+  <highlighted_element>class AdminAttendancesFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/approved/AdminAttendanceApprovedFragment.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances.approved</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.approved.AdminAttendanceApprovedFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>52</length>
+  <highlighted_element>class AdminAttendanceApprovedFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/pending/AdminAttendancePendingFragment.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances.pending</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.pending.AdminAttendancePendingFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>51</length>
+  <highlighted_element>class AdminAttendancePendingFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/attendances/rejected/AdminAttendanceRejectedFragment.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.attendances.rejected</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.attendances.rejected.AdminAttendanceRejectedFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>52</length>
+  <highlighted_element>class AdminAttendanceRejectedFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/announcement/AdminAnnouncementDetailActivity.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.announcement</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>61</length>
+  <highlighted_element>class AdminAnnouncementDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/attendance/AdminAttendanceDetailActivity.kt</file>
+  <line>25</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>59</length>
+  <highlighted_element>class AdminAttendanceDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/detail/worker/AdminWorkerDetailActivity.kt</file>
+  <line>37</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.detail.worker</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.detail.worker.AdminWorkerDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>55</length>
+  <highlighted_element>class AdminWorkerDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/home/AdminHomeFragment.kt</file>
+  <line>23</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.home</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.home.AdminHomeFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>38</length>
+  <highlighted_element>class AdminHomeFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/home/workers/AdminListWorkerActivity.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.home.workers</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.home.workers.AdminListWorkerActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>53</length>
+  <highlighted_element>class AdminListWorkerActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/projects/AdminAddProjectActivity.kt</file>
+  <line>47</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.projects</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>53</length>
+  <highlighted_element>class AdminAddProjectActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/admin/ui/main/projects/AdminProjectsFragment.kt</file>
+  <line>20</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.admin.ui.main.projects</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.admin.ui.main.projects.AdminProjectsFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class AdminProjectsFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/auth/AuthActivity.kt</file>
+  <line>13</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.auth</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.auth.AuthActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class AuthActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/auth/login/LoginFragment.kt</file>
+  <line>27</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.auth.login</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.auth.login.LoginFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>34</length>
+  <highlighted_element>class LoginFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/auth/register/RegisterFragment.kt</file>
+  <line>24</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.auth.register</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.auth.register.RegisterFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>37</length>
+  <highlighted_element>class RegisterFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/MainActivity.kt</file>
+  <line>16</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.MainActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class MainActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/ClockInActivity.kt</file>
+  <line>41</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.attendance.ClockInActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>45</length>
+  <highlighted_element>class ClockInActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/ClockOutActivity.kt</file>
+  <line>43</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.attendance.ClockOutActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>46</length>
+  <highlighted_element>class ClockOutActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/attendance/ShowProjectActivity.kt</file>
+  <line>21</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.attendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.attendance.ShowProjectActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>49</length>
+  <highlighted_element>class ShowProjectActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/detail/AttendanceDetailActivity.kt</file>
+  <line>23</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.detail</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.detail.AttendanceDetailActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>54</length>
+  <highlighted_element>class AttendanceDetailActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/eplore/ExploreFragment.kt</file>
+  <line>24</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.eplore</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.eplore.ExploreFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>36</length>
+  <highlighted_element>class ExploreFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has one instantiation, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/home/HomeFragment.kt</file>
+  <line>33</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.home</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.home.HomeFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>33</length>
+  <highlighted_element>class HomeFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/settings/SettingsFragment.kt</file>
+  <line>22</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.settings</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.settings.SettingsFragment" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>37</length>
+  <highlighted_element>class SettingsFragment : Fragment() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class has 2 instantiations, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/settings/account/AccountActivity.kt</file>
+  <line>34</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.main.settings.account</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.settings.account.AccountActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>45</length>
+  <highlighted_element>class AccountActivity : AppCompatActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/splash/SplashScreenActivity.kt</file>
+  <line>24</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.ui.splash</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.splash.SplashScreenActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>35</length>
+  <highlighted_element>@SuppressLint(&quot;CustomSplashScreen&quot;)</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/FeliyaAttendanceApp.kt</file>
+  <line>8</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.utils.FeliyaAttendanceApp" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>43</length>
+  <highlighted_element>class FeliyaAttendanceApp : Application() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/utils/OfflinePersistence.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.main</module>
+  <package>com.gity.feliyaattendance.utils</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.utils.OfflinePersistence" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class OfflinePersistence: Application () {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/test/java/com/gity/feliyaattendance/ExampleUnitTest.kt</file>
+  <line>7</line>
+  <module>Feliya_Attendance.app.unitTest</module>
+  <package>com.gity.feliyaattendance</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ExampleUnitTest" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>3</length>
+  <highlighted_element>/**</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+</problems>

@@ -217,9 +217,13 @@
     <string name="failed_create_announcement">An error occurred</string>
     <string name="no_announcement">No Announcement</string>
     <string name="no_announcement_description">Failed to load announcements</string>
+    <string name="delete_announcement">Delete Announcement</string>
+    <string name="delete_announcement_description">Are you sure to delete this announcement?</string>
+    <string name="delete_announcement_success">Successfully Delete Announcement</string>
 
     <!-- Account -->
     <string name="success_upload_image">Profile image updated</string>
     <string name="failed_upload_image">Failed to upload image</string>
+
 
 </resources>
