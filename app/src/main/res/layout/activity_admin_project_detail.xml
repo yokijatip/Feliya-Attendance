@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.detail.AttendanceDetailActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.main.detail.AttendanceDetailActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--  Title  -->
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_dot_arrow_left"
+                        app:tint="@color/secondary_color"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/inter_medium"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/back"
+                        android:textColor="@color/secondary_color"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:maxLines="1"
+                    android:text="@string/detail_project"
+                    android:textColor="@color/primary_color"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:backgroundTint="@color/background_card_secondary_color"
+                android:padding="0dp"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintVertical_bias="1.0"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Project Name & Location -->
+                    <LinearLayout
+                        android:id="@+id/linear_layout_project"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <!-- Icon Map-->
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_map_pin"
+                            app:tint="@color/secondary_color" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_project_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="@color/secondary_color"
+                                android:textSize="14sp"
+                                tools:text="Blok M Sency" />
+
+                            <TextView
+                                android:id="@+id/tv_project_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="#232359"
+                                android:textSize="16sp"
+                                tools:text="Jakarta, Indonesia" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:backgroundTint="@color/status_pending_background"
+                            android:translationZ="4dp"
+                            app:cardCornerRadius="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+                            app:strokeWidth="0dp">
+
+                            <TextView
+                                android:id="@+id/tv_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                android:paddingStart="12dp"
+                                android:paddingTop="4dp"
+                                android:paddingEnd="12dp"
+                                android:paddingBottom="4dp"
+                                tools:text="@string/status_pending"
+                                android:textColor="@color/status_pending" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:backgroundTint="@color/white"
+                        app:cardElevation="8dp"
+                        app:cardMaxElevation="12dp"
+                        app:shapeAppearanceOverlay="@style/TopRoundCard"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                android:backgroundTint="@color/primary_color"
+                                app:cardCornerRadius="20dp"
+                                app:strokeWidth="0dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_detail_project"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Start Date -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_attendance_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:backgroundTint="@android:color/transparent"
+                                app:cardCornerRadius="8dp"
+                                app:strokeWidth="0dp">
+                                <!-- Attendance Date -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <!--    Icon    -->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="42dp"
+                                        android:layout_height="42dp"
+                                        android:backgroundTint="@color/background_icon"
+                                        app:cardCornerRadius="14dp"
+                                        app:strokeWidth="0dp">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_calendar"
+                                            app:tint="@color/primary_color" />
+
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <!--    Text    -->
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/inter_regular"
+                                            android:maxLines="1"
+                                            android:text="@string/start_date"
+                                            android:textColor="@color/gray"
+                                            android:textSize="12sp"
+                                            tools:ignore="SmallSp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_start_date"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/inter_medium"
+                                            android:maxLines="1"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"
+                                            tools:text="30 Maret 2024" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- End Date -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_end_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:backgroundTint="@android:color/transparent"
+                                app:cardCornerRadius="8dp"
+                                app:strokeWidth="0dp">
+                                <!-- Attendance Date -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <!--    Icon    -->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="42dp"
+                                        android:layout_height="42dp"
+                                        android:backgroundTint="@color/background_icon"
+                                        app:cardCornerRadius="14dp"
+                                        app:strokeWidth="0dp">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_calendar"
+                                            app:tint="@color/primary_color" />
+
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <!--    Text    -->
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/inter_regular"
+                                            android:maxLines="1"
+                                            android:text="@string/end_date"
+                                            android:textColor="@color/gray"
+                                            android:textSize="12sp"
+                                            tools:ignore="SmallSp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_end_date"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/inter_medium"
+                                            android:maxLines="1"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"
+                                            tools:text="30 Maret 2024" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+
+                            <!-- Attendance Detail -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_attendance_detail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:backgroundTint="@android:color/transparent"
+                                app:cardCornerRadius="8dp"
+                                app:strokeWidth="0dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <!--    Icon    -->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="42dp"
+                                        android:layout_height="42dp"
+                                        android:backgroundTint="@color/background_icon"
+                                        app:cardCornerRadius="14dp"
+                                        app:strokeWidth="0dp">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_menu_scale"
+                                            app:tint="@color/primary_color" />
+
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <!--    Text    -->
+                                    <TextView
+                                        android:id="@+id/tv_project_description"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/inter_regular"
+                                        android:text="@string/lorem_ipsum"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/edt_status_project_layout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:backgroundTint="@color/white"
+                                android:hint="@string/select_status_project"
+                                app:boxCornerRadiusBottomEnd="14dp"
+                                app:boxCornerRadiusBottomStart="14dp"
+                                app:boxCornerRadiusTopEnd="14dp"
+                                app:boxCornerRadiusTopStart="14dp"
+                                app:startIconDrawable="@drawable/ic_check_square">
+
+                                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                    android:id="@+id/edt_status_project"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:inputType="none" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--  Guideline  -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="12dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="12dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="12dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="12dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+

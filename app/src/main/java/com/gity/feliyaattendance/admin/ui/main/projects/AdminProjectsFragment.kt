@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.admin.adapter.AdminProjectAdapter
+import com.gity.feliyaattendance.admin.ui.main.detail.project.AdminProjectDetailActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminProjectsBinding
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.ViewModelFactory
@@ -21,11 +22,7 @@ class AdminProjectsFragment : Fragment() {
 
     private var _binding: FragmentAdminProjectsBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firebaseFirestore: FirebaseFirestore
-
-    private lateinit var repository: Repository
+    private lateinit var adapter: AdminProjectAdapter
     private lateinit var viewModel: AdminProjectViewModel
 
     override fun onCreateView(
@@ -34,20 +31,13 @@ class AdminProjectsFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAdminProjectsBinding.inflate(inflater, container, false)
+        setupViewModel()
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseFirestore = FirebaseFirestore.getInstance()
-
-        repository = Repository(firebaseAuth, firebaseFirestore)
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[AdminProjectViewModel::class.java]
-
-        val adapter = AdminProjectAdapter { selectedProject ->
-            Toast.makeText(
-                requireContext(),
-                "Selected Project: ${selectedProject.projectName}",
-                Toast.LENGTH_SHORT
-            ).show()
+        adapter = AdminProjectAdapter { selectedProject ->
+            Intent(requireActivity(), AdminProjectDetailActivity::class.java).apply {
+                putExtra("PROJECT_ID", selectedProject.projectId)
+                startActivity(this)
+            }
         }
 
         binding.apply {
@@ -64,20 +54,41 @@ class AdminProjectsFragment : Fragment() {
             }
         }
 
+
+        setupObserver()
+        swipeToRefresh()
+        viewModel.fetchProjects("asc")
+        return binding.root
+    }
+
+    private fun setupObserver() {
         viewModel.projects.observe(viewLifecycleOwner) { result ->
             result.onSuccess {
                 val projectList = result.getOrNull()
                 projectList?.let {
                     adapter.submitList(it)
                 }
+                binding.swipeRefreshLayout.isRefreshing = false
             }.onFailure {
                 Log.e("PROJECTS_DATA", "Failed to Load projects | Error : ${it.message}")
+                binding.swipeRefreshLayout.isRefreshing = false
             }
         }
+    }
 
-        viewModel.fetchProjects("desc")
+    private fun swipeToRefresh() {
+        binding.apply {
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.fetchProjects("asc")
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
+    }
 
-        return binding.root
+    private fun setupViewModel() {
+        val repository = Repository(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
+        val factory = ViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[AdminProjectViewModel::class.java]
     }
 
     override fun onDestroyView() {

@@ -65,7 +65,6 @@ class AdminListWorkerActivity : AppCompatActivity() {
         viewModel.getWorkerList()
         swipeRefreshLayout(adapter)
         handleBackButton()
-
     }
 
     private fun swipeRefreshLayout(adapter: AdminWorkerAdapter) {

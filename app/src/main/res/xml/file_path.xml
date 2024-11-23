@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-<!--    <files-path-->
-<!--        name="images"-->
-<!--        path="." />-->
-<!--    <external-path-->
-<!--        name="external_files"-->
-<!--        path="Documents/LaporanAbsensi" />-->
+    <!-- Untuk akses ke direktori eksternal secara umum -->
+    <external-path
+        name="external_files"
+        path="." /> <!-- Mengizinkan akses ke seluruh storage eksternal -->
 
-    <!-- Untuk akses ke direktori Documents publik -->
+    <!-- Jika file berada di dalam folder Documents -->
     <external-path
         name="external_documents"
-        path="Documents" />
+        path="Documents/" /> <!-- Pastikan path sesuai dengan struktur folder -->
+
+    <!-- Jika Anda memiliki file dalam folder internal aplikasi -->
+    <files-path
+        name="internal_files"
+        path="." />
 
     <!-- Backup untuk backward compatibility -->
     <files-path

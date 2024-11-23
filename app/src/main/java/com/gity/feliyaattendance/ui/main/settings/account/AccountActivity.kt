@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -55,7 +56,9 @@ class AccountActivity : AppCompatActivity() {
         if (permissions.all { it.value }) {
             showImageSelectionDialog()
         } else {
-            Toast.makeText(this, "Permissions required", Toast.LENGTH_SHORT).show()
+            CommonHelper.showInformationFailedDialog(
+                this, getString(R.string.error), getString(R.string.permission_required)
+            )
         }
     }
 
@@ -191,7 +194,7 @@ class AccountActivity : AppCompatActivity() {
                 }
             }
         } else {
-            Toast.makeText(this, "Failed to select image", Toast.LENGTH_SHORT).show()
+            Log.d("AccountActivity", "Failed to select image", Exception("Failed to select image"))
         }
     }
 }

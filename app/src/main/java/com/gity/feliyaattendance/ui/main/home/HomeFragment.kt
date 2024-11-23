@@ -158,11 +158,7 @@ class HomeFragment : Fragment() {
             result.onSuccess { name ->
                 binding.tvWorkerName.text = name
             }.onFailure { exception ->
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to load name: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Log.e("HomeFragment", "Error fetching name", exception)
             }
         }
     }

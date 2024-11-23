@@ -150,7 +150,6 @@ class Repository(
         }
     }
 
-
     // Fungsi untuk menambahkan project baru
     suspend fun addProject(
         projectName: String,
@@ -271,12 +270,15 @@ class Repository(
     }
 
     //    Get All Project
-    suspend fun getAllProject(orderBy: String = "desc"): Result<List<Project>> {
+    suspend fun getAllProject(orderBy: String = "asc", filterStatus: String? = null): Result<List<Project>> {
         return try {
-            val snapshot = firebaseFirestore.collection("projects").orderBy(
-                "startDate",
-                if (orderBy == "desc") Query.Direction.DESCENDING else Query.Direction.ASCENDING
-            ).get().await()
+            val snapshot = firebaseFirestore.collection("projects")
+                .orderBy(
+                    "projectName",
+                    if (orderBy == "asc") Query.Direction.ASCENDING else Query.Direction.DESCENDING
+                )
+                .get()
+                .await()
 
             val projects = snapshot.documents.mapNotNull { documentSnapshot ->
                 documentSnapshot.toObject(Project::class.java)?.apply {
@@ -285,6 +287,33 @@ class Repository(
             }
 
             Result.success(projects)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getDetailProject(projectId: String): Result<Project> {
+        return try {
+            // Get project document from Firestore using the projectId
+            val snapshot = firebaseFirestore.collection("projects")
+                .document(projectId)  // Fix: Use projectId directly instead of string "projectId"
+                .get()
+                .await()
+
+            if (snapshot.exists()) {
+                // Convert document to Project object and set the projectId
+                val project = snapshot.toObject(Project::class.java)?.apply {
+                    this.projectId = snapshot.id
+                }
+
+                if (project != null) {
+                    Result.success(project)
+                } else {
+                    Result.failure(Exception("Failed to parse project data"))
+                }
+            } else {
+                Result.failure(Exception("Project not found"))
+            }
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -309,7 +338,6 @@ class Repository(
             val snapshot =
                 firebaseFirestore.collection("attendance")
                     .whereEqualTo("userId", userId)
-                    .orderBy("date", Query.Direction.DESCENDING)
                     .limit(10)
                     .get()
                     .await()
@@ -388,7 +416,6 @@ class Repository(
         return try {
             firebaseFirestore.collection("attendance").document(attendanceId)
                 .update("status", newStatus).await()
-
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
@@ -444,7 +471,8 @@ class Repository(
     suspend fun getWorkerList(): Result<List<Worker>> {
         return try {
             val snapshot =
-                firebaseFirestore.collection("users").whereEqualTo("role", "worker").get().await()
+                firebaseFirestore.collection("users").whereEqualTo("role", "worker").orderBy("name")
+                    .get().await()
 
             val workerList = snapshot.documents.mapNotNull { document ->
                 document.toObject(Worker::class.java)?.apply {
@@ -821,7 +849,6 @@ class Repository(
         }
     }
 
-
     suspend fun createAnnouncement(
         announcement: String,
         createdBy: String,
@@ -909,6 +936,5 @@ class Repository(
             Result.failure(e)
         }
     }
-
 
 }

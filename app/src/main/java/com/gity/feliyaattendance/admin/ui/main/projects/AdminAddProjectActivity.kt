@@ -211,9 +211,9 @@ class AdminAddProjectActivity : AppCompatActivity() {
 
     private fun setupStatusProject(): List<String> {
         return listOf(
-            getString(R.string.status_project_active),
-            getString(R.string.status_project_inactive),
-            getString(R.string.status_project_completed)
+            "Active",
+            "Inactive",
+            "Completed"
         )
     }
 

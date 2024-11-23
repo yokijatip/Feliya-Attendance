@@ -6,6 +6,8 @@ import com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementVie
 import com.gity.feliyaattendance.admin.ui.main.attendances.AdminAttendanceViewModel
 import com.gity.feliyaattendance.admin.ui.main.detail.announcement.AdminAnnouncementDetailViewModel
 import com.gity.feliyaattendance.admin.ui.main.detail.attendance.AdminAttendanceDetailViewModel
+import com.gity.feliyaattendance.admin.ui.main.detail.project.AdminProjectDetailActivity
+import com.gity.feliyaattendance.admin.ui.main.detail.project.AdminProjectDetailViewModel
 import com.gity.feliyaattendance.admin.ui.main.detail.worker.AdminWorkerDetailViewModel
 import com.gity.feliyaattendance.admin.ui.main.home.AdminHomeViewModel
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminProjectViewModel
@@ -47,6 +49,8 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
             return AdminAnnouncementViewModel(repository) as T
         } else if(modelClass.isAssignableFrom(AdminAnnouncementDetailViewModel::class.java)) {
             return AdminAnnouncementDetailViewModel(repository) as T
+        } else if(modelClass.isAssignableFrom(AdminProjectDetailViewModel::class.java)) {
+            return AdminProjectDetailViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }

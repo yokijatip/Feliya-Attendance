@@ -1,0 +1,237 @@
+<resources>
+
+    <!--  Bottom navigation menu  -->
+    <string name="home">Beranda</string>
+    <string name="reports">Laporan</string>
+    <string name="settings">Pengaturan</string>
+    <string name="explore">Jelajahi</string>
+    <string name="back">Kembali</string>
+
+    <string name="hello_blank_fragment">Halo, fragment kosong</string>
+
+    <!--  Auth  -->
+    <string name="auth_text_login_title">Hai,\nMasuk Sekarang!</string>
+    <string name="auth_text_login_description">Belum punya akun?</string>
+    <string name="auth_text_login_to_register">Buat Akun Baru</string>
+    <string name="auth_text_register_title">Halo,\nDaftar Sekarang!</string>
+    <string name="auth_text_register_description">Sudah punya akun?</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="logout">Keluar</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="name">Nama</string>
+    <string name="password_helper">Kata sandi minimal 8 karakter</string>
+    <string name="worker_id">ID Pekerja</string>
+
+    <!--  Auth Information Log  -->
+    <string name="name_is_empty">Nama kosong, mohon diisi</string>
+    <string name="phone_is_empty">Nomor telepon kosong, mohon diisi</string>
+    <string name="phone_is_not_valid">Nomor telepon tidak valid, periksa kembali</string>
+    <string name="role_is_empty">Pilih peran Anda, mohon diisi</string>
+    <string name="email_is_empty">Email kosong, mohon diisi</string>
+    <string name="password_is_empty">Kata sandi kosong, mohon diisi</string>
+    <string name="email_is_not_valid">Email tidak valid, periksa kembali</string>
+    <string name="password_is_not_match">Kata sandi tidak cocok, periksa kembali</string>
+    <string name="worker_id_is_not_valid">ID Pekerja tidak valid, periksa kembali</string>
+    <string name="team_is_empty">Tim kosong, mohon diisi</string>
+    <string name="login_success">Berhasil Masuk</string>
+    <string name="login_failed">Gagal Masuk</string>
+    <string name="register_success">Berhasil Daftar</string>
+    <string name="register_failed">Gagal Daftar</string>
+    <string name="logout_success">Berhasil Keluar</string>
+    <string name="logout_failed">Gagal Keluar</string>
+    <string name="logout_confirmation">Apakah Anda yakin ingin keluar dari Feliya Attendance?</string>
+    <string name="delete_account_success">Akun Berhasil Dihapus</string>
+    <string name="delete_account_failed">Gagal Menghapus Akun</string>
+    <string name="delete_account_confirmation">Apakah Anda yakin ingin menghapus akun Anda?</string>
+    <string name="delete">Hapus</string>
+    <string name="cancel">Batal</string>
+    <string name="select_role">Pilih Peran</string>
+    <string name="hours_default">--:--</string>
+
+    <!--  Home Fragment  -->
+    <string name="greetings_good_morning">Selamat Pagi</string>
+    <string name="greetings_good_afternoon">Selamat Siang</string>
+    <string name="greetings_good_evening">Selamat Malam</string>
+    <string name="dashboard">Dasbor</string>
+    <string name="clock_in">Masuk</string>
+    <string name="clock_out">Keluar</string>
+    <string name="in_and_out">Masuk &amp; Keluar</string>
+    <string name="hours">Jam</string>
+    <string name="days">Hari</string>
+    <string name="dashboard_total_hours_title">Total Jam</string>
+    <string name="dashboard_total_days_title">Total Hari</string>
+    <string name="your_activity">Aktivitas Anda</string>
+    <string name="view_all">Lihat Semua</string>
+    <string name="leave_application">Pengajuan Cuti</string>
+    <string name="placeholder_hour">--:--</string>
+
+    <!--  Worker Attendance  -->
+    <string name="clock_in_title">Konfirmasi Masuk</string>
+    <string name="clock_out_title">Konfirmasi Keluar</string>
+    <string name="image_proof">Bukti Gambar</string>
+    <string name="upload_image_from_camera_or_gallery">Unggah dari kamera atau galeri</string>
+    <string name="select_project">Pilih Proyek</string>
+    <string name="information">Informasi</string>
+    <string name="set_time">Atur Waktu</string>
+    <string name="image_not_found">Gambar Tidak Ditemukan</string>
+    <string name="insert_image_proof">Masukkan Bukti Gambar</string>
+    <string name="select_camera_or_gallery">Pilih Sumber Gambar</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="clock_in_proof">Bukti Masuk</string>
+    <string name="clock_out_proof">Bukti Keluar</string>
+    <string name="work_description">Deskripsi Pekerjaan</string>
+    <string name="menu">Menu</string>
+
+    <!--  Setting  -->
+    <string name="account">Akun</string>
+    <string name="change_password">Ubah Kata Sandi</string>
+    <string name="notification">Notifikasi</string>
+    <string name="language">Bahasa</string>
+    <string name="about_us">Tentang Kami</string>
+    <string name="help">Bantuan</string>
+    <string name="account_upload_image">Unggah Foto Profil</string>
+
+    <!--  List Item Attendance  -->
+    <string name="date">Tanggal</string>
+    <string name="status_approved">Disetujui</string>
+    <string name="status_rejected">Ditolak</string>
+    <string name="status_pending">Pending</string>
+    <string name="dash">-</string>
+
+
+    <!--    Admin Home  -->
+    <string name="worker">Pekerja</string>
+    <string name="feature">Fitur</string>
+    <string-array name="features">
+        <item>Tambah Pekerja</item>
+        <item>Tambah Proyek</item>
+        <item>Persetujuan Kehadiran</item>
+        <item>Hasilkan Laporan</item>
+    </string-array>
+
+    <!--  Admin Projects  -->
+    <string name="project">Proyek</string>
+    <string name="projects">Proyek</string>
+    <string name="project_name">Nama Proyek</string>
+    <string name="create_new_project">Buat Proyek Baru</string>
+    <string name="details">Detail</string>
+    <string name="save">Simpan</string>
+    <string name="calendar">Kalender</string>
+    <string name="choose_date">Pilih Tanggal</string>
+    <string name="select_status_project">Pilih Status</string>
+    <string name="description">Deskripsi</string>
+    <string name="start_date">Tanggal Mulai</string>
+    <string name="end_date">Tanggal Selesai</string>
+    <string name="location">Lokasi</string>
+    <string name="status_project_inactive">Tidak Aktif</string>
+    <string name="status_project_active">Aktif</string>
+    <string name="status_project_completed">Selesai</string>
+    <string name="error_empty_project_name">Nama Proyek tidak boleh kosong</string>
+    <string name="error_empty_location">Lokasi tidak boleh kosong</string>
+    <string name="error_empty_status">Silakan pilih status</string>
+    <string name="error_taking_picture">Gagal mengambil gambar</string>
+    <string name="error_picking_image">Gagal memilih gambar</string>
+    <string name="error_general">Terjadi kesalahan</string>
+
+    <!--  Dialog Text  -->
+    <string name="title_dialog_confirmation">Apakah Anda yakin?</string>
+    <string name="sure">Yakin</string>
+    <string name="description_dialog_confirmation_default">Ini tidak dapat diubah atau diperbarui.</string>
+    <string name="successfully">Berhasil</string>
+    <string name="failed">Gagal</string>
+    <string name="error">Kesalahan</string>
+    <string name="ok">OK</string>
+    <string name="process_success">Proses yang Anda lakukan telah berhasil</string>
+    <string name="process_failed">Proses yang Anda lakukan telah gagal.</string>
+    <string name="account_pending_message">Akun Anda sedang menunggu persetujuan. Harap tunggu konfirmasi admin.</string>
+    <string name="account_suspended_message">Akun Anda telah ditangguhkan. Silakan hubungi admin untuk informasi lebih lanjut.</string>
+    <string name="account_activated_message">Akun Anda telah diaktifkan</string>
+    <string name="invalid_role_not_found">Peran Tidak Valid Tidak Ditemukan</string>
+    <string name="invalid_account_status">Status akun tidak valid. Silakan hubungi admin.</string>
+    <string name="user_not_found">Pengguna tidak ditemukan.</string>
+    <string name="error_checking_account_status">Kesalahan memeriksa status akun:</string>
+
+    <!--  Admin Workers  -->
+    <string name="workers">Pekerja</string>
+
+    <!--  Admin Attendance  -->
+    <string name="attendances">Kehadiran</string>
+    <string name="attendance">Kehadiran</string>
+    <string name="select_status_attendance">Pilih Status Kehadiran</string>
+    <string-array name="status_attendance">
+        <item>disetujui</item>
+        <item>menunggu</item>
+        <item>ditolak</item>
+    </string-array>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
+
+    <!--  Detail Attendance  -->
+    <string name="detail_attendance">Detail Kehadiran</string>
+    <string name="date_attendance">Tanggal</string>
+    <string name="status_attendance">Status</string>
+    <string name="working">Bekerja</string>
+    <string name="overtime">Lembur</string>
+    <string name="total">Total</string>
+    <string name="confirmation_delete_attendance">Hapus Kehadiran</string>
+    <string name="confirmation_delete_attendance_description">Apakah Anda yakin ingin menghapus kehadiran secara permanen? Anda tidak dapat mengembalikan perubahan ini.</string>
+
+    <!--  Admin Home  -->
+    <string name="zero">0</string>
+    <string name="admin_menu_see_worker_list">Daftar Pekerja</string>
+    <string name="admin_menu_attendance_approval">Persetujuan\nKehadiran</string>
+    <string name="admin_menu_add_worker">Tambah Pekerja</string>
+    <string name="admin_menu_add_project">Tambah Proyek</string>
+    <string name="admin_menu_delete_account">Hapus Akun</string>
+    <string name="admin_menu_make_announcement">Pengumuman</string>
+    <string name="admin_menu_history_attendance">Riwayat Kehadiran</string>
+    <string name="admin_menu_delete_account_title_confirmation">Konfirmasi Penghapusan Akun</string>
+    <string name="admin_menu_delete_account_description_confirmation">Apakah Anda yakin ingin menghapus akun pekerja?</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Fragment Pertama</string>
+    <string name="second_fragment_label">Fragment Kedua</string>
+    <string name="next">Berikutnya</string>
+    <string name="previous">Sebelumnya</string>
+
+    <!--  Admin Detail Worker  -->
+    <string name="delete_account">Hapus Akun</string>
+    <string name="suspend_account">Tangguhkan Akun</string>
+    <string name="activate_account">Aktifkan Akun</string>
+
+    <string name="lorem_ipsum">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+    volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus.
+    </string>
+
+    <string name="strip">-</string>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
+
+    <!-- Announcement -->
+    <string name="announcement">Pengumuman</string>
+    <string name="add_post">Tambah Postingan</string>
+    <string name="success_create_announcement">Pengumuman berhasil ditambahkan</string>
+    <string name="failed_create_announcement">Terjadi kesalahan</string>
+    <string name="no_announcement">Tidak Ada Pengumuman</string>
+    <string name="no_announcement_description">Gagal memuat pengumuman</string>
+    <string name="delete_announcement">Hapus Pengumuman</string>
+    <string name="delete_announcement_description">Apakah Anda yakin ingin menghapus pengumuman ini?</string>
+    <string name="delete_announcement_success">Pengumuman berhasil dihapus</string>
+
+    <!-- Account -->
+    <string name="success_upload_image">Gambar profil berhasil diperbarui</string>
+    <string name="failed_upload_image">Gagal mengunggah gambar</string>
+
+    <!-- Information -->
+    <string name="permission_required">Izin Diperlukan</string>
+    <string name="select_month">Pilih Bulan</string>
+
+    <!-- Detail Project -->
+    <string name="detail_project">Detail Proyek</string>
+
+
+</resources>

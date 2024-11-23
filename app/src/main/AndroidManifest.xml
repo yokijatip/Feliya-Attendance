@@ -21,6 +21,9 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" /> <!-- Location Permissions -->
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ProtectedPermissions,ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -36,6 +39,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
+        <activity
+            android:name=".admin.ui.main.detail.project.AdminProjectDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.main.eplore.AnnouncementDetailActivity"
             android:exported="false" />

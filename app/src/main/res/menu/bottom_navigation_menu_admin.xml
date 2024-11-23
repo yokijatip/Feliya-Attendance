@@ -23,7 +23,7 @@
     <item
         android:id="@+id/projects"
         android:icon="@drawable/ic_folder"
-        android:title="@string/projects"
+        android:title="@string/project"
         app:cnb_backgroundColor="@color/primary_color"
         app:cnb_iconColor="@color/white"
         app:cnb_iconTintMode="src_in"

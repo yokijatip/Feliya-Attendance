@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.AdminAnnouncementAdapter
 import com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementViewModel
-import com.gity.feliyaattendance.admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity
 import com.gity.feliyaattendance.databinding.FragmentExploreBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
@@ -106,14 +105,13 @@ class ExploreFragment : Fragment() {
     private fun setupFilterButton() {
         binding.btnFilter.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select Month")
+                .setTitleText(getString(R.string.select_month))
                 .build()
 
             datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
                 selectedDate = Date(selectedDateInMillis)
                 viewModel.fetchAnnouncements(selectedDate)
             }
-
             datePicker.show(parentFragmentManager, "DATE_PICKER")
         }
     }

@@ -34,7 +34,7 @@ class   AdminProjectViewModel(private val repository: Repository) : ViewModel() 
         }
     }
 
-    fun fetchProjects(orderBy: String = "desc") {
+    fun fetchProjects(orderBy: String = "asc") {
         viewModelScope.launch {
             try {
                 val result = repository.getAllProject(orderBy)

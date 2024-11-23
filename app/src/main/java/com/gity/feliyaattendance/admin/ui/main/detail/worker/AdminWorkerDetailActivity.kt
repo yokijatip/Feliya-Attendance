@@ -1,10 +1,11 @@
 package com.gity.feliyaattendance.admin.ui.main.detail.worker
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -28,6 +29,7 @@ import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.utils.StoragePermissionHandler
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -59,7 +61,6 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         storagePermissionHandler = StoragePermissionHandler(this)
         handleBackButton()
 
@@ -219,9 +220,9 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
 
     private fun observeExcelGeneration() {
         viewModel.excelGenerationResult.observe(this) { result ->
-            result.onSuccess { file ->
-//                Buka file atau share
-                openExcelFile(file)
+            result.onSuccess {
+                // Langsung membuka file yang berhasil dibuat
+                showSuccessSnackbar()
             }.onFailure {
                 Toast.makeText(
                     this@AdminWorkerDetailActivity,
@@ -231,6 +232,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun observerDetailViewModel() {
         viewModel.workerDetailResult.observe(this) { result ->
@@ -272,9 +274,6 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         }
     }
 
-    //    Fungsi untuk membuka file excel
-    // TODO 1 : Handle Open File
-    @SuppressLint("QueryPermissionsNeeded")
     private fun openExcelFile(file: File) {
         try {
             val uri = FileProvider.getUriForFile(
@@ -291,26 +290,45 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
 
-            // Cek apakah ada aplikasi yang dapat menangani file
-            val activities =
-                packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-
-            if (activities.isNotEmpty()) {
-                // Gunakan createChooser untuk menampilkan dialog pemilihan aplikasi
-                val chooserIntent = Intent.createChooser(intent, "Buka dengan aplikasi spreadsheet")
-                startActivity(chooserIntent)
-            } else {
-                Toast.makeText(
-                    this,
-                    "Tidak ada aplikasi spreadsheet yang terinstall. Silakan install Microsoft Excel atau aplikasi spreadsheet lainnya.",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+            // Coba membuka langsung tanpa memilih aplikasi
+            startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(this, "Error membuka file: ${e.message}", Toast.LENGTH_SHORT).show()
+            // Jika gagal membuka langsung, gunakan chooser
+            try {
+                val chooserIntent = Intent.createChooser(intent, "Buka dengan")
+                startActivity(chooserIntent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Tidak dapat membuka file: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 
+    private fun showSuccessSnackbar() {
+        val snackbar = Snackbar.make(
+            binding.root,
+            "Excel berhasil dihasilkan! Akses di Documents > LaporanAbsensi",
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction("Buka") {
+            // Arahkan pengguna ke folder Documents jika diperlukan
+            openDocumentsFolder()
+        }
+        snackbar.show()
+    }
+
+    private fun openDocumentsFolder() {
+        val documentsFolder = File("/storage/emulated/0/Documents/LaporanAbsensi")
+        val intent = Intent(Intent.ACTION_VIEW)
+        val uri = FileProvider.getUriForFile(
+            this,
+            "${packageName}.provider",
+            documentsFolder
+        )
+        intent.setDataAndType(uri, "resource/folder")
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        startActivity(intent)
+    }
 
     // Fungsi ini memeriksa hasil permintaan izin
     override fun onRequestPermissionsResult(
@@ -320,10 +338,18 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == StoragePermissionHandler.STORAGE_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                generateExcel(workerId)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    generateExcel(workerId)
+                } else {
+                    Toast.makeText(this, "Storage permission required", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this, "Storage permission required", Toast.LENGTH_SHORT).show()
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    generateExcel(workerId)
+                } else {
+                    Toast.makeText(this, "Storage permission required", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
