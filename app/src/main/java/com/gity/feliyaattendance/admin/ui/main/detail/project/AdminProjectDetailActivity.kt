@@ -150,6 +150,14 @@ class AdminProjectDetailActivity : AppCompatActivity() {
     private fun setupStatusProjectDropdown() {
         statusProjectAdapter = ArrayAdapter(this, R.layout.list_item_roles, setupStatusProject())
         binding.edtStatusProject.setAdapter(statusProjectAdapter)
+
+        binding.edtStatusProject.setOnItemClickListener { _, _, position, _ ->
+            val selectedStatus = statusProjectAdapter.getItem(position)
+            selectedStatus?.let {
+                projectId?.let { id -> viewModel.updateProjectStatus(id, it) }
+                updateStatusUI(it) // Update UI immediately after selection
+            }
+        }
     }
 
     private fun setupStatusProject(): List<String> {
@@ -159,6 +167,5 @@ class AdminProjectDetailActivity : AppCompatActivity() {
             "Completed"
         )
     }
-
 
 }

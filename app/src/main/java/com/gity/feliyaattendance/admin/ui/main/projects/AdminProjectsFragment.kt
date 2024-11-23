@@ -1,15 +1,18 @@
 package com.gity.feliyaattendance.admin.ui.main.projects
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.Window
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.admin.adapter.AdminProjectAdapter
 import com.gity.feliyaattendance.admin.ui.main.detail.project.AdminProjectDetailActivity
 import com.gity.feliyaattendance.databinding.FragmentAdminProjectsBinding
@@ -32,6 +35,7 @@ class AdminProjectsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAdminProjectsBinding.inflate(inflater, container, false)
         setupViewModel()
+        setupUI()
 
         adapter = AdminProjectAdapter { selectedProject ->
             Intent(requireActivity(), AdminProjectDetailActivity::class.java).apply {
@@ -43,22 +47,51 @@ class AdminProjectsFragment : Fragment() {
         binding.apply {
             rvProjects.layoutManager = LinearLayoutManager(requireContext())
             rvProjects.adapter = adapter
-
-            btnAddProject.setOnClickListener {
-                navigateToAddProject()
-            }
-
-            btnFilter.setOnClickListener {
-                // Implement filter functionality here
-                Toast.makeText(requireContext(), "Filter button clicked", Toast.LENGTH_SHORT).show()
-            }
         }
-
 
         setupObserver()
         swipeToRefresh()
-        viewModel.fetchProjects("asc")
+        viewModel.fetchProjects("asc") // Ambil proyek awal
         return binding.root
+    }
+
+    private fun setupUI() {
+        navigateToAddProject()
+        setupButtonFilter()
+    }
+
+    private fun setupButtonFilter() {
+        binding.apply {
+            btnFilter.setOnClickListener {
+                showDialogImage()
+            }
+        }
+    }
+
+    private fun showDialogImage() {
+        val dialog = Dialog(requireContext()).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(true)
+            setContentView(R.layout.custom_dialog_menu_admin_project_filter)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_active).setOnClickListener {
+            // Panggil fetchProjects dengan filter "Active"
+            viewModel.fetchProjects("asc", "Active")
+            dialog.dismiss() // Tutup dialog
+        }
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_inactive).setOnClickListener {
+            // Panggil fetchProjects dengan filter "Inactive"
+            viewModel.fetchProjects("asc", "Inactive")
+            dialog.dismiss() // Tutup dialog
+        }
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_completed).setOnClickListener {
+            // Panggil fetchProjects dengan filter "Completed"
+            viewModel.fetchProjects("asc", "Completed")
+            dialog.dismiss() // Tutup dialog
+        }
+        dialog.show()
     }
 
     private fun setupObserver() {
@@ -79,7 +112,7 @@ class AdminProjectsFragment : Fragment() {
     private fun swipeToRefresh() {
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener {
-                viewModel.fetchProjects("asc")
+                viewModel.fetchProjects("asc") // Ambil proyek tanpa filter saat refresh
                 swipeRefreshLayout.isRefreshing = false
             }
         }
@@ -97,7 +130,11 @@ class AdminProjectsFragment : Fragment() {
     }
 
     private fun navigateToAddProject() {
-        val intent = Intent(requireActivity(), AdminAddProjectActivity::class.java)
-        startActivity(intent)
+        binding.apply {
+            btnAddProject.setOnClickListener {
+                val intent = Intent(requireActivity(), AdminAddProjectActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }

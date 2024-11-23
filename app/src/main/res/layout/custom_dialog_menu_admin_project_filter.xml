@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_medium"
             android:padding="12dp"
-            android:text="@string/menu"
+            android:text="@string/filter"
             android:background="@color/gray_ultra_light"
             android:textColor="@color/black"
             android:textSize="14sp" />

@@ -234,5 +234,8 @@
     <!-- Detail Project -->
     <string name="detail_project">Detail Project</string>
 
+    <!-- Project Fragment -->
+    <string name="filter" translatable="false">Filter</string>
+
 
 </resources>

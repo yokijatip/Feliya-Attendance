@@ -9,7 +9,7 @@ import com.gity.feliyaattendance.repository.Repository
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class   AdminProjectViewModel(private val repository: Repository) : ViewModel() {
+class AdminProjectViewModel(private val repository: Repository) : ViewModel() {
 
     private val _saveProjectResult = MutableLiveData<Result<Unit>>()
     val saveProjectResult: LiveData<Result<Unit>> = _saveProjectResult
@@ -34,10 +34,12 @@ class   AdminProjectViewModel(private val repository: Repository) : ViewModel() 
         }
     }
 
-    fun fetchProjects(orderBy: String = "asc") {
+    // Modifikasi fungsi fetchProjects untuk menerima filterStatus
+    fun fetchProjects(orderBy: String = "asc", filterStatus: String? = null) {
         viewModelScope.launch {
             try {
-                val result = repository.getAllProject(orderBy)
+                // Panggil repository dengan filterStatus
+                val result = repository.getAllProject(orderBy, filterStatus)
                 _projects.value = result
             } catch (e: Exception) {
                 _projects.postValue(Result.failure(e))

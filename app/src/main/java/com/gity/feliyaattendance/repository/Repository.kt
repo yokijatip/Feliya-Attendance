@@ -269,24 +269,41 @@ class Repository(
         }
     }
 
-    //    Get All Project
+    // Get All Project
     suspend fun getAllProject(orderBy: String = "asc", filterStatus: String? = null): Result<List<Project>> {
         return try {
-            val snapshot = firebaseFirestore.collection("projects")
+            // Buat query dasar
+            val query = firebaseFirestore.collection("projects")
                 .orderBy(
                     "projectName",
                     if (orderBy == "asc") Query.Direction.ASCENDING else Query.Direction.DESCENDING
                 )
-                .get()
-                .await()
 
+            // Ambil snapshot dari query
+            val snapshot = query.get().await()
+
+            // Peta dokumen menjadi objek Project
             val projects = snapshot.documents.mapNotNull { documentSnapshot ->
                 documentSnapshot.toObject(Project::class.java)?.apply {
                     projectId = documentSnapshot.id
                 }
             }
 
-            Result.success(projects)
+            // Jika filterStatus tidak null, filter daftar proyek
+            val filteredProjects = if (filterStatus != null) {
+                projects.filter { project ->
+                    when (filterStatus) {
+                        "Active" -> project.status == "Active"
+                        "Inactive" -> project.status == "Inactive"
+                        "Completed" -> project.status == "Completed"
+                        else -> true // Jika filterStatus tidak cocok, tidak ada filter yang diterapkan
+                    }
+                }
+            } else {
+                projects // Jika tidak ada filter, kembalikan semua proyek
+            }
+
+            Result.success(filteredProjects)
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -316,6 +333,20 @@ class Repository(
             }
         } catch (e: Exception) {
             Result.failure(e)
+        }
+    }
+
+    suspend fun updateProjectStatus(projectId: String, newStatus: String): Result<Unit> {
+        return try {
+            // Update the project status in Firestore
+            firebaseFirestore.collection("projects")
+                .document(projectId)
+                .update("status", newStatus)
+                .await() // Await for the update to complete
+
+            Result.success(Unit) // Return success result
+        } catch (e: Exception) {
+            Result.failure(e) // Return failure result
         }
     }
 

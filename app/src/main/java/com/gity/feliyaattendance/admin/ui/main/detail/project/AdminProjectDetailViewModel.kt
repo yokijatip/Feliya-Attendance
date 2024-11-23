@@ -1,5 +1,6 @@
 package com.gity.feliyaattendance.admin.ui.main.detail.project
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,16 @@ class AdminProjectDetailViewModel(private val repository: Repository) : ViewMode
                 _projectDetail.postValue(detail)
             } catch (e: Exception) {
                 _projectDetail.postValue(null)
+            }
+        }
+    }
+
+    fun updateProjectStatus(projectId: String, newStatus: String) {
+        viewModelScope.launch {
+            val result = repository.updateProjectStatus(projectId, newStatus)
+            // Handle the result if needed (e.g., show a message)
+            if (result.isFailure) {
+                Log.e("AdminProjectDetailViewModel", "Failed to update project status: ${result.exceptionOrNull()?.message}")
             }
         }
     }
