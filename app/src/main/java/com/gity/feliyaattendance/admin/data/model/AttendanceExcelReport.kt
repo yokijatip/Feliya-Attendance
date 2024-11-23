@@ -13,5 +13,6 @@ data class AttendanceExcelReport(
     var overtimeHours: String = "",
     var totalHours: String = "",
     var workDescription: String = "",
-    var projectId: String = ""
+    var projectName: String = "",
+    var projectId: String = "",
 ) : Parcelable

@@ -270,7 +270,10 @@ class Repository(
     }
 
     // Get All Project
-    suspend fun getAllProject(orderBy: String = "asc", filterStatus: String? = null): Result<List<Project>> {
+    suspend fun getAllProject(
+        orderBy: String = "asc",
+        filterStatus: String? = null
+    ): Result<List<Project>> {
         return try {
             // Buat query dasar
             val query = firebaseFirestore.collection("projects")
@@ -604,12 +607,30 @@ class Repository(
         userId: String, startTimestamp: Timestamp, endTimestamp: Timestamp
     ): Result<List<AttendanceExcelReport>> {
         return try {
-            val snapshot = firebaseFirestore.collection("attendance").whereEqualTo("userId", userId)
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("userId", userId)
+                .whereEqualTo("status", "approved")
                 .whereGreaterThanOrEqualTo("date", startTimestamp)
                 .whereLessThanOrEqualTo("date", endTimestamp)
-                .orderBy("date", Query.Direction.ASCENDING).get().await()
+                .orderBy("date", Query.Direction.ASCENDING)
+                .get()
+                .await()
+
+            // Get all unique project IDs from the attendance records
+            val projectIds = snapshot.documents.mapNotNull { it.getString("projectId") }.distinct()
+
+            // Fetch all referenced projects in one batch
+            val projectsSnapshot = projectIds.map { projectId ->
+                firebaseFirestore.collection("projects").document(projectId).get().await()
+            }
+
+            // Create a map of projectId to projectName for quick lookup
+            val projectNameMap = projectsSnapshot.associate { doc ->
+                doc.id to (doc.getString("projectName") ?: "Unknown Project")
+            }
 
             val attendanceReports = snapshot.documents.map { document ->
+                val projectId = document.getString("projectId") ?: ""
                 AttendanceExcelReport(
                     date = document.getTimestamp("date") ?: Timestamp.now(),
                     clockInTime = document.getTimestamp("clockInTime"),
@@ -618,7 +639,8 @@ class Repository(
                     overtimeHours = document.getString("overtimeHoursFormatted") ?: "",
                     totalHours = document.getString("totalHoursFormatted") ?: "",
                     workDescription = document.getString("workDescription") ?: "",
-                    projectId = document.getString("projectId") ?: ""
+                    projectId = projectId,
+                    projectName = projectNameMap[projectId] ?: "Unknown Project"
                 )
             }
 
@@ -685,7 +707,7 @@ class Repository(
                 "Jam Lembur",
                 "Total Jam Kerja",
                 "Deskripsi Pekerjaan",
-                "Project ID"
+                "Nama Proyek"
             )
 
             headers.forEachIndexed { index, header ->
@@ -710,7 +732,7 @@ class Repository(
                 row.createCell(4).setCellValue(report.overtimeHours)
                 row.createCell(5).setCellValue(report.totalHours)
                 row.createCell(6).setCellValue(report.workDescription)
-                row.createCell(7).setCellValue(report.projectId)
+                row.createCell(7).setCellValue(report.projectName)
             }
 
             // Function untuk menghitung total menit dari format "HH:mm"
@@ -787,7 +809,7 @@ class Repository(
 
             // Buat nama file
             val fileName =
-                "Laporan_Absensi_${userName}_${dateFormat.format(startTimestamp.toDate())}_to_${
+                "Laporan_Absensi_${userName}_${dateFormat.format(startTimestamp.toDate())}_sampai_${
                     dateFormat.format(endTimestamp.toDate())
                 }.xlsx"
 
