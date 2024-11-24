@@ -1,9 +1,12 @@
 package com.gity.feliyaattendance.admin.ui.main.attendances
 
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -36,6 +39,7 @@ class AdminAttendancesFragment : Fragment() {
         setupViewModel()
         setupViewPager()
         setupSwipeRefresh()
+        setupFiltering()
 //        End Your Code
         return binding.root
     }
@@ -61,6 +65,33 @@ class AdminAttendancesFragment : Fragment() {
                     swipeRefreshLayout.isEnabled = positionOffset == 0f && positionOffsetPixels == 0
                 }
             })
+        }
+    }
+
+    private fun setupFiltering() {
+        binding.apply {
+            btnFilter.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+                val datePickerDialog = DatePickerDialog(
+                    requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                        val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                        Toast.makeText(
+                            requireContext(),
+                            "Tanggal yang dipilih: $selectedDate",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    },
+                    year,
+                    month,
+                    day
+                )
+
+                datePickerDialog.show()
+            }
         }
     }
 

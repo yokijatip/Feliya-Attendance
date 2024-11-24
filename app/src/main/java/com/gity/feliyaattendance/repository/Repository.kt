@@ -392,7 +392,9 @@ class Repository(
     suspend fun getAllAttendancePending(): Result<List<Attendance>> {
         return try {
             val snapshot =
-                firebaseFirestore.collection("attendance").whereEqualTo("status", "pending").get()
+                firebaseFirestore.collection("attendance")
+                    .whereEqualTo("status", "pending")
+                    .get()
                     .await()
 
             val attendanceStatus = snapshot.documents.mapNotNull { documentSnapshot ->
