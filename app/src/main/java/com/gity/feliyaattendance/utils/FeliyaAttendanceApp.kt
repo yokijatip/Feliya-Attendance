@@ -23,7 +23,6 @@ class FeliyaAttendanceApp : Application() {
             filename = ".env"
         }
 
-
         val config = mapOf(
             "cloud_name" to dotEnv["CLOUDINARY_NAME"],
             "api_key" to dotEnv["CLOUDINARY_MY_API_KEY"],
