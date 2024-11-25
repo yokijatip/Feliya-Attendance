@@ -103,6 +103,9 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation("org.apache.xmlbeans:xmlbeans:5.1.1")
 
+//    Support Library .env (Dot ENV)
+    implementation ("io.github.cdimascio:dotenv-kotlin:6.4.1")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
