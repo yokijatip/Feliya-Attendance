@@ -391,17 +391,8 @@ class Repository(
     //    Get attendance pending
     suspend fun getAllAttendancePending(): Result<List<Attendance>> {
         return try {
-            val today = Calendar.getInstance().apply {
-                set(Calendar.HOUR_OF_DAY, 0)
-                set(Calendar.MINUTE, 0)
-                set(Calendar.SECOND, 0)
-                set(Calendar.MILLISECOND, 0)
-            }.time
-
             val snapshot = firebaseFirestore.collection("attendance")
                 .whereEqualTo("status", "pending")
-                .whereGreaterThanOrEqualTo("date", today)
-                .whereLessThanOrEqualTo("date", Calendar.getInstance().time)
                 .get()
                 .await()
 
