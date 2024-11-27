@@ -2,6 +2,7 @@ package com.gity.feliyaattendance.utils
 
 import android.app.Application
 import com.cloudinary.android.MediaManager
+import com.gity.feliyaattendance.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import io.github.cdimascio.dotenv.dotenv
@@ -18,15 +19,10 @@ class FeliyaAttendanceApp : Application() {
 
     private fun initCloudinary() {
 
-        val dotEnv = dotenv {
-            directory = "."
-            filename = ".env"
-        }
-
         val config = mapOf(
-            "cloud_name" to dotEnv["CLOUDINARY_NAME"],
-            "api_key" to dotEnv["CLOUDINARY_MY_API_KEY"],
-            "api_secret" to dotEnv["CLOUDINARY_MY_API_SECRET"]
+            "cloud_name" to resources.getString(R.string.CLOUDINARY_NAME),
+            "api_key" to resources.getString(R.string.MY_API_KEY),
+            "api_secret" to resources.getString(R.string.MY_API_SECRET)
         )
         MediaManager.init(this, config)
     }
