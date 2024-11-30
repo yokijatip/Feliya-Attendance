@@ -22,6 +22,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.adapter.WorkerDetailAdapter
 import com.gity.feliyaattendance.admin.data.model.Worker
+import com.gity.feliyaattendance.admin.ui.main.history.attendance.approved.HistoryAttendanceApprovedActivity
+import com.gity.feliyaattendance.admin.ui.main.history.attendance.pending.HistoryAttendancePendingActivity
+import com.gity.feliyaattendance.admin.ui.main.history.attendance.rejected.HistoryAttendanceRejectedActivity
 import com.gity.feliyaattendance.data.model.DetailWorkerMenu
 import com.gity.feliyaattendance.databinding.ActivityAdminWorkerDetailBinding
 import com.gity.feliyaattendance.helper.CommonHelper
@@ -166,7 +169,12 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
     private fun workerDetailMenuSetup() {
         val workerDetailMenuList = listOf(
             DetailWorkerMenu(getString(R.string.admin_menu_generate_excel), R.drawable.ic_table),
-            DetailWorkerMenu(getString(R.string.admin_menu_generate_pdf), R.drawable.ic_file_text),
+            DetailWorkerMenu(
+                getString(R.string.history_approved),
+                R.drawable.ic_check_square_custom_admin
+            ),
+            DetailWorkerMenu(getString(R.string.history_rejected), R.drawable.ic_minus_circle),
+            DetailWorkerMenu(getString(R.string.history_pending), R.drawable.ic_clock)
         )
 
         val detailWorkerMenuAdapter = WorkerDetailAdapter(workerDetailMenuList) { menu ->
@@ -180,12 +188,31 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                     }
                 }
 
-                getString(R.string.admin_menu_generate_pdf) -> {
-                    Toast.makeText(
-                        this@AdminWorkerDetailActivity,
-                        "Generated PDF",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                getString(R.string.history_approved) -> {
+                    startActivity(
+                        Intent(
+                            this@AdminWorkerDetailActivity,
+                            HistoryAttendanceApprovedActivity::class.java
+                        )
+                    )
+                }
+
+                getString(R.string.history_rejected) -> {
+                    startActivity(
+                        Intent(
+                            this@AdminWorkerDetailActivity,
+                            HistoryAttendanceRejectedActivity::class.java
+                        )
+                    )
+                }
+
+                getString(R.string.history_pending) -> {
+                    startActivity(
+                        Intent(
+                            this@AdminWorkerDetailActivity,
+                            HistoryAttendancePendingActivity::class.java
+                        )
+                    )
                 }
             }
         }

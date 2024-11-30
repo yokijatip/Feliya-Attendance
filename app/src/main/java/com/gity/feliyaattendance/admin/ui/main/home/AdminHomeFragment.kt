@@ -172,7 +172,7 @@ class AdminHomeFragment : Fragment() {
     }
 
     private fun navigateToHistoryAttendance() {
-        CommonHelper.showToast(requireContext(), "Under Maintenance")
+        startActivity(Intent(requireActivity(), AdminListWorkerActivity::class.java))
     }
 
     private fun refreshData() {

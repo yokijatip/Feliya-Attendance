@@ -229,13 +229,18 @@
     <string name="permission_required">Permission Required</string>
     <string name="select_month">Select Month</string>
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
-
     <!-- Detail Project -->
     <string name="detail_project">Detail Project</string>
 
     <!-- Project Fragment -->
     <string name="filter" translatable="false">Filter</string>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
+
+    <string name="history_pending">History Pending</string>
+    <string name="history_approved">History Approved</string>
+    <string name="history_rejected">History Rejected</string>
+    <string name="period">Period</string>
 
 
 </resources>

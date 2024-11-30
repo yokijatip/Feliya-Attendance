@@ -30,6 +30,25 @@ object CommonHelper {
         return "${randomString}@${randomDomain}"
     }
 
+    fun getCurrentMonthAndYear(): Pair<Int, Int> {
+        val calendar = Calendar.getInstance()
+        val month = calendar.get(Calendar.MONTH) + 1 // Tambahkan 1 karena bulan dimulai dari 0
+        val year = calendar.get(Calendar.YEAR)
+        return Pair(month, year)
+    }
+
+    fun getCurrentMonth(): Int {
+        val calendar = Calendar.getInstance()
+        val month = calendar.get(Calendar.MONTH) + 1 // Tambahkan 1 karena bulan dimulai dari 0
+        return month
+    }
+
+    fun getCurrentYear(): Int {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR) + 1 // Tambahkan 1 karena bulan dimulai dari 0
+        return year
+    }
+
     fun generateRandomPassword(length: Int = 8): String {
         val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
         return (1..length).map { allowedChars.random() }.joinToString("")

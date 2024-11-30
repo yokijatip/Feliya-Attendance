@@ -209,8 +209,6 @@
 
     <string name="strip">-</string>
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
-
     <!-- Announcement -->
     <string name="announcement">Pengumuman</string>
     <string name="add_post">Tambah Postingan</string>
@@ -232,6 +230,14 @@
 
     <!-- Detail Project -->
     <string name="detail_project">Detail Proyek</string>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
+
+    <string name="history_pending">Riwayat Pending</string>
+    <string name="history_approved">Riwayat Disetujui</string>
+    <string name="history_rejected">Riwayat Ditolak</string>
+
+    <string name="period">Periode</string>
 
 
 </resources>

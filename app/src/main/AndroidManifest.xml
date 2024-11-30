@@ -40,6 +40,15 @@
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
         <activity
+            android:name=".admin.ui.main.history.attendance.rejected.HistoryAttendanceRejectedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ui.main.history.attendance.pending.HistoryAttendancePendingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ui.main.history.attendance.approved.HistoryAttendanceApprovedActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.ui.main.detail.project.AdminProjectDetailActivity"
             android:exported="false" />
         <activity
