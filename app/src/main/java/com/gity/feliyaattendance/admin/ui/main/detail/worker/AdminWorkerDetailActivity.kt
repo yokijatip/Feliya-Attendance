@@ -84,7 +84,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
 
 //        Observer ViewModel
         observerDetailViewModel()
-        workerDetailMenuSetup()
+        workerDetailMenuSetup(workerId)
 
         viewModel.fetchWorkerDetail(workerId)
 
@@ -166,7 +166,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun workerDetailMenuSetup() {
+    private fun workerDetailMenuSetup(workerId: String) {
         val workerDetailMenuList = listOf(
             DetailWorkerMenu(getString(R.string.admin_menu_generate_excel), R.drawable.ic_table),
             DetailWorkerMenu(
@@ -189,30 +189,15 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 }
 
                 getString(R.string.history_approved) -> {
-                    startActivity(
-                        Intent(
-                            this@AdminWorkerDetailActivity,
-                            HistoryAttendanceApprovedActivity::class.java
-                        )
-                    )
+                    navigateToApprovedAttendance(workerId)
                 }
 
                 getString(R.string.history_rejected) -> {
-                    startActivity(
-                        Intent(
-                            this@AdminWorkerDetailActivity,
-                            HistoryAttendanceRejectedActivity::class.java
-                        )
-                    )
+                    navigateToRejectedAttendance(workerId)
                 }
 
                 getString(R.string.history_pending) -> {
-                    startActivity(
-                        Intent(
-                            this@AdminWorkerDetailActivity,
-                            HistoryAttendancePendingActivity::class.java
-                        )
-                    )
+                    navigateToPendingAttendance(workerId)
                 }
             }
         }
@@ -379,6 +364,27 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun navigateToApprovedAttendance(workerId: String) {
+        val intent =
+            Intent(this@AdminWorkerDetailActivity, HistoryAttendanceApprovedActivity::class.java)
+        intent.putExtra("WORKER_ID", workerId)
+        startActivity(intent)
+    }
+
+    private fun navigateToRejectedAttendance(workerId: String) {
+        val intent =
+            Intent(this@AdminWorkerDetailActivity, HistoryAttendanceRejectedActivity::class.java)
+        intent.putExtra("WORKER_ID", workerId)
+        startActivity(intent)
+    }
+
+    private fun navigateToPendingAttendance(workerId: String) {
+        val intent =
+            Intent(this@AdminWorkerDetailActivity, HistoryAttendancePendingActivity::class.java)
+        intent.putExtra("WORKER_ID", workerId)
+        startActivity(intent)
     }
 
 }

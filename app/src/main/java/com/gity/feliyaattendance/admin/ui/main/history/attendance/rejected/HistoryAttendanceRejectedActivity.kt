@@ -37,16 +37,21 @@ class HistoryAttendanceRejectedActivity : AppCompatActivity() {
     private var currentYear: Int = 0
     private var currentMonth: Int = 0
 
+    private lateinit var workerId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryAttendanceRejectedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupSwipeRefreshLayout()
+        //        Get Worker ID
+        workerId = intent.getStringExtra("WORKER_ID")!!
+
+        setupSwipeRefreshLayout(workerId)
         setupUI()
         setupViewModel()
         setupRecyclerView()
-        setupEditDate()
+        setupEditDate(workerId)
 
         // Use Firebase Timestamp to get current date
         val currentTimestamp = Timestamp.now()
@@ -57,7 +62,7 @@ class HistoryAttendanceRejectedActivity : AppCompatActivity() {
         currentMonth = calendar.get(Calendar.MONTH) + 1
 
         updateDateDisplay(currentYear, currentMonth)
-        fetchAttendanceByMonthAndYear(currentYear, currentMonth)
+        fetchAttendanceByMonthAndYear(workerId, currentYear, currentMonth)
         observerData()
 
     }
@@ -88,7 +93,7 @@ class HistoryAttendanceRejectedActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupSwipeRefreshLayout() {
+    private fun setupSwipeRefreshLayout(userId: String) {
         swipeRefreshLayout = binding.swipeRefreshLayout.apply {
             setColorSchemeResources(
                 R.color.primary_color,
@@ -97,13 +102,13 @@ class HistoryAttendanceRejectedActivity : AppCompatActivity() {
             )
             isMotionEventSplittingEnabled = false
             setOnRefreshListener {
-                fetchAttendanceByMonthAndYear(currentYear, currentMonth)
+                fetchAttendanceByMonthAndYear(userId, currentYear, currentMonth)
             }
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setupEditDate() {
+    private fun setupEditDate(userId: String) {
         binding.moreMenu.setOnClickListener {
             val currentTimestamp = Timestamp.now()
             val currentDate = currentTimestamp.toDate()
@@ -123,7 +128,7 @@ class HistoryAttendanceRejectedActivity : AppCompatActivity() {
                     updateDateDisplay(selectedYear, selectedMonth + 1)
 
                     // Fetch attendance for the selected month and year
-                    fetchAttendanceByMonthAndYear(selectedYear, selectedMonth + 1)
+                    fetchAttendanceByMonthAndYear(userId, selectedYear, selectedMonth + 1)
                 },
                 currentYear,
                 currentMonth,
@@ -142,8 +147,8 @@ class HistoryAttendanceRejectedActivity : AppCompatActivity() {
         binding.tvDate.text = dateFormat.format(calendar.time)
     }
 
-    private fun fetchAttendanceByMonthAndYear(year: Int, month: Int) {
-        viewModel.fetchRejectedAttendanceByMonthAndYear(year, month)
+    private fun fetchAttendanceByMonthAndYear(userId: String, year: Int, month: Int) {
+        viewModel.fetchRejectedAttendanceByMonthAndYear(userId, year, month)
     }
 
     private fun observerData() {

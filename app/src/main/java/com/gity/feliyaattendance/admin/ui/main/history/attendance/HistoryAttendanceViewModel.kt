@@ -19,23 +19,23 @@ class HistoryAttendanceViewModel(private val repository: Repository) : ViewModel
     private var _historyAttendancePending = MutableLiveData<Result<List<Attendance>>>()
     val historyAttendancePending: LiveData<Result<List<Attendance>>> get() = _historyAttendancePending
 
-    fun fetchApprovedAttendanceByMonthAndYear(year: Int, month: Int) {
+    fun fetchApprovedAttendanceByMonthAndYear(userId: String,year: Int, month: Int) {
         viewModelScope.launch {
-            val result = repository.getApprovedAttendanceByMonthAndYear(year, month)
+            val result = repository.getApprovedAttendanceByMonthAndYear(userId, year, month)
             _historyAttendanceApproved.postValue(result)
         }
     }
 
-    fun fetchRejectedAttendanceByMonthAndYear(year: Int, month: Int) {
+    fun fetchRejectedAttendanceByMonthAndYear(userId: String, year: Int, month: Int) {
         viewModelScope.launch {
-            val result = repository.getRejectedAttendanceByMonthAndYear(year, month)
+            val result = repository.getRejectedAttendanceByMonthAndYear(userId, year, month)
             _historyAttendanceRejected.postValue(result)
         }
     }
 
-    fun fetchPendingAttendanceByMonthAndYear(year: Int, month: Int) {
+    fun fetchPendingAttendanceByMonthAndYear(userId: String, year: Int, month: Int) {
         viewModelScope.launch {
-            val result = repository.getPendingAttendanceByMonthAndYear(year, month)
+            val result = repository.getPendingAttendanceByMonthAndYear(userId, year, month)
             _historyAttendancePending.postValue(result)
         }
     }

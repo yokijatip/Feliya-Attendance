@@ -429,6 +429,7 @@ class Repository(
 
     //    History Attendance List Approved filter by Month and Year
     suspend fun getApprovedAttendanceByMonthAndYear(
+        userId: String,
         year: Int,
         month: Int
     ): Result<List<Attendance>> {
@@ -445,6 +446,7 @@ class Repository(
             }.time
 
             val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("userId", userId)
                 .whereEqualTo("status", "approved")
                 .whereGreaterThanOrEqualTo("date", startOfMonth)
                 .whereLessThanOrEqualTo("date", endOfMonth)
@@ -465,6 +467,7 @@ class Repository(
 
     //    History Attendance List Approved filter by Month and Year
     suspend fun getRejectedAttendanceByMonthAndYear(
+        userId: String,
         year: Int,
         month: Int
     ): Result<List<Attendance>> {
@@ -481,6 +484,7 @@ class Repository(
             }.time
 
             val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("userId", userId)
                 .whereEqualTo("status", "rejected")
                 .whereGreaterThanOrEqualTo("date", startOfMonth)
                 .whereLessThanOrEqualTo("date", endOfMonth)
@@ -501,6 +505,7 @@ class Repository(
 
     //    History Attendance List Approved filter by Month and Year
     suspend fun getPendingAttendanceByMonthAndYear(
+        userId: String,
         year: Int,
         month: Int
     ): Result<List<Attendance>> {
@@ -517,6 +522,7 @@ class Repository(
             }.time
 
             val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("userId", userId)
                 .whereEqualTo("status", "pending")
                 .whereGreaterThanOrEqualTo("date", startOfMonth)
                 .whereLessThanOrEqualTo("date", endOfMonth)
