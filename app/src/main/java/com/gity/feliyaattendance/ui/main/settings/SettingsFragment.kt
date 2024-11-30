@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +45,6 @@ class SettingsFragment : Fragment() {
     private fun settingListSetup() {
         val settingList = listOf(
             Setting(getString(R.string.account), R.drawable.ic_people_tag),
-            Setting(getString(R.string.help), R.drawable.ic_headset_help),
             Setting(getString(R.string.logout), R.drawable.ic_log_out)
         )
 
@@ -56,11 +54,6 @@ class SettingsFragment : Fragment() {
                     // Handle account click
 //                    Toast.makeText(requireContext(), "Account clicked", Toast.LENGTH_SHORT).show()
                     navigateToAccount()
-                }
-
-                getString(R.string.help) -> {
-                    // Handle help click
-                    Toast.makeText(requireContext(), "Help clicked", Toast.LENGTH_SHORT).show()
                 }
 
                 getString(R.string.logout) -> {

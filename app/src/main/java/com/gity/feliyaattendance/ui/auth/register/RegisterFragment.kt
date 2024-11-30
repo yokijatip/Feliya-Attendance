@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.FragmentRegisterBinding
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.auth.AuthActivity
 import com.gity.feliyaattendance.ui.auth.AuthViewModel
@@ -100,13 +101,17 @@ class RegisterFragment : Fragment() {
             result.fold(
                 onSuccess = {
                     showLoading(false)
-                    showToast(getString(R.string.register_success))
                     navigateToLogin()
                 },
                 onFailure = { exception ->
                     showLoading(false)
-                    val errorMessage = "${getString(R.string.register_failed)}: ${exception.message}"
-                    showToast(errorMessage)
+                    val errorMessage =
+                        "${getString(R.string.register_failed)}: ${exception.message}"
+                    CommonHelper.showInformationFailedDialog(
+                        requireContext(),
+                        getString(R.string.register_failed),
+                        "Error : ${exception.message}"
+                    )
                     Log.e(TAG, errorMessage)
                 }
             )
@@ -169,27 +174,32 @@ class RegisterFragment : Fragment() {
                     edtEmailLayout.requestFocus()
                     return false
                 }
+
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
                     edtEmail.error = getString(R.string.email_is_not_valid)
                     edtEmail.requestFocus()
                     return false
                 }
+
                 name.isEmpty() -> {
                     edtName.error = getString(R.string.name_is_empty)
                     edtName.requestFocus()
                     return false
                 }
+
                 role.isEmpty() -> {
                     edtRole.error = getString(R.string.role_is_empty)
                     edtRole.requestFocus()
                     return false
                 }
+
                 password.isEmpty() -> {
                     showToast(getString(R.string.password_is_empty))
                     edtPassword.error = getString(R.string.password_is_empty)
                     edtPassword.requestFocus()
                     return false
                 }
+
                 password.length < 8 -> {
                     showToast(getString(R.string.password_helper))
                     edtPassword.error = getString(R.string.password_helper)

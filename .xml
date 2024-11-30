@@ -615,8 +615,8 @@
   <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/eplore/ExploreFragment.kt</file>
   <line>24</line>
   <module>Feliya_Attendance.app.main</module>
-  <package>com.gity.feliyaattendance.ui.main.eplore</package>
-  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.eplore.ExploreFragment" />
+  <package>com.gity.feliyaattendance.ui.main.explore</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.explore.ExploreFragment" />
   <language>kotlin</language>
   <offset>0</offset>
   <length>36</length>
@@ -1159,8 +1159,8 @@
   <file>file://$PROJECT_DIR$/app/src/main/java/com/gity/feliyaattendance/ui/main/eplore/ExploreFragment.kt</file>
   <line>24</line>
   <module>Feliya_Attendance.app.main</module>
-  <package>com.gity.feliyaattendance.ui.main.eplore</package>
-  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.eplore.ExploreFragment" />
+  <package>com.gity.feliyaattendance.ui.main.explore</package>
+  <entry_point TYPE="class" FQNAME="com.gity.feliyaattendance.ui.main.explore.ExploreFragment" />
   <language>kotlin</language>
   <offset>0</offset>
   <length>36</length>

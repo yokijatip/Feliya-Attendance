@@ -1,4 +1,4 @@
-package com.gity.feliyaattendance.ui.main.eplore
+package com.gity.feliyaattendance.ui.main.explore
 
 import android.content.Intent
 import android.os.Bundle

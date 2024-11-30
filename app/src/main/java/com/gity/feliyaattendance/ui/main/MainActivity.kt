@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.ActivityMainBinding
-import com.gity.feliyaattendance.ui.main.eplore.ExploreFragment
+import com.gity.feliyaattendance.ui.main.explore.ExploreFragment
 import com.gity.feliyaattendance.ui.main.home.HomeFragment
 import com.gity.feliyaattendance.ui.main.settings.SettingsFragment
 

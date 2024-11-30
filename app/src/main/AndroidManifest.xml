@@ -52,7 +52,7 @@
             android:name=".admin.ui.main.detail.project.AdminProjectDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.eplore.AnnouncementDetailActivity"
+            android:name=".ui.main.explore.AnnouncementDetailActivity"
             android:exported="false" />
         <activity
             android:name=".admin.ui.main.detail.announcement.AdminAnnouncementDetailActivity"
