@@ -14,9 +14,11 @@ import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.adapter.WorkerDetailAdapter
 import com.gity.feliyaattendance.data.model.DetailWorkerMenu
 import com.gity.feliyaattendance.databinding.ActivityWorkerReportBinding
+import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.main.report.activity.WorkerActivityActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
+import com.google.android.gms.common.internal.service.Common
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -31,6 +33,10 @@ class WorkerReportActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupUI()
         setupViewModel()
+        val workerId = FirebaseAuth.getInstance().currentUser?.uid
+        CommonHelper.showToast(this, workerId!!)
+        viewModel.calculateMonthlyWorkHours(FirebaseAuth.getInstance().currentUser?.uid.toString())
+        observerMonthlyTotalHoursAndOvertime()
         workerReportMenuSetup()
     }
 
@@ -63,7 +69,6 @@ class WorkerReportActivity : AppCompatActivity() {
             }
         }
 
-
         binding.rvWorkerReportMenu.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = workerReportMenuAdapter
@@ -75,6 +80,16 @@ class WorkerReportActivity : AppCompatActivity() {
             startActivity(Intent(this@WorkerReportActivity, WorkerActivityActivity::class.java))
         } catch (e: Exception) {
             Log.e("WORKER_REPORT", "Error ${e.message}")
+        }
+    }
+
+    private fun observerMonthlyTotalHoursAndOvertime() {
+        viewModel.monthlyWorkHours.observe(this@WorkerReportActivity) {
+            binding.tvTotalHours.text = it
+        }
+
+        viewModel.monthlyOvertime.observe(this@WorkerReportActivity) {
+            binding.tvTotalOvertime.text = it
         }
     }
 

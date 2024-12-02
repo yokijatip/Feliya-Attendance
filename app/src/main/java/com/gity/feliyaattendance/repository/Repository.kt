@@ -2,6 +2,7 @@ package com.gity.feliyaattendance.repository
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 import com.gity.feliyaattendance.admin.data.model.Announcement
 import com.gity.feliyaattendance.admin.data.model.AttendanceExcelReport
 import com.gity.feliyaattendance.admin.data.model.Worker
@@ -1140,6 +1141,52 @@ class Repository(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    /**
+     *
+     *
+     * Batas Dev Code Baru
+     *
+     *
+     * **/
+
+    // Method to calculate monthly work hours for a specific worker
+    suspend fun calculateMonthlyWorkHours(
+        workerId: String,
+        year: Int,
+        month: Int
+    ): Result<Pair<String, String>> {
+        return try {
+            // Fetch all attendance records for the given worker, year, and month
+            val attendanceResult = getAllAttendanceByMonthAndYear(workerId, year, month)
+
+            attendanceResult.map { attendanceList ->
+                // Calculate total work minutes and overtime minutes
+                var totalWorkMinutes = 0
+                var totalOvertimeMinutes = 0
+
+                attendanceList.forEach { attendance ->
+                    totalWorkMinutes += attendance.workMinutes
+                    totalOvertimeMinutes += attendance.overtimeMinutes
+                }
+
+                // Format hours
+                val workHours = formatMinutesToHoursMinutes(totalWorkMinutes)
+                val overtimeHours = formatMinutesToHoursMinutes(totalOvertimeMinutes)
+
+                Pair(workHours, overtimeHours)
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Helper method to format minutes to hours:minutes
+    private fun formatMinutesToHoursMinutes(totalMinutes: Int): String {
+        val hours = totalMinutes / 60
+        val minutes = totalMinutes % 60
+        return "${hours}:${minutes.toString().padStart(2, '0')}"
     }
 
 }
