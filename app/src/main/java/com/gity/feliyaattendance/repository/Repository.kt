@@ -541,6 +541,43 @@ class Repository(
         }
     }
 
+    //    History Attendance List Approved filter by Month and Year
+    suspend fun getAllAttendanceByMonthAndYear(
+        userId: String,
+        year: Int,
+        month: Int
+    ): Result<List<Attendance>> {
+        return try {
+            val startOfMonth = Calendar.getInstance().apply {
+                set(year, month - 1, 1, 0, 0, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.time
+
+            val endOfMonth = Calendar.getInstance().apply {
+                set(year, month, 1, 0, 0, 0)
+                set(Calendar.MILLISECOND, 0)
+                add(Calendar.MILLISECOND, -1) // Ambil hari terakhir bulan ini
+            }.time
+
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereEqualTo("userId", userId)
+                .whereGreaterThanOrEqualTo("date", startOfMonth)
+                .whereLessThanOrEqualTo("date", endOfMonth)
+                .get()
+                .await()
+
+            val attendanceList = snapshot.documents.mapNotNull { documentSnapshot ->
+                documentSnapshot.toObject(Attendance::class.java)?.apply {
+                    attendanceId = documentSnapshot.id
+                }
+            }
+
+            Result.success(attendanceList)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     //    Get attendance rejected
     suspend fun getAllAttendanceRejected(): Result<List<Attendance>> {
         return try {

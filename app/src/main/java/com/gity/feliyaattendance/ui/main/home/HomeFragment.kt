@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +19,7 @@ import com.gity.feliyaattendance.repository.Repository
 import com.gity.feliyaattendance.ui.main.attendance.ClockOutActivity
 import com.gity.feliyaattendance.ui.main.attendance.ShowProjectActivity
 import com.gity.feliyaattendance.ui.main.detail.AttendanceDetailActivity
+import com.gity.feliyaattendance.ui.main.report.WorkerReportActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
     private fun calculateClockOutTime(clockIn: Timestamp): Date {
         val calendar = Calendar.getInstance()
         calendar.time = clockIn.toDate()
-        calendar.add(Calendar.HOUR_OF_DAY, 8) // Add 8 hours for standard work day
+        calendar.add(Calendar.HOUR_OF_DAY, 9) // Add 8 hours for standard work day
         return calendar.time
     }
 
@@ -136,6 +136,9 @@ class HomeFragment : Fragment() {
             btnClockOut.setOnClickListener { navigateToClockOut() }
             btnLeaveApplication.setOnClickListener { navigateToLeaveApplication() }
             btnReports.setOnClickListener { navigateToReportActivity() }
+            viewAllActivity.setOnClickListener {
+                navigateToViewAllActivity()
+            }
         }
     }
 
@@ -195,7 +198,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToReportActivity() {
-        CommonHelper.showToast(requireContext(), "Under Development")
+        startActivity(Intent(requireActivity(), WorkerReportActivity::class.java))
     }
 
     private fun navigateToDetailAttendance(attendanceId: String) {
@@ -203,6 +206,10 @@ class HomeFragment : Fragment() {
             putExtra("ATTENDANCE_ID", attendanceId)
         }
         startActivity(intent)
+    }
+
+    private fun navigateToViewAllActivity() {
+        startActivity(Intent(requireActivity(), WorkerReportActivity::class.java))
     }
 
     override fun onDestroyView() {

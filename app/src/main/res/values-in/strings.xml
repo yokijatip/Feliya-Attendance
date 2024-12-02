@@ -166,6 +166,7 @@
         <item>menunggu</item>
         <item>ditolak</item>
     </string-array>
+    <string name="please_clock_in_first">Silakan masuk terlebih dahulu</string>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -236,8 +237,9 @@
     <string name="history_pending">Riwayat Pending</string>
     <string name="history_approved">Riwayat Disetujui</string>
     <string name="history_rejected">Riwayat Ditolak</string>
-
     <string name="period">Periode</string>
+    <string name="monthly_report">Laporan Bulanan</string>
+    <string name="history_activity">Riwayat Aktivitas</string>
 
 
 </resources>

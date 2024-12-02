@@ -167,6 +167,7 @@
         <item>pending</item>
         <item>rejected</item>
     </string-array>
+    <string name="please_clock_in_first">Please Clock In First</string>
 
     <!--  Detail Attendance  -->
     <string name="detail_attendance">Detail Attendance</string>
@@ -241,6 +242,8 @@
     <string name="history_approved">History Approved</string>
     <string name="history_rejected">History Rejected</string>
     <string name="period">Period</string>
+    <string name="monthly_report">Monthly Report</string>
+    <string name="history_activity">History Activity</string>
 
 
 </resources>

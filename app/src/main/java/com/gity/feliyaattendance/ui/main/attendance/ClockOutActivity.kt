@@ -92,11 +92,11 @@ class ClockOutActivity : AppCompatActivity() {
                     btnSave.isEnabled = false
                     btnSave.alpha = 0.5f
                     // Optional: Show message why button is disabled
-                    Toast.makeText(
+                    CommonHelper.showInformationFailedDialog(
                         this@ClockOutActivity,
-                        "Please clock in first",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        getString(R.string.failed),
+                        getString(R.string.please_clock_in_first)
+                    )
                 }
             } else {
                 // Even if clocked in, still need to validate other fields
@@ -121,7 +121,7 @@ class ClockOutActivity : AppCompatActivity() {
     // Untuk testing dengan 2 menit sebagai batas regular working time
     private fun calculateRegularAndOvertimeMinutes(totalMinutes: Int): Pair<Int, Int> {
         //val regularTimeLimit = 2 // 2 menit untuk testing
-        val regularTimeLimit = 480 // 8 jam
+        val regularTimeLimit = 540 // 8 jam
         //val regularTimeLimit = 60 // 1 Jam
         return if (totalMinutes > regularTimeLimit) {
             Pair(regularTimeLimit, totalMinutes - regularTimeLimit)
