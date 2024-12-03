@@ -106,6 +106,102 @@ class AttendanceManager(
         }
     }
 
+    //    Update Attendance Function
+    suspend fun updateAttendance(
+        attendanceId: String,
+        updateData: Map<String, Any>
+    ) {
+        try {
+            // Validasi input
+            require(attendanceId.isNotBlank()) { "Attendance ID cannot be empty" }
+            require(updateData.isNotEmpty()) { "Update data cannot be empty" }
+
+            // Daftar field yang diizinkan untuk diupdate
+            val allowedFields = setOf(
+                "status",
+                "workDescription",
+                "workMinutes",
+                "overtimeMinutes",
+                "totalMinutes",
+                "workHoursFormatted",
+                "overtimeHoursFormatted",
+                "totalHoursFormatted"
+            )
+
+            // Filter hanya field yang diizinkan
+            val filteredUpdateData = updateData.filterKeys { it in allowedFields }
+
+            // Tambahkan perhitungan ulang jam jika ada perubahan menit
+            val updatedData = if (filteredUpdateData.containsKey("workMinutes") ||
+                filteredUpdateData.containsKey("overtimeMinutes")
+            ) {
+                val workMinutes = filteredUpdateData["workMinutes"] as? Int
+                    ?: (firestore.collection("attendance")
+                        .document(attendanceId)
+                        .get()
+                        .await()
+                        .getLong("workMinutes")?.toInt() ?: 0)
+
+                val overtimeMinutes = filteredUpdateData["overtimeMinutes"] as? Int
+                    ?: (firestore.collection("attendance")
+                        .document(attendanceId)
+                        .get()
+                        .await()
+                        .getLong("overtimeMinutes")?.toInt() ?: 0)
+
+                val totalMinutes = workMinutes + overtimeMinutes
+
+                filteredUpdateData.toMutableMap().apply {
+                    put("workHoursFormatted", "${workMinutes / 60}:${workMinutes % 60}")
+                    put("overtimeHoursFormatted", "${overtimeMinutes / 60}:${overtimeMinutes % 60}")
+                    put("totalMinutes", totalMinutes)
+                    put("totalHoursFormatted", "${totalMinutes / 60}:${totalMinutes % 60}")
+                }
+            } else {
+                filteredUpdateData
+            }
+
+            // Lakukan update di Firestore
+            firestore.collection("attendance")
+                .document(attendanceId)
+                .update(updatedData)
+                .await()
+
+        } catch (e: Exception) {
+            // Log error atau tangani kesalahan
+            throw AttendanceUpdateException("Gagal memperbarui data absensi", e)
+        }
+    }
+
+//    // Contoh penggunaan
+//    suspend fun exampleUpdateUsage() {
+//        try {
+//            // Update status absensi
+//            attendanceManager.updateAttendance(
+//                attendanceId = "1f49e729-2340-4ab2-8e08-a27a9bfff154",
+//                updateData = mapOf(
+//                    "status" to "approved",
+//                    "workDescription" to "Pekerjaan selesai dengan baik"
+//                )
+//            )
+//
+//            // Update jam kerja
+//            attendanceManager.updateAttendance(
+//                attendanceId = "1f49e729-2340-4ab2-8e08-a27a9bfff154",
+//                updateData = mapOf(
+//                    "workMinutes" to 120,  // 2 jam
+//                    "overtimeMinutes" to 30  // 30 menit
+//                )
+//            )
+//        } catch (e: AttendanceUpdateException) {
+//            // Tangani error
+//            println("Gagal update: ${e.message}")
+//        }
+//    }
+
+    class AttendanceUpdateException(message: String, cause: Throwable? = null) :
+        Exception(message, cause)
+
 
     class AttendanceUploadException(message: String, cause: Throwable? = null) :
         Exception(message, cause)

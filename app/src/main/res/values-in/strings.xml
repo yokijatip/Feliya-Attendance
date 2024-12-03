@@ -241,5 +241,10 @@
     <string name="monthly_report">Laporan Bulanan</string>
     <string name="history_activity">Riwayat Aktivitas</string>
 
+    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
+    <string name="edit_attendance">Edit Kehadiran</string>
+    <string name="choose_working_hours">Pilih Jam Kerja</string>
+    <string name="choose_overtime_hours">Pilih Jam Lembur</string>
+
 
 </resources>

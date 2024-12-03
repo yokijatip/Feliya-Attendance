@@ -1,11 +1,11 @@
 package com.gity.feliyaattendance.admin.ui.main.detail.attendance
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Window
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +18,7 @@ import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.databinding.ActivityAdminAttendanceDetailBinding
 import com.gity.feliyaattendance.helper.CommonHelper
 import com.gity.feliyaattendance.repository.Repository
+import com.gity.feliyaattendance.ui.main.attendance.edit.EditAttendanceActivity
 import com.gity.feliyaattendance.utils.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,10 +38,8 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupWindowInsets()
-        setupListeners()
-
-
         attendanceId = intent.getStringExtra("ATTENDANCE_ID")
+        setupListeners(attendanceId!!)
 
         attendanceId?.let { id ->
             viewModel.fetchAttendanceDetail(id)
@@ -72,7 +71,11 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
                     updateStatusUI(detail.attendance.status)
                 }
             } else {
-                showToast("Attendance detail not found")
+                CommonHelper.showInformationFailedDialog(
+                    this@AdminAttendanceDetailActivity,
+                    getString(R.string.error),
+                    getString(R.string.failed)
+                )
             }
         }
     }
@@ -132,17 +135,17 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupListeners() {
+    private fun setupListeners(attendanceId: String) {
         binding.apply {
             btnBack.setOnClickListener { finish() }
             fabApproved.setOnClickListener {
-                attendanceId?.let {
+                attendanceId.let {
                     viewModel.updateAttendanceStatus(it, approveAttendance())
                     updateStatusUI(approveAttendance())
                 }
             }
         }
-        moreMenu()
+        moreMenu(attendanceId)
     }
 
     private fun setupWindowInsets() {
@@ -163,7 +166,6 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
                         updateStatusUI(detail.attendance.status)
                         swipeRefreshLayout.isRefreshing = false
                     } else {
-                        showToast("Attendance detail not found")
                         swipeRefreshLayout.isRefreshing = false
                     }
                 }
@@ -200,15 +202,15 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun moreMenu() {
+    private fun moreMenu(attendanceId: String) {
         binding.apply {
             btnMore.setOnClickListener {
-                showDialogImage()
+                showDialogImage(attendanceId)
             }
         }
     }
 
-    private fun showDialogImage() {
+    private fun showDialogImage(attendanceId: String) {
         val dialog = Dialog(this).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setCancelable(true)
@@ -224,6 +226,13 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
             rejectAttendance()
             dialog.dismiss()
         }
+
+        dialog.findViewById<LinearLayout>(R.id.linear_layout_edit_attendance).setOnClickListener {
+            //editAttendance()
+            navigateToEditAttendance(attendanceId)
+            dialog.dismiss()
+        }
+
         dialog.findViewById<LinearLayout>(R.id.linear_layout_delete).setOnClickListener {
             //deleteAttendance()
             CommonHelper.showConfirmationDialog(
@@ -238,8 +247,9 @@ class AdminAttendanceDetailActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun navigateToEditAttendance(attendanceId: String) {
+        val intent = Intent(this, EditAttendanceActivity::class.java)
+        intent.putExtra("ATTENDANCE_ID", attendanceId)
+        startActivity(intent)
     }
 }

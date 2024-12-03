@@ -236,14 +236,17 @@
     <!-- Project Fragment -->
     <string name="filter" translatable="false">Filter</string>
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
-
     <string name="history_pending">History Pending</string>
     <string name="history_approved">History Approved</string>
     <string name="history_rejected">History Rejected</string>
     <string name="period">Period</string>
     <string name="monthly_report">Monthly Report</string>
     <string name="history_activity">History Activity</string>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~Belum di translate~~~~~~~~~~~~~~~~~~~~ -->
+    <string name="edit_attendance">Edit Attendance</string>
+    <string name="choose_working_hours">Choose Working Hours</string>
+    <string name="choose_overtime_hours">Choose Overtime Hours</string>
 
 
 </resources>

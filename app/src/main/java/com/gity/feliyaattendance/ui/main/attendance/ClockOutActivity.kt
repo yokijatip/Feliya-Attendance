@@ -72,8 +72,7 @@ class ClockOutActivity : AppCompatActivity() {
         cloudinaryHelper = CloudinaryHelper(this@ClockOutActivity)
         val attendanceDataStore = AttendanceDataStoreManager(this)
         val projectDataStore = ProjectDataStoreManager(this)
-        attendanceManager =
-            AttendanceManager(this, attendanceDataStore, projectDataStore, firebaseFirestore)
+        attendanceManager = AttendanceManager(this, attendanceDataStore, projectDataStore, firebaseFirestore)
 
         binding.apply {
             btnBack.setOnClickListener { finish() }
@@ -118,11 +117,10 @@ class ClockOutActivity : AppCompatActivity() {
         )
     }
 
-    // Untuk testing dengan 2 menit sebagai batas regular working time
     private fun calculateRegularAndOvertimeMinutes(totalMinutes: Int): Pair<Int, Int> {
         //val regularTimeLimit = 2 // 2 menit untuk testing
-        val regularTimeLimit = 540 // 8 jam
         //val regularTimeLimit = 60 // 1 Jam
+        val regularTimeLimit = 540 // 8 jam
         return if (totalMinutes > regularTimeLimit) {
             Pair(regularTimeLimit, totalMinutes - regularTimeLimit)
         } else {
