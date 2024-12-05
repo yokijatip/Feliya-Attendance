@@ -851,6 +851,34 @@ class Repository(
                 })
             }
 
+            // Style untuk status
+            val approvedStyle = workbook.createCellStyle().apply {
+                fillForegroundColor = IndexedColors.SEA_GREEN.index
+                fillPattern = FillPatternType.SOLID_FOREGROUND
+                alignment = HorizontalAlignment.CENTER
+                verticalAlignment = VerticalAlignment.CENTER
+                setFont(workbook.createFont().apply {
+                    color = IndexedColors.WHITE.index
+                })
+            }
+
+            val pendingStyle = workbook.createCellStyle().apply {
+                fillForegroundColor = IndexedColors.GREY_25_PERCENT.index
+                fillPattern = FillPatternType.SOLID_FOREGROUND
+                alignment = HorizontalAlignment.CENTER
+                verticalAlignment = VerticalAlignment.CENTER
+            }
+
+            val rejectedStyle = workbook.createCellStyle().apply {
+                fillForegroundColor = IndexedColors.RED.index
+                fillPattern = FillPatternType.SOLID_FOREGROUND
+                alignment = HorizontalAlignment.CENTER
+                verticalAlignment = VerticalAlignment.CENTER
+                setFont(workbook.createFont().apply {
+                    color = IndexedColors.WHITE.index
+                })
+            }
+
             val headers = listOf(
                 "Tanggal",
                 "Jam Masuk",
@@ -859,7 +887,7 @@ class Repository(
                 "Jam Lembur",
                 "Total Jam Kerja",
                 "Deskripsi Pekerjaan",
-                "status",
+                "Status",
                 "Nama Proyek"
             )
 
@@ -885,7 +913,17 @@ class Repository(
                 row.createCell(4).setCellValue(report.overtimeHours)
                 row.createCell(5).setCellValue(report.totalHours)
                 row.createCell(6).setCellValue(report.workDescription)
-                row.createCell(7).setCellValue(report.status)
+
+                // Tambahkan kondisi warna untuk status
+                val statusCell = row.createCell(7)
+                statusCell.setCellValue(report.status)
+                statusCell.cellStyle = when (report.status.lowercase()) {
+                    "approved" -> approvedStyle
+                    "pending" -> pendingStyle
+                    "rejected" -> rejectedStyle
+                    else -> workbook.createCellStyle() // Default style jika status tidak sesuai
+                }
+
                 row.createCell(8).setCellValue(report.projectName)
             }
 
@@ -995,6 +1033,7 @@ class Repository(
             Result.failure(e)
         }
     }
+
 
     //    Delete Worker Account
     suspend fun deleteWorker(workerId: String): Result<Unit> {
