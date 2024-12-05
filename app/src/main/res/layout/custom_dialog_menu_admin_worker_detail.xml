@@ -25,7 +25,7 @@
             android:text="@string/menu"
             android:background="@color/gray_ultra_light"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <View
             android:layout_width="260dp"
@@ -55,7 +55,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/activate_account"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -81,7 +81,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/suspend_account"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -107,7 +107,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/delete_account"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 

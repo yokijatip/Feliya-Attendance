@@ -25,7 +25,7 @@
             android:text="@string/filter"
             android:background="@color/gray_ultra_light"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <View
             android:layout_width="260dp"
@@ -55,7 +55,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/status_project_active"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -82,7 +82,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/status_project_inactive"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -109,7 +109,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/status_project_completed"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
