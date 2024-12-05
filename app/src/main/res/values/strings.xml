@@ -247,6 +247,9 @@
     <string name="edit_attendance">Edit Attendance</string>
     <string name="choose_working_hours">Choose Working Hours</string>
     <string name="choose_overtime_hours">Choose Overtime Hours</string>
+    
+    <string name="overtime_alert">Overtime Alert</string>
+    <string name="overtime_alert_description">You have already worked 9 hours today. Additional time will be counted as overtime.</string>
 
 
 </resources>

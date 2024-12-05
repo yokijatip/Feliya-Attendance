@@ -246,5 +246,8 @@
     <string name="choose_working_hours">Pilih Jam Kerja</string>
     <string name="choose_overtime_hours">Pilih Jam Lembur</string>
 
+    <string name="overtime_alert">Peringatan Lembur</string>
+    <string name="overtime_alert_description">Anda sudah bekerja 9 jam hari ini. Tambahan waktu akan dihitung sebagai Jam Lembur.</string>
+
 
 </resources>

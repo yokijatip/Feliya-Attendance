@@ -72,36 +72,14 @@ class ClockOutActivity : AppCompatActivity() {
         cloudinaryHelper = CloudinaryHelper(this@ClockOutActivity)
         val attendanceDataStore = AttendanceDataStoreManager(this)
         val projectDataStore = ProjectDataStoreManager(this)
-        attendanceManager = AttendanceManager(this, attendanceDataStore, projectDataStore, firebaseFirestore)
+        attendanceManager =
+            AttendanceManager(this, attendanceDataStore, projectDataStore, firebaseFirestore)
 
         binding.apply {
             btnBack.setOnClickListener { finish() }
             openGalleryOrCamera.setOnClickListener { checkAndRequestPermissions() }
         }
         checkClockInStatus()
-    }
-
-    private fun checkClockInStatus() {
-        lifecycleScope.launch {
-            val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
-            val hasClockIn = attendanceDataStore.clockIn.firstOrNull() != null
-
-            if (!hasClockIn) {
-                binding.apply {
-                    btnSave.isEnabled = false
-                    btnSave.alpha = 0.5f
-                    // Optional: Show message why button is disabled
-                    CommonHelper.showInformationFailedDialog(
-                        this@ClockOutActivity,
-                        getString(R.string.failed),
-                        getString(R.string.please_clock_in_first)
-                    )
-                }
-            } else {
-                // Even if clocked in, still need to validate other fields
-
-            }
-        }
     }
 
     private fun showConfirmationClockOut() {
@@ -117,10 +95,20 @@ class ClockOutActivity : AppCompatActivity() {
         )
     }
 
-    private fun calculateRegularAndOvertimeMinutes(totalMinutes: Int): Pair<Int, Int> {
-        //val regularTimeLimit = 2 // 2 menit untuk testing
-        //val regularTimeLimit = 60 // 1 Jam
-        val regularTimeLimit = 540 // 8 jam
+//    private fun calculateRegularAndOvertimeMinutes(totalMinutes: Int): Pair<Int, Int> {
+//        //val regularTimeLimit = 2 // 2 menit untuk testing
+//        //val regularTimeLimit = 60 // 1 Jam
+//        val regularTimeLimit = 540 // 8 jam
+//        return if (totalMinutes > regularTimeLimit) {
+//            Pair(regularTimeLimit, totalMinutes - regularTimeLimit)
+//        } else {
+//            Pair(totalMinutes, 0)
+//        }
+//    }
+
+    // Updated logic for calculating regular and overtime minutes
+    private suspend fun calculateRegularAndOvertimeMinutes(totalMinutes: Int): Pair<Int, Int> {
+        val regularTimeLimit = 540 // 9 jam = 540 menit
         return if (totalMinutes > regularTimeLimit) {
             Pair(regularTimeLimit, totalMinutes - regularTimeLimit)
         } else {
@@ -138,6 +126,49 @@ class ClockOutActivity : AppCompatActivity() {
             totalMinutes = totalMinutes
         )
     }
+
+//    private fun clockOut() {
+//        CommonHelper.showLoading(
+//            this@ClockOutActivity,
+//            binding.loadingBar,
+//            binding.loadingOverlay
+//        )
+//        lifecycleScope.launch {
+//            try {
+//                val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
+//                val clockInTime = attendanceDataStore.clockIn.firstOrNull()
+//                    ?: throw Exception("Clock in time not found")
+//
+//                val clockOutTime = Timestamp.now()
+//                val description = binding.edtDescriptionProject.text.toString()
+//                val status = "pending"
+//
+//                val imageUrl = photoUri?.let {
+//                    cloudinaryHelper.uploadImage(it, firebaseAuth.currentUser?.uid!!)
+//                } ?: throw Exception("No Image Selected")
+//
+//                // Hitung waktu kerja
+//                val workTime = calculateWorkTime(clockInTime, clockOutTime)
+//                val (regularMinutes, overtimeMinutes) = calculateRegularAndOvertimeMinutes(workTime.totalMinutes)
+//
+//                attendanceManager.clockOut(
+//                    clockOut = clockOutTime,
+//                    imageUrlOut = imageUrl,
+//                    status = status,
+//                    workMinutes = regularMinutes,
+//                    overtimeMinutes = overtimeMinutes,
+//                    totalMinutes = workTime.totalMinutes,
+//                    description = description
+//                )
+//                CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
+//
+//                finish()
+//            } catch (e: Exception) {
+//                CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
+//                Log.e("Clock_out", "Error: ${e.message}")
+//            }
+//        }
+//    }
 
     private fun clockOut() {
         CommonHelper.showLoading(
@@ -161,7 +192,29 @@ class ClockOutActivity : AppCompatActivity() {
 
                 // Hitung waktu kerja
                 val workTime = calculateWorkTime(clockInTime, clockOutTime)
-                val (regularMinutes, overtimeMinutes) = calculateRegularAndOvertimeMinutes(workTime.totalMinutes)
+
+                // Check total working hours for today
+                val userId = firebaseAuth.currentUser?.uid
+                    ?: throw Exception("User not authenticated")
+
+                val todayTotalWorkMinutes = attendanceManager.getTotalWorkingHoursForToday(userId)
+                val currentWorkMinutes = workTime.totalMinutes
+
+                val (regularMinutes, overtimeMinutes) = if (todayTotalWorkMinutes + currentWorkMinutes > 540) {
+                    // If total daily work exceeds 9 hours, calculate regular and overtime
+                    val regularLimit = 540 - todayTotalWorkMinutes
+                    val currentOvertimeMinutes = currentWorkMinutes - regularLimit
+
+                    if (regularLimit > 0) {
+                        Pair(regularLimit, currentOvertimeMinutes)
+                    } else {
+                        // All current work is overtime
+                        Pair(0, currentWorkMinutes)
+                    }
+                } else {
+                    // Normal calculation if not exceeding 9 hours
+                    Pair(currentWorkMinutes, 0)
+                }
 
                 attendanceManager.clockOut(
                     clockOut = clockOutTime,
@@ -169,7 +222,7 @@ class ClockOutActivity : AppCompatActivity() {
                     status = status,
                     workMinutes = regularMinutes,
                     overtimeMinutes = overtimeMinutes,
-                    totalMinutes = workTime.totalMinutes,
+                    totalMinutes = currentWorkMinutes,
                     description = description
                 )
                 CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
@@ -178,9 +231,15 @@ class ClockOutActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 CommonHelper.hideLoading(binding.loadingBar, binding.loadingOverlay)
                 Log.e("Clock_out", "Error: ${e.message}")
+                CommonHelper.showInformationFailedDialog(
+                    this@ClockOutActivity,
+                    "Error",
+                    e.message ?: "An unknown error occurred"
+                )
             }
         }
     }
+
 
     private fun displayProjectData() {
         lifecycleScope.launch {
@@ -208,6 +267,46 @@ class ClockOutActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
         repository = Repository(firebaseAuth, firebaseFirestore)
+    }
+
+
+    // Modify checkClockInStatus to add a check for daily working hours
+    private fun checkClockInStatus() {
+        lifecycleScope.launch {
+            val attendanceDataStore = AttendanceDataStoreManager(this@ClockOutActivity)
+            val hasClockIn = attendanceDataStore.clockIn.firstOrNull() != null
+
+            if (!hasClockIn) {
+                binding.apply {
+                    btnSave.isEnabled = false
+                    btnSave.alpha = 0.5f
+                    CommonHelper.showInformationFailedDialog(
+                        this@ClockOutActivity,
+                        getString(R.string.failed),
+                        getString(R.string.please_clock_in_first)
+                    )
+                }
+            } else {
+                // Check total working hours for the day
+                val userId = firebaseAuth.currentUser?.uid
+                if (userId != null) {
+                    val todayTotalWorkMinutes =
+                        attendanceManager.getTotalWorkingHoursForToday(userId)
+
+                    if (todayTotalWorkMinutes >= 540) { // 9 hours = 540 minutes
+                        binding.apply {
+                            btnSave.isEnabled = true
+                            // Optionally, show a warning that this will count as overtime
+                            CommonHelper.showInformationSuccessDialog(
+                                this@ClockOutActivity,
+                                getString(R.string.overtime_alert),
+                                getString(R.string.overtime_alert_description)
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun setupViewModel() {

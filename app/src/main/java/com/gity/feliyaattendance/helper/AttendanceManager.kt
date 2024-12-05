@@ -1,12 +1,14 @@
 package com.gity.feliyaattendance.helper
 
 import android.content.Context
+import android.util.Log
 import com.gity.feliyaattendance.data.local.AttendanceDataStoreManager
 import com.gity.feliyaattendance.data.local.ProjectDataStoreManager
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.tasks.await
+import java.util.Calendar
 import java.util.UUID
 
 class AttendanceManager(
@@ -107,10 +109,7 @@ class AttendanceManager(
     }
 
     //    Update Attendance Function
-    suspend fun updateAttendance(
-        attendanceId: String,
-        updateData: Map<String, Any>
-    ) {
+    suspend fun updateAttendance(attendanceId: String, updateData: Map<String, Any>) {
         try {
             // Validasi input
             require(attendanceId.isNotBlank()) { "Attendance ID cannot be empty" }
@@ -170,6 +169,34 @@ class AttendanceManager(
         } catch (e: Exception) {
             // Log error atau tangani kesalahan
             throw AttendanceUpdateException("Gagal memperbarui data absensi", e)
+        }
+    }
+
+    // New method in AttendanceManager to check total working hours for the day
+    suspend fun getTotalWorkingHoursForToday(userId: String): Int {
+        val today = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.time
+
+        val todayTimestamp = Timestamp(today)
+
+        return try {
+            val querySnapshot = firestore.collection("attendance")
+                .whereEqualTo("userId", userId)
+                .whereGreaterThanOrEqualTo("date", todayTimestamp)
+                .get()
+                .await()
+
+            // Sum up total minutes for today's attendance records
+            querySnapshot.documents.sumOf { document ->
+                document.getLong("totalMinutes")?.toInt() ?: 0
+            }
+        } catch (e: Exception) {
+            Log.e("AttendanceManager", "Error fetching today's working hours", e)
+            0
         }
     }
 
