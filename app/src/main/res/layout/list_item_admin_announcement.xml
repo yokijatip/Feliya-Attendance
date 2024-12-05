@@ -85,7 +85,6 @@
                 android:maxHeight="300dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/img_fakhrusyi"
                 />
 
         </com.google.android.material.card.MaterialCardView>
