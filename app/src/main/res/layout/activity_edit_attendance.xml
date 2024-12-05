@@ -362,14 +362,6 @@
                                             android:textSize="14sp"
                                             tools:text="30 Maret 2024" />
 
-                                        <ImageButton
-                                            android:id="@+id/btn_edit_date"
-                                            android:layout_width="40dp"
-                                            android:layout_height="40dp"
-                                            android:src="@drawable/ic_edit"
-                                            android:backgroundTint="@android:color/transparent"
-                                            />
-
                                     </LinearLayout>
 
 
@@ -448,14 +440,6 @@
                                                 tools:text="16:30" />
 
                                         </LinearLayout>
-
-                                        <ImageButton
-                                            android:id="@+id/btn_edit_clock_in_and_clock_out"
-                                            android:layout_width="40dp"
-                                            android:layout_height="40dp"
-                                            android:src="@drawable/ic_edit"
-                                            android:backgroundTint="@android:color/transparent"
-                                            />
 
                                     </LinearLayout>
                                 </com.google.android.material.card.MaterialCardView>

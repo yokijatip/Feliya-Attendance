@@ -2,7 +2,6 @@ package com.gity.feliyaattendance.repository
 
 import android.content.Context
 import android.os.Environment
-import android.util.Log
 import com.gity.feliyaattendance.admin.data.model.Announcement
 import com.gity.feliyaattendance.admin.data.model.AttendanceExcelReport
 import com.gity.feliyaattendance.admin.data.model.Worker
@@ -762,7 +761,6 @@ class Repository(
         return try {
             val snapshot = firebaseFirestore.collection("attendance")
                 .whereEqualTo("userId", userId)
-                .whereEqualTo("status", "approved")
                 .whereGreaterThanOrEqualTo("date", startTimestamp)
                 .whereLessThanOrEqualTo("date", endTimestamp)
                 .orderBy("date", Query.Direction.ASCENDING)
@@ -792,6 +790,7 @@ class Repository(
                     overtimeHours = document.getString("overtimeHoursFormatted") ?: "",
                     totalHours = document.getString("totalHoursFormatted") ?: "",
                     workDescription = document.getString("workDescription") ?: "",
+                    status = document.getString("status") ?: "",
                     projectId = projectId,
                     projectName = projectNameMap[projectId] ?: "Unknown Project"
                 )
@@ -860,6 +859,7 @@ class Repository(
                 "Jam Lembur",
                 "Total Jam Kerja",
                 "Deskripsi Pekerjaan",
+                "status",
                 "Nama Proyek"
             )
 
@@ -885,7 +885,8 @@ class Repository(
                 row.createCell(4).setCellValue(report.overtimeHours)
                 row.createCell(5).setCellValue(report.totalHours)
                 row.createCell(6).setCellValue(report.workDescription)
-                row.createCell(7).setCellValue(report.projectName)
+                row.createCell(7).setCellValue(report.status)
+                row.createCell(8).setCellValue(report.projectName)
             }
 
             // Function untuk menghitung total menit dari format "HH:mm"
