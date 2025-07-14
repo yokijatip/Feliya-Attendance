@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -79,11 +78,6 @@ class AdminAttendancesFragment : Fragment() {
                 val datePickerDialog = DatePickerDialog(
                     requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                         val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                        Toast.makeText(
-                            requireContext(),
-                            "Tanggal yang dipilih: $selectedDate",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     },
                     year,
                     month,
