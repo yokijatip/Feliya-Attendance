@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Alfa Attendance</string>
+    <string name="app_name" translatable="false">Feliya Attendance</string>
 
     <!--  Bottom navigation menu  -->
     <string name="home">Home</string>
