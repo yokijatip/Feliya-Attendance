@@ -186,6 +186,7 @@
     <string name="admin_menu_add_worker">Add Worker</string>
     <string name="admin_menu_add_project">Add Project</string>
     <string name="admin_menu_generate_excel" translatable="false">Generate Excel</string>
+    <string name="admin_menu_analytic_performance" translatable="false">Analytics Performance</string>
     <string name="admin_menu_generate_pdf" translatable="false">Generate PDF</string>
     <string name="admin_menu_delete_account">Delete Account</string>
     <string name="admin_menu_make_announcement">Announcement</string>
@@ -247,7 +248,7 @@
     <string name="edit_attendance">Edit Attendance</string>
     <string name="choose_working_hours">Choose Working Hours</string>
     <string name="choose_overtime_hours">Choose Overtime Hours</string>
-    
+
     <string name="overtime_alert">Overtime Alert</string>
     <string name="overtime_alert_description">You have already worked 9 hours today. Additional time will be counted as overtime.</string>
 

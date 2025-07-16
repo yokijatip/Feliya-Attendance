@@ -22,6 +22,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.adapter.WorkerDetailAdapter
 import com.gity.feliyaattendance.admin.data.model.Worker
+import com.gity.feliyaattendance.admin.ui.main.detail.worker.analytics.PerformanceAnalyticActivity
 import com.gity.feliyaattendance.admin.ui.main.history.attendance.approved.HistoryAttendanceApprovedActivity
 import com.gity.feliyaattendance.admin.ui.main.history.attendance.pending.HistoryAttendancePendingActivity
 import com.gity.feliyaattendance.admin.ui.main.history.attendance.rejected.HistoryAttendanceRejectedActivity
@@ -174,7 +175,8 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 R.drawable.ic_check_square_custom_admin
             ),
             DetailWorkerMenu(getString(R.string.history_rejected), R.drawable.ic_minus_circle),
-            DetailWorkerMenu(getString(R.string.history_pending), R.drawable.ic_clock)
+            DetailWorkerMenu(getString(R.string.history_pending), R.drawable.ic_clock),
+            DetailWorkerMenu(getString(R.string.admin_menu_analytic_performance), R.drawable.ic_bar_chart)
         )
 
         val detailWorkerMenuAdapter = WorkerDetailAdapter(workerDetailMenuList) { menu ->
@@ -198,6 +200,10 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
 
                 getString(R.string.history_pending) -> {
                     navigateToPendingAttendance(workerId)
+                }
+
+                getString(R.string.admin_menu_analytic_performance) -> {
+                    navigateToAnalyticPerformance()
                 }
             }
         }
@@ -384,6 +390,13 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         val intent =
             Intent(this@AdminWorkerDetailActivity, HistoryAttendancePendingActivity::class.java)
         intent.putExtra("WORKER_ID", workerId)
+        startActivity(intent)
+    }
+
+    private fun navigateToAnalyticPerformance() {
+        val intent = Intent(this@AdminWorkerDetailActivity, PerformanceAnalyticActivity::class.java)
+        intent.putExtra("WORKER_ID", workerId)
+        intent.putExtra("WORKER_NAME", workerName)
         startActivity(intent)
     }
 
