@@ -106,6 +106,17 @@ dependencies {
 //    Support Library .env (Dot ENV)
     implementation ("io.github.cdimascio:dotenv-kotlin:6.4.1")
 
+    // TensorFlow Lite
+    implementation ("org.tensorflow:tensorflow-lite:2.13.0")
+    implementation ("org.tensorflow:tensorflow-lite-support:0.4.4")
+
+// JSON parsing untuk metadata
+    implementation ("com.google.code.gson:gson:2.10.1")
+
+// Chart library untuk visualisasi (optional)
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

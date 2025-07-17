@@ -7,7 +7,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.view.Window
+import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
@@ -22,7 +25,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.gity.feliyaattendance.R
 import com.gity.feliyaattendance.adapter.WorkerDetailAdapter
 import com.gity.feliyaattendance.admin.data.model.Worker
-import com.gity.feliyaattendance.admin.ui.main.detail.worker.analytics.PerformanceAnalyticActivity
 import com.gity.feliyaattendance.admin.ui.main.history.attendance.approved.HistoryAttendanceApprovedActivity
 import com.gity.feliyaattendance.admin.ui.main.history.attendance.pending.HistoryAttendancePendingActivity
 import com.gity.feliyaattendance.admin.ui.main.history.attendance.rejected.HistoryAttendanceRejectedActivity
@@ -38,6 +40,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
+import java.util.Calendar
 import java.util.Date
 
 class AdminWorkerDetailActivity : AppCompatActivity() {
@@ -203,7 +206,7 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 }
 
                 getString(R.string.admin_menu_analytic_performance) -> {
-                    navigateToAnalyticPerformance()
+                    showDateRangePickerForAnalytics()
                 }
             }
         }
@@ -393,11 +396,65 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun navigateToAnalyticPerformance() {
-        val intent = Intent(this@AdminWorkerDetailActivity, PerformanceAnalyticActivity::class.java)
-        intent.putExtra("WORKER_ID", workerId)
-        intent.putExtra("WORKER_NAME", workerName)
-        startActivity(intent)
+    private fun showDateRangePickerForAnalytics() {
+        val dialog = Dialog(this@AdminWorkerDetailActivity).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(true)
+            setContentView(R.layout.dialog_date_range_picker)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+        // Get current date
+        val currentCalendar = Calendar.getInstance()
+        val currentYear = currentCalendar.get(Calendar.YEAR)
+        val currentMonth = currentCalendar.get(Calendar.MONTH)
+
+        // Initialize spinners
+        val spinnerStartMonth = dialog.findViewById<Spinner>(R.id.spinner_start_month)
+        val spinnerStartYear = dialog.findViewById<Spinner>(R.id.spinner_start_year)
+        val spinnerEndMonth = dialog.findViewById<Spinner>(R.id.spinner_end_month)
+        val spinnerEndYear = dialog.findViewById<Spinner>(R.id.spinner_end_year)
+        val btnCancel = dialog.findViewById<Button>(R.id.btn_cancel)
+        val btnAnalyze = dialog.findViewById<Button>(R.id.btn_analyze)
+
+        // Setup month spinner
+        val months = arrayOf(
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        )
+        val monthAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, months)
+        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spinnerStartMonth.adapter = monthAdapter
+        spinnerEndMonth.adapter = monthAdapter
+
+        // Setup year spinner (last 5 years to current year)
+        val years = mutableListOf<String>()
+        for (year in (currentYear - 4)..currentYear) {
+            years.add(year.toString())
+        }
+        val yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spinnerStartYear.adapter = yearAdapter
+        spinnerEndYear.adapter = yearAdapter
+
+        // Set default values (last 3 months to current month)
+        val startCalendar = Calendar.getInstance().apply {
+            add(Calendar.MONTH, -2) // 3 months ago
+        }
+
+        spinnerStartMonth.setSelection(startCalendar.get(Calendar.MONTH))
+        spinnerStartYear.setSelection(years.indexOf(startCalendar.get(Calendar.YEAR).toString()))
+        spinnerEndMonth.setSelection(currentMonth)
+        spinnerEndYear.setSelection(years.indexOf(currentYear.toString()))
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
+
 
 }

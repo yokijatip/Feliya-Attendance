@@ -34,6 +34,11 @@
     <color name="on_background_color">#18183C</color>
     <color name="on_surface_color">#18183C</color>
 
+<!--    Red, Orange, green-->
+    <color name="red">#ED3500</color>
+    <color name="orange">#FF9500</color>
+    <color name="green">#008000</color>
+
     <!-- Error Colors -->
     <color name="error_color">#B00020</color>
     <color name="on_error_color">@color/white</color>

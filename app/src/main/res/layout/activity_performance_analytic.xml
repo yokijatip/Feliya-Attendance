@@ -76,7 +76,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:backgroundTint="@color/white"
             app:cardElevation="8dp"
@@ -84,7 +84,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
             app:layout_constraintVertical_bias="0.0"
             app:shapeAppearanceOverlay="@style/TopRoundCard"
             app:strokeWidth="0dp">
@@ -94,7 +93,307 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:paddingHorizontal="10dp"
+                android:paddingTop="10dp">
+
+                <!-- Progress Bar -->
+                                <ProgressBar
+                                    android:id="@+id/progress_bar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:visibility="visible" />
+
+                                <!-- Content Layout -->
+                                <LinearLayout
+                                    android:id="@+id/content_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+                                    <!-- Worker Info Card -->
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="16dp"
+                                        app:cardCornerRadius="12dp"
+                                        app:cardElevation="4dp"
+                                        app:strokeWidth="0dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:padding="16dp">
+
+                                            <TextView
+                                                android:id="@+id/tv_worker_name"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/inter_semi_bold"
+                                                android:text="Nama Karyawan"
+                                                android:textColor="@color/primary_color"
+                                                android:textSize="18sp" />
+
+                                            <TextView
+                                                android:id="@+id/tv_analysis_date"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="4dp"
+                                                android:fontFamily="@font/inter_regular"
+                                                android:text="Analisis per tanggal"
+                                                android:textColor="@color/secondary_color"
+                                                android:textSize="14sp" />
+
+                                        </LinearLayout>
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Performance Metrics -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="12dp"
+                                    app:cardElevation="4dp"
+                                    app:strokeWidth="0dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/inter_medium"
+                                            android:text="Rata-rata Jam Kerja"
+                                            android:textColor="@color/secondary_color"
+                                            android:textSize="12sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_average_work_hours"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="8dp"
+                                            android:fontFamily="@font/inter_bold"
+                                            android:text="0.0 jam"
+                                            android:textColor="@color/primary_color"
+                                            android:textSize="16sp" />
+
+                                    </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="4dp"
+                                app:strokeWidth="0dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:text="Total Jam"
+                                        android:textColor="@color/secondary_color"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_average_total_hours"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:text="0.0 jam"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="16sp" />
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="4dp"
+                                app:strokeWidth="0dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:text="Total Hari"
+                                        android:textColor="@color/secondary_color"
+                                        android:textSize="12sp" />
+
+                                   <TextView
+                                        android:id="@+id/tv_total_days"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:text="0 hari"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="16sp" />
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </LinearLayout>
+
+                        <!-- Category Result Card -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp"
+                            app:strokeWidth="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_medium"
+                                   android:text="Kategori Performa"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_cluster_category"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="Kategori"
+                                    android:textColor="@color/white"
+                                    android:textSize="24sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_performance_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:text="0%"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Performance Chart -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp"
+                            app:strokeWidth="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_semi_bold"
+                                    android:text="Grafik Performa Harian"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="16sp" />
+
+                                <com.github.mikephil.charting.charts.LineChart
+                                    android:id="@+id/chart_performance"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="200dp"
+                                    android:layout_marginTop="12dp" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Recommendation Card -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp"
+                            app:strokeWidth="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_semi_bold"
+                                    android:text="Rekomendasi"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_recommendation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:lineSpacingExtra="4dp"
+                                    android:text="Rekomendasi akan muncul di sini"
+                                    android:textColor="@color/secondary_color"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
 
             </LinearLayout>
 
