@@ -36,4 +36,6 @@ class FeliyaAttendanceApp : Application() {
         // Terapkan pengaturan ke instance Firebase Firestore
         FirebaseFirestore.getInstance().firestoreSettings = settings
     }
+
+
 }

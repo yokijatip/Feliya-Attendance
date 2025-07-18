@@ -56,7 +56,10 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
             return HistoryAttendanceViewModel(repository) as T
         } else if(modelClass.isAssignableFrom(WorkerReportViewModel::class.java)) {
             return WorkerReportViewModel(repository) as T
-        } 
+        }
+//        else if(modelClass.isAssignableFrom(AnalysisWorkerViewModel::class.java)) {
+//            return AnalysisWorkerViewModel(repository) as T
+//        }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }
 }

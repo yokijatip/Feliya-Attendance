@@ -80,6 +80,13 @@ class AdminHomeFragment : Fragment() {
             btnHistoryAttendance.setOnClickListener {
                 navigateToHistoryAttendance()
             }
+            btnAnalysisWorker.setOnClickListener {
+//                Show Date Picker
+                CommonHelper.showDateRangePickerDialog(requireContext()) { dateRange ->
+                    // Handle the selected date range
+                    Log.d("DateRangePicker", "Selected Date Range: $dateRange")
+                }
+            }
         }
     }
 

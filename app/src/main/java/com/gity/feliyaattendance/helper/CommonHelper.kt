@@ -11,10 +11,11 @@ import android.view.Window
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StyleRes
-import com.gity.feliyaattendance.R
+import androidx.compose.material3.DateRangePicker
 import com.gity.feliyaattendance.databinding.CustomDialogConfimationBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationFailedBinding
 import com.gity.feliyaattendance.databinding.CustomDialogInformationSuccessBinding
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -22,6 +23,29 @@ import java.util.Locale
 import kotlin.random.Random
 
 object CommonHelper {
+
+    fun showDateRangePickerDialog(context: Context, onDateSelected: (String) -> Unit) {
+        val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
+            .setTitleText("Select Date Range")
+            .build()
+
+        dateRangePicker.addOnPositiveButtonClickListener { selection ->
+            val startDate = selection.first
+            val endDate = selection.second
+
+            // Format date to YYYY-MM-DD
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formattedStart = formatter.format(Date(startDate))
+            val formattedEnd = formatter.format(Date(endDate))
+
+            val result = "$formattedStart to $formattedEnd"
+            onDateSelected(result)
+        }
+
+        dateRangePicker.show((context as androidx.fragment.app.FragmentActivity).supportFragmentManager, "date_range_picker")
+    }
+
+
     fun generateRandomEmail(): String {
         val random = Random
         val domains = listOf("gmail.com", "yahoo.com", "outlook.com")
@@ -229,5 +253,6 @@ object CommonHelper {
     fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
 
 }

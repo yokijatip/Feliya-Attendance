@@ -206,7 +206,8 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
                 }
 
                 getString(R.string.admin_menu_analytic_performance) -> {
-                    showDateRangePickerForAnalytics()
+//                   USe Toast
+                    Toast.makeText(this@AdminWorkerDetailActivity, "Clicked", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -395,66 +396,5 @@ class AdminWorkerDetailActivity : AppCompatActivity() {
         intent.putExtra("WORKER_ID", workerId)
         startActivity(intent)
     }
-
-    private fun showDateRangePickerForAnalytics() {
-        val dialog = Dialog(this@AdminWorkerDetailActivity).apply {
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            setCancelable(true)
-            setContentView(R.layout.dialog_date_range_picker)
-            window?.setBackgroundDrawableResource(android.R.color.transparent)
-        }
-
-        // Get current date
-        val currentCalendar = Calendar.getInstance()
-        val currentYear = currentCalendar.get(Calendar.YEAR)
-        val currentMonth = currentCalendar.get(Calendar.MONTH)
-
-        // Initialize spinners
-        val spinnerStartMonth = dialog.findViewById<Spinner>(R.id.spinner_start_month)
-        val spinnerStartYear = dialog.findViewById<Spinner>(R.id.spinner_start_year)
-        val spinnerEndMonth = dialog.findViewById<Spinner>(R.id.spinner_end_month)
-        val spinnerEndYear = dialog.findViewById<Spinner>(R.id.spinner_end_year)
-        val btnCancel = dialog.findViewById<Button>(R.id.btn_cancel)
-        val btnAnalyze = dialog.findViewById<Button>(R.id.btn_analyze)
-
-        // Setup month spinner
-        val months = arrayOf(
-            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-        )
-        val monthAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, months)
-        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        spinnerStartMonth.adapter = monthAdapter
-        spinnerEndMonth.adapter = monthAdapter
-
-        // Setup year spinner (last 5 years to current year)
-        val years = mutableListOf<String>()
-        for (year in (currentYear - 4)..currentYear) {
-            years.add(year.toString())
-        }
-        val yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
-        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        spinnerStartYear.adapter = yearAdapter
-        spinnerEndYear.adapter = yearAdapter
-
-        // Set default values (last 3 months to current month)
-        val startCalendar = Calendar.getInstance().apply {
-            add(Calendar.MONTH, -2) // 3 months ago
-        }
-
-        spinnerStartMonth.setSelection(startCalendar.get(Calendar.MONTH))
-        spinnerStartYear.setSelection(years.indexOf(startCalendar.get(Calendar.YEAR).toString()))
-        spinnerEndMonth.setSelection(currentMonth)
-        spinnerEndYear.setSelection(years.indexOf(currentYear.toString()))
-
-        btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
 
 }

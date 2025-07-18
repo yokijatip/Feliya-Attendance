@@ -40,7 +40,10 @@
         android:theme="@style/Theme.FeliyaAttendance"
         tools:targetApi="31">
         <activity
-            android:name=".admin.ui.main.detail.worker.analytics.PerformanceAnalyticActivity"
+            android:name=".admin.ui.main.analytics.DateRangePickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ui.main.analytics.AnalysisWorkerActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.attendance.edit.EditAttendanceActivity"
