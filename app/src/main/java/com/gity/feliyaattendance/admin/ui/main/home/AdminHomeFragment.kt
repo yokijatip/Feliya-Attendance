@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gity.feliyaattendance.R
+import com.gity.feliyaattendance.admin.ui.main.analytics.clustering.WorkerAnalysisActivity
 import com.gity.feliyaattendance.admin.ui.main.announcement.AdminAnnouncementActivity
 import com.gity.feliyaattendance.admin.ui.main.home.workers.AdminListWorkerActivity
 import com.gity.feliyaattendance.admin.ui.main.projects.AdminAddProjectActivity
@@ -82,10 +83,7 @@ class AdminHomeFragment : Fragment() {
             }
             btnAnalysisWorker.setOnClickListener {
 //                Show Date Picker
-                CommonHelper.showDateRangePickerDialog(requireContext()) { dateRange ->
-                    // Handle the selected date range
-                    Log.d("DateRangePicker", "Selected Date Range: $dateRange")
-                }
+                startActivity(Intent(requireContext(), WorkerAnalysisActivity::class.java))
             }
         }
     }

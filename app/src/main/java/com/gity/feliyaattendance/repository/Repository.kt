@@ -2,9 +2,15 @@ package com.gity.feliyaattendance.repository
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 import com.gity.feliyaattendance.admin.data.model.Announcement
 import com.gity.feliyaattendance.admin.data.model.AttendanceExcelReport
+import com.gity.feliyaattendance.admin.data.model.AttendanceRecord
+import com.gity.feliyaattendance.admin.data.model.DateRange
+import com.gity.feliyaattendance.admin.data.model.PerformanceSummary
+import com.gity.feliyaattendance.admin.data.model.UserData
 import com.gity.feliyaattendance.admin.data.model.Worker
+import com.gity.feliyaattendance.admin.data.model.WorkerPerformanceData
 import com.gity.feliyaattendance.data.model.Attendance
 import com.gity.feliyaattendance.data.model.AttendanceDetail
 import com.gity.feliyaattendance.data.model.Project
@@ -27,10 +33,235 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.UUID
+import kotlin.math.max
+import kotlin.math.min
 
 class Repository(
     private val firebaseAuth: FirebaseAuth, private val firebaseFirestore: FirebaseFirestore
 ) {
+
+    /**
+    +     * Worker Performance Analysis Methods
+    +     * Implementasi K-means clustering untuk analisis performa worker
+    +     */
+
+    // Get workers data for analysis
+    suspend fun getWorkersData(): Result<List<UserData>> {
+        return try {
+            val snapshot = firebaseFirestore.collection("users")
+                .whereEqualTo("role", "worker")
+                .whereEqualTo("status", "activated")
+                .get()
+                .await()
+
+            val workers = snapshot.documents.mapNotNull { doc ->
+                UserData(
+                    userId = doc.id,
+                    name = doc.getString("name") ?: "",
+                    email = doc.getString("email") ?: "",
+                    workerId = doc.getString("workerId") ?: "",
+                    role = doc.getString("role") ?: "",
+                    status = doc.getString("status") ?: "",
+                    created = doc.getTimestamp("created")?.toDate()?.toString() ?: ""
+                )
+            }
+
+//            Logging Worker data
+            Log.d("Repository", "Workers Data: $workers")
+
+            Result.success(workers)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Get attendance data for analysis within date range
+    suspend fun getAttendanceDataForAnalysis(dateRange: DateRange): Result<List<AttendanceRecord>> {
+        return try {
+            val startDate =
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateRange.startDate)
+            val endDate =
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateRange.endDate)
+
+            val snapshot = firebaseFirestore.collection("attendance")
+                .whereGreaterThanOrEqualTo("date", startDate!!)
+                .whereLessThanOrEqualTo("date", endDate!!)
+                .whereEqualTo("status", "approved")
+                .get()
+                .await()
+
+            val attendanceRecords = snapshot.documents.mapNotNull { doc ->
+                val clockInTime = doc.getTimestamp("clockInTime")
+                val clockOutTime = doc.getTimestamp("clockOutTime")
+
+                AttendanceRecord(
+                    attendanceId = doc.id,
+                    userId = doc.getString("userId") ?: "",
+                    date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+                        doc.getTimestamp("date")?.toDate() ?: Date()
+                    ),
+                    clockInTime = clockInTime?.toDate().toString(),
+                    clockOutTime = clockOutTime?.toDate()?.toString() ?: "",
+                    status = doc.getString("status") ?: "",
+                    workMinutes = doc.getLong("workHours")?.toInt() ?: 0,
+                    overtimeMinutes = doc.getLong("overtimeHours")?.toInt() ?: 0,
+                    totalMinutes = (doc.getLong("workHours")?.toInt()
+                        ?: 0) + (doc.getLong("overtimeHours")?.toInt() ?: 0),
+                    workDescription = doc.getString("workDescription") ?: ""
+                )
+            }
+
+            Result.success(attendanceRecords)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Process worker performance data for ML analysis
+    fun processWorkerPerformanceData(
+        workers: List<UserData>,
+        attendanceRecords: List<AttendanceRecord>,
+        dateRange: DateRange
+    ): List<WorkerPerformanceData> {
+        val workingDays = calculateWorkingDays(dateRange)
+
+        return workers.map { worker ->
+            val workerAttendance = attendanceRecords.filter { it.userId == worker.userId }
+
+            WorkerPerformanceData(
+                userId = worker.userId,
+                name = worker.name,
+                email = worker.email,
+                workerId = worker.workerId,
+                attendanceRate = calculateAttendanceRate(workerAttendance, workingDays),
+                avgWorkHours = calculateAvgWorkHours(workerAttendance),
+                punctualityScore = calculatePunctualityScore(workerAttendance),
+                consistencyScore = calculateConsistencyScore(workerAttendance),
+                totalRecords = workerAttendance.size
+            )
+        }
+    }
+
+    // Calculate attendance rate
+    private fun calculateAttendanceRate(
+        attendance: List<AttendanceRecord>,
+        workingDays: Int
+    ): Double {
+        val approvedDays = attendance.size
+        return if (workingDays > 0) {
+            min((approvedDays.toDouble() / workingDays) * 100, 100.0)
+        } else 0.0
+    }
+
+    // Calculate average work hours
+    private fun calculateAvgWorkHours(attendance: List<AttendanceRecord>): Double {
+        return if (attendance.isNotEmpty()) {
+            attendance.map { it.workMinutes / 60.0 }.average()
+        } else 0.0
+    }
+
+    // Calculate punctuality score
+    private fun calculatePunctualityScore(attendance: List<AttendanceRecord>): Double {
+        if (attendance.isEmpty()) return 0.0
+
+        val punctualDays = attendance.count { record ->
+            isPunctual(record.clockInTime)
+        }
+
+        return (punctualDays.toDouble() / attendance.size) * 100
+    }
+
+    // Calculate consistency score
+    private fun calculateConsistencyScore(attendance: List<AttendanceRecord>): Double {
+        if (attendance.size < 2) return 0.0
+
+        val workHours = attendance.map { it.workMinutes / 60.0 }
+        val mean = workHours.average()
+        val variance = workHours.map { (it - mean) * (it - mean) }.average()
+        val stdDev = kotlin.math.sqrt(variance)
+
+        // Convert to consistency score (lower std_dev = higher consistency)
+        val maxStd = 4.0 // Assume max std deviation of 4 hours
+        return max(0.0, (maxStd - stdDev) / maxStd * 100)
+    }
+
+    // Check if worker was punctual
+    private fun isPunctual(clockInTime: String): Boolean {
+        return try {
+            if (clockInTime.isBlank()) return false
+
+            // Parse different time formats from Firebase
+            // Format: "Fri Dec 13 07:49:32 GMT+07:00 2024" or similar
+            val timePattern = "\\d{1,2}:\\d{2}:\\d{2}".toRegex()
+            val timeMatch = timePattern.find(clockInTime) ?: return false
+
+            val timePart = timeMatch.value
+            val hour = timePart.split(":")[0].toInt()
+
+            // Consider punctual if clocked in at 8 AM or earlier
+            hour <= 8
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    // Calculate working days in date range (excluding weekends)
+    private fun calculateWorkingDays(dateRange: DateRange): Int {
+        return try {
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val startDate = sdf.parse(dateRange.startDate) ?: return 0
+            val endDate = sdf.parse(dateRange.endDate) ?: return 0
+
+            val calendar = Calendar.getInstance()
+            calendar.time = startDate
+
+            var workingDays = 0
+            while (calendar.time <= endDate) {
+                val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+                // Monday = 2, Friday = 6 in Calendar
+                if (dayOfWeek in Calendar.MONDAY..Calendar.FRIDAY) {
+                    workingDays++
+                }
+                calendar.add(Calendar.DAY_OF_MONTH, 1)
+            }
+
+            workingDays
+        } catch (e: Exception) {
+            0
+        }
+    }
+
+    // Generate performance summary
+    fun generatePerformanceSummary(workers: List<WorkerPerformanceData>): PerformanceSummary {
+        val highPerformers = workers.count { it.performanceLabel == "High Performer" }
+        val mediumPerformers = workers.count { it.performanceLabel == "Medium Performer" }
+        val lowPerformers = workers.count { it.performanceLabel == "Low Performer" }
+
+        val avgAttendanceRate = if (workers.isNotEmpty()) {
+            workers.map { it.attendanceRate }.average()
+        } else 0.0
+
+        val avgWorkHours = if (workers.isNotEmpty()) {
+            workers.map { it.avgWorkHours }.average()
+        } else 0.0
+
+        return PerformanceSummary(
+            totalWorkers = workers.size,
+            highPerformers = highPerformers,
+            mediumPerformers = mediumPerformers,
+            lowPerformers = lowPerformers,
+            averageAttendanceRate = avgAttendanceRate,
+            averageWorkHours = avgWorkHours
+        )
+    }
+
+    // Get workers by performance level for filtering
+    fun getWorkersByPerformance(
+        workers: List<WorkerPerformanceData>,
+        performanceLevel: String
+    ): List<WorkerPerformanceData> {
+        return workers.filter { it.performanceLabel == performanceLevel }
+    }
 
 
     //    Login
